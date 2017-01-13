@@ -1,0 +1,31 @@
+SPEC javax.crypto.KeyGenerator
+USES_OBJECTS
+    int keySize;
+    java.security.spec.AlgorithmParameterSpec params;
+    javax.crypto.SecretKey key;
+    String alg;
+
+REQUIRED_EVENTS
+    g1: getInstance(alg);
+    g2: getInstance(alg, _);
+    Gets := g1, g2;
+
+    i1: init(keySize);
+    i2: init(keySize, _);
+    i3: init(params);
+    i4: init(params, _);
+    i5: init(_);
+    Inits := i1, i2, i3, i4, i5;
+
+    gk: key = generateKey();
+
+ENFORCE_ORDER
+    Gets, Inits?, gk
+
+ENFORCES_CONSTRAINTS 
+    alg in {"AES"} => keySize in {128, 192, 256}
+    alg in {"DES"} => keySize in {56}
+    alg in {"Blowfish"} => keySize in {40, 44, 48, 52, 56, ..., 436, 440} 
+    
+ENSURES 
+    generatedKey(key,alg);

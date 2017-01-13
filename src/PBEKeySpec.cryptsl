@@ -1,0 +1,22 @@
+SPEC javax.crypto.spec.PBEKeySpec
+USES_OBJECTS 
+	char[] pw;
+	byte[] salt;
+	int it;
+	int keylength;
+FORBIDDEN_EVENTS
+	PBEKeySpec(char) => cP
+	PBEKeySpec(char[], char[], int) => cP
+REQUIRED_EVENTS
+	c1: PBEKeySpec(it,_);
+	
+	cP: clearPassword();
+
+	Ca := c1, cP;
+ENFORCE_ORDER
+ 	c1, cP, Ca
+ENFORCES_CONSTRAINTS
+	it > 100;
+	random(it);
+ENSURES
+	random(it);
