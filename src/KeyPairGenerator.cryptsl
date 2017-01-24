@@ -1,0 +1,30 @@
+SPEC java.security.KeyPairGenerator
+USES_OBJECTS
+    String alg;
+    java.security.KeyPair kp;
+    java.security.spec.AlgorithmParameterSpec params;
+    int keySize;
+
+REQUIRED_EVENTS
+    g1:getInstance(alg);
+    g2:getInstance(alg, _);
+    Gets := g1, g2;
+
+    i1: initialize(params);
+    i2: initialize(params, _);
+    i3: initialize(keySize);
+    i4: initialize(keySize, _);
+    Inits := i1, i2, i3, i4;
+
+    k1: kp = generateKeyPair();
+    k2: kp = genKeyPair();
+    Generators := k1, k2;
+
+ENFORCE_ORDER
+    Gets, Inits, Generators
+
+ENFORCES_CONSTRAINTS
+    alg in {"RSA"} => keySize in {1024, 2048, 4096}
+
+ENSURES
+    generatedKeyPair(kp, alg);

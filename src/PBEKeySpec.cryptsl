@@ -16,7 +16,7 @@ REQUIRED_EVENTS
 ENFORCE_ORDER
  	c1, cP, Ca
 ENFORCES_CONSTRAINTS
-	it > 100;
+	it > 100
 	random(it);
 ENSURES
 	random(it);
