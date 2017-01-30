@@ -60,7 +60,7 @@ REQUIRED_EVENTS
     DOFINALS := FINWOU, f1, f3, f4;
 
 ENFORCE_ORDER
-    Gets, Inits, (FINWOU | (updates+, DOFINALS))
+    Gets, Inits, (FINWOU | (updates+, DOFINALS))+
 
 ENFORCES_CONSTRAINTS
 	part(0, "/", transformation) in {"AES", "Blowfish", "DESede",  "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"}
