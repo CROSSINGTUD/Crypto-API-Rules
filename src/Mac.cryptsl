@@ -5,11 +5,14 @@ USES_OBJECTS
     byte inp;
     byte[] input;
     byte[] output;
-    String alg;
+    java.lang.String alg;
     java.security.spec.AlgorithmParameterSpec params;
     int offset;
     int outOffset;
     int len;
+
+FORBIDDEN_EVENTS
+	getAlgorithm() ;
     
 REQUIRED_EVENTS
     g1: getInstance(alg);

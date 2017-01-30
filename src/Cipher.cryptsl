@@ -1,6 +1,6 @@
 SPEC javax.crypto.Cipher
 USES_OBJECTS
-    String transformation;
+    java.lang.String transformation;
     int encmode;
     javax.crypto.SecretKey key;
     java.security.cert.Certificate cert;

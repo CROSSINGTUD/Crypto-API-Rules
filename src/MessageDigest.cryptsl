@@ -1,6 +1,6 @@
 SPEC java.security.MessageDigest
 USES_OBJECTS
-    String alg;
+    java.lang.String alg;
     byte pre_inbyte;
     byte[] pre_inbytearr;
     int pre_off;

@@ -4,7 +4,7 @@ USES_OBJECTS
     byte inpb;
     byte[] inpba;
     java.nio.ByteBuffer inpBuf;
-    String alg;
+    java.lang.String alg;
     java.security.PrivateKey priv;
     java.security.PublicKey pub;
     java.security.cert.Certificate cert;

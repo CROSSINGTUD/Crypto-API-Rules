@@ -3,7 +3,7 @@ USES_OBJECTS
     int keySize;
     java.security.spec.AlgorithmParameterSpec params;
     javax.crypto.SecretKey key;
-    String alg;
+    java.lang.String alg;
 
 REQUIRED_EVENTS
     g1: getInstance(alg);

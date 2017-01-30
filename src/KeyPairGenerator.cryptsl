@@ -1,6 +1,6 @@
 SPEC java.security.KeyPairGenerator
 USES_OBJECTS
-    String alg;
+    java.lang.String alg;
     java.security.KeyPair kp;
     java.security.spec.AlgorithmParameterSpec params;
     int keySize;

@@ -4,9 +4,11 @@ USES_OBJECTS
 	byte[] salt;
 	int it;
 	int keylength;
+	java.lang.String s;
 FORBIDDEN_EVENTS
-	PBEKeySpec(char) => cP
-	PBEKeySpec(char[], char[], int) => cP
+	PBEKeySpec(char[]) => c1; 
+	PBEKeySpec(char[],byte[],int) => c1;	
+	
 REQUIRED_EVENTS
 	c1: PBEKeySpec(it,_);
 	
