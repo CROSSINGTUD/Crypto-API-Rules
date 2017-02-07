@@ -10,7 +10,13 @@ USES_OBJECTS
     int off;
     int len;
     byte[] out;
+    
+    byte[] comp1;
+    byte[] comp2;
 
+FORBIDDEN_EVENTS
+	equals(java_lang_Object) => iE;
+	
 REQUIRED_EVENTS
     g1: getInstance(alg);
     g2: getInstance(alg, _);
@@ -29,6 +35,8 @@ REQUIRED_EVENTS
     DWU := d1, d3;
     Digests := DWU, DWOU;
     r: reset();
+    
+    iE: isEqual(comp1, comp2);
 
 ENFORCE_ORDER
     (Gets | r), (DWOU | (Updates+, Digests)) 

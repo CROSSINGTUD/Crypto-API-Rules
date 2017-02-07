@@ -20,5 +20,6 @@ ENFORCE_ORDER
 ENFORCES_CONSTRAINTS
 	it > 100
 	random(it);
+	typeOf(pw);
 ENSURES
 	random(it);
