@@ -74,12 +74,12 @@ ENFORCES_CONSTRAINTS
     part(0, "/", transformation) in {"RSA"} => part(2, "/", transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"}
     part(1, "/", transformation) in {"CBC"} => part(2, "/", transformation) in {"PKCS5Padding", "PKCS7Padding", "ISO10126Padding"}
     
-    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => IWOIV
+    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => !IWOIV
     
     generatedKey(key, part(0, "/", transformation));
     !macced(plainText,_);
 
-	encmode > 1
+	encmode >= 1
 	encmode <= 4
     pre_plaintext.length >= pre_plain_off + len
     pre_ciphertext.length <= pre_ciphertext_off
