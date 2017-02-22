@@ -1,0 +1,48 @@
+SPEC javax.crypto.Mac
+USES_OBJECTS
+    javax.crypto.Mac mac;
+    java.security.Key key;
+    byte inp;
+    byte[] input;
+    byte[] output;
+    java.lang.String alg;
+    java.security.spec.AlgorithmParameterSpec params;
+    int offset;
+    int outOffset;
+    int len;
+
+FORBIDDEN_EVENTS
+	getAlgorithm() ;
+   
+REQUIRED_EVENTS
+    g1: getInstance(alg);
+    g2: getInstance(alg);
+    Gets := g1, g2;
+
+    i1: init(key);
+    i2: init(key, params);
+    Inits := i1, i2;
+
+    u1: update(inp);
+    u2: update(input);
+    u3: update(input, offset, len);
+    u4: update(input);
+    Updates := u1, u2, u3, u4;
+
+    f1: output = doFinal();
+    f2: output =  doFinal(input);
+    f3: doFinal(output, outOffset);
+    FinalsWU := f1, f2;
+    Finals := FinalsWU, f3;
+
+ENFORCE_ORDER
+    Inits, (Finals | (Updates+, Finals))
+
+ENFORCES_CONSTRAINTS
+    alg in {"HmacMD5", "HmacSHA1", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "HmacPBESHA1", "PBEWithHmacSHA1", "PBEWithHmacSHA224", "PBEWithHmacSHA256", "PBEWithHmacSHA384", "PBEWithHmacSHA512"}
+    offset < len
+    outOffset < output.size
+    !encrypted(output, _);
+
+ENSURES
+    macced(plainText, output);

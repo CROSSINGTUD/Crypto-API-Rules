@@ -13,7 +13,7 @@ USES_OBJECTS
 
 FORBIDDEN_EVENTS
 	getAlgorithm() ;
-    
+   
 REQUIRED_EVENTS
     g1: getInstance(alg);
     g2: getInstance(alg);

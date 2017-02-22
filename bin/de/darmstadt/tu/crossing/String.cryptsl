@@ -1,0 +1,23 @@
+SPEC java.lang.String
+USES_OBJECTS
+	byte[] bytes;
+	int pos;
+FORBIDDEN_EVENTS
+	charAt(int) ;
+	indexOf(int) ;
+	indexOf(int,int) ;
+	indexOf(java_lang_String) ;
+	indexOf(java_lang_String,int) ;
+	hashCode() ;
+	getBytes() ;
+	getBytes(java_lang_String) ;
+	
+REQUIRED_EVENTS
+	c1: charAt(pos);
+	
+ENFORCE_ORDER
+	c1
+ENFORCES_CONSTRAINTS
+	
+	
+	
