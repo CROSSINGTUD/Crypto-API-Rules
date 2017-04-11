@@ -58,7 +58,9 @@ REQUIRED_EVENTS
     f7: doFinal(plainBuffer, cipherBuffer);
     FINWOU := f2, f5, f6, f7;
     DOFINALS := FINWOU, f1, f3, f4;
-
+    
+    gi: getIV();
+    
 ENFORCE_ORDER
     Gets, Inits, (FINWOU | (updates+, DOFINALS))+
 
@@ -74,7 +76,8 @@ ENFORCES_CONSTRAINTS
     part(0, "/", transformation) in {"RSA"} => part(2, "/", transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"}
     part(1, "/", transformation) in {"CBC"} => part(2, "/", transformation) in {"PKCS5Padding", "PKCS7Padding", "ISO10126Padding"}
     
-    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => !IWOIV
+    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => noCallOf(IWOIV)
+    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode == 1 && noCallOf(IWIV) => gi
     
     generatedKey(key, part(0, "/", transformation));
     !macced(plainText,_);
