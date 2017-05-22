@@ -1,0 +1,43 @@
+SPEC java.security.SecureRandom
+USES_OBJECTS 
+	byte[] seed;
+	byte[] genSeed;
+	int num;
+	java.lang.String alg;
+	long lSeed;
+	byte[] next;
+	int numB;
+
+FORBIDDEN_EVENTS
+	getSeed(int) => gS;
+
+REQUIRED_EVENTS
+	c1: SecureRandom();
+	c2: SecureRandom(seed);
+	Cons := c1, c2;
+	
+	g1: getInstance(alg);
+	g2: getInstance(alg, _);
+	gI: getInstanceStrong();
+	Gets := g1, g2, gI;
+
+	gS: genSeed  = generateSeed(num);	
+
+	s1: setSeed(seed);
+	s2: setSeed(lSeed);
+	Seeds := s1, s2;
+	
+	ne: next(numB);
+	nB: nextBytes(next);
+	Nexts := ne, nB;
+
+ENFORCE_ORDER
+ 	(Cons | Gets), Seeds?, (gS | Nexts)
+ENFORCES_CONSTRAINTS
+	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"}
+	random(seed);
+	
+ENSURES
+	random(genSeed);
+	random(next); 
+	random(numB);

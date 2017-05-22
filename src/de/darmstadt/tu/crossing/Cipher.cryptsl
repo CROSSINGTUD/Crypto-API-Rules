@@ -58,6 +58,8 @@ REQUIRED_EVENTS
     f7: doFinal(plainBuffer, cipherBuffer);
     FINWOU := f2, f5, f6, f7;
     DOFINALS := FINWOU, f1, f3, f4;
+    
+    iv: getIV();
 
 ENFORCE_ORDER
     Gets, Inits, (FINWOU | (updates+, DOFINALS))+
@@ -75,6 +77,7 @@ ENFORCES_CONSTRAINTS
     part(1, "/", transformation) in {"CBC"} => part(2, "/", transformation) in {"PKCS5Padding", "PKCS7Padding", "ISO10126Padding"}
     
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => !IWOIV
+    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode == 1 => IWIV
     
     generatedKey(key, part(0, "/", transformation));
     !macced(plainText,_);

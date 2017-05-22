@@ -10,7 +10,7 @@ FORBIDDEN_EVENTS
 	PBEKeySpec(char[],byte[],int) => c1;	
 	
 REQUIRED_EVENTS
-	c1: PBEKeySpec(it,_);
+	c1: PBEKeySpec(pw, salt, it,_);
 	
 	cP: clearPassword();
 
@@ -22,4 +22,4 @@ ENFORCES_CONSTRAINTS
 	random(it);
 	typeOf(pw);
 ENSURES
-	random(it);
+	keyspec();
