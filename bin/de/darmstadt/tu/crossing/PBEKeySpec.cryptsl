@@ -6,20 +6,19 @@ USES_OBJECTS
 	int keylength;
 	java.lang.String s;
 FORBIDDEN_EVENTS
-	PBEKeySpec(char[]) => c1; 
-	PBEKeySpec(char[],byte[],int) => c1;	
+	PBEKeySpec(char[]) => c1;
+	PBEKeySpec(char[],byte[],int) => c1;
 	
 REQUIRED_EVENTS
-	c1: PBEKeySpec(it,_);
-	
+	c1: PBEKeySpec(pw, salt, it, keylength);
 	cP: clearPassword();
 
 	Ca := c1, cP;
 ENFORCE_ORDER
  	c1, cP, Ca
 ENFORCES_CONSTRAINTS
-	it > 100
+	it > 100 
 	random(it);
-	typeOf(pw);
+	typeOf(pw, java.lang.String)
 ENSURES
-	random(it);
+	keyspec(this, _, keylength);

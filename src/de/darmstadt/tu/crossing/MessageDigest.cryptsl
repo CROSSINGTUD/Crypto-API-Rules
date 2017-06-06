@@ -47,4 +47,5 @@ ENFORCES_CONSTRAINTS
     len > off
 
 ENSURES
-    digested(inbytearr, out);
+	digested(out, _);
+    digested(out, inbytearr);

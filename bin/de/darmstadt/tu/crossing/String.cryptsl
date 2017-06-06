@@ -2,7 +2,9 @@ SPEC java.lang.String
 USES_OBJECTS
 	byte[] bytes;
 	int pos;
+	
 FORBIDDEN_EVENTS
+	String() ; 
 	charAt(int) ;
 	indexOf(int) ;
 	indexOf(int,int) ;

@@ -16,7 +16,7 @@ REQUIRED_EVENTS
     i4: init(params, _);
     i5: init(_);
     Inits := i1, i2, i3, i4, i5;
-
+    
     gk: key = generateKey();
 
 ENFORCE_ORDER
@@ -28,4 +28,4 @@ ENFORCES_CONSTRAINTS
     alg in {"Blowfish"} => keySize in {40, 44, 48, 52, 56, ..., 436, 440} 
     
 ENSURES 
-    generatedKey(key,alg);
+    generatedKey(key, alg);
