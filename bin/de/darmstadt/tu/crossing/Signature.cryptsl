@@ -40,7 +40,7 @@ ENFORCE_ORDER
     Gets, ((InitSigns, Updates+, Signs) | (InitVerifies, Updates+, Verifies))
 
 ENFORCES_CONSTRAINTS
-    alg in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA"}
+    alg in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA"};
 
 ENSURES
-    signed(inp);
+    signed(inp) ;

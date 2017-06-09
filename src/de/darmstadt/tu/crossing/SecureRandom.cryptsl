@@ -34,10 +34,10 @@ REQUIRED_EVENTS
 ENFORCE_ORDER
  	(Cons | Gets), Seeds?, (gS | Nexts)
 ENFORCES_CONSTRAINTS
-	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"}
-	random(seed);
+	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
+	random(seed) ;
 	
 ENSURES
-	random(genSeed);
-	random(next); 
-	random(numB);
+	random(genSeed) ;
+	random(next) ; 
+	random(numB) ;

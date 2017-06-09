@@ -42,10 +42,10 @@ ENFORCE_ORDER
     Gets, (DWOU | (Updates+, Digests)), (r, (DWOU | (Updates+, Digests)))? 
 
 ENFORCES_CONSTRAINTS
-    alg in {"SHA-256", "SHA-384", "SHA-512"}
-    pre_len > pre_off
-    len > off
+    alg in {"SHA-256", "SHA-384", "SHA-512"};
+    pre_len > pre_off;
+    len > off;
 
 ENSURES
-	digested(out, _);
-    digested(out, inbytearr);
+	digested(out, _) ;
+    digested(out, inbytearr) ;
