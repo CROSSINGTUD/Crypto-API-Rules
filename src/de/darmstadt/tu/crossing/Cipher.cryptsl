@@ -2,7 +2,7 @@ SPEC javax.crypto.Cipher
 USES_OBJECTS
     java.lang.String transformation;
     int encmode;
-    javax.crypto.SecretKey key;
+    java.security.Key key;
     java.security.cert.Certificate cert;
     java.security.spec.AlgorithmParameterSpec params;
     java.security.AlgorithmParameters param;
@@ -77,9 +77,9 @@ ENFORCES_CONSTRAINTS
 
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode == 1 => iv;     
-     
-    generatedKey(key, part(0, "/", transformation)) ;
-    !macced(plainText,_) ;
+    
+    generatedKey[key, transformation];
+    !macced[plainText,_];
 
 	encmode >= 1;
 	encmode <= 4;
@@ -89,6 +89,6 @@ ENFORCES_CONSTRAINTS
     cipherText <= ciphertext_off;
 
 ENSURES
-	encrypted(pre_ciphertext, pre_plaintext) ;
-	encrypted(cipherText, plainText) ;
-	encrypted(cipherBuffer, plainBuffer) ;
+	encrypted[pre_ciphertext, pre_plaintext]; 
+	encrypted[cipherText, plainText];
+	encrypted[cipherBuffer, plainBuffer];

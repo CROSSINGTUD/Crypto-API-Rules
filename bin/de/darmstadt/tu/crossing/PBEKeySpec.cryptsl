@@ -18,7 +18,7 @@ ENFORCE_ORDER
  	c1, cP, Ca
 ENFORCES_CONSTRAINTS
 	it > 100 ;
-	random(it) ;
+	random[it];
 	neverTypeOf(pw, java.lang.String) ;
 ENSURES
-	keyspec(this, _, keylength) ;
+	keyspec[this, _, keylength];
