@@ -23,9 +23,11 @@ ENFORCE_ORDER
     Gets, Inits?, gk
 
 ENFORCES_CONSTRAINTS
+	alg in {"AES", "DES", "Blowfish", "DESede"};
     alg in {"AES"} => keySize in {128, 192, 256};
     alg in {"DES"} => keySize in {56};
-    alg in {"Blowfish"} => keySize in {40, 44, 48, 52, 56, ..., 436, 440}; 
+    alg in {"Blowfish"} => keySize in {128, 192, 256, 320, 384, 448};
+    alg in {"DESede"} => keySize  in {112, 168};
     
 ENSURES 
     generatedKey[key, alg];
