@@ -20,8 +20,10 @@ REQUIRED_EVENTS
 	g2: getInstance(alg, _);
 	gI: getInstanceStrong();
 	Gets := g1, g2, gI;
+	
+	Ins := Gets, Cons;
 
-	gS: genSeed  = generateSeed(num);	
+	gS: genSeed = generateSeed(num);	
 
 	s1: setSeed(seed);
 	s2: setSeed(lSeed);
@@ -33,11 +35,13 @@ REQUIRED_EVENTS
 
 ENFORCE_ORDER
  	(Cons | Gets), Seeds?, (gS | Nexts)
+ 	
 ENFORCES_CONSTRAINTS
 	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
-	random[seed];
+	seed.random[];
 	
 ENSURES
-	random[genSeed];
-	random[next];
-	random[numB];
+	this.random[] after Ins;
+	genSeed.random[];
+	next.random[];
+	numB.random[];

@@ -22,6 +22,8 @@ USES_OBJECTS
     byte[] cipherText;
 	java.nio.ByteBuffer plainBuffer;
 	java.nio.ByteBuffer cipherBuffer;
+	
+	java.security.SecureRandom ranGen;
 
 REQUIRED_EVENTS
     g1: getInstance(transformation);
@@ -29,13 +31,13 @@ REQUIRED_EVENTS
     Gets := g1, g2;
 
     i1: init(encmode, cert);
-    i2: init(encmode, cert, _);
+    i2: init(encmode, cert, ranGen);
     i3: init(encmode, key);
     i4: init(encmode, key, params);
     i5: init(encmode, key, param);
-    i6: init(encmode, key, params, _);
-    i7: init(encmode, key, param, _);
-    i8: init(encmode, key, _);
+    i6: init(encmode, key, params, ranGen);
+    i7: init(encmode, key, param, ranGen);
+    i8: init(encmode, key, ranGen);
     IWOIV := i1, i2, i3, i8;
     IWIV := i3, i4, i5, i6, i7;
     Inits := IWOIV, IWIV;
@@ -78,8 +80,9 @@ ENFORCES_CONSTRAINTS
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode == 1 => callTo(iv) ;     
     
-    generatedKey[key, part(0, "/", transformation)];
-    !macced[plainText,_];
+    key.generatedKey[part(0, "/", transformation)];
+    ranGen.random[];
+    !_.macced[plainText];
 
 	encmode >= 1;
 	encmode <= 4;
@@ -89,6 +92,6 @@ ENFORCES_CONSTRAINTS
     cipherText <= ciphertext_off;
 
 ENSURES
-	encrypted[pre_ciphertext, pre_plaintext]; 
-	encrypted[cipherText, plainText];
-	encrypted[cipherBuffer, plainBuffer];
+	pre_ciphertext.encrypted[pre_plaintext] after updates; 
+	cipherText.encrypted[plainText];
+	cipherBuffer.encrypted[plainBuffer];

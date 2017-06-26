@@ -11,14 +11,17 @@ FORBIDDEN_EVENTS
 	
 REQUIRED_EVENTS
 	c1: PBEKeySpec(pw, salt, it, keylength);
+	
 	cP: clearPassword();
 
-	Ca := c1, cP;
 ENFORCE_ORDER
- 	c1, cP, Ca
+ 	c1,  cP
 ENFORCES_CONSTRAINTS
-	it > 100 ;
-	random[it];
+	it > 100;
+	salt.random[];
 	neverTypeOf(pw, java.lang.String) ;
+	
 ENSURES
-	keyspec[this, _, keylength];
+	 this.keyspec[_, keylength] after c1;
+DESTROYS
+	 this.keyspec[_, _] after cP;
