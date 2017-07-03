@@ -1,5 +1,5 @@
 SPEC java.security.Signature
-USES_OBJECTS
+OBJECTS
     java.security.Signature sign;
     byte inpb;
     byte[] inpba;
@@ -10,7 +10,7 @@ USES_OBJECTS
     java.security.cert.Certificate cert;
     java.security.spec.AlgorithmParameterSpec params;
 
-REQUIRED_EVENTS
+EVENTS
     g1: getInstance(alg);
     g2: getInstance(alg, _);
     Gets := g1, g2;
@@ -36,10 +36,10 @@ REQUIRED_EVENTS
     v2: verify(sign, offset, len);
     Verifies := v1, v2;
 
-ENFORCE_ORDER
+ORDER
     Gets, ((InitSigns, Updates+, Signs) | (InitVerifies, Updates+, Verifies))
 
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
     alg in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA"};
 
 ENSURES

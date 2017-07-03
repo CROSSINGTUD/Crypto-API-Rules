@@ -1,5 +1,5 @@
 SPEC java.security.SecureRandom
-USES_OBJECTS 
+OBJECTS 
 	byte[] seed;
 	byte[] genSeed;
 	int num;
@@ -8,10 +8,10 @@ USES_OBJECTS
 	byte[] next;
 	int numB;
 
-FORBIDDEN_EVENTS
+FORBIDDEN
 	getSeed(int) => gS;
 
-REQUIRED_EVENTS
+EVENTS
 	c1: SecureRandom();
 	c2: SecureRandom(seed);
 	Cons := c1, c2;
@@ -32,11 +32,13 @@ REQUIRED_EVENTS
 	ne: next(numB);
 	nB: nextBytes(next);
 	Nexts := ne, nB;
+	
+	Ends := gS, Nexts;
 
-ENFORCE_ORDER
- 	(Cons | Gets), Seeds?, (gS | Nexts)
+ORDER
+ 	Ins, Seeds?, Ends
  	
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
 	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
 	seed.random[];
 	

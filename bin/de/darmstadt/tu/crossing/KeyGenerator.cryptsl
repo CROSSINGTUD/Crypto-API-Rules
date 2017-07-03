@@ -1,11 +1,11 @@
 SPEC javax.crypto.KeyGenerator
-USES_OBJECTS
+OBJECTS
     int keySize;
     java.security.spec.AlgorithmParameterSpec params;
     javax.crypto.SecretKey key;
     java.lang.String alg;
 
-REQUIRED_EVENTS
+EVENTS
     g1: getInstance(alg);
     g2: getInstance(alg, _);
     Gets := g1, g2;
@@ -19,10 +19,10 @@ REQUIRED_EVENTS
     
     gk: key = generateKey();
 
-ENFORCE_ORDER
+ORDER
     Gets, Inits?, gk
 
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
 	alg in {"AES", "Blowfish", "DESede", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
     alg in {"AES"} => keySize in {128, 192, 256};
     alg in {"Blowfish"} => keySize in {128, 192, 256, 320, 384, 448};

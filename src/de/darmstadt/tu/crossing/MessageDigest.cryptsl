@@ -1,5 +1,5 @@
 SPEC java.security.MessageDigest
-USES_OBJECTS
+OBJECTS
     java.lang.String alg;
     byte pre_inbyte;
     byte[] pre_inbytearr;
@@ -14,10 +14,10 @@ USES_OBJECTS
     byte[] comp1;
     byte[] comp2;
 
-FORBIDDEN_EVENTS
+FORBIDDEN
 	equals(java_lang_Object) => iE;
 	
-REQUIRED_EVENTS
+EVENTS
     g1: getInstance(alg);
     g2: getInstance(alg, _);
     Gets := g1, g2;
@@ -38,10 +38,10 @@ REQUIRED_EVENTS
     
     iE: isEqual(comp1, comp2);
 
-ENFORCE_ORDER
+ORDER
     Gets, (DWOU | (Updates+, Digests)), (r, (DWOU | (Updates+, Digests)))* 
 
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
     alg in {"SHA-256", "SHA-384", "SHA-512"};
     pre_len > pre_off;
     len > off;

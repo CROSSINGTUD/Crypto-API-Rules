@@ -1,5 +1,5 @@
 SPEC javax.crypto.Cipher
-USES_OBJECTS
+OBJECTS
     java.lang.String transformation;
     int encmode;
     java.security.Key key;
@@ -25,7 +25,7 @@ USES_OBJECTS
 	
 	java.security.SecureRandom ranGen;
 
-REQUIRED_EVENTS
+EVENTS
     g1: getInstance(transformation);
     g2:getInstance(transformation, _);
     Gets := g1, g2;
@@ -62,10 +62,10 @@ REQUIRED_EVENTS
     
     iv: getIV();
     
-ENFORCE_ORDER
+ORDER
     Gets, Inits, (FINWOU | (updates+, DOFINALS))+
 
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
 	part(0, "/", transformation) in {"AES", "Blowfish", "DESede",  "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"};
     part(0, "/", transformation) in {"AES"} => part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"};
     part(0, "/", transformation) in {"Blowfish", "DESede"} => part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB64", "OFB", "OFB8..OFB64"};

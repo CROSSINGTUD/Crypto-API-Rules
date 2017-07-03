@@ -1,27 +1,27 @@
 SPEC javax.crypto.spec.PBEKeySpec
-USES_OBJECTS 
+OBJECTS 
 	char[] pw;
 	byte[] salt;
 	int it;
 	int keylength;
 	java.lang.String s;
-FORBIDDEN_EVENTS
+FORBIDDEN
 	PBEKeySpec(char[]) => c1;
 	PBEKeySpec(char[],byte[],int) => c1;
 	
-REQUIRED_EVENTS
+EVENTS
 	c1: PBEKeySpec(pw, salt, it, keylength);
 	
 	cP: clearPassword();
 
-ENFORCE_ORDER
+ORDER
  	c1,  cP
-ENFORCES_CONSTRAINTS
+CONSTRAINTS
 	it > 100;
 	salt.random[];
 	neverTypeOf(pw, java.lang.String) ;
 	
 ENSURES
 	 this.keyspec[_, keylength] after c1;
-DESTROYS
+NEGATES
 	 this.keyspec[_, _] after cP;
