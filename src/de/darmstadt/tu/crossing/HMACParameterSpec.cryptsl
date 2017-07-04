@@ -1,0 +1,10 @@
+SPEC javax.crypto.spec.HMACParameterSpec
+OBJECTS 
+	int outputLength;
+EVENTS
+	c1: HMACParameterSpec(outputLength);
+	
+ORDER
+	c1
+ENSURES
+	this.HMACParam[];

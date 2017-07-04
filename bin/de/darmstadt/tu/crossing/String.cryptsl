@@ -1,9 +1,9 @@
 SPEC java.lang.String
-USES_OBJECTS
+OBJECTS
 	byte[] bytes;
 	int pos;
 	
-FORBIDDEN_EVENTS
+FORBIDDEN
 	String() ; 
 	charAt(int) ;
 	indexOf(int) ;
@@ -14,10 +14,10 @@ FORBIDDEN_EVENTS
 	getBytes() ;
 	getBytes(java_lang_String) ;
 	
-REQUIRED_EVENTS
+EVENTS
 	c1: charAt(pos);
 	
-ENFORCE_ORDER
+ORDER
 	c1
 	
 	

@@ -67,7 +67,7 @@ ORDER
 
 CONSTRAINTS
 	part(0, "/", transformation) in {"AES", "Blowfish", "DESede",  "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"};
-    part(0, "/", transformation) in {"AES"} => part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"};
+    part(0, "/", transformation) in {"AES"} => part(1, "/", transformation) in {"CBC","GCM", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"};
     part(0, "/", transformation) in {"Blowfish", "DESede"} => part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB64", "OFB", "OFB8..OFB64"};
     part(0, "/", transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => part(1, "/", transformation) in {"CBC"};
     part(0, "/", transformation) in {"RSA"} => part(1, "/", transformation) in {"ECB"};
@@ -86,10 +86,10 @@ CONSTRAINTS
 
 	encmode >= 1;
 	encmode <= 4;
-    pre_plaintext.length >= pre_plain_off + len;
-    pre_ciphertext.length <= pre_ciphertext_off;
-    plainText.length <= plain_off + len;
-    cipherText <= ciphertext_off;
+    pre_plaintext.length >= pre_plain_off.length + len;
+    pre_ciphertext.length <= pre_ciphertext_off.length;
+    plainText.length <= plain_off.length + len;
+    cipherText.length <= ciphertext_off;
 
 ENSURES
 	pre_ciphertext.encrypted[pre_plaintext] after updates; 
