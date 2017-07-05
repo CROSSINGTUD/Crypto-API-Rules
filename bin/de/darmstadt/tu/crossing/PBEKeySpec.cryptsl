@@ -22,6 +22,6 @@ CONSTRAINTS
 	neverTypeOf(pw, java.lang.String) ;
 	
 ENSURES
-	 keyspec[this, _, keylength] after c1;
+	 keyspec[this, keylength] after c1;
 NEGATES
-	 keyspec[this, _, _] after cP;
+	 keyspec[this, _] after cP;
