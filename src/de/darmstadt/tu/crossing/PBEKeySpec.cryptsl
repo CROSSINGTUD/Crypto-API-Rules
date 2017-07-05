@@ -18,10 +18,10 @@ ORDER
  	c1,  cP
 CONSTRAINTS
 	it > 100;
-	salt.random[];
+	random[salt];
 	neverTypeOf(pw, java.lang.String) ;
 	
 ENSURES
-	 this.keyspec[_, keylength] after c1;
+	 keyspec[this, _, keylength] after c1;
 NEGATES
-	 this.keyspec[_, _] after cP;
+	 keyspec[this, _, _] after cP;

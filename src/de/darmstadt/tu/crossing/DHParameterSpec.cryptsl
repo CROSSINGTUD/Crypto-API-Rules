@@ -11,4 +11,4 @@ EVENTS
 ORDER
 	Cons
 ENSURES
-	this.DHParam[];
+	DHParam[this];

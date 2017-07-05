@@ -80,9 +80,9 @@ CONSTRAINTS
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "CFB8..CFB128", "OFB", "OFB8..OFB128"} && encmode == 1 => callTo(iv) ;     
     
-    key.generatedKey[part(0, "/", transformation)];
-    ranGen.random[];
-    !_.macced[plainText];
+    generatedKey[key, part(0, "/", transformation)];
+    random[ranGen];
+    !macced[_, plainText];
 
 	encmode >= 1;
 	encmode <= 4;
@@ -92,6 +92,6 @@ CONSTRAINTS
     cipherText.length <= ciphertext_off;
 
 ENSURES
-	pre_ciphertext.encrypted[pre_plaintext] after updates; 
-	cipherText.encrypted[plainText];
-	cipherBuffer.encrypted[plainBuffer];
+	encrypted[pre_ciphertext, pre_plaintext] after updates; 
+	encrypted[cipherText, plainText];
+	encrypted[cipherBuffer, plainBuffer];

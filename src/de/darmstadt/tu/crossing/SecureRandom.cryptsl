@@ -40,10 +40,10 @@ ORDER
  	
 CONSTRAINTS
 	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
-	seed.random[];
+	random[seed];
 	
 ENSURES
-	this.random[] after Ins;
-	genSeed.random[];
-	next.random[];
-	numB.random[];
+	random[this] after Ins;
+	random[genSeed];
+	random[next];
+	random[numB];

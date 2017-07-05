@@ -12,8 +12,8 @@ EVENTS
 ORDER
 	Cons
 CONSTRAINTS
-	salt.random[];
+	random[salt];
 	iterationCount > 1000;	
 
 ENSURES
-	this.PBEParam[];
+	PBEParam[this];

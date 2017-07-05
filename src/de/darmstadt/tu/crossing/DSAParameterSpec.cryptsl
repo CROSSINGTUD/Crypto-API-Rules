@@ -9,4 +9,4 @@ EVENTS
 ORDER
 	c1
 ENSURES
-	this.DSAParam[];
+	DSAParam[this];

@@ -33,4 +33,4 @@ CONSTRAINTS
     alg in {"HmacSHA512"} => keySize in {512};
     
 ENSURES 
-    key.generatedKey[alg];
+    generatedKey[key, alg];

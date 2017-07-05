@@ -27,4 +27,4 @@ CONSTRAINTS
     alg in {"RSA"} => keySize in {1024, 2048, 4096};
 
 ENSURES
-    kp.generatedKeyPair[alg];
+    generatedKeyPair[key, alg];

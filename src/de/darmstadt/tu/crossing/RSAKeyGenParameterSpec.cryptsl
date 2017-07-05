@@ -11,4 +11,4 @@ CONSTRAINTS
 	 keyLength in {1024, 2048, 4096};
 	 publicExponent == 65537;
 ENSURES
-	this.RSAKeyParam[];
+	RSAKeyParam[this];

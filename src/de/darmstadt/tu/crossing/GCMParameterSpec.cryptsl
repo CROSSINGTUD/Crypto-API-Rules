@@ -12,8 +12,8 @@ EVENTS
 ORDER
 	Cons
 CONSTRAINTS
-	src.random[];
+	random[src];
 	tLen in {96, 104, 112, 120, 128};
 	
 ENSURES
-	this.GCMParam[];
+	GCMParam[this];

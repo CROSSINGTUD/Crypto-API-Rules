@@ -47,5 +47,5 @@ CONSTRAINTS
     len > off;
 
 ENSURES
-	out.digested[_];
-    out.digested[inbytearr];
+	digested[out, _];
+    digested[out, inbytearr];

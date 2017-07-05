@@ -11,4 +11,4 @@ EVENTS
 ORDER
 	Cons
 ENSURES
-	this.IVParam[];
+	IVParam[this];
