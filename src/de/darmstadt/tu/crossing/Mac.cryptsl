@@ -29,7 +29,7 @@ EVENTS
     Updates := u1, u2, u3, u4;
 
     f1: output1 = doFinal();
-    f2: output2 =  doFinal(input);
+    f2: output2 = doFinal(input);
     f3: doFinal(output1, outOffset);
     FinalsWU := f1, f2;
     Finals := FinalsWU, f3;
@@ -43,6 +43,8 @@ CONSTRAINTS
     outOffset < output1.size;
     !encrypted[output1, _];
     !encrypted[output2,_];
+    
+    HMACParam[params];
 
 ENSURES
     macced[output1, inp];
