@@ -3,8 +3,7 @@ OBJECTS
 	char[] pw;
 	byte[] salt;
 	int it;
-	int keylength;
-	java.lang.String s;
+	int keylength; 
 FORBIDDEN
 	PBEKeySpec(char[]) => c1;
 	PBEKeySpec(char[],byte[],int) => c1;
@@ -13,7 +12,7 @@ EVENTS
 	c1: PBEKeySpec(pw, salt, it, keylength);
 	
 	cP: clearPassword();
-
+	
 ORDER
  	c1,  cP
 CONSTRAINTS
