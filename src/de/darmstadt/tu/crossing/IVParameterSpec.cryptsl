@@ -1,11 +1,11 @@
-SPEC javax.crypto.spec.IVParameterSpec
+SPEC javax.crypto.spec.IvParameterSpec
 OBJECTS 
 	byte[] iv;
 	int offset;
 	int len;
 EVENTS
-	c1: IVParameterSpec(iv);
-	c2: IVParameterSpec(iv, offset, len);
+	c1: IvParameterSpec(iv);
+	c2: IvParameterSpec(iv, offset, len);
 	Cons := c1, c2;
 	
 ORDER

@@ -1,4 +1,4 @@
-SPEC javax.crypto.spec.DSAParameterSpec
+SPEC java.security.spec.DSAParameterSpec
 OBJECTS 
 	java.math.BigInteger p;
 	java.math.BigInteger q;

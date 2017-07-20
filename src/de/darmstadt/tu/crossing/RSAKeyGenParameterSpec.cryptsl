@@ -1,4 +1,4 @@
-SPEC javax.crypto.spec.RSAKeyGenParameterSpec
+SPEC java.security.spec.RSAKeyGenParameterSpec
 OBJECTS 
 	int keyLength;
 	java.math.BigInteger publicExponent;

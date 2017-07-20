@@ -1,4 +1,4 @@
-SPEC javax.crypto.spec.IVParameterSpec
+SPEC javax.crypto.spec.DHParameterSpec
 OBJECTS 
 	java.math.BigInteger p;
 	java.math.BigInteger g;
