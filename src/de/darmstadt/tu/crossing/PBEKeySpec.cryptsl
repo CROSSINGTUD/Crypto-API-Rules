@@ -16,10 +16,11 @@ EVENTS
 ORDER
  	c1,  cP
 CONSTRAINTS
-	it > 100;
-	random[salt];
+	it > 1000;
 	neverTypeOf(pw, java.lang.String) ;
-	
+
+REQUIRES
+	random[salt];	
 ENSURES
 	 keyspec[this, keylength] after c1;
 NEGATES

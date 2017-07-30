@@ -28,7 +28,7 @@ OBJECTS
 EVENTS
     g1: getInstance(transformation);
     g2:getInstance(transformation, _);
-    Gets := g1, g2;
+    Gets := g1 | g2;
 
     i1: init(encmode, cert);
     i2: init(encmode, cert, ranGen);
@@ -38,9 +38,9 @@ EVENTS
     i6: init(encmode, key, params, ranGen);
     i7: init(encmode, key, param, ranGen);
     i8: init(encmode, key, ranGen);
-    IWOIV := i1, i2, i3, i8;
-    IWIV := i3, i4, i5, i6, i7;
-    Inits := IWOIV, IWIV;
+    IWOIV := i1 | i2 | i3 | i8;
+    IWIV := i3 | i4 | i5 | i6 | i7;
+    Inits := IWOIV | IWIV;
 
 
     u1: pre_ciphertext = update(pre_plaintext);
@@ -48,7 +48,7 @@ EVENTS
     u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
     u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
     u5: update(pre_plaintext, pre_ciphertext);
-    updates := u1, u2, u3, u4, u5;
+    updates := u1 | u2 | u3 | u4 | u5;
 
     f1: cipherText = doFinal();
     f2: cipherText =  doFinal(plainText);
@@ -57,8 +57,8 @@ EVENTS
     f5: doFinal(plainText, plain_off, len, cipherText);
     f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
     f7: doFinal(plainBuffer, cipherBuffer);
-    FINWOU := f2, f5, f6, f7;
-    DOFINALS := FINWOU, f1, f3, f4;
+    FINWOU := f2 | f5 | f6 | f7;
+    DOFINALS := FINWOU | f1 | f3 | f4;
     
     iv: getIV();
     
@@ -72,19 +72,14 @@ CONSTRAINTS
     part(0, "/", transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => part(1, "/", transformation) in {"CBC"};
     part(0, "/", transformation) in {"RSA"} => part(1, "/", transformation) in {"ECB"};
 
-    part(0, "/", transformation) in {"AES", "Blowfish", "DESede", "RC2"} => part(2, "/", transformation) in {"NoPadding", "PKCS5Padding", "ISO10126Padding"};
     part(0, "/", transformation) in {"PBEWithMD5AndDES", "PBEWithMD5AndTripleDES", "PBEWithSHA1AndDESede", "PBEWithSHA1AndRC2_40", "PBEWithSHA1AndRC2_128", "PBEWithSHA1AndRC4_40", "PBEWithSHA1AndRC4_128", "PBEWithHmacSHA1AndAES_128", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => part(2, "/", transformation) in {"PKCS5Padding"};
     part(0, "/", transformation) in {"RSA"} => part(2, "/", transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
-    part(1, "/", transformation) in {"CBC"} => part(2, "/", transformation) in {"PKCS5Padding", "PKCS7Padding", "ISO10126Padding"};
 
+    part(0, "/", transformation) in {"AES", "Blowfish", "DESede", "RC2"} && part(1, "/", transformation) in {"CBC", "PCBC"} => part(2, "/", transformation) in {"", "PKCS5Padding", "ISO10126Padding"};
+    part(0, "/", transformation) in {"AES", "Blowfish", "DESede", "RC2"} && part(1, "/", transformation) in {"GCM", "CTR", "CFB", "OFB"} => part(2, "/", transformation) in {"", "NoPadding","PKCS5Padding", "ISO10126Padding"};
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo(iv) ;     
     
-    generatedKey[key, part(0, "/", transformation)];
-    random[ranGen];
-    algParam[param, part(0, "/", transformation)];
-    !macced[_, plainText];
-
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} => IVParam[params];
 	part(1, "/", transformation) in {"GCM"} => GCMParam[params];
 
@@ -93,6 +88,12 @@ CONSTRAINTS
     pre_ciphertext.length <= pre_ciphertext_off.length;
     plainText.length <= plain_off.length + len;
     cipherText.length <= ciphertext_off;
+
+REQUIRES
+	generatedKey[key, part(0, "/", transformation)];
+    random[ranGen];
+    algParam[param, part(0, "/", transformation)];
+    !macced[_, plainText];
 
 ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after updates; 

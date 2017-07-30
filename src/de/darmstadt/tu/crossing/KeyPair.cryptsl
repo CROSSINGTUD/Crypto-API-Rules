@@ -9,13 +9,13 @@ OBJECTS
 EVENTS
 	co : KeyPair(consPriv, consPub);
 
-	pu : pub = getPublic();
-	pr : priv = getPrivate();
-	Gets := pu, pr;
+	pu : retPub = getPublic();
+	pr : retPriv = getPrivate();
+	Gets := pu | pr;
 
 ORDER
-	co?, Gets*
-CONSTRAINTS
+	co?, (pu*, pr*)*
+REQUIRES
 	generatedPrivKey[consPriv, _];
 	generatedPubKey[consPub, _];
 	

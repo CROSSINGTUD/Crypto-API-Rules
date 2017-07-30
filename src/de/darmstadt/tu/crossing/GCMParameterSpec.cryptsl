@@ -7,13 +7,14 @@ OBJECTS
 EVENTS
 	c1: GCMParameterSpec(tLen, src);
 	c2: GCMParameterSpec(tLen, src, offset, len);
-	Cons := c1, c2;
+	Cons := c1 | c2;
 	
 ORDER
 	Cons
 CONSTRAINTS
-	random[src];
 	tLen in {96, 104, 112, 120, 128};
 	
+REQUIRES
+	random[src];
 ENSURES
 	GCMParam[this];

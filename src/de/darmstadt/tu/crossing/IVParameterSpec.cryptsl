@@ -6,7 +6,7 @@ OBJECTS
 EVENTS
 	c1: IvParameterSpec(iv);
 	c2: IvParameterSpec(iv, offset, len);
-	Cons := c1, c2;
+	Cons := c1 | c2;
 	
 ORDER
 	Cons

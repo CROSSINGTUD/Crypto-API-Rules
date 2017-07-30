@@ -7,13 +7,15 @@ OBJECTS
 EVENTS
 	c1: PBEParameterSpec(salt, iterationCount);
 	c2: PBEParameterSpec(salt, iterationCount, paramSpec);
-	Cons := c1, c2;
+	Cons := c1 | c2;
 	
 ORDER
 	Cons
 CONSTRAINTS
-	random[salt];
 	iterationCount > 1000;	
+
+REQUIRES
+	random[salt];
 
 ENSURES
 	PBEParam[this];
