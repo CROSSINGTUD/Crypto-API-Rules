@@ -10,5 +10,7 @@ EVENTS
 	
 ORDER
 	Cons
+REQUIRES
+	random[iv];
 ENSURES
 	IVParam[this];

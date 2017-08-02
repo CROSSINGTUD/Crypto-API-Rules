@@ -25,11 +25,11 @@ ORDER
 
 CONSTRAINTS
 	alg in {"AES", "Blowfish", "DESede", "DiffieHellman", "OEAP", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
-    alg in {"AES", "Blowfish", "DESede"} => IVParam[params];
-    alg in {"DiffieHellman"} => DHParam[params];
 
 REQUIRES    
     algParam[parAr];
+    alg in {"AES", "Blowfish", "DESede"} => IVParam[params];
+    alg in {"DiffieHellman"} => DHParam[params];
     
 ENSURES 
     algParam[this, alg] after Inits;

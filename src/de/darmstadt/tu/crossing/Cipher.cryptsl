@@ -80,9 +80,6 @@ CONSTRAINTS
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo(iv) ;     
     
-	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} => IVParam[params];
-	part(1, "/", transformation) in {"GCM"} => GCMParam[params];
-
 	encmode in {1,2,3,4};
     pre_plaintext.length >= pre_plain_off.length + len;
     pre_ciphertext.length <= pre_ciphertext_off.length;
@@ -94,7 +91,10 @@ REQUIRES
     random[ranGen];
     algParam[param, part(0, "/", transformation)];
     !macced[_, plainText];
-
+	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} => IVParam[params];
+	part(1, "/", transformation) in {"GCM"} => GCMParam[params];
+	
+	
 ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after updates; 
 	encrypted[cipherText, plainText];
