@@ -10,12 +10,6 @@ OBJECTS
     int off;
     int len;
     byte[] out;
-    
-    byte[] comp1;
-    byte[] comp2;
-
-FORBIDDEN
-	equals(java_lang_Object) => iE;
 	
 EVENTS
     g1: getInstance(alg);
@@ -35,8 +29,6 @@ EVENTS
     DWU := d1 | d3;
     Digests := DWU | DWOU;
     r: reset();
-    
-    iE: isEqual(comp1, comp2);
 
 ORDER
     Gets, (DWOU | (Updates+, Digests)), (r, (DWOU | (Updates+, Digests)))* 

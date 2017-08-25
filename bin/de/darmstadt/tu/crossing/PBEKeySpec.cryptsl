@@ -22,6 +22,6 @@ CONSTRAINTS
 REQUIRES
 	random[salt];	
 ENSURES
-	 keyspec[this, keylength] after c1;
+	keyspec[this, keylength] after c1;
 NEGATES
-	 keyspec[this, _] after cP;
+	keyspec[this, _] after cP;

@@ -8,9 +8,6 @@ OBJECTS
 	byte[] next;
 	int numB;
 
-FORBIDDEN
-	getSeed(int) => gS;
-
 EVENTS
 	c1: SecureRandom();
 	c2: SecureRandom(seed);
