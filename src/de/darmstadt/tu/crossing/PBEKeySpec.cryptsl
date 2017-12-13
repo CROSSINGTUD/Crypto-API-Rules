@@ -16,7 +16,7 @@ EVENTS
 ORDER
  	c1,  cP
 CONSTRAINTS
-	it > 1000;
+	it >= 1000;
 	neverTypeOf(pw, java.lang.String) ;
 
 REQUIRES

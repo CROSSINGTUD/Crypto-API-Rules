@@ -42,7 +42,6 @@ EVENTS
     IWIV := i3 | i4 | i5 | i6 | i7;
     Inits := IWOIV | IWIV;
 
-
     u1: pre_ciphertext = update(pre_plaintext);
     u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
     u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
@@ -53,12 +52,12 @@ EVENTS
     f1: cipherText = doFinal();
     f2: cipherText =  doFinal(plainText);
     f3: doFinal(cipherText, plain_off);
-    f4: cipherText = doFinal(cipherText, plain_off, len);
+    f4: cipherText = doFinal(plainText, plain_off, len);
     f5: doFinal(plainText, plain_off, len, cipherText);
     f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
     f7: doFinal(plainBuffer, cipherBuffer);
-    FINWOU := f2 | f5 | f6 | f7;
-    DOFINALS := FINWOU | f1 | f3 | f4;
+    FINWOU := f2 | f4 | f5 | f6 | f7;
+    DOFINALS := FINWOU | f1 | f3;
     
     iv: getIV();
     
@@ -81,17 +80,17 @@ CONSTRAINTS
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo(iv) ;     
     
     encmode in {1,2,3,4};
-    pre_plaintext.length >= pre_plain_off.length + len;
-    pre_ciphertext.length <= pre_ciphertext_off.length;
-    plainText.length <= plain_off.length + len;
-    cipherText.length <= ciphertext_off;
+    length(pre_plaintext) >= pre_plain_off + len;
+    length(pre_ciphertext) <= pre_ciphertext_off;
+    length(plainText) <= plain_off + len;
+    length(cipherText) <= ciphertext_off;
 
 REQUIRES
 	generatedKey[key, part(0, "/", transformation)];
     random[ranGen];
     algParam[param, part(0, "/", transformation)];
     !macced[_, plainText];
-	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} => IVParam[params];
+	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => IVParam[params];
 	part(1, "/", transformation) in {"GCM"} => GCMParam[params];
 	
 	
