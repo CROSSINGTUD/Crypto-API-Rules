@@ -39,10 +39,10 @@ CONSTRAINTS
 	alg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
 	
 REQUIRES	
-	random[seed];
+	randomized[seed];
 	
 ENSURES
-	random[this] after Ins;
-	random[genSeed];
-	random[next];
-	random[numB];
+	randomized[this] after Ins;
+	randomized[genSeed];
+	randomized[next];
+	randomized[numB];

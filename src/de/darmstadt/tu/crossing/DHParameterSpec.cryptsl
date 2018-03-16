@@ -11,4 +11,4 @@ EVENTS
 ORDER
 	Cons
 ENSURES
-	DHParam[this];
+	preparedDH[this];

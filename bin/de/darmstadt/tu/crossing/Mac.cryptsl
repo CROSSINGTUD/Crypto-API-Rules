@@ -45,8 +45,7 @@ CONSTRAINTS
 REQUIRES
     !encrypted[output1, _];
     !encrypted[output2,_];
-    
-    HMACParam[params];
+    preparedHMAC[params];
 
 ENSURES
     macced[output1, inp];

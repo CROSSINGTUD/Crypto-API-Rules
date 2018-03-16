@@ -17,7 +17,7 @@ EVENTS
     Inits := i1 | i2 | i3;
     
     e1: parsRes = getEncoded();
-    e2: parsRes =getEncoded(format);
+    e2: parsRes = getEncoded(format);
     Encoded := e1 | e2;
 
 ORDER
@@ -27,10 +27,10 @@ CONSTRAINTS
 	alg in {"AES", "Blowfish", "DESede", "DiffieHellman", "OEAP", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
 
 REQUIRES    
-    algParam[parAr];
-    alg in {"AES", "Blowfish", "DESede"} => IVParam[params];
-    alg in {"DiffieHellman"} => DHParam[params];
+    preparedAlg[parAr];
+    alg in {"AES", "Blowfish", "DESede"} => preparedIV[params];
+    alg in {"DiffieHellman"} => preparedDH[params];
     
 ENSURES 
-    algParam[this, alg] after Inits;
-    algParam[parsRes, alg] after Encoded;
+    preparedAlg[this, alg] after Inits;
+    preparedAlg[parsRes, alg] after Encoded;

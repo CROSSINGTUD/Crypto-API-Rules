@@ -17,6 +17,9 @@ OBJECTS
     
     byte[] pre_plaintext;
     byte[] pre_ciphertext;
+    java.nio.ByteBuffer pre_plainBuffer;
+	java.nio.ByteBuffer pre_cipherBuffer;
+	
     
     byte[] plainText;
     byte[] cipherText;
@@ -46,7 +49,7 @@ EVENTS
     u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
     u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
     u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
-    u5: update(pre_plaintext, pre_ciphertext);
+    u5: update(pre_plainBuffer, pre_cipherBuffer);
     updates := u1 | u2 | u3 | u4 | u5;
 
     f1: cipherText = doFinal();
@@ -87,12 +90,11 @@ CONSTRAINTS
 
 REQUIRES
 	generatedKey[key, part(0, "/", transformation)];
-    random[ranGen];
-    algParam[param, part(0, "/", transformation)];
+    randomized[ranGen];
+    preparedAlg[param, part(0, "/", transformation)];
     !macced[_, plainText];
-	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => IVParam[params];
-	part(1, "/", transformation) in {"GCM"} => GCMParam[params];
-	
+	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[params];
+	part(1, "/", transformation) in {"GCM"} => preparedGCM[params];
 	
 ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after updates; 

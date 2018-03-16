@@ -34,7 +34,7 @@ CONSTRAINTS
     alg in {"HmacSHA512"} => keySize in {512};
    
 REQUIRES
-    random[ranGen];
+    randomized[ranGen];
     
 ENSURES 
     generatedKey[key, alg];

@@ -7,7 +7,7 @@ OBJECTS
 	java.security.PublicKey retPub;
 	
 EVENTS
-	co : KeyPair(consPriv, consPub);
+	co : KeyPair(consPub, consPriv);
 
 	pu : retPub = getPublic();
 	pr : retPriv = getPrivate();
@@ -16,10 +16,10 @@ EVENTS
 ORDER
 	co?, (pu*, pr*)*
 REQUIRES
-	generatedPrivKey[consPriv, _];
-	generatedPubKey[consPub, _];
+	generatedPrivkey[consPriv, _];
+	generatedPubkey[consPub, _];
 	
 ENSURES
-	generatedKeyPair[this, _] after co;
-	generatedPubKey[retPub, _] after pu;
-	generatedPrivKey[retPriv, _] after pr;
+	generatedKeypair[this, _] after co;
+	generatedPubkey[retPub, _] after pu;
+	generatedPrivkey[retPriv, _] after pr;

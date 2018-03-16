@@ -7,4 +7,4 @@ EVENTS
 ORDER
 	c1
 ENSURES
-	HMACParam[this];
+	preparedHMAC[this];

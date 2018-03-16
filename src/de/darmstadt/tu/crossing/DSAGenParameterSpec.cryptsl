@@ -11,4 +11,4 @@ EVENTS
 ORDER
 	Cons
 ENSURES
-	DSAGenParam[this];
+	preparedDSA[this];

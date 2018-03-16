@@ -15,6 +15,6 @@ CONSTRAINTS
 	tLen in {96, 104, 112, 120, 128};
 	
 REQUIRES
-	random[src];
+	randomized[src];
 ENSURES
-	GCMParam[this];
+	preparedGCM[this];

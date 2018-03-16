@@ -9,4 +9,4 @@ EVENTS
 ORDER
 	c1
 ENSURES
-	DSAParam[this];
+	preparedDSA[this];

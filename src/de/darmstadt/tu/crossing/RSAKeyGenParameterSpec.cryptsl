@@ -9,6 +9,6 @@ ORDER
 	c1
 CONSTRAINTS
 	 keyLength in {1024, 2048, 4096};
-	 publicExponent == 65537;
+	 publicExponent in {65537};
 ENSURES
-	RSAKeyParam[this];
+	preparedRSAKey[this];
