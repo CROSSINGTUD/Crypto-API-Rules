@@ -1,0 +1,21 @@
+List of all predicates ensured by the cryptsl rules
+preparedAlg
+preparedHMAC
+encrypted
+preparedGCM
+preparedDH
+preparedDSA
+preparedHMAC
+preparedIV
+generatedKey
+generatedKeypair
+generatedPrivkey
+generatedPubkey
+macced
+digested
+speccedKey
+preparedPBE
+preparedRSAKey
+randomized
+signed
+verified
