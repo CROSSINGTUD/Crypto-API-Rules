@@ -8,9 +8,12 @@ preparedDSA
 preparedHMAC
 preparedIV
 generatedKey
+generatedKeyStore
 generatedKeypair
 generatedPrivkey
 generatedPubkey
+generatedKeyManager
+generatedTrustManager
 macced
 digested
 speccedKey
