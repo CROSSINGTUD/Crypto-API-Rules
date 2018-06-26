@@ -21,10 +21,11 @@ ORDER
 	Gets, Init, gtm?
 	
 CONSTRAINTS
-	algo in {"PKIX"};
+	algo in {"PKIX", "SunX509"};
 
 REQUIRES
-	generatedKeyStore[keyStore];									
+	generatedKeyStore[keyStore];
+	generatedManagerFactoryParameters[params];									
 															
 ENSURES
 	generatedTrustManager[this] after Init;			

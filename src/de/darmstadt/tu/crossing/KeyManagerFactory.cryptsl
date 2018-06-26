@@ -23,7 +23,7 @@ ORDER
 
 CONSTRAINTS
     neverTypeOf(password, java.lang.String) ;
-    algo in {"SunX509"};
+    algo in {"PKIX", "SunX509"};
 
 REQUIRES
 	generatedKeyStore[keyStore];
