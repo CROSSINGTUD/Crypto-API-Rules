@@ -54,7 +54,7 @@ EVENTS
 
     f1: cipherText = doFinal();
     f2: cipherText =  doFinal(plainText);
-    f3: doFinal(cipherText, plain_off);
+    f3: doFinal(cipherText, ciphertext_off);
     f4: cipherText = doFinal(plainText, plain_off, len);
     f5: doFinal(plainText, plain_off, len, cipherText);
     f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
