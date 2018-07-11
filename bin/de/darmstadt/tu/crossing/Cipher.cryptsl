@@ -78,7 +78,8 @@ CONSTRAINTS
     part(0, "/", transformation) in {"RSA"} => part(2, "/", transformation) in {"", "PKCS1Padding","OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
 
     part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"CBC", "PCBC"} => part(2, "/", transformation) in {"", "PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
-    part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"GCM", "CTR", "CFB", "OFB"} => part(2, "/", transformation) in {"", "NoPadding","PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
+    part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"GCM", "CTR", "CFB", "OFB"} => part(2, "/", transformation) in {"NoPadding"};
+	
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo(IWOIV) ;
     part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo(iv) ;     
     
