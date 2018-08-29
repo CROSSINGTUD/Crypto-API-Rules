@@ -77,7 +77,7 @@ CONSTRAINTS
     part(0, "/", transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => part(2, "/", transformation) in {"PKCS7Padding", "PKCS5Padding"};
     part(0, "/", transformation) in {"RSA"} => part(2, "/", transformation) in {"", "PKCS1Padding","OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
 
-    part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"CBC", "PCBC"} => part(2, "/", transformation) in {"", "PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
+    part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"CBC", "PCBC"} => part(2, "/", transformation) in {"PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
     part(0, "/", transformation) in {"AES", "Blowfish"} && part(1, "/", transformation) in {"GCM", "CTR", "CFB", "OFB"} => part(2, "/", transformation) in {"NoPadding"};
 	
 	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo(IWOIV) ;
