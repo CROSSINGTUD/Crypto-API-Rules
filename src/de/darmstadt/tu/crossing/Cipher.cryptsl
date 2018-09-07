@@ -42,7 +42,7 @@ EVENTS
     i7: init(encmode, key, param, ranGen);
     i8: init(encmode, key, ranGen);
     IWOIV := i1 | i2 | i3 | i8;
-    IWIV := i3 | i4 | i5 | i6 | i7;
+    IWIV :=  i4 | i5 | i6 | i7;
     Inits := IWOIV | IWIV;
 
     u1: pre_ciphertext = update(pre_plaintext);
