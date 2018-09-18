@@ -97,6 +97,7 @@ REQUIRES
 	part(1, "/", transformation) in {"GCM"} => preparedGCM[params];
 	
 ENSURES
+	initializedCipher[this] after Inits;
 	encrypted[pre_ciphertext, pre_plaintext] after updates; 
 	encrypted[cipherText, plainText];
 	encrypted[cipherBuffer, plainBuffer];
