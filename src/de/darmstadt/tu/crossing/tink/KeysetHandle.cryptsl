@@ -1,0 +1,31 @@
+/*
+ * A CrySL rule that specifies the process for generating
+ * and exporting KeysetHandles. 
+ * 
+ * Ensures that a KeysetHandle must be available before 
+ * using a Tink primitive.  
+ */ 
+ 
+SPEC com.google.crypto.tink.KeysetHandle
+
+OBJECTS
+    com.google.crypto.tink.proto.KeyTemplate kt;
+	com.google.crypto.tink.KeysetHandle ksh;
+
+EVENTS
+    gen  : ksh = generateNew(kt);
+    readC: ksh = read(_);            // load clear text keysets 
+    readE: ksh = read(_, _);		 // load encrypted text keysets
+    
+    GenKSH := gen | readC | readE ;
+    
+    write: write(_, _);  
+
+ORDER
+    GenKSH, write? 
+
+REQUIRES
+	keyTemplate[kt];                 // only necessary if we call generateNew
+	
+ENSURES
+	generatedKeysetHandle[ksh] after GenKSH;	

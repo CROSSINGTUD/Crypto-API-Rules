@@ -1,0 +1,60 @@
+/*
+ * This is a CrySL specification for the Google Tink implementation of 
+ * the classe AeadKeyTemplates. 
+ * 
+ * Note: in this case, we are not specifying the correct usage of the 
+ * API, but actually guaranteeing that the Google Tink API implementation 
+ * actually exposes some key templates as static attributes. This 
+ * informations simplifies the specification of other properties for 
+ * correctly using the API. 
+ */
+
+SPEC com.google.crypto.tink.aead.AeadKeyTemplates
+
+OBJECTS
+	com.google.crypto.tink.proto.KeyTemplate aes128_gcm;
+	com.google.crypto.tink.proto.KeyTemplate aes256_gcm;
+	com.google.crypto.tink.proto.KeyTemplate aes128_eax;
+	com.google.crypto.tink.proto.KeyTemplate aes256_eax;
+	com.google.crypto.tink.proto.KeyTemplate aes128_ctr_hmac_sha256;
+	com.google.crypto.tink.proto.KeyTemplate aes256_ctr_hmac_sha256;
+	
+	int k16;
+	int k32; 
+	int iv16;
+	int hmk32;
+	int tag16;
+	int tag32; 
+	
+	int hashType;  // HashType enum: (1) - SHA1, (3) - SHA256, and (4) - SHA 512. 
+	
+EVENTS
+	aes128_gcm : aes128_gcm = createAesGcmKeyTemplate(k16);
+	aes256_gcm : aes256_gcm = createAesGcmKeyTemplate(k32);
+	aes128_eax : aes128_eax = createAesEaxKeyTemplate(k16, iv16);
+	aes256_eax : aes256_eax = createAesEaxKeyTemplate(k32, iv16);
+	aes128_ctr_hmac_sha256 : aes128_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag16, hashType);
+	aes256_ctr_hmac_sha256 : aes256_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag32, hashType);
+	
+	CreateKeyTemplates := aes128_gcm | aes256_gcm | aes128_eax;
+	
+ORDER 
+	(CreateKeyTemplates)*	
+
+CONSTRAINTS
+	k16 == 16;
+	k32 == 32; 
+	iv16 == 16;	
+	hmk32 == 32;
+	tag16 == 16; 
+	tag32 == 32; 
+	hashType == 3; 
+	
+ENSURES
+	keyTemplate[aes128_gcm] after aes128_gcm;
+	keyTemplate[aes256_gcm] after aes256_gcm;
+	keyTemplate[aes128_eax] after aes128_eax;
+	keyTemplate[aes256_eax] after aes256_eax;
+	keyTemplate[aes128_ctr_hmac_sha256] after aes128_ctr_hmac_sha256;
+	keyTemplate[aes256_ctr_hmac_sha256] after aes256_ctr_hmac_sha256;
+	

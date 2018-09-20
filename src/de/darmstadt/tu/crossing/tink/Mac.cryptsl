@@ -1,0 +1,25 @@
+/*
+ * A CrySL specification for using the MAC algorithms of the Google Google library. 
+ */
+SPEC com.google.crypto.tink.Mac
+
+OBJECTS
+	com.google.crypto.tink.Mac mac; 
+	
+	byte[] data;
+	byte[] mac;
+
+EVENTS
+	mac : mac = computeMac(data);
+	verify : verifyMac(data, mac); 
+	
+	Mode := mac | verify; 
+
+ORDER
+	(Mode)*
+
+REQUIRES 
+	setMacPrimitive[mac];
+	
+ENSURES
+	macced[mac, data];
