@@ -1,6 +1,6 @@
 /*
  * A CrySL rule that specifies the process for generating
- * and exporting KeysetHandles. 
+ * and exporting KeysetHandles using the Google Tink API. 
  * 
  * Ensures that a KeysetHandle must be available before 
  * using a Tink primitive.  

@@ -1,11 +1,11 @@
 /*
  * This is a CrySL specification for the Google Tink implementation of 
- * the classe MacKeyTemplates. 
+ * the class MacKeyTemplates. 
  * 
  * Note: in this case, we are not specifying the correct usage of the 
  * API, but actually guaranteeing that the Google Tink API implementation 
  * actually exposes some key templates as static attributes. This 
- * informations simplifies the specification of other properties for 
+ * information simplifies the specification of other properties for 
  * correctly using the API. 
  * 
  * It constraints the use of the API to the following keys: 
