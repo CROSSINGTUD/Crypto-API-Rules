@@ -24,7 +24,7 @@ OBJECTS
 EVENTS
     aes256_siv : aes256_siv = createAesSivKeyTemplate(k64);
 	
-	CreateKeyTemplates := aes128_gcm | aes256_gcm | aes128_eax;
+	CreateKeyTemplates := aes256_siv;
 	
 ORDER 
 	(CreateKeyTemplates)*	
