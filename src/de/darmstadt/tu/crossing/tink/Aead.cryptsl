@@ -24,5 +24,4 @@ REQUIRES
 	setAeadPrimitive[aead];
 	
 ENSURES
-	setAeadPrimitive[aead];
 	encrypted[cipherText, plainText];
