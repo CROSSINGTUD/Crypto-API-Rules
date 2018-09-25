@@ -25,8 +25,5 @@ ORDER
 CONSTRAINTS
 	len > off;
 	
-REQUIRES
-	initializedCipher[ciph];
-	
 ENSURES
 	cipheredOutputStream[os, ciph];

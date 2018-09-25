@@ -21,9 +21,6 @@ EVENTS
 ORDER
 	Constructs, Reads+, c
 	
-CONSTRAINTS
-	len > off;
-	
 REQUIRES
 	initializedCipher[ciph];
 	
