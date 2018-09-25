@@ -20,9 +20,9 @@ EVENTS
 	
 ORDER
 	Constructs, Reads+, c
-	
-REQUIRES
-	initializedCipher[ciph];
+
+CONSTRAINTS
+	len > off;
 	
 ENSURES
 	cipheredInputStream[is, ciph];
