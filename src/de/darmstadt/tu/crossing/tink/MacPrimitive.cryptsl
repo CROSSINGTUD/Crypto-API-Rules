@@ -8,19 +8,19 @@ OBJECTS
 	com.google.crypto.tink.Mac mac; 
 	
 	byte[] data;
-	byte[] mac;
+	byte[] tag;
 
 EVENTS
-	mac : mac = computeMac(data);
-	verify : verifyMac(data, mac); 
+	mac_evt : tag = computeMac(data);
+	verify_evt : verifyMac(tag, data); 
 	
-	Mode := mac | verify; 
+	Mode := mac_evt | verify_evt; 
 
 ORDER
 	(Mode)*
 
 REQUIRES 
-	setMacPrimitive[mac];
+	generateMacPrimitive[mac];
 	
 ENSURES
-	macced[mac, data];
+	generateMacFromData[tag, data];

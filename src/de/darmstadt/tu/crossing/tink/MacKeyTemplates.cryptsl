@@ -22,33 +22,26 @@ OBJECTS
 	
 	int k16;
 	int k32; 
-	int iv16;
-	int hmk32;
-	int tag16;
-	int tag32; 
 	
 	int hashType;  // HashType enum: (1) - SHA1, (3) - SHA256, and (4) - SHA 512. 
 	
 EVENTS
-	hmac_sha256_128bittag : hmac_sha256_128bittag = createHmacKeyTemplate(k32, tag16, hashType);
-	hmac_sha256_256bittag : hmac_sha256_256bittag = createHmacKeyTemplate(k32, tag32, hashType);
+	hmac_sha256_128bittag_evt : hmac_sha256_128bittag = createHmacKeyTemplate(k32, k16, _);
+	hmac_sha256_256bittag_evt : hmac_sha256_256bittag = createHmacKeyTemplate(k32, k32, _);
 	
 	
-	CreateKeyTemplates := hmac_sha256_128bittag | hmac_sha256_256bittag;
+	CreateKeyTemplates := hmac_sha256_128bittag_evt | hmac_sha256_256bittag_evt;
 	
 ORDER 
-	(CreateKeyTemplates)*	
+	(CreateKeyTemplates)
 
 CONSTRAINTS
 	k16 == 16;
 	k32 == 32; 
-	iv16 == 16;	
-	hmk32 == 32;
-	tag16 == 16; 
-	tag32 == 32; 
-	hashType == 3; 
+	
+	//hashType == 3; 
 	
 	
 ENSURES
-	macKeyTemplate[hmac_sha256_128bittag] after hmac_sha256_128bittag;
-	macKeyTemplate[hmac_sha256_256bittag] after hmac_sha256_256bittag;
+	macKeyTemplate[hmac_sha256_128bittag] after hmac_sha256_128bittag_evt;
+	macKeyTemplate[hmac_sha256_256bittag] after hmac_sha256_256bittag_evt;

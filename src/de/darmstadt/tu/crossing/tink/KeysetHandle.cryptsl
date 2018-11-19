@@ -10,22 +10,18 @@ SPEC com.google.crypto.tink.KeysetHandle
 
 OBJECTS
     com.google.crypto.tink.proto.KeyTemplate kt;
-	com.google.crypto.tink.KeysetHandle ksh;
 
 EVENTS
-    gen  : ksh = generateNew(kt);
-    readC: ksh = read(_);            // load clear text keysets 
-    readE: ksh = read(_, _);		 // load encrypted text keysets
+    gen_evt    : generateNew(kt);
+    read_evt   : read(_, _); 
+    export_evt : write(_, _); 
     
-    GenKSH := gen | readC | readE ;
-    
-    write: write(_, _);  
-
 ORDER
-    GenKSH, write? 
+    (gen_evt | read_evt), export_evt?  
+   
 
 REQUIRES
-	keyTemplate[kt];                 // only necessary if we call generateNew
+	keyTemplate[kt];
 	
 ENSURES
-	generatedKeysetHandle[ksh] after GenKSH;	
+	generatedKeySet[this];
