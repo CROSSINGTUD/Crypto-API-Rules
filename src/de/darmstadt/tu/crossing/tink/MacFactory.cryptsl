@@ -15,7 +15,7 @@ ORDER
 	gp
 
 REQUIRES 
-	generatedKeysetHandle[ksh]; 
+	generatedKeySet[ksh]; 
 	
 ENSURES
-	generateMacPrimitive[mac];
+	macPrimitive[mac];
