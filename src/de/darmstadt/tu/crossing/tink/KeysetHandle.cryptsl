@@ -1,0 +1,27 @@
+/*
+ * A CrySL rule that specifies the process for generating
+ * and exporting KeysetHandles using the Google Tink API. 
+ * 
+ * Ensures that a KeysetHandle must be available before 
+ * using a Tink primitive.  
+ */ 
+ 
+SPEC com.google.crypto.tink.KeysetHandle
+
+OBJECTS
+    com.google.crypto.tink.proto.KeyTemplate kt;
+
+EVENTS
+    gen_evt    : generateNew(kt);
+    read_evt   : read(_, _); 
+    export_evt : write(_, _); 
+    
+ORDER
+    (gen_evt | read_evt), export_evt?  
+   
+
+REQUIRES
+	keyTemplate[kt];
+	
+ENSURES
+	generatedKeySet[this];

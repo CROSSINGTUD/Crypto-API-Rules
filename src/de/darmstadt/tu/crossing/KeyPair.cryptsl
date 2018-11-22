@@ -15,9 +15,10 @@ EVENTS
 
 ORDER
 	co?, (pu*, pr*)*
+	
 REQUIRES
-	generatedPrivkey[consPriv, _];
-	generatedPubkey[consPub, _];
+	generatedPrivkey[consPriv];
+	generatedPubkey[consPub];
 	
 ENSURES
 	generatedKeypair[this, _] after co;

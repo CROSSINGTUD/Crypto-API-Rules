@@ -1,0 +1,61 @@
+/*
+ * This is a CrySL specification for the Google Tink implementation of 
+ * the class AeadKeyTemplates. 
+ * 
+ * Note: in this case, we are not specifying the correct usage of the 
+ * API, but actually guaranteeing that the Google Tink API implementation 
+ * actually exposes some key templates as static attributes. This 
+ * information simplifies the specification of other properties for 
+ * correctly using the API. 
+ * 
+ * 
+ * It constraints the use of the API to the following key templates: 
+ * 
+ * - aes128_gcm
+ * - aes256_gcm
+ * - aes128_eax
+ * - aes256_eax
+ * - aes128_ctr_hmac_sha256
+ * - aes256_ctr_hmac_sha256
+ * 
+ */
+
+SPEC com.google.crypto.tink.aead.AeadKeyTemplates
+
+OBJECTS
+	com.google.crypto.tink.proto.KeyTemplate kt;
+	
+	int k16;
+	int k32; 
+	
+	com.google.crypto.tink.proto.HashType hashType;  // HashType enum: (1) - SHA1, (3) - SHA256, and (4) - SHA 512. 
+	
+EVENTS
+	aes128_gcm_evt : kt = createAesGcmKeyTemplate(k16);
+	aes256_gcm_evt : kt = createAesGcmKeyTemplate(k32);
+	aes128_eax_evt : kt = createAesEaxKeyTemplate(k16, k16);
+	aes256_eax_evt : kt = createAesEaxKeyTemplate(k32, k16);
+
+//	aes128_ctr_hmac_sha256_evt : aes128_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag16, hashType);
+//	aes256_ctr_hmac_sha256_evt : aes256_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag32, hashType);
+	
+	CreateKeyTemplates := aes128_gcm_evt | aes256_gcm_evt | aes128_eax_evt | aes256_eax_evt;// | aes128_ctr_hmac_sha256_evt | aes256_ctr_hmac_sha256_evt ;
+	
+ORDER 
+	(CreateKeyTemplates)+	
+
+CONSTRAINTS
+	k16 == 16;
+	k32 == 32; 
+	 
+	//hashType == com.google.crypto.tink.proto.HashType.HashTyp.SHA256; 
+	
+ENSURES
+	keyTemplate[kt] after aes128_gcm_evt;
+	keyTemplate[kt] after aes256_gcm_evt;
+	keyTemplate[kt] after aes128_eax_evt;
+	keyTemplate[kt] after aes256_eax_evt;
+
+//	keyTemplate[aes128_ctr_hmac_sha256] after aes128_ctr_hmac_sha256_evt;
+//	keyTemplate[aes256_ctr_hmac_sha256] after aes256_ctr_hmac_sha256_evt;
+	
