@@ -11,8 +11,8 @@
  * 
  * It constraints the use of the API to the following key templates: 
  * 
- * - aes_ctr_hmac_sha256_4kb_evt
- * - aes_gcm_hkdf_4kb_evt
+ * - aes_ctr_hmac_sha256_4kb
+ * - aes_gcm_hkdf_4kb
  */
 
 SPEC com.google.crypto.tink.streamingaead.StreamingAeadKeyTemplates
