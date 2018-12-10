@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.params.RSAKeyGenerationParameters
+
+OBJECTS
+	int dummy;
+
+EVENTS
+	c : RSAKeyGenerationParameters(_, _, _, _); // is this correct?
+
+ORDER
+	c
+	
+ENSURES
+	generatedRSAKeyParam[this];

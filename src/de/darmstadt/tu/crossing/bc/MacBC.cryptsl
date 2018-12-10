@@ -1,0 +1,48 @@
+// Since the crysl are applied for object types this specification becomes
+// useless because its an interface
+
+SPEC org.bouncycastle.crypto.Mac
+
+OBJECTS
+	org.bouncycastle.crypto.macs.CBCBlockCipherMac cipher;
+
+	org.bouncycastle.crypto.CipherParameters params;
+	byte inp;
+    byte[] input;
+    byte[] output;
+    int outOffset;
+	int offset;
+	int len;
+    
+EVENTS
+//	c1 : CBCBlockCipherMac(cipher);
+//	c2 : CFBBlockCipherMac(cipher);
+//	Cons := c1 | c2; 
+
+	i : init(params);
+	Inits := i;
+	
+	u1 : update(inp);
+	u2 : update(input, offset, len);
+	Updates := u1 | u2;
+	
+	f : doFinal(output, outOffset);
+	Finals := f;
+	
+ORDER
+	Inits, (Finals | (Updates+, Finals)) //taken from javax.Mac.cryptsl
+	
+CONSTRAINTS
+	offset < len;
+    length(output) > outOffset;
+    
+REQUIRES
+	
+	encrypted[output, _]; //taken from javax.Mac.cryptsl
+	preparedDAC[params];
+	preparedIV[params]; //it requires either DAC or IV as per MacTest.java
+//	preparedCipher[cipher]
+
+ENSURES
+	macced[output, inp];
+    macced[output, input];

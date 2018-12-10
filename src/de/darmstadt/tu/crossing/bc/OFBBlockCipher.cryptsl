@@ -1,0 +1,16 @@
+SPEC org.bouncycastle.crypto.modes.OFBBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine;
+	
+EVENTS
+	c : OFBBlockCipher(engine);
+	
+ORDER
+	c
+
+REQUIRES
+	generatedEngine[engine];
+	
+ENSURES
+	generatedMode[this];

@@ -1,0 +1,37 @@
+SPEC org.bouncycastle.crypto.macs.CBCBlockCipherMac
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine;
+	org.bouncycastle.crypto.CipherParameters params;
+	byte[] inputArray;
+	byte[] outputArray;
+	byte input;
+	int inputOff;
+	int outputOff;
+	int len;
+	
+EVENTS
+	c : CBCBlockCipherMac(engine);
+	Cons := c;
+	
+	i : init(params);
+	Inits := i;
+	
+	u1 : update(input);
+	u2 : update(inputArray, inputOff, len);
+	Updates := u1 | u2;
+	
+	f : doFinal(outputArray, outputOff);
+	Finals := f;
+	
+ORDER
+	Cons, (Inits, Updates, Finals)+
+	
+REQUIRES
+	generatedKey[params];	// how to specify both KeyParameter & ParametersWithIV
+//	preparedIV[params];
+	generatedEngine[engine];
+	
+ENSURES
+	generatedMac[this];
+	

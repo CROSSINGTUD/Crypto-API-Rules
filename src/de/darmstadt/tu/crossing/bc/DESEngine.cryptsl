@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.engines.DESEngine
+
+OBJECTS
+	int dummy;
+	
+EVENTS
+	c : DESEngine();
+	
+ORDER
+	c
+	
+ENSURES
+	generatedEngine[this];
