@@ -11,11 +11,9 @@ OBJECTS
 
 EVENTS
 	dec : plainText = decrypt(cipherText, context);
-	
-	Mode := dec ; 
 
 ORDER
-	(Mode)*
+	dec*
 
 REQUIRES 
 	hybridDecryptPrimitive[this];

@@ -18,7 +18,6 @@ EVENTS
     read_evt       : read(_, _); 
     export_evt     : write(_, _); 
     
-    
 ORDER
     (gen_evt | read_evt), gen_public_evt?, export_evt?  
    

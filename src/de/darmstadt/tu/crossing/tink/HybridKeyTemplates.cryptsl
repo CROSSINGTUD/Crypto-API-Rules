@@ -23,7 +23,7 @@ OBJECTS
 				
 EVENTS
    	ecies_aes128_gcm_evt: ecies_aes128_gcm = createEciesAeadHkdfKeyTemplate(_, _, _, _, _);
-	ecies_aes128_ctr_hmac_evt : ecies_aes128_ctr_hmac = createEciesAeadHkdfKeyTemplate(_, _, _, _, _);
+	ecies_aes128_ctr_hmac_evt: ecies_aes128_ctr_hmac = createEciesAeadHkdfKeyTemplate(_, _, _, _, _);
 	
 	CreateKeyTemplates := ecies_aes128_gcm_evt | ecies_aes128_ctr_hmac_evt;
 	

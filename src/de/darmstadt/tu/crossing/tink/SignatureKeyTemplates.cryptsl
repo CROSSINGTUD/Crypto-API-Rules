@@ -21,10 +21,8 @@ OBJECTS
 EVENTS
 	ecdsa_evt : ecdsa = createEcdsaKeyTemplate(hashType, curveType, _);
 	
-	CreateKeyTemplates := ecdsa_evt;
-	
 ORDER 
-	(CreateKeyTemplates)
+	ecdsa_evt
 
 //CONSTRAINTS
  	//hashType in {SHA256, SHA52}

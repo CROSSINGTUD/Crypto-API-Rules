@@ -44,7 +44,7 @@ ORDER
 
 CONSTRAINTS
 	key in {16, 32};
-	iv == 16; 
+	iv in {16}; 
 	 
 	//hashType == com.google.crypto.tink.proto.HashType.HashTyp.SHA256; 
 	

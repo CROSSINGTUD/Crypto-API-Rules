@@ -12,11 +12,9 @@ OBJECTS
 
 EVENTS
 	enc : cipherText = encrypt(plainText, context);
-	
-	Mode := enc ; 
-
+		
 ORDER
-	(Mode)*
+	enc*
 
 REQUIRES 
 	hybridEncriptPrimitive[this];

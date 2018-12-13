@@ -27,10 +27,8 @@ OBJECTS
 EVENTS
 	hmac_sha256_evt : hmac_sha256 = createHmacKeyTemplate(key, tag, _);
 	
-	CreateKeyTemplates := hmac_sha256_evt;
-	
 ORDER 
-	(CreateKeyTemplates)
+	(hmac_sha256_evt)
 
 CONSTRAINTS
 	key == 32;

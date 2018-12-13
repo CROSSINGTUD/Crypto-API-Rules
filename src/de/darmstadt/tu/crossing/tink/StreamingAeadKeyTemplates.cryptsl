@@ -37,8 +37,8 @@ ORDER
 
 CONSTRAINTS
 	key in {16, 32};
-	tag32 == 32; 
-	segmentSize == 4096;
+	tag32 in {32}; 
+	segmentSize in {4096};
 	
 ENSURES
 	keyTemplate[aes_ctr_hmac_sha256_4kb];

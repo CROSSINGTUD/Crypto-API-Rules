@@ -24,13 +24,11 @@ OBJECTS
 EVENTS
     aes256_siv_evt : aes256_siv = createAesSivKeyTemplate(k64);
 	
-	CreateKeyTemplates := aes256_siv_evt;
-	
 ORDER 
-	(CreateKeyTemplates)*	
+	aes256_siv_evt*	
 
 CONSTRAINTS
-	k64 == 64;
+	k64 in {64};
 	
 ENSURES
 	keyTemplate[aes256_siv];
