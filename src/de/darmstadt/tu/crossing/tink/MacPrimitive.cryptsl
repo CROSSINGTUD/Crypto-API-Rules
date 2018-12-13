@@ -5,8 +5,6 @@
 SPEC com.google.crypto.tink.Mac
 
 OBJECTS
-	com.google.crypto.tink.Mac mac; 
-	
 	byte[] data;
 	byte[] tag;
 
@@ -20,7 +18,7 @@ ORDER
 	(Mode)*
 
 REQUIRES 
-	generateMacPrimitive[mac];
+	macPrimitive[this];
 	
 ENSURES
 	generateMacFromData[tag, data];

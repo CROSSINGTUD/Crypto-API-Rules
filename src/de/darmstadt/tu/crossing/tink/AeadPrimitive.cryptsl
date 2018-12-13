@@ -5,8 +5,6 @@
 SPEC com.google.crypto.tink.Aead
 
 OBJECTS
-	com.google.crypto.tink.Aead aead; 
-	
 	byte[] plainText;
 	byte[] cipherText;
 	byte[] aad;
@@ -21,7 +19,7 @@ ORDER
 	(Mode)*
 
 REQUIRES 
-	setAeadPrimitive[aead];
+	aeadPrimitive[this];
 	
 ENSURES
 	encrypted[cipherText, plainText];
