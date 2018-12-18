@@ -17,31 +17,24 @@
 SPEC com.google.crypto.tink.mac.MacKeyTemplates
 
 OBJECTS
-	com.google.crypto.tink.proto.KeyTemplate hmac_sha256_128bittag;
-	com.google.crypto.tink.proto.KeyTemplate hmac_sha256_256bittag;
+	com.google.crypto.tink.proto.KeyTemplate hmac_sha256;
 	
-	int k16;
-	int k32; 
+	int key;
+	int tag; 
 	
 	int hashType;  // HashType enum: (1) - SHA1, (3) - SHA256, and (4) - SHA 512. 
 	
 EVENTS
-	hmac_sha256_128bittag_evt : hmac_sha256_128bittag = createHmacKeyTemplate(k32, k16, _);
-	hmac_sha256_256bittag_evt : hmac_sha256_256bittag = createHmacKeyTemplate(k32, k32, _);
-	
-	
-	CreateKeyTemplates := hmac_sha256_128bittag_evt | hmac_sha256_256bittag_evt;
+	hmac_sha256_evt : hmac_sha256 = createHmacKeyTemplate(key, tag, _);
 	
 ORDER 
-	(CreateKeyTemplates)
+	(hmac_sha256_evt)
 
 CONSTRAINTS
-	k16 == 16;
-	k32 == 32; 
+	key == 32;
+	tag in {16, 32};
 	
 	//hashType == 3; 
 	
-	
 ENSURES
-	macKeyTemplate[hmac_sha256_128bittag] after hmac_sha256_128bittag_evt;
-	macKeyTemplate[hmac_sha256_256bittag] after hmac_sha256_256bittag_evt;
+	keyTemplate[hmac_sha256];

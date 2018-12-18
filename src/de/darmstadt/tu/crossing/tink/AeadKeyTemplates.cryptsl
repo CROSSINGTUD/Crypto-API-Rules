@@ -25,36 +25,31 @@ SPEC com.google.crypto.tink.aead.AeadKeyTemplates
 OBJECTS
 	com.google.crypto.tink.proto.KeyTemplate kt;
 	
-	int k16;
-	int k32; 
+	int key;
+	int iv; 
 	
 	com.google.crypto.tink.proto.HashType hashType;  // HashType enum: (1) - SHA1, (3) - SHA256, and (4) - SHA 512. 
 	
 EVENTS
-	aes128_gcm_evt : kt = createAesGcmKeyTemplate(k16);
-	aes256_gcm_evt : kt = createAesGcmKeyTemplate(k32);
-	aes128_eax_evt : kt = createAesEaxKeyTemplate(k16, k16);
-	aes256_eax_evt : kt = createAesEaxKeyTemplate(k32, k16);
+	aes_gcm_evt : kt = createAesGcmKeyTemplate(key);
+	aes_eax_evt : kt = createAesEaxKeyTemplate(key, iv);
 
 //	aes128_ctr_hmac_sha256_evt : aes128_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag16, hashType);
 //	aes256_ctr_hmac_sha256_evt : aes256_ctr_hmac_sha256 = createAesCtrHmacAeadKeyTemplate(k16, iv16, hmk32, tag32, hashType);
 	
-	CreateKeyTemplates := aes128_gcm_evt | aes256_gcm_evt | aes128_eax_evt | aes256_eax_evt;// | aes128_ctr_hmac_sha256_evt | aes256_ctr_hmac_sha256_evt ;
+	CreateKeyTemplates := aes_gcm_evt | aes_eax_evt;// | aes128_ctr_hmac_sha256_evt | aes256_ctr_hmac_sha256_evt ;
 	
 ORDER 
 	(CreateKeyTemplates)+	
 
 CONSTRAINTS
-	k16 == 16;
-	k32 == 32; 
+	key in {16, 32};
+	iv in {16}; 
 	 
 	//hashType == com.google.crypto.tink.proto.HashType.HashTyp.SHA256; 
 	
 ENSURES
-	keyTemplate[kt] after aes128_gcm_evt;
-	keyTemplate[kt] after aes256_gcm_evt;
-	keyTemplate[kt] after aes128_eax_evt;
-	keyTemplate[kt] after aes256_eax_evt;
+	keyTemplate[kt];
 
 //	keyTemplate[aes128_ctr_hmac_sha256] after aes128_ctr_hmac_sha256_evt;
 //	keyTemplate[aes256_ctr_hmac_sha256] after aes256_ctr_hmac_sha256_evt;

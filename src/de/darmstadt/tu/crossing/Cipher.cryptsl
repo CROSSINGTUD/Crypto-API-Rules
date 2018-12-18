@@ -19,7 +19,6 @@ OBJECTS
     byte[] pre_ciphertext;
     java.nio.ByteBuffer pre_plainBuffer;
 	java.nio.ByteBuffer pre_cipherBuffer;
-	
     
     byte[] plainText;
     byte[] cipherText;
@@ -27,6 +26,8 @@ OBJECTS
 	java.nio.ByteBuffer cipherBuffer;
 	
 	java.security.SecureRandom ranGen;
+	
+	java.security.Key wrappedKey;
 
 EVENTS
     g1: getInstance(transformation);
@@ -62,13 +63,15 @@ EVENTS
     FINWOU := f2 | f4 | f5 | f6 | f7;
     DOFINALS := FINWOU | f1 | f3;
     
+    w: wrap(wrappedKey);
+    
     iv: getIV();
     
 ORDER
-    Gets, Inits, (FINWOU | (updates+, DOFINALS))+
+    Gets, Inits+, w+ | (FINWOU | (updates+, DOFINALS))+
 
 CONSTRAINTS
-	part(0, "/", transformation) in {"AES",  "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"};
+	part(0, "/", transformation) in {"AES", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"};
     part(0, "/", transformation) in {"AES"} => part(1, "/", transformation) in {"CBC", "GCM", "PCBC", "CTR", "CTS", "CFB", "OFB"};
     part(0, "/", transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => part(1, "/", transformation) in {"CBC"};
     part(0, "/", transformation) in {"RSA"} => part(1, "/", transformation) in {"", "ECB"};
