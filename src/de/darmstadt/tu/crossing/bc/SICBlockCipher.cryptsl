@@ -18,8 +18,9 @@ ORDER
 	Cons, (Inits, Procs+)+
 
 REQUIRES
+	generatedEngineOrMode[engine];
 	generatedEngine[engine];
 	preparedIV[params];
 	
 ENSURES
-	generatedMode[this] after Cons;
+	generatedEngineOrMode[this] after Cons;

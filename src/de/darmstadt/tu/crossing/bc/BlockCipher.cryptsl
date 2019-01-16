@@ -12,10 +12,10 @@ EVENTS
 	p : processBlock(buf, _, buf, _);
 	
 ORDER
-	i, p*	
+	i, p*
 	
 REQUIRES
-	generatedEngine[this];
+	generatedEngineOrMode[this];
 	generatedKey[params];
 	
 ENSURES

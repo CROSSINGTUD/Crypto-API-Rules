@@ -21,4 +21,5 @@ REQUIRES
 	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
 	
 ENSURES
+	generatedEngineOrMode[this];
 	generatedEngine[this];

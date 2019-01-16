@@ -10,5 +10,6 @@ ORDER
 	c
 	
 ENSURES
+	generatedEngineOrMode[this];
 	generatedEngine[this];
 	

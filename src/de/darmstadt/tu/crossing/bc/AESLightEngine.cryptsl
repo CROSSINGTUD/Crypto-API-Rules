@@ -12,7 +12,7 @@ EVENTS
 	p : processBlock(buf, _, buf, _);
 	
 ORDER
-	c, i, p*	
+	c | (c, i+, p*)	// there cannot be processBlock without init	
 	
 REQUIRES
 	generatedKey[params];	

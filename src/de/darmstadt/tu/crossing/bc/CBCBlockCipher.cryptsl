@@ -10,7 +10,8 @@ ORDER
 	c
 
 REQUIRES
+	generatedEngineOrMode[engine];
 	generatedEngine[engine];
 	
 ENSURES
-	generatedMode[this];
+	generatedEngineOrMode[this];
