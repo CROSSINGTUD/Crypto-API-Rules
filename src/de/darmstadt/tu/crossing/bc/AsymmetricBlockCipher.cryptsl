@@ -1,4 +1,4 @@
-SPEC org.bouncycastle.crypto.engines.RSAEngine
+SPEC org.bouncycastle.crypto.AsymmetricBlockCipher
 
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
@@ -8,19 +8,15 @@ OBJECTS
 	int len;
 	
 EVENTS
-	c : RSAEngine();
 	
 	i : init(is_encryption, params);
 	
 	p : processBlock(input, input_off, len);
 	
 ORDER
-	c, (i, p)+
+	i, p*
 	
 REQUIRES
-	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
-	
-ENSURES
 	generatedEngineOrMode[this];
-	generatedEngine[this];
-	
+	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
+ 

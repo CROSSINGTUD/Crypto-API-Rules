@@ -18,4 +18,5 @@ REQUIRES
 	generatedKey[params];
 
 ENSURES
+	generatedKey[params];
 	preparedIV[this];

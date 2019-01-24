@@ -1,0 +1,9 @@
+SPEC org.bouncycastle.crypto.CipherKeyGenerator
+
+OBJECTS
+	org.bouncycastle.crypto.KeyGenerationParameters param;
+	
+EVENTS
+	i : init(param);
+	
+	

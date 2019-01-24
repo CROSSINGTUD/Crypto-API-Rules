@@ -1,4 +1,5 @@
 SPEC org.bouncycastle.crypto.AsymmetricCipherKeyPair
+
 OBJECTS
 	org.bouncycastle.crypto.params.AsymmetricKeyParameter consPublicParam;
 	org.bouncycastle.crypto.params.AsymmetricKeyParameter consPrivateParam;

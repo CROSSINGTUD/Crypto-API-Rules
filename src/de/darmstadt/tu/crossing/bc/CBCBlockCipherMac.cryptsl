@@ -3,6 +3,7 @@ SPEC org.bouncycastle.crypto.macs.CBCBlockCipherMac
 OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	org.bouncycastle.crypto.CipherParameters params;
+	org.bouncycastle.crypto.paddings.BlockCipherPadding padding;
 	byte[] inputArray;
 	byte[] outputArray;
 	byte input;
@@ -11,8 +12,9 @@ OBJECTS
 	int len;
 	
 EVENTS
-	c : CBCBlockCipherMac(engine);
-	Cons := c;
+	c1 : CBCBlockCipherMac(engine);
+	c2 : CBCBlockCipherMac(engine, padding);
+	Cons := c1 | c2;
 	
 	i : init(params);
 	Inits := i;
@@ -28,8 +30,8 @@ ORDER
 	Cons, (Inits, Updates, Finals)+
 	
 REQUIRES
+	generatedPadding[padding];
 	generatedKey[params];	// how to specify both KeyParameter & ParametersWithIV
-//	preparedIV[params];
 	generatedEngine[engine];
 	
 ENSURES

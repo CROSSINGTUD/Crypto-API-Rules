@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.paddings.PKCS7Padding
+
+OBJECTS 
+	java.security.SecureRandom random;
+
+EVENTS
+	c : PKCS7Padding();
+	
+	i : init(random);
+	
+ORDER
+	c, i*
+	
+REQUIRES
+	randomized[random];
+	
+ENSURES
+	generatedPadding[this];
+	

@@ -15,7 +15,7 @@ OBJECTS
 	int len;
     
 EVENTS
-//	c1 : CBCBlockCipherMac(cipher);
+//	c1 : CBCBlockCipherMac(cipher); // Not supported
 //	c2 : CFBBlockCipherMac(cipher);
 //	Cons := c1 | c2; 
 
@@ -30,17 +30,16 @@ EVENTS
 	Finals := f;
 	
 ORDER
-	Inits, (Finals | (Updates+, Finals)) //taken from javax.Mac.cryptsl
+	Inits, (Finals | (Updates+, Finals)) // taken from javax.Mac.cryptsl
 	
 CONSTRAINTS
 	offset < len;
     length(output) > outOffset;
     
 REQUIRES
-	
-	encrypted[output, _]; //taken from javax.Mac.cryptsl
+	encrypted[output, _]; // taken from javax.Mac.cryptsl
 	preparedDAC[params];
-	preparedIV[params]; //it requires either DAC or IV as per MacTest.java
+	preparedIV[params]; // it requires either DAC or IV as per MacTest.java
 //	preparedCipher[cipher]
 
 ENSURES
