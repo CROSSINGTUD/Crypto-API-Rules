@@ -3,16 +3,17 @@ SPEC org.bouncycastle.crypto.engines.AESLightEngine
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 	byte[] buf;
+	byte[] buf2;
 	
 EVENTS
 	c : AESLightEngine();	
 	
 	i : init(_, params);
 	
-	p : processBlock(buf, _, buf, _);
+	p : processBlock(buf, _, buf2, _);
 	
 ORDER
-	c | (c, i+, p*)	// there cannot be processBlock without init	
+	c , (i+, p*)?	// there cannot be processBlock without init	
 	
 REQUIRES
 	generatedKey[params];	

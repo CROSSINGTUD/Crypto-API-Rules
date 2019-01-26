@@ -2,8 +2,18 @@ SPEC org.bouncycastle.crypto.CipherKeyGenerator
 
 OBJECTS
 	org.bouncycastle.crypto.KeyGenerationParameters param;
+	byte[] key;
 	
 EVENTS
 	i : init(param);
 	
+	g : key = generateKey();
 	
+ORDER
+	i, g*
+	
+REQUIRES
+	generatedKeyGenParam[param];
+	
+ENSURES
+	generatedKey[this];
