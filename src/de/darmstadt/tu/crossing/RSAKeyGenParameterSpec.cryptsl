@@ -11,4 +11,4 @@ CONSTRAINTS
 	 keyLength in {1024, 2048, 4096};
 	 publicExponent in {65537};
 ENSURES
-	preparedRSAKey[this];
+	preparedRSA[this];
