@@ -28,11 +28,9 @@ EVENTS
     DWOU := d2;
     DWU := d1 | d3;
     Digests := DWU | DWOU;
-    
-    r: reset();
 
 ORDER
-    Gets, (DWOU | (Updates+, Digests)), (r, (DWOU | (Updates+, Digests)))* 
+    Gets, (DWOU | (Updates+, Digests))+
 
 CONSTRAINTS
     digestAlg in {"SHA-256", "SHA-384", "SHA-512"};
