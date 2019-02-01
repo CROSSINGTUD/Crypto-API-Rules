@@ -30,5 +30,12 @@ CONSTRAINTS
 	alg in {"DiffieHellman", "DH"} => keySize in {2048};
 	alg in {"EC"} => keySize in {256};
 
+REQUIRES
+    alg in {"RSA"} => preparedRSA[params];
+    alg in {"DSA"} => preparedDSA[params];
+    alg in {"DiffieHellman", "DH"} => preparedDH[params];
+    alg in {"EC"} => preparedEC[params]; //seems missing
+    
+
 ENSURES
     generatedKeypair[kp, alg];
