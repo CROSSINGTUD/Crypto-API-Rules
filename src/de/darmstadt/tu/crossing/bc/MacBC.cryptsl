@@ -1,6 +1,3 @@
-// Since the crysl are applied for object types this specification becomes
-// useless because its an interface
-
 SPEC org.bouncycastle.crypto.Mac
 
 OBJECTS
@@ -37,9 +34,10 @@ CONSTRAINTS
     length(output) > outOffset;
     
 REQUIRES
-	encrypted[output, _]; // taken from javax.Mac.cryptsl
-	preparedDAC[params];
-	preparedIV[params]; // it requires either DAC or IV as per MacTest.java
+	generatedKey[params];
+//	encrypted[output, _]; // taken from javax.Mac.cryptsl
+//	preparedDAC[params];
+//	preparedIV[params]; // it requires either DAC or IV as per MacTest.java
 //	preparedCipher[cipher]
 
 ENSURES
