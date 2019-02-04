@@ -5,10 +5,10 @@ OBJECTS
 
 	org.bouncycastle.crypto.CipherParameters params;
 	byte inp;
-    byte[] input;
-    byte[] output;
+	byte[] input;
+	byte[] output;
     int outOffset;
-	int offset;
+    int offset;
 	int len;
     
 EVENTS
@@ -31,7 +31,7 @@ ORDER
 	
 CONSTRAINTS
 	offset < len;
-    length(output) > outOffset;
+	length(output) > outOffset;
     
 REQUIRES
 	generatedKey[params];
@@ -42,4 +42,4 @@ REQUIRES
 
 ENSURES
 	macced[output, inp];
-    macced[output, input];
+	macced[output, input];

@@ -17,9 +17,7 @@ OBJECTS
 	
 	byte[] cipherText;
 	
-	
 EVENTS
-
 	c1 : BufferedBlockCipher(engineOrMode);
 	Cons := c1;
 
@@ -40,7 +38,7 @@ ORDER
 	
 CONSTRAINTS
 	length(pre_plaintext) >= pre_plain_off + pre_len;
-    length(pre_ciphertext) <= pre_ciphertext_off;
+	length(pre_ciphertext) <= pre_ciphertext_off;
     length(cipherText) <= ciphertext_off;
 	
 REQUIRES
