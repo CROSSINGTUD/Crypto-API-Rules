@@ -7,8 +7,8 @@ OBJECTS
 	byte inp;
 	byte[] input;
 	byte[] output;
-    int outOffset;
-    int offset;
+	int outOffset;
+	int offset;
 	int len;
     
 EVENTS
