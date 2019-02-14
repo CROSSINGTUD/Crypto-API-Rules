@@ -1,0 +1,41 @@
+SPEC org.bouncycastle.crypto.signers.RSADigestSigner
+
+OBJECTS
+	org.bouncycastle.crypto.Digest digest;
+	org.bouncycastle.asn1.ASN1ObjectIdentifier digestOid;
+	org.bouncycastle.crypto.CipherParameters params;
+	byte input;
+	byte[] inputArr;
+	int inOff;
+	int len;
+	byte[] sign;
+	
+EVENTS
+	c1 : RSADigestSigner(digest);
+	c2 : RSADigestSigner(digest, digestOid);
+	
+	i : init(_, params);
+	Inits := i;
+	
+	u1 : update(input);
+	u2 : update(inputArr, inOff, len);
+	Updates := u1 | u2;
+	
+	g : sign = generateSignature();
+	Gen := g;
+	
+	v : verifySignature(sign);
+	Verify := v;
+	
+ORDER
+	((c1, Inits, Updates, Gen) | (c2, Inits, Updates, Verify))+
+	
+REQUIRES
+	generatedDigest[digest];
+	generatedRSAKeyParam[params];
+	generatedSign[sign];
+
+ENSURES
+	generatedSign[sign] after Gen;
+	verifiedSign[sign] after Verify;
+	
