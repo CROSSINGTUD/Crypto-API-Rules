@@ -1,0 +1,23 @@
+SPEC org.bouncycastle.crypto.io.DigestOutputStream
+OBJECTS
+	org.bouncycastle.crypto.Digest md;
+	byte[] byte;
+	int off;
+	int len;
+	int b;
+
+EVENTS
+	c: DigestOutputStream(md);
+	
+	r1: write(b); 
+	r2: write(byte, off, len);
+	Writes:= r1 | r2;
+	
+ORDER
+	c, Writes+
+	
+CONSTRAINTS
+	len > off;
+	
+ENSURES
+	digestedOutputStream[this, md]; // to be verified
