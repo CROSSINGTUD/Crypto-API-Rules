@@ -3,8 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.darmstad.tu.crossing</groupId>
-	<artifactId>CryptSL-Examples</artifactId>
+	<artifactId>CrySLRules</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>CrySL Rules Bundle</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.crypto.tink</groupId>
@@ -30,6 +31,7 @@
 				</excludes>
 			</resource>
 		</resources>
+		<pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -39,6 +41,23 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+					</execution>
+				</executions>
+				 <configuration>
+                    <includes>
+                        <include>**/*.*</include>
+                    </includes>
+                </configuration>
+			</plugin>
 		</plugins>
+		</pluginManagement>
 	</build>
 </project>

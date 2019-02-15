@@ -1,0 +1,15 @@
+SPEC org.bouncycastle.crypto.engines.AESEngine
+
+OBJECTS
+	int dummy;
+
+EVENTS
+	c : AESEngine();
+	
+ORDER
+	c
+	
+ENSURES
+	generatedEngineOrMode[this];
+	generatedEngine[this];
+	

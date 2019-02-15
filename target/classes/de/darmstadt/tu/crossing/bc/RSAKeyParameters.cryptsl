@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.params.RSAKeyParameters
+
+OBJECTS
+	int dummy;
+	
+EVENTS
+	c : RSAKeyParameters(_, _, _); //cannot write for AsymmetricKeyParameter because its constructor is different
+
+ORDER
+	c	
+
+ENSURES
+	generatedRSAKeyParam[this];

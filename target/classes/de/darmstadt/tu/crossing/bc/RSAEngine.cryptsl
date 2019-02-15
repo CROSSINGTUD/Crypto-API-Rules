@@ -1,0 +1,26 @@
+SPEC org.bouncycastle.crypto.engines.RSAEngine
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	boolean is_encryption;
+	byte[] input;
+	int input_off;
+	int len;
+	
+EVENTS
+	c : RSAEngine();
+	
+	i : init(is_encryption, params);
+	
+	p : processBlock(input, input_off, len);
+	
+ORDER
+	c, (i, p)+
+	
+REQUIRES
+	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
+	
+ENSURES
+	generatedEngineOrMode[this];
+	generatedEngine[this];
+	

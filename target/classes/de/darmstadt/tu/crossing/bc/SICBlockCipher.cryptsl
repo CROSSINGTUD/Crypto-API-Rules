@@ -1,0 +1,26 @@
+SPEC org.bouncycastle.crypto.modes.SICBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine;
+	org.bouncycastle.crypto.CipherParameters params;
+	
+EVENTS
+	c : SICBlockCipher(engine);
+	Cons := c;
+	
+	i : init(is_encryption, params); //here params object type is ParametersWithIV
+	Inits := i;
+	
+	p : processBytes(pre_plaintext, pre_plain_off, pre_ciphertext, pre_ciphertext_off);
+	Procs := p;
+	
+ORDER
+	Cons, (Inits, Procs+)+
+
+REQUIRES
+	generatedEngineOrMode[engine];
+	generatedEngine[engine];
+	preparedIV[params];
+	
+ENSURES
+	generatedEngineOrMode[this] after Cons;

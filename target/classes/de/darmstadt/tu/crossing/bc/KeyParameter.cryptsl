@@ -1,0 +1,18 @@
+SPEC org.bouncycastle.crypto.params.KeyParameter
+
+OBJECTS
+	byte[] key1;
+	byte[] key2;
+	int keyOff;
+	int keyLen;
+
+EVENTS
+	c1 : KeyParameter(key1);
+	c2 : KeyParameter(key2, keyOff, keyLen);
+	Cons := c1 | c2;
+	
+ORDER
+	Cons
+
+ENSURES
+	generatedKey[this];

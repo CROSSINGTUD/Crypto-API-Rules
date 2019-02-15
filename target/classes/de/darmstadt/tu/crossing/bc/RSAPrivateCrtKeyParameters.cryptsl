@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
+
+OBJECTS
+	int dummy;
+	
+EVENTS
+	c : RSAPrivateCrtKeyParameters(_, _, _, _, _, _, _, _);
+
+ORDER
+	c	
+
+ENSURES
+	generatedRSAKeyParam[this];

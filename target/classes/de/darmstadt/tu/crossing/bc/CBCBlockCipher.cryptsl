@@ -1,0 +1,17 @@
+SPEC org.bouncycastle.crypto.modes.CBCBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine;
+	
+EVENTS
+	c : CBCBlockCipher(engine);
+	
+ORDER
+	c
+
+REQUIRES
+	generatedEngineOrMode[engine];
+	generatedEngine[engine];
+	
+ENSURES
+	generatedEngineOrMode[this];
