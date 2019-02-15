@@ -1,0 +1,37 @@
+SPEC org.bouncycastle.crypto.io.CipherInputStream
+OBJECTS
+	java.io.InputStream is;
+	org.bouncycastle.crypto.BufferedBlockCipher ciph1;
+	org.bouncycastle.crypto.StreamCipher ciph2;
+	org.bouncycastle.crypto.modes.AEADBlockCipher ciph3;
+	int bufSize;
+	byte[] b;
+	int off;
+	int len;
+	
+EVENTS
+	c1: CipherInputStream(is, ciph1);
+	c2: CipherInputStream(is, ciph2);
+	c2: CipherInputStream(is, ciph3);
+	c4: CipherInputStream(is, ciph1, bufSize);
+	c5: CipherInputStream(is, ciph2, bufSize);
+	c6: CipherInputStream(is, ciph3, bufSize);
+	Constructs:= c1 | c2 | c3 | c4 | c5 | c6;
+	
+	r1: read();
+	r2: read(b); 
+	r3: read(b, off, len);
+	Reads:= r1 | r2 | r3;
+	
+	c: close();
+	
+ORDER
+	Constructs, Reads+, c
+
+CONSTRAINTS
+	len > off;
+	
+ENSURES
+	cipheredInputStream[is, ciph1];
+	cipheredInputStream[is, ciph2];
+	cipheredInputStream[is, ciph3];

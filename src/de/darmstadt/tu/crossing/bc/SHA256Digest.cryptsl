@@ -26,5 +26,6 @@ CONSTRAINTS
 	len > inputOff;
 	
 ENSURES
+	generatedDigest[this] after Cons;
 	digested[outputArray];
 	
