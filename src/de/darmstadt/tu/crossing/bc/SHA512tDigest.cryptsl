@@ -1,7 +1,7 @@
-SPEC org.bouncycastle.crypto.digests.SHA256Digest
+SPEC org.bouncycastle.crypto.digests.SHA512tDigest
 
 OBJECTS
-	org.bouncycastle.crypto.digests.SHA256Digest digest;
+	org.bouncycastle.crypto.digests.SHA512tDigest digest;
 	byte[] edigest;
 	byte input;
 	byte[] inputArray;
@@ -11,9 +11,9 @@ OBJECTS
 	int len;
 	
 EVENTS
-	c1 : SHA256Digest();
-	c2 : SHA256Digest(digest);
-	c3 : SHA256Digest(edigest);
+	c1 : SHA512tDigest();
+	c2 : SHA512tDigest(digest);
+	c3 : SHA512tDigest(edigest);
 	Cons := c1 | c2 | c3;
 	
 	u1 : update(input);
