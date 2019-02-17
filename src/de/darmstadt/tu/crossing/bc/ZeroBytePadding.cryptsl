@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.paddings.ZeroBytePadding
+
+OBJECTS 
+	java.security.SecureRandom random;
+
+EVENTS
+	c : ZeroBytePadding();
+	
+	i : init(random);
+	
+ORDER
+	c, i*
+	
+REQUIRES
+	randomized[random];
+	
+ENSURES
+	generatedPadding[this];
+	

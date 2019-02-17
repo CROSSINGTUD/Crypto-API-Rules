@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.paddings.ISO10126d2Padding
+
+OBJECTS 
+	java.security.SecureRandom random;
+
+EVENTS
+	c : ISO10126d2Padding();
+	
+	i : init(random);
+	
+ORDER
+	c, i*
+	
+REQUIRES
+	randomized[random];
+	
+ENSURES
+	generatedPadding[this];
+	
