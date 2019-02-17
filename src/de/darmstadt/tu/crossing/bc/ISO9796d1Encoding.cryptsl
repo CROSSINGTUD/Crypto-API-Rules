@@ -1,0 +1,31 @@
+SPEC org.bouncycastle.crypto.encodings.ISO9796d1Encoding
+
+OBJECTS
+	org.bouncycastle.crypto.AsymmetricBlockCipher engine;
+	org.bouncycastle.crypto.CipherParameters params;
+
+	boolean is_encryption;
+	byte[] input;
+	byte[] output;
+	int off;
+	int len;
+
+EVENTS
+	c1 : ISO9796d1Encoding(engine);
+	Cons := c1;
+	
+	i1 : init(is_encryption, params);
+	Inits := i1;
+	
+	p1 : output = processBlock(input, off, len);
+	Procs := p1;
+	
+ORDER
+	Cons, (Inits, Procs)+
+	
+REQUIRES
+	generatedRSAEngine[engine];
+	generatedRSAKeyParam[params];
+
+ENSURES
+	encoded[output];

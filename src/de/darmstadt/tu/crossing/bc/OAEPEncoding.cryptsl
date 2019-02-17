@@ -1,0 +1,37 @@
+SPEC org.bouncycastle.crypto.encodings.OAEPEncoding
+
+OBJECTS
+	org.bouncycastle.crypto.AsymmetricBlockCipher engine;
+	org.bouncycastle.crypto.CipherParameters params;
+	org.bouncycastle.crypto.CipherParameters eParams;
+	org.bouncycastle.crypto.Digest digest;
+	
+	boolean is_encryption;
+	byte[] input;
+	byte[] output;
+	int off;
+	int len;
+
+EVENTS
+	c1 : OAEPEncoding(engine);
+	c2 : OAEPEncoding(engine, digest);
+	c3 : OAEPEncoding(engine, digest, eParams);
+	c4 : OAEPEncoding(engine, digest, digest, eParams);
+	Cons := c1 | c2 | c3 | c4;
+	
+	i1 : init(is_encryption, params);
+	Inits := i1;
+	
+	p1 : output = processBlock(input, off, len);
+	Procs := p1;
+	
+ORDER
+	Cons, (Inits, Procs)+
+	
+REQUIRES
+	generatedRSAEngine[engine];
+	generatedRSAKeyParam[params];
+	generatedDigest[digest];
+
+ENSURES
+	encoded[output];

@@ -1,0 +1,35 @@
+SPEC org.bouncycastle.crypto.encodings.PKCS1Encoding
+
+OBJECTS
+	org.bouncycastle.crypto.AsymmetricBlockCipher engine;
+	org.bouncycastle.crypto.CipherParameters params;
+	
+	int pLen;
+	byte[] fallback;
+	boolean is_encryption;
+	byte[] input;
+	byte[] output;
+	int off;
+	int len;
+
+EVENTS
+	c1 : PKCS1Encoding(engine);
+	c2 : PKCS1Encoding(engine, pLen);
+	c3 : PKCS1Encoding(engine, fallback);
+	Cons := c1 | c2 | c3;
+	
+	i1 : init(is_encryption, params);
+	Inits := i1;
+	
+	p1 : output = processBlock(input, off, len);
+	Procs := p1;
+	
+ORDER
+	Cons, (Inits, Procs)+
+	
+REQUIRES
+	generatedRSAEngine[engine];
+	generatedRSAKeyParam[params];
+
+ENSURES
+	encoded[output];
