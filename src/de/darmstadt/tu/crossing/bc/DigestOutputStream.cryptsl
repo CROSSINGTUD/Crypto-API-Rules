@@ -1,20 +1,25 @@
 SPEC org.bouncycastle.crypto.io.DigestOutputStream
 OBJECTS
 	org.bouncycastle.crypto.Digest md;
-	byte[] byte;
+	int b;
+	byte[] bArr;
 	int off;
 	int len;
-	int b;
+	byte[] res;
 
 EVENTS
-	c: DigestOutputStream(md);
+	c1 : DigestOutputStream(md);
+	Cons := c1;
 	
-	r1: write(b); 
-	r2: write(byte, off, len);
-	Writes:= r1 | r2;
+	w1 : write(b); 
+	w2 : write(bArr, off, len);
+	Writes := w1 | w2;
+	
+	g1 : res = getDigest();
+	Gets := g1;
 	
 ORDER
-	c, Writes+
+	c, Writes+, Gets
 	
 CONSTRAINTS
 	len > off;

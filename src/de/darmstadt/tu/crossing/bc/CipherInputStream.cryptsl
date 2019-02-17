@@ -12,7 +12,7 @@ OBJECTS
 EVENTS
 	c1: CipherInputStream(is, ciph1);
 	c2: CipherInputStream(is, ciph2);
-	c2: CipherInputStream(is, ciph3);
+	c3: CipherInputStream(is, ciph3);
 	c4: CipherInputStream(is, ciph1, bufSize);
 	c5: CipherInputStream(is, ciph2, bufSize);
 	c6: CipherInputStream(is, ciph3, bufSize);

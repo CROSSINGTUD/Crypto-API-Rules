@@ -1,4 +1,5 @@
 SPEC org.bouncycastle.crypto.io.DigestInputStream
+
 OBJECTS
 	java.io.InputStream is;
 	org.bouncycastle.crypto.Digest md;
@@ -7,11 +8,11 @@ OBJECTS
 	int len;
 
 EVENTS
-	c: DigestInputStream(is, md);
+	c : DigestInputStream(is, md);
 	
-	r1: read(); 
-	r2: read(b, off, len);
-	Reads:= r1 | r2;
+	r1 : read(); 
+	r2 : read(b, off, len);
+	Reads := r1 | r2;
 	
 ORDER
 	c, Reads+
