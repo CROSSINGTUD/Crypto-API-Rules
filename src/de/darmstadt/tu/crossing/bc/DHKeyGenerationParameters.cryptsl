@@ -1,0 +1,20 @@
+SPEC org.bouncycastle.crypto.params.DHKeyGenerationParameters
+
+OBJECTS
+	java.security.SecureRandom random;
+	org.bouncycastle.crypto.params.DHParameters params;
+	
+EVENTS
+	c : DHKeyGenerationParameters(random, params);
+	
+	g : getParameters();
+	
+ORDER
+	c, g
+	
+REQUIRES
+	randomized[random];
+	generatedDHParams[params];
+	
+ENSURES
+	generatedDHKeyGenParams[this];

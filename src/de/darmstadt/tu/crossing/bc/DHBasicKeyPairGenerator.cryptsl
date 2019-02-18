@@ -1,4 +1,4 @@
-SPEC org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
+SPEC org.bouncycastle.crypto.generators.DHBasicKeyPairGenerator
 OBJECTS
 	org.bouncycastle.crypto.KeyGenerationParameters params;
 	org.bouncycastle.crypto.AsymmetricCipherKeyPair kp;
@@ -11,7 +11,7 @@ ORDER
 	i, k
 	
 REQUIRES
-	generatedKeyGenParams[params];
+	generatedDHKeyGenParams[params];
 
 ENSURES
-	generatedKeyPair[kp] after k;
+	generatedDHKeyPair[kp] after k;

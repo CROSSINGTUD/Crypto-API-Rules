@@ -1,0 +1,22 @@
+SPEC org.bouncycastle.crypto.generators.DHParametersGenerator
+
+OBJECTS
+	java.security.SecureRandom random;
+	org.bouncycastle.crypto.params.DHParameters params;
+	int size;
+	
+EVENTS
+	c : DHParametersGenerator();
+	
+	i : init(size, _, random);
+	
+	g : params = generateParameters();
+	
+ORDER
+	c, i, g
+	
+REQUIRES
+	randomized[random];
+	
+ENSURES
+	generatedDHParams[params];

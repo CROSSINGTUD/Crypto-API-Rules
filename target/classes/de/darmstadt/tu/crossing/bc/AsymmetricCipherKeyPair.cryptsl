@@ -16,10 +16,10 @@ ORDER
 	co?, (pu*, pr*)*
 	 
 REQUIRES
-	generatedPrivkey[consPrivateParam, _];
-	generatedPubkey[consPublicParam, _];
+	generatedPrivKeyParams[consPrivateParam, _];
+	generatedPubKeyParams[consPublicParam, _];
 	
 ENSURES
-	generatedKeypair[this, _] after co;
-	generatedPubkey[retPublicParam] after pu;
-	generatedPrivkey[retPrivateParam] after pr;
+	generatedKeyPair[this, _] after co;
+	generatedPubKey[retPublicParam] after pu;
+	generatedPrivKey[retPrivateParam] after pr;

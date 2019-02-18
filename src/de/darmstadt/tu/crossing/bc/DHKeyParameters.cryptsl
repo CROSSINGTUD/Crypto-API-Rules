@@ -1,0 +1,18 @@
+SPEC org.bouncycastle.crypto.params.DHKeyParameters
+
+OBJECTS
+	org.bouncycastle.crypto.params.DHParameters params;
+	boolean isPrivate;
+
+EVENTS
+	c1 : DHKeyParameters(isPrivate, params);
+	Cons := c1;
+	
+ORDER
+	Cons
+	
+REQUIRES
+	generatedDHParams[params];
+
+ENSURES
+	generatedDHKeyParams[this];
