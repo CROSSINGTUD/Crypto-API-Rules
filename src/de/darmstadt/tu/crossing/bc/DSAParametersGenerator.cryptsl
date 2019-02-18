@@ -1,0 +1,31 @@
+SPEC org.bouncycastle.crypto.generators.DSAParametersGenerator
+
+OBJECTS
+	java.security.SecureRandom random;
+	org.bouncycastle.crypto.Digest digest;
+	org.bouncycastle.crypto.params.DSAParameterGenerationParameters params;
+	org.bouncycastle.crypto.params.DSAParameters genParam;
+	int size;
+	int certainty;
+	
+EVENTS
+	c1 : DSAParametersGenerator();
+	c2 : DSAParametersGenerator(digest);
+	Cons := c1 | c2;
+	
+	i1 : init(size, certainty, random);
+	i2 : init(params);
+	Inits := i1 | i2;
+	
+	g1 : genParam = generateParameters();
+	Gen := g1;
+	
+ORDER
+	Cons, Inits, Gen
+	
+REQUIRES
+	randomized[random];
+	generatedDigest[digest];
+	
+ENSURES
+	generatedKeyGenParams[params];

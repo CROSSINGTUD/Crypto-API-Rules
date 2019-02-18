@@ -1,0 +1,42 @@
+SPEC org.bouncycastle.crypto.modes.OCBBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine1;
+	org.bouncycastle.crypto.BlockCipher engine2;
+	boolean forEncryption;
+	org.bouncycastle.crypto.CipherParameters params;
+	byte input;
+	byte[] inputArr;
+	int off;
+	int len;
+	byte[] output;
+	int outOff;
+	
+EVENTS
+	c : OCBBlockCipher(engine1, engine2);
+	Cons := c;
+	
+	i : init(forEncryption, params);
+	Inits := i;
+	
+	p1 : processAADByte(input);
+	p2 : processAADBytes(inputArr, off, len);
+	p3 : processByte(input, output, outOff);
+	p4 : processBytes(inputArr, off, len, output, outOff);
+	Procs := p1 | p2 | p3 | p4;
+	
+	f : doFinal(output, outOff);
+	Finals := f;
+	
+	r : reset();
+	
+ORDER
+	Cons, (Inits, Procs*, Finals)+
+
+REQUIRES
+	generatedEngineOrMode[engine1, engine2];
+	generatedEngine[engine1, engine2];
+	generatedCipherParams[params];
+	
+ENSURES
+	generatedMode[this];
