@@ -1,6 +1,8 @@
 SPEC org.bouncycastle.crypto.digests.SHA256Digest
 
 OBJECTS
+	org.bouncycastle.crypto.digests.SHA256Digest digest;
+	byte[] edigest;
 	byte input;
 	byte[] inputArray;
 	int inputOff;
@@ -10,7 +12,9 @@ OBJECTS
 	
 EVENTS
 	c1 : SHA256Digest();
-	Cons := c1;
+	c2 : SHA256Digest(digest);
+	c3 : SHA256Digest(edigest);
+	Cons := c1 | c2 | c3;
 	
 	u1 : update(input);
 	u2 : update(inputArray, inputOff, len);
@@ -19,12 +23,18 @@ EVENTS
 	f : doFinal(outputArray, outputOff);
 	Finals := f;
 	
+	r : reset();
+	
 ORDER
 	Cons, Updates+, Finals
 	
 CONSTRAINTS
 	len > inputOff;
 	
+REQUIRES
+	generatedDigest[digest];
+	
 ENSURES
+	generatedDigest[this] after Cons;
 	digested[outputArray];
 	

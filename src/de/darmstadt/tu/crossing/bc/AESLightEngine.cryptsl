@@ -16,7 +16,7 @@ ORDER
 	c , (i+, p*)?	// there cannot be processBlock without init	
 	
 REQUIRES
-	generatedCipherParameters[params];	
+	generatedCipherParams[params];	
 	
 ENSURES
 	generatedEngine[this];

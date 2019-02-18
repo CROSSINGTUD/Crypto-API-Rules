@@ -29,7 +29,7 @@ ORDER
 	
 REQUIRES
 	generatedRSAEngine[engine];
-	generatedRSAKeyParam[params];
+	generatedRSAKeyParams[params];
 
 ENSURES
 	encoded[output];

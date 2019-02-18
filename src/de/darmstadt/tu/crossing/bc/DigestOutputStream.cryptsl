@@ -1,4 +1,5 @@
 SPEC org.bouncycastle.crypto.io.DigestOutputStream
+
 OBJECTS
 	org.bouncycastle.crypto.Digest md;
 	int b;
@@ -19,7 +20,7 @@ EVENTS
 	Gets := g1;
 	
 ORDER
-	c, Writes+, Gets
+	Cons, Writes+, Gets
 	
 CONSTRAINTS
 	len > off;
