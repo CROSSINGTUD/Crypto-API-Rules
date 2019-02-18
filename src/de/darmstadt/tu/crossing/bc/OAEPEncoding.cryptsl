@@ -30,7 +30,7 @@ ORDER
 	
 REQUIRES
 	generatedRSAEngine[engine];
-	generatedRSAKeyParam[params];
+	generatedRSAKeyParams[params];
 	generatedDigest[digest];
 
 ENSURES

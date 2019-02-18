@@ -16,7 +16,7 @@ ORDER
 	
 REQUIRES
 	generatedEngineOrMode[this];
-	generatedKey[params];
+	generatedCipherParams[params];
 	
 ENSURES
 	encrypted[buf] after p;

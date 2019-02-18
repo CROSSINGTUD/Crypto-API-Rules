@@ -18,4 +18,4 @@ ORDER
 	Cons, (Inits, Encrypts+)+
 
 REQUIRES
-	generatedKey[keyParams];
+	generatedCipherParams[keyParams];

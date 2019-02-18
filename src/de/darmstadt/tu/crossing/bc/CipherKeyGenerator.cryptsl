@@ -13,7 +13,7 @@ ORDER
 	i, g*
 	
 REQUIRES
-	generatedKeyGenParam[param];
+	generatedKeyGenParams[param];
 	
 ENSURES
 	generatedKey[this];

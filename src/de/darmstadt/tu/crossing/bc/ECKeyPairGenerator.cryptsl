@@ -14,7 +14,7 @@ ORDER
 	c, i, g
 
 REQUIRES
-	generatedKeyGenParam[genParams];
+	generatedKeyGenParams[genParams];
 
 ENSURES
 	generatedECKeyPair[this] after g;

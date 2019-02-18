@@ -16,7 +16,7 @@ ORDER
 	c, (i, g)+
 	
 REQUIRES
-	generatedRSAKeyGenParam[genParam];
+	generatedRSAKeyGenParams[genParam];
 	
 ENSURES
 	generatedRSAKeyPair[this] after g;

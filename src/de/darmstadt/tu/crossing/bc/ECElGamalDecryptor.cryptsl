@@ -19,4 +19,4 @@ ORDER
 
 REQUIRES
 	generatedECPair[pair];
-	generatedKey[keyParams];
+	generatedCipherParams[keyParams];

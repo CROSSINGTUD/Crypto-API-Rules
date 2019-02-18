@@ -19,5 +19,5 @@ ORDER
 	Cons, (Inits, Transforms+)
 
 REQUIRES
-	generatedKey[keyParams];
+	generatedCipherParams[keyParams];
 	generatedECPair[cipherText];

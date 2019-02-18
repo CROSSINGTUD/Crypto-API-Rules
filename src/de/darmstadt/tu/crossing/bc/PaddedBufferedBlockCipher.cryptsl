@@ -43,7 +43,7 @@ CONSTRAINTS
 	
 REQUIRES
 	generatedEngineOrMode[engineOrMode];
-	generatedKey[params];
+	generatedCipherParams[params];
 	
 ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after Procs;

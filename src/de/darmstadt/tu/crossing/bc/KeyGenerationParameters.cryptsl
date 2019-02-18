@@ -14,4 +14,4 @@ REQUIRES
 	randomized[random];
 	
 ENSURES
-	generatedKeyGenParam[this];
+	generatedKeyGenParams[this];
