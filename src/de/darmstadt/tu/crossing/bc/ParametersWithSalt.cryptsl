@@ -1,0 +1,22 @@
+SPEC org.bouncycastle.crypto.params.ParametersWithSalt
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	byte[] salt;
+	int saltOff;
+	int saltLen;
+	
+EVENTS
+	c1 : ParametersWithSalt(params, salt);
+	c2 : ParametersWithSalt(params, salt, saltOff, saltLen);
+	Cons := c1 | c2;
+	
+ORDER
+	Cons
+	
+REQUIRES
+	generatedCipherParams[params];
+
+ENSURES
+	generatedCipherParams[params];
+	generatedParamsWithSalt[this];

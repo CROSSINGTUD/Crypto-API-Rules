@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.params.ParametersWithID
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	byte[] id;
+	
+EVENTS
+	c1 : ParametersWithID(params, id);
+	Cons := c1;
+	
+ORDER
+	Cons
+	
+REQUIRES
+	generatedCipherParams[params];
+
+ENSURES
+	generatedCipherParams[params];
+	generatedParamsWithID[this];

@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.params.ParametersWithSBox
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	byte[] sBox;
+	
+EVENTS
+	c1 : ParametersWithSBox(params, sBox);
+	Cons := c1;
+	
+ORDER
+	Cons
+	
+REQUIRES
+	generatedCipherParams[params];
+
+ENSURES
+	generatedCipherParams[params];
+	generatedParamsWithSBox[this];
