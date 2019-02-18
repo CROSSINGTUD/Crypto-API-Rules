@@ -18,5 +18,5 @@ ORDER
 	
 REQUIRES
 	generatedEngineOrMode[this];
-	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
+	generatedRSAKeyParams[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
  

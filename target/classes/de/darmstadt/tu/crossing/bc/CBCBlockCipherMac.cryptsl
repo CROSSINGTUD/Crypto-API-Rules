@@ -38,7 +38,7 @@ CONSTRAINTS
 	
 REQUIRES
 	generatedPadding[padding]; // padding can also be null
-	generatedKey[params];
+	generatedCipherParams[params];
 	generatedEngine[cipher];
 	
 ENSURES

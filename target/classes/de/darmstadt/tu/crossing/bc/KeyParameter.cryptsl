@@ -15,4 +15,4 @@ ORDER
 	Cons
 
 ENSURES
-	generatedKey[this];
+	generatedCipherParams[this];

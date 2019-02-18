@@ -15,8 +15,8 @@ ORDER
 	Cons
 	
 REQUIRES
-	generatedKey[params];
+	generatedCipherParams[params];
 
 ENSURES
-	generatedKey[params];
-	preparedIV[this];
+	generatedCipherParams[params];
+	generatedParamsWithIV[this];

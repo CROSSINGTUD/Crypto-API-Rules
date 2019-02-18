@@ -18,9 +18,10 @@ ORDER
 	c, (i, p)+
 	
 REQUIRES
-	generatedRSAKeyParam[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
+	generatedRSAKeyParams[params]; //either from RSAKeyParameters or RSAPrivateCrtKeyParameters
 	
 ENSURES
-	generatedEngineOrMode[this];
-	generatedEngine[this];
+//	generatedEngineOrMode[this];
+//	generatedEngine[this];
+	generatedRSAEngine[this];
 	

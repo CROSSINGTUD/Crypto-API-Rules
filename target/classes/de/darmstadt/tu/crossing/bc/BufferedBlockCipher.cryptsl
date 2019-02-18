@@ -43,8 +43,9 @@ CONSTRAINTS
 	
 REQUIRES
 	generatedEngineOrMode[engineOrMode];
-	generatedKey[params];
+	generatedCipherParams[params];
 //	preparedIV[params]; //this is added for BlockCipherVectorTest & BlockCipherMonteCarloTest
 	
 ENSURES
-	encrypted[pre_ciphertext] after Procs;
+	encrypted[pre_ciphertext, pre_plaintext] after Procs;
+	encrypted[cipherText];

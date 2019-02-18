@@ -10,4 +10,4 @@ ORDER
 	c
 	
 ENSURES
-	generatedRSAKeyGenParam[this];
+	generatedRSAKeyGenParams[this];

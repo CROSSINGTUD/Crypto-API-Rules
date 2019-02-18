@@ -34,7 +34,7 @@ CONSTRAINTS
 	length(output) > outOffset;
     
 REQUIRES
-	generatedKey[params];
+	generatedCipherParams[params];
 //	encrypted[output, _]; // taken from javax.Mac.cryptsl
 //	preparedDAC[params];
 //	preparedIV[params]; // it requires either DAC or IV as per MacTest.java
