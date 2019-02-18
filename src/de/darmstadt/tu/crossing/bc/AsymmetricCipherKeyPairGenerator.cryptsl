@@ -9,6 +9,9 @@ EVENTS
 
 ORDER
 	i, k
+	
+REQUIRES
+	generatedKeyGenParams[params];
 
 ENSURES
 	generatedKeyPair[kp] after k;
