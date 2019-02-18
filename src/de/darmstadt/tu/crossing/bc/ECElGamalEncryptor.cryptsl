@@ -1,0 +1,21 @@
+SPEC org.bouncycastle.crypto.ec.ECElGamalEncryptor
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters keyParams;
+	org.bouncycastle.math.ec.ECPoint data;
+
+EVENTS
+	c1 : ECElGamalEncryptor();
+	Cons := c1;
+	
+	i1 : init(keyParams);
+	Inits := i1;
+	
+	e1 : encrypt(data);
+	Encrypts := e1;
+
+ORDER
+	Cons, (Inits, Encrypts+)+
+
+REQUIRES
+	generatedKey[keyParams];

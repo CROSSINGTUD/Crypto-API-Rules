@@ -1,0 +1,22 @@
+SPEC org.bouncycastle.crypto.ec.ECElGamalDecryptor
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters keyParams;
+	org.bouncycastle.crypto.ec.ECPair pair;
+
+EVENTS
+	c1 : ECElGamalDecryptor();
+	Cons := c1;
+	
+	i1 : init(keyParams);
+	Inits := i1;
+	
+	d1 : decrypt(pair);
+	Decrypts := d1;
+
+ORDER
+	Cons, (Inits, Decrypts+)+
+
+REQUIRES
+	generatedECPair[pair];
+	generatedKey[keyParams];
