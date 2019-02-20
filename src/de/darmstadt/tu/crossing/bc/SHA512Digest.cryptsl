@@ -1,7 +1,7 @@
 SPEC org.bouncycastle.crypto.digests.SHA512Digest
 
 OBJECTS
-	org.bouncycastle.crypto.digests.SHA384Digest digest;
+	org.bouncycastle.crypto.digests.SHA512Digest digest;
 	byte[] edigest;
 	byte input;
 	byte[] inputArray;

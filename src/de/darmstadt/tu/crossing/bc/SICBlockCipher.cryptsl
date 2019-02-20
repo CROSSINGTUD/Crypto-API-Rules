@@ -11,11 +11,11 @@ EVENTS
 	i : init(is_encryption, params); //here params object type is ParametersWithIV
 	Inits := i;
 	
-	p : processBytes(pre_plaintext, pre_plain_off, pre_ciphertext, pre_ciphertext_off);
+	p : processBlock(pre_plaintext, pre_plain_off, pre_ciphertext, pre_ciphertext_off);
 	Procs := p;
 	
 ORDER
-	Cons, (Inits, Procs+)+
+	Cons, (Inits, Procs+)*
 
 REQUIRES
 	generatedEngineOrMode[engine];

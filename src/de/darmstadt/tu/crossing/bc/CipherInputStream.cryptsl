@@ -30,6 +30,11 @@ ORDER
 
 CONSTRAINTS
 	len > off;
+
+REQUIRES
+	generatedCipher[ciph1];
+	generatedCipher[ciph2];
+	generatedCipher[ciph3];
 	
 ENSURES
 	cipheredInputStream[is, ciph1];

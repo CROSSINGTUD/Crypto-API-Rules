@@ -49,3 +49,4 @@ REQUIRES
 ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after Procs;
 	encrypted[cipherText];
+	generatedCipher[this];
