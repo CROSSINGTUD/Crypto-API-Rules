@@ -3,6 +3,7 @@ SPEC org.bouncycastle.crypto.ec.ECElGamalEncryptor
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters keyParams;
 	org.bouncycastle.math.ec.ECPoint data;
+	org.bouncycastle.crypto.ec.ECPair cipherText;
 
 EVENTS
 	c1 : ECElGamalEncryptor();
@@ -11,7 +12,7 @@ EVENTS
 	i1 : init(keyParams);
 	Inits := i1;
 	
-	e1 : encrypt(data);
+	e1 : cipherText = encrypt(data);
 	Encrypts := e1;
 
 ORDER
@@ -19,3 +20,6 @@ ORDER
 
 REQUIRES
 	generatedCipherParams[keyParams];
+
+ENSURES
+	generatedGamalEncryptor[cipherText] after e1;

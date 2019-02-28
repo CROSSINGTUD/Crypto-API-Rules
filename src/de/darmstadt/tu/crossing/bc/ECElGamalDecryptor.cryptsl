@@ -3,6 +3,7 @@ SPEC org.bouncycastle.crypto.ec.ECElGamalDecryptor
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters keyParams;
 	org.bouncycastle.crypto.ec.ECPair pair;
+	org.bouncycastle.math.ec.ECPoint plainText;
 
 EVENTS
 	c1 : ECElGamalDecryptor();
@@ -11,7 +12,7 @@ EVENTS
 	i1 : init(keyParams);
 	Inits := i1;
 	
-	d1 : decrypt(pair);
+	d1 : plainText = decrypt(pair);
 	Decrypts := d1;
 
 ORDER
@@ -20,3 +21,6 @@ ORDER
 REQUIRES
 	generatedECPair[pair];
 	generatedCipherParams[keyParams];
+
+ENSURES
+	generatedGamalDecryptor[plainText] after d1;
