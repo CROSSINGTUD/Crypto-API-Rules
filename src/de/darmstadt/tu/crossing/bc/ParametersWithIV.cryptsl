@@ -19,4 +19,4 @@ REQUIRES
 
 ENSURES
 	generatedCipherParams[params];
-	generatedParamsWithIV[this];
+	generatedCipherParams[this];

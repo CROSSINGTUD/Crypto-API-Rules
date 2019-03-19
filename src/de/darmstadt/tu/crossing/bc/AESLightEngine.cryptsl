@@ -19,5 +19,5 @@ REQUIRES
 	generatedCipherParams[params];	
 	
 ENSURES
-	generatedEngine[this];
+	generatedEngineOrMode[this];
 	encrypted[buf] after p;
