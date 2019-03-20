@@ -19,7 +19,7 @@ ORDER
 	c1 | c2 | c3
 	
 REQUIRES
-	generatedPubkey[pubKey,_];
+	generatedPubkey[pubKey];
 	
 ENSURES
 	generatedTrustAnchor[this];
