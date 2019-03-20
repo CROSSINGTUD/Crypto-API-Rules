@@ -2,12 +2,19 @@ SPEC org.bouncycastle.crypto.params.RSAKeyParameters
 
 OBJECTS
 	boolean isPrivate;
+	java.math.BigInteger exponent;
+	java.math.BigInteger modulus;
+	
 	
 EVENTS
-	c : RSAKeyParameters(isPrivate, _, _); //cannot write for AsymmetricKeyParameter because its constructor is different
+	c : RSAKeyParameters(isPrivate, modulus, exponent); //cannot write for AsymmetricKeyParameter because its constructor is different
 
 ORDER
 	c	
+
+//TODO we would like to say something as "a private key shall never be hardcoded into the code"
+//CONSTRAINTS
+//	isPrivate == true => notHardCoded(exponent) 
 
 ENSURES
 	generatedRSAKeyParams[this];

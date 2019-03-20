@@ -1,0 +1,17 @@
+SPEC org.bouncycastle.crypto.PBEParametersGenerator
+
+OBJECTS
+	char[] password;
+	byte[] byteArrayPassword;
+
+EVENTS
+	c : byteArrayPassword = PKCS12PasswordToBytes(password); 
+	
+ORDER
+	c
+
+CONSTRAINTS
+	neverTypeOf(password, java.lang.String) ;
+	
+ENSURES
+	passwordBytes[byteArrayPassword];
