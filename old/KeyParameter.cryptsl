@@ -13,8 +13,8 @@ EVENTS
 ORDER
 	Cons
 
-REQUIRES
-	randomized[key];
+CONSTRAINTS
+	neverTypeOf(key, java.lang.String) ;
 
 ENSURES
-	generatedKeyParameter[this];
+	generatedCipherParams[this];

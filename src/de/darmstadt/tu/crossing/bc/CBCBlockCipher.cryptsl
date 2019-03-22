@@ -10,8 +10,7 @@ ORDER
 	c
 
 REQUIRES
-	generatedEngineOrMode[engine];
-	generatedEngine[engine];
+	generatedAESEngine[engine];
 	
 ENSURES
-	generatedEngineOrMode[this];
+	generatedCBCBlockCipher[this];

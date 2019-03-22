@@ -15,9 +15,8 @@ ORDER
 	Cons
 	
 REQUIRES
-	randomized[iv];
+	generatedCipherParams[params];
 
 ENSURES
-	generatedParametersWithIV[this];
-	//Can be removed as soon as REQUIRES supports OR
-	generatedAEADParametersOrParametersWithIV[this];
+	generatedCipherParams[params];
+	generatedCipherParams[this];
