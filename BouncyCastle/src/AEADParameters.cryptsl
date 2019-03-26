@@ -4,8 +4,8 @@ OBJECTS
 	org.bouncycastle.crypto.params.KeyParameter keyParam;
 
 EVENTS
-	c1 : AEADParameters(keyParam, _, _);
-	c2 : AEADParameters(keyParam, _, _, _);
+	c1 : AEADParameters(keyParam,_,_);
+	c2 : AEADParameters(keyParam,_,_,_);
 	CONS := c1 | c2;
 
 ORDER
