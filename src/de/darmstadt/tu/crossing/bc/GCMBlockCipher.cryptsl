@@ -19,4 +19,4 @@ REQUIRES
 		
 	
 ENSURES
-	generatedGCMBlockCipherMode[this] after c;
+	generatedGCMBlockCipherMode[this] after Cons;
