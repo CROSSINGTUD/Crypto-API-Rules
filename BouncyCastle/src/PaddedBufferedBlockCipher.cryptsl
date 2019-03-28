@@ -18,12 +18,10 @@ EVENTS
 	i : init(is_encryption, params);
 	Inits := i;
 
-//	@return the number of output bytes copied to out.
 	p1: processByte(_ ,_ ,_);
 	p2: processBytes(_,_,_,_,_);
 	Procs := p1 | p2;
 	
-//	@return the number of output bytes copied to out.
 	f : doFinal(cipherText,_);
 	DOFINALS := f;
 	
