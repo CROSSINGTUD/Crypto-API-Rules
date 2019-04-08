@@ -22,4 +22,4 @@ REQUIRES
 	daeadPrimitive[this];
 	
 ENSURES
-	encrypted[cipherText];
+	encrypted[cipherText, plainText];

@@ -20,4 +20,4 @@ REQUIRES
 	hybridEncriptPrimitive[this];
 	
 ENSURES
-	encrypted[cipherText];
+	encrypted[cipherText, plainText];
