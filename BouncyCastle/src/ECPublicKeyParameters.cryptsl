@@ -1,0 +1,18 @@
+SPEC org.bouncycastle.crypto.params.ECPublicKeyParameters
+
+OBJECTS
+	org.bouncycastle.crypto.params.ECDomainParameters params;
+	org.bouncycastle.math.ec.ECPoint Q;
+
+EVENTS
+	c1: ECPublicKeyParameters(Q, params);
+	Cons := c1;
+	
+ORDER
+	Cons
+
+REQUIRES
+	generatedECDomainParameters[params];
+
+ENSURES
+	generatedECPublicKeyParameters[this];
