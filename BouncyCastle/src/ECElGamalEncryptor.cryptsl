@@ -2,6 +2,7 @@ SPEC org.bouncycastle.crypto.ec.ECElGamalEncryptor
 
 OBJECTS
 	org.bouncycastle.crypto.params.ECPublicKeyParameters keyParams;
+	org.bouncycastle.crypto.params.ParametersWithRandom keyParamsWithRandom;
 	org.bouncycastle.math.ec.ECPoint data;
 	org.bouncycastle.crypto.ec.ECPair cipherText;
 
@@ -10,7 +11,8 @@ EVENTS
 	Cons := c1;
 	
 	i1 : init(keyParams);
-	Inits := i1;
+	i2 : init(keyParamsWithRandom);
+	Inits := i1 | i2;
 	
 	e1 : cipherText = encrypt(data);
 	Encrypts := e1;
@@ -20,6 +22,8 @@ ORDER
 
 REQUIRES
 	generatedECPublicKeyParameters[keyParams];
+	//Can be removed when REQUIRES support OR clause
+	generatedgeneratedParametersWithRandom[keyParamsWithRandom];
 
 ENSURES
 	generatedECElGamalEncrypt[cipherText] after e1;

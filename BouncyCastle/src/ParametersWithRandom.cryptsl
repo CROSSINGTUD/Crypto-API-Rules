@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.params.ParametersWithRandom
+
+OBJECTS
+	java.security.SecureRandom random;
+	org.bouncycastle.crypto.params.ECPublicKeyParameters params;
+
+EVENTS
+	c1 : ParametersWithRandom(params, random);
+	c2 : ParametersWithRandom(params);
+	Cons := c1 | c2;
+	
+ORDER
+	Cons
+
+REQUIRES
+	randomized[random];
+
+ENSURES
+	generatedParametersWithRandom[this];
