@@ -1,0 +1,23 @@
+SPEC org.bouncycastle.crypto.AsymmetricBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	
+	boolean is_encryption;
+	byte[] cipherText;
+	
+EVENTS
+	i : init(is_encryption, params);
+	
+	p : cipherText = processBlock(_, _, _);
+	
+ORDER
+	i, p*
+	
+REQUIRES
+	generatedRSAEngine[this];
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParameters[params];
+	
+ENSURES
+	encrypted[cipherText] after p;

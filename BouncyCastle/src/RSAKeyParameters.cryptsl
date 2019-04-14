@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.params.RSAKeyParameters
+
+OBJECTS
+	boolean isPrivate;
+	
+EVENTS
+	c : RSAKeyParameters(isPrivate, _, _);
+
+ORDER
+	c	
+
+ENSURES
+	generatedRSAKeyParameters[this];
