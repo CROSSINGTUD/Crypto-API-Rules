@@ -1,8 +1,7 @@
 SPEC org.bouncycastle.crypto.ec.ECElGamalEncryptor
 
 OBJECTS
-	org.bouncycastle.crypto.params.ECPublicKeyParameters keyParams;
-	org.bouncycastle.crypto.params.ParametersWithRandom keyParamsWithRandom;
+	org.bouncycastle.crypto.CipherParameters params;
 	org.bouncycastle.math.ec.ECPoint data;
 	org.bouncycastle.crypto.ec.ECPair cipherText;
 
@@ -10,9 +9,8 @@ EVENTS
 	c1 : ECElGamalEncryptor();
 	Cons := c1;
 	
-	i1 : init(keyParams);
-	i2 : init(keyParamsWithRandom);
-	Inits := i1 | i2;
+	i1 : init(params);
+	Inits := i1;
 	
 	e1 : cipherText = encrypt(data);
 	Encrypts := e1;
@@ -21,9 +19,9 @@ ORDER
 	Cons, (Inits, Encrypts+)+
 
 REQUIRES
-	generatedECPublicKeyParameters[keyParams];
+	generatedECPublicKeyParameters[params];
 	//Can be removed when REQUIRES support OR clause
-	generatedgeneratedParametersWithRandom[keyParamsWithRandom];
+	generatedParametersWithRandom[params];
 
 ENSURES
 	generatedECElGamalEncrypt[cipherText] after e1;
