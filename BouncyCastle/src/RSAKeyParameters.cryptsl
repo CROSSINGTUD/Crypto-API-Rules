@@ -2,12 +2,16 @@ SPEC org.bouncycastle.crypto.params.RSAKeyParameters
 
 OBJECTS
 	boolean isPrivate;
+	java.math.BigInteger modulus;
 	
 EVENTS
-	c : RSAKeyParameters(isPrivate, _, _);
+	c : RSAKeyParameters(isPrivate, modulus, _);
 
 ORDER
 	c	
+	
+CONSTRAINTS
+	modulus >= 2000; // BSI describles length of the modulus n to be at least 2000 bits
 
 ENSURES
 	generatedRSAKeyParameters[this];
