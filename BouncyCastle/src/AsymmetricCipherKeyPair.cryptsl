@@ -1,0 +1,28 @@
+SPEC org.bouncycastle.crypto.AsymmetricCipherKeyPair
+
+OBJECTS
+	org.bouncycastle.crypto.params.AsymmetricKeyParameter consPublicParam;
+	org.bouncycastle.crypto.params.AsymmetricKeyParameter consPrivateParam;
+	
+	org.bouncycastle.crypto.params.AsymmetricKeyParameter retPublicParam;
+	org.bouncycastle.crypto.params.AsymmetricKeyParameter retPrivateParam;
+	
+EVENTS
+	co : AsymmetricCipherKeyPair(consPublicParam, consPrivateParam);
+	pu : retPublicParam = getPublic();
+	pr : retPrivateParam = getPrivate();
+	
+ORDER
+	co?, (pu | pr)*
+	 
+REQUIRES
+	generatedRSAKeyParameters[consPublicParam];
+	generatedRSAPrivateCrtKeyParameters[consPrivateParam];
+	
+ENSURES
+	generatedRSAKeyPair[this] after co;
+	generatedRSAKeyParameters[retPublicParam] after pu;
+	generatedRSAPrivateCrtKeyParameters[retPrivateParam] after pr;
+	
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParameters[retPublicParam, retPrivateParam];
