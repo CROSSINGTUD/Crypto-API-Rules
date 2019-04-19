@@ -1,3 +1,8 @@
+/* Added in order to avoid IncompleteOperationError when using
+ * AsymmetricBlockCipher cipher = new RSAEngine();
+ * cipher.init(...);
+ */
+
 SPEC org.bouncycastle.crypto.AsymmetricBlockCipher
 
 OBJECTS
@@ -12,12 +17,16 @@ EVENTS
 	p : cipherText = processBlock(_, _, _);
 	
 ORDER
-	i, p*
+	c, (i, p)+
 	
 REQUIRES
-	generatedRSAEngine[this];
+//	generatedRSAKeyParameters[params];
+//	generatedRSAPrivateCrtKeyParameters[params];
+	
 	//Can be removed as soon as REQUIRES supports OR
 	generatedRSAKeyParametersOrRSAPrivateCrtKeyParameters[params];
 	
 ENSURES
+	generatedRSAEngine[this] after c;
 	encrypted[cipherText] after p;
+ 
