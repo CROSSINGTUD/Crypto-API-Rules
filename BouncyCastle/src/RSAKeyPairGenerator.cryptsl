@@ -1,7 +1,7 @@
 SPEC org.bouncycastle.crypto.generators.RSAKeyPairGenerator
 
 OBJECTS
-	org.bouncycastle.crypto.params.RSAKeyGenerationParameters genParams;
+	org.bouncycastle.crypto.KeyGenerationParameters genParams;
 	org.bouncycastle.crypto.AsymmetricCipherKeyPair pair;
 
 EVENTS
