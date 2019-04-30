@@ -17,9 +17,6 @@ ORDER
 	c, (i, p)+
 	
 REQUIRES
-//	generatedRSAKeyParameters[params];
-//	generatedRSAPrivateCrtKeyParameters[params];
-	
 	//Can be removed as soon as REQUIRES supports OR
 	generatedRSAKeyParametersOrRSAPrivateCrtKeyParameters[params];
 	
