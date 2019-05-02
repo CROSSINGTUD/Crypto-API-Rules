@@ -1,0 +1,39 @@
+SPEC org.bouncycastle.crypto.signers.RSADigestSigner
+
+OBJECTS
+	org.bouncycastle.crypto.Digest digest;
+	org.bouncycastle.crypto.CipherParameters params;
+
+	byte[] out;
+	byte[] sign;
+	boolean is_encryption;
+	
+EVENTS
+	c1 : RSADigestSigner(digest);
+	c2 : RSADigestSigner(digest, _);
+	
+	i : init(is_encryption, params);
+	Inits := i;
+	
+	u1 : update(_);
+	u2 : update(_, _, _);
+	Updates := u1 | u2;
+	
+	g : out = generateSignature();
+	Signs := g;
+	
+	v : verifySignature(sign);
+	Verify := v;
+	
+ORDER
+	((c1, Inits, Updates+, Signs) | (c2, Inits, Updates+, Verify))+
+	
+REQUIRES
+	generatedDigest[digest];
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
+
+ENSURES
+	signed[out] after Signs;
+	verified[sign] after Verify;
+	

@@ -14,7 +14,8 @@ ORDER
 
 REQUIRES
 	randomized[random];
-	generatedECPublicKeyParameters[params];
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
 
 ENSURES
 	generatedParametersWithRandom[this];
