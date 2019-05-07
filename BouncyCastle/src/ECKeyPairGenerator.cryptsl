@@ -1,7 +1,7 @@
 SPEC org.bouncycastle.crypto.generators.ECKeyPairGenerator
 
 OBJECTS
-	org.bouncycastle.crypto.params.ECKeyGenerationParameters genParams;
+	org.bouncycastle.crypto.KeyGenerationParameters genParams;
 	
 EVENTS
 	c : ECKeyPairGenerator();

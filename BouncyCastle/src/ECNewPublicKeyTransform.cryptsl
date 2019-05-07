@@ -1,7 +1,7 @@
 SPEC org.bouncycastle.crypto.ec.ECNewPublicKeyTransform
 
 OBJECTS
-	org.bouncycastle.crypto.params.ECPublicKeyParameters keyParams;
+	org.bouncycastle.crypto.CipherParameters keyParams;
 	org.bouncycastle.crypto.ec.ECPair cipherText;
 	org.bouncycastle.crypto.ec.ECPair transformedCipherText;
 
@@ -19,6 +19,9 @@ ORDER
 	Cons, (Inits, Transforms+)
 
 REQUIRES
+	//As the keyParams can be an instance of ParametersWithRandom with ECPublicKeyParameters in it or instance of ECPublicKeyParameters iteself.
+	generatedParametersWithRandom[keyParams];
+	//OR
 	generatedECPublicKeyParameters[keyParams];
 	generatedECPair[cipherText];
 
