@@ -8,9 +8,9 @@ EVENTS
 	Cons : GCMBlockCipher(engine);
 	init: init(_,params);
 	p1: processAADByte(_);
-	p2: processAADByte(_,_,_);
+	p2: processAADBytes(_,_,_);
 	p3: processByte(_,_,_);
-	p4: processByte(_,_,_,_,_);
+	p4: processBytes(_,_,_,_,_);
 	
 	process := p1 | p2 | p3 | p4;
 	doFinal: doFinal(_,_);
