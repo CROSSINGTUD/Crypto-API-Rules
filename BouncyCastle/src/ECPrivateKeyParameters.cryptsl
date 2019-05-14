@@ -11,6 +11,9 @@ EVENTS
 ORDER
 	Cons
 
+CONSTRAINTS
+	notHardCoded(d) ;
+
 REQUIRES
 	generatedECDomainParameters[params];
 
