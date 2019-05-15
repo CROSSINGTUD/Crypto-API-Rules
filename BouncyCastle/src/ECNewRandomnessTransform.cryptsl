@@ -20,9 +20,7 @@ ORDER
 
 REQUIRES
 	//As the keyParams can be an instance of ParametersWithRandom with ECPublicKeyParameters in it or instance of ECPublicKeyParameters iteself.
-	generatedParametersWithRandom[keyParams];
-	//OR
-	generatedECPublicKeyParameters[keyParams];
+	generatedParametersWithRandomOrgeneratedECPublicKeyParameters[keyParams];
 	generatedECPair[cipherText];
 
 ENSURES
