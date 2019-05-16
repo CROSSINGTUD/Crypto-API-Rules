@@ -16,6 +16,7 @@ ORDER
 	
 REQUIRES
 	randomized[iv];
+	generatedKeyParameter[params];
 
 ENSURES
 	generatedParametersWithIV[this];
