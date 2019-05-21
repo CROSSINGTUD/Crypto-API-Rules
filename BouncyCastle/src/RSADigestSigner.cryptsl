@@ -29,7 +29,7 @@ ORDER
 	((c1, Inits, Updates+, Signs) | (c2, Inits, Updates+, Verify))+
 	
 REQUIRES
-	generatedDigest[digest];
+	generatedSHA256Digest[digest];
 	//Can be removed as soon as REQUIRES supports OR
 	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
 
