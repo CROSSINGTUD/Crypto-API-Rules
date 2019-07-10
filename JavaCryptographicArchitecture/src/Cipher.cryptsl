@@ -82,14 +82,14 @@ CONSTRAINTS
     part(0, "/", transformation) in {"AES"} && part(1, "/", transformation) in {"CBC", "PCBC"} => part(2, "/", transformation) in {"PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
     part(0, "/", transformation) in {"AES"} && part(1, "/", transformation) in {"GCM", "CTR", "CFB", "OFB"} => part(2, "/", transformation) in {"NoPadding"};
 	
-	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo(IWOIV) ;
-    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo(iv) ;     
+	part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
+    part(1, "/", transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[iv];     
     
     encmode in {1,2,3,4};
-    length(pre_plaintext) >= pre_plain_off + len;
-    length(pre_ciphertext) <= pre_ciphertext_off;
-    length(plainText) <= plain_off + len;
-    length(cipherText) <= ciphertext_off;
+    length[pre_plaintext] >= pre_plain_off + len;
+    length[pre_ciphertext] <= pre_ciphertext_off;
+    length[plainText] <= plain_off + len;
+    length[cipherText] <= ciphertext_off;
 
 REQUIRES
 	generatedKey[key, part(0, "/", transformation)];

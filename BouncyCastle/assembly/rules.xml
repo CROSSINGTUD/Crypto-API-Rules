@@ -13,9 +13,9 @@
 	<fileSets>
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
-			<directory>target/classes</directory>
+			<directory>src</directory>
 			<includes>
-				<include>*.cryptslbin</include>
+				<include>*.cryptsl</include>
 			</includes>
 		</fileSet>
 	</fileSets>

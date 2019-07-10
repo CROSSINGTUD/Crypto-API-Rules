@@ -22,7 +22,7 @@ ORDER
 	Gets, Init, gkm?
 
 CONSTRAINTS
-    neverTypeOf(password, java.lang.String) ;
+    neverTypeOf[password, java.lang.String];
     algo in {"PKIX", "SunX509"};
 
 REQUIRES
