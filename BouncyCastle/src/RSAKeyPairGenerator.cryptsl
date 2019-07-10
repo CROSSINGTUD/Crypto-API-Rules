@@ -1,0 +1,21 @@
+SPEC org.bouncycastle.crypto.generators.RSAKeyPairGenerator
+
+OBJECTS
+	org.bouncycastle.crypto.KeyGenerationParameters genParams;
+	org.bouncycastle.crypto.AsymmetricCipherKeyPair pair;
+
+EVENTS
+	c : RSAKeyPairGenerator();
+	
+	i : init(genParams);
+	
+	g : pair = generateKeyPair();
+	
+ORDER
+	c, (i, g)+
+	
+REQUIRES
+	generatedRSAKeyGenerationParameters[genParams];
+	
+ENSURES
+	generatedRSAKeyPair[pair] after g;

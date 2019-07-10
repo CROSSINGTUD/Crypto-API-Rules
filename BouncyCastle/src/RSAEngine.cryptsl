@@ -1,0 +1,26 @@
+SPEC org.bouncycastle.crypto.engines.RSAEngine
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters params;
+	
+	boolean is_encryption;
+	byte[] cipherText;
+	
+EVENTS
+	c : RSAEngine();
+	
+	i : init(is_encryption, params);
+	
+	p : cipherText = processBlock(_, _, _);
+	
+ORDER
+	c, (i, p)+
+	
+REQUIRES
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
+	
+ENSURES
+	generatedRSAEngine[this] after c;
+	encrypted[cipherText] after p;
+	

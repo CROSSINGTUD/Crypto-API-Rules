@@ -5,12 +5,18 @@ OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 	
 EVENTS
-	c1 : GCMBlockCipher(engine);
-	Cons := c1;
-
+	Cons : GCMBlockCipher(engine);
+	init: init(_,params);
+	p1: processAADByte(_);
+	p2: processAADBytes(_,_,_);
+	p3: processByte(_,_,_);
+	p4: processBytes(_,_,_,_,_);
+	
+	process := p1 | p2 | p3 | p4;
+	doFinal: doFinal(_,_);
 	
 ORDER
-	Cons
+	Cons, init, process+, doFinal
 
 REQUIRES
 	generatedAESEngine[engine];

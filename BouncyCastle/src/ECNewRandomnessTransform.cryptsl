@@ -1,0 +1,27 @@
+SPEC org.bouncycastle.crypto.ec.ECNewRandomnessTransform
+
+OBJECTS
+	org.bouncycastle.crypto.CipherParameters keyParams;
+	org.bouncycastle.crypto.ec.ECPair cipherText;
+	org.bouncycastle.crypto.ec.ECPair transformedCipherText;
+
+EVENTS
+	c1 : ECNewRandomnessTransform();
+	Cons := c1;
+	
+	i1 : init(keyParams);
+	Inits := i1;
+	
+	t1 : transformedCipherText = transform(cipherText);
+	Transforms := t1;
+
+ORDER
+	Cons, (Inits, Transforms+)
+
+REQUIRES
+	//As the keyParams can be an instance of ParametersWithRandom with ECPublicKeyParameters in it or instance of ECPublicKeyParameters iteself.
+	generatedParametersWithRandomOrgeneratedECPublicKeyParameters[keyParams];
+	generatedECPair[cipherText];
+
+ENSURES
+	generatedECNewRandomnessTransform[transformedCipherText] after t1;
