@@ -12,7 +12,7 @@ ORDER
 	Cons
 
 CONSTRAINTS
-	notHardCoded(d) ;
+	notHardCoded[d];
 
 REQUIRES
 	generatedECDomainParameters[params];

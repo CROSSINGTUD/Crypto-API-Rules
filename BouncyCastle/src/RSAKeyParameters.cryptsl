@@ -13,7 +13,7 @@ ORDER
 	
 CONSTRAINTS
 	modulus >= 2000; // BSI describles length of the modulus n to be at least 2000 bits
-	isPrivate == true => notHardCoded(exponent) ;
+	isPrivate == true => notHardCoded[exponent];
 
 ENSURES
 	generatedRSAKeyParameters[this];
