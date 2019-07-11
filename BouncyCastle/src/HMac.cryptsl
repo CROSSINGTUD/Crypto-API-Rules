@@ -1,0 +1,35 @@
+SPEC org.bouncycastle.crypto.macs.HMac
+
+OBJECTS
+	org.bouncycastle.crypto.Digest digest;
+	org.bouncycastle.crypto.CipherParameters params;
+	byte[] output;
+
+EVENTS
+	c1 : HMac(digest);
+	c2 : HMac(digest, _);
+	Cons := c1 | c2;
+	
+	Init : init(params);
+	
+	u1 : update(_);
+	u2 : update(_, _, _);
+	
+	Updates := u1 | u2;
+	
+	f1 : doFinal(output, _);
+	
+	Finals := f1;
+	
+	r : reset();
+
+ORDER
+	Cons, (Init, Updates+, Finals)+
+	
+REQUIRES
+	generatedSHA256Digest[digest];
+	generatedKeyParameter[params];
+
+ENSURES
+	macced[output];
+	
