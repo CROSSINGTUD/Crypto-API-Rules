@@ -30,8 +30,9 @@ ORDER
 	
 REQUIRES
 	generatedSHA256Digest[digest];
-	//Can be removed as soon as REQUIRES supports OR
-	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
+	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params];
+	// needs to be OR-ed with above line
+	generatedECPublicKeyParameters[params];
 
 ENSURES
 	signed[out] after Signs;

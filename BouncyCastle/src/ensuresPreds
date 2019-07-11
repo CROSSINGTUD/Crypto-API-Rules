@@ -1,0 +1,67 @@
+RULE							ENSURES
+
+AEADParameters ->				generatedAEADParameters[this];
+
+AESEngine ->					generatedAESEngine[this];
+
+AsymmetricCipherKeyPair ->		generatedRSAKeyPair[this] after co;
+
+BufferedBlockCipher ->			encrypted[cipherText];
+
+CBCBlockCipher ->				generatedCBCBlockCipher[this];
+
+ECDomainParameters ->			generatedECDomainParameters[this];
+
+ECElGamalDecryptor ->			generatedECElGamalDecrypt[plainText] after d1;
+
+ECElGamalEncryptor ->			generatedECElGamalEncrypt[cipherText] after e1;
+
+ECFixedTransform ->				generatedECFixedTransform[transformedCipherText] after t1;
+
+ECKeyGenerationParameters ->	generatedECKeyGenerationParameters[this];
+
+ECKeyPairGenerator ->			generatedECKeyPair[this] after g;
+
+ECKeyParameters ->				generatedECKeyParameters[this];
+
+ECNewPublicKeyTransform ->		generatedNewPublicKeyTransform[transformedCipherText] after t1;
+
+ECNewRandomnessTransform ->		generatedECNewRandomnessTransform[transformedCipherText] after t1;
+
+ECPair ->						generatedECPair[this];
+
+ECPrivateKeyParameters ->		generatedECPrivateKeyParameters[this];
+
+ECPublicKeyParameters ->		generatedECPublicKeyParameters[this];
+
+GCMBlockCipher ->				generatedGCMBlockCipherMode[this] after Cons;
+
+KeyParameter ->					generatedKeyParameter[this];
+
+PaddedBufferedBlockCipher ->	encrypted[cipherText];
+
+ParametersWithIV ->				generatedParametersWithIV[this];
+
+ParametersWithRandom ->			generatedParametersWithRandom[this];
+
+RSADigestSigner ->				signed[out] after Signs;
+								verified[sign] after Verify;
+
+RSAEngine ->					generatedRSAEngine[this] after c;
+								encrypted[cipherText] after p;
+
+RSAKeyGenerationParameters ->	generatedRSAKeyGenerationParameters[this];
+
+RSAKeyPairGenerator ->			generatedRSAKeyPair[pair] after g;
+
+RSAKeyParameters ->				generatedRSAKeyParameters[this];
+
+RSAPrivateCrtKeyParameters ->	generatedRSAPrivateCrtKeyParameters[this];
+
+SecureRandom ->					randomized[this] after Ins;
+								randomized[genSeed];
+								randomized[next];
+								randomized[numB];
+
+SHA256Digest ->					generatedSHA256Digest[this] after Cons;
+								digested[output];

@@ -1,0 +1,76 @@
+RULE							REQUIRES
+
+AEADParameters ->				generatedKeyParameter[keyParam];
+
+AESEngine ->					none
+
+AsymmetricCipherKeyPair ->		generatedRSAKeyParameters[pubParams];
+								generatedRSAPrivateCrtKeyParameters[privParams];
+
+BufferedBlockCipher ->			generatedGCMBlockCipher[engineOrMode];
+								generatedCipherParams[params];
+
+CBCBlockCipher ->				generatedAESEngine[engine];
+
+ECDomainParameters ->			randomized[seed];
+
+ECElGamalDecryptor ->			generatedECPair[pair];
+								generatedECPrivateKeyParameters[keyParams];
+
+ECElGamalEncryptor ->			generatedECPublicKeyParameters[params] || generatedParametersWithRandom[params];
+
+ECFixedTransform ->				generatedECPublicKeyParameters[keyParams];
+								generatedECPair[cipherText];
+
+ECKeyGenerationParameters ->	randomized[random];
+								generatedECDomainParameters[domainParams];
+
+ECKeyPairGenerator ->			generatedECKeyGenerationParameters[genParams];
+
+ECKeyParameters ->				generatedECDomainParameters[keyParams];
+
+ECNewPublicKeyTransform ->		generatedParametersWithRandom[keyParams] || generatedECPublicKeyParameters[keyParams];
+								generatedECPair[cipherText];
+
+ECNewRandomnessTransform ->		generatedParametersWithRandom[keyParams] || generatedECPublicKeyParameters[keyParams];
+								generatedECPair[cipherText];
+
+ECPair ->						none
+
+ECPrivateKeyParameters ->		generatedECDomainParameters[params];
+
+ECPublicKeyParameters ->		generatedECDomainParameters[params];
+
+GCMBlockCipher ->				generatedAESEngine[engine];
+								generatedAEADParameters[params] || generatedParametersWithIV[params];
+
+KeyParameter ->					randomized[key];
+
+PaddedBufferedBlockCipher ->	generatedCBCBlockCipher[cipher];
+								generatedParametersWithIV[params];
+								generatedPKCS7Padding[padding];
+
+ParametersWithIV ->				randomized[iv];
+								generatedKeyParameter[params];
+
+ParametersWithRandom ->			randomized[random];
+								generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
+
+
+RSADigestSigner ->				generatedSHA256Digest[digest];
+								generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
+
+RSAEngine ->					generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
+
+RSAKeyGenerationParameters ->	randomized[random];
+
+RSAKeyPairGenerator ->			generatedRSAKeyGenerationParameters[genParams];
+
+RSAKeyParameters ->				none
+
+RSAPrivateCrtKeyParameters ->	randomized[p];
+								randomized[q];
+
+SecureRandom ->					randomized[seed];
+
+SHA256Digest ->					generatedSHA256Digest[digest];

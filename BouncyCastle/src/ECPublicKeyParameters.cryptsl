@@ -16,6 +16,3 @@ REQUIRES
 
 ENSURES
 	generatedECPublicKeyParameters[this];
-	//Can be removed as soon as REQUIRES supports OR
-	generatedParametersWithRandomOrgeneratedECPublicKeyParameters[this];
-	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[this];
