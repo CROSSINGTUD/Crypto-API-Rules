@@ -10,10 +10,10 @@ EVENTS
     g2:getInstance(alg, _);
     Gets := g1 | g2;
 
-    i1: initialize(params);
-    i2: initialize(params, _);
-    i3: initialize(keySize);
-    i4: initialize(keySize, _);
+	i1: initialize(keySize);
+    i2: initialize(keySize, _);
+    i3: initialize(params);
+    i4: initialize(params, _);
     Inits := i1 | i2 | i3 | i4;
 
     k1: kp = generateKeyPair();
@@ -25,7 +25,7 @@ ORDER
 
 CONSTRAINTS
 	alg in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
-    alg in {"RSA"} => keySize in {2048, 4096};
+    alg in {"RSA"} => keySize in {4096, 3072, 2048};
     alg in {"DSA"} => keySize in {2048};
 	alg in {"DiffieHellman", "DH"} => keySize in {2048};
 	alg in {"EC"} => keySize in {256};
