@@ -5,15 +5,15 @@ OBJECTS
     byte[] inpba;
     byte[] out;
     java.nio.ByteBuffer inpBuf;
-    java.lang.String alg;
+    java.lang.String signAlgorithm;
     java.security.PrivateKey priv;
     java.security.PublicKey pub;
     java.security.cert.Certificate cert;
     java.security.spec.AlgorithmParameterSpec params;
 
 EVENTS
-    g1: getInstance(alg);
-    g2: getInstance(alg, _);
+    g1: getInstance(signAlgorithm);
+    g2: getInstance(signAlgorithm, _);
     Gets := g1 | g2;
 
     i1: initSign(priv);
@@ -41,7 +41,7 @@ ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    alg in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA", "SHA256withRSA", "SHA256withECDSA"};
+    signAlgorithm in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA", "SHA256withRSA", "SHA256withECDSA"};
     
 REQUIRES
     generatedPrivkey[priv];

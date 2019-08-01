@@ -1,13 +1,13 @@
 SPEC java.security.KeyPairGenerator
 OBJECTS
-    java.lang.String alg;
+    java.lang.String keyPairAlgorithm;
     java.security.KeyPair kp;
     java.security.spec.AlgorithmParameterSpec params;
     int keySize;
 
 EVENTS
-    g1:getInstance(alg);
-    g2:getInstance(alg, _);
+    g1:getInstance(keyPairAlgorithm);
+    g2:getInstance(keyPairAlgorithm, _);
     Gets := g1 | g2;
 
 	i1: initialize(keySize);
@@ -24,18 +24,18 @@ ORDER
     Gets, Inits, Generators
 
 CONSTRAINTS
-	alg in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
-    alg in {"RSA"} => keySize in {4096, 3072, 2048};
-    alg in {"DSA"} => keySize in {2048};
-	alg in {"DiffieHellman", "DH"} => keySize in {2048};
-	alg in {"EC"} => keySize in {256};
+	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
+    keyPairAlgorithm in {"RSA"} => keySize in {4096, 3072, 2048};
+    keyPairAlgorithm in {"DSA"} => keySize in {2048};
+	keyPairAlgorithm in {"DiffieHellman", "DH"} => keySize in {2048};
+	keyPairAlgorithm in {"EC"} => keySize in {256};
 
 REQUIRES
-    alg in {"RSA"} => preparedRSA[params];
-    alg in {"DSA"} => preparedDSA[params];
-    alg in {"DiffieHellman", "DH"} => preparedDH[params];
-    alg in {"EC"} => preparedEC[params]; //seems missing
+    keyPairAlgorithm in {"RSA"} => preparedRSA[params];
+    keyPairAlgorithm in {"DSA"} => preparedDSA[params];
+    keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+    keyPairAlgorithm in {"EC"} => preparedEC[params]; //seems missing
     
 
 ENSURES
-    generatedKeypair[kp, alg];
+    generatedKeypair[kp, keyPairAlgorithm];

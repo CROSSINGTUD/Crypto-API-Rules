@@ -3,12 +3,12 @@ OBJECTS
     int keySize;
     java.security.spec.AlgorithmParameterSpec params;
     javax.crypto.SecretKey key;
-    java.lang.String alg;
+    java.lang.String keyAlgorithm;
     java.security.SecureRandom ranGen;
 
 EVENTS
-    g1: getInstance(alg);
-    g2: getInstance(alg, _);
+    g1: getInstance(keyAlgorithm);
+    g2: getInstance(keyAlgorithm, _);
     Gets := g1 | g2;
 
     i1: init(keySize);
@@ -24,11 +24,11 @@ ORDER
     Gets, Inits?, gk
 
 CONSTRAINTS
-	alg in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
-    alg in {"AES"} => keySize in {128, 192, 256};
+	keyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
+    keyAlgorithm in {"AES"} => keySize in {128, 192, 256};
    
 REQUIRES
     randomized[ranGen];
     
 ENSURES 
-    generatedKey[key, alg];
+    generatedKey[key, keyAlgorithm];
