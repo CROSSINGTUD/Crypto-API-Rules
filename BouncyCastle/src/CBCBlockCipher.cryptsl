@@ -5,6 +5,8 @@ OBJECTS
 	
 EVENTS
 	c : CBCBlockCipher(engine);
+
+//No need to specify the order, must be wrapped in PaddedBufferedCipher!
 	
 ORDER
 	c

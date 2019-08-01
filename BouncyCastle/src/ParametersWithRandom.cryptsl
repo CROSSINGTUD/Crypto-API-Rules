@@ -1,0 +1,22 @@
+SPEC org.bouncycastle.crypto.params.ParametersWithRandom
+
+OBJECTS
+	java.security.SecureRandom random;
+	org.bouncycastle.crypto.CipherParameters params;
+
+EVENTS
+	c1 : ParametersWithRandom(params, random);
+	c2 : ParametersWithRandom(params);
+	Cons := c1 | c2;
+	
+ORDER
+	Cons
+
+REQUIRES
+	randomized[random];
+	//Can be removed as soon as REQUIRES supports OR
+	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
+
+ENSURES
+	generatedParametersWithRandom[this];
+	generatedParametersWithRandomOrgeneratedECPublicKeyParameters[this];

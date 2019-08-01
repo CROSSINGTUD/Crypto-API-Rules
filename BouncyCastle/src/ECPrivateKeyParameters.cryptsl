@@ -1,0 +1,21 @@
+SPEC org.bouncycastle.crypto.params.ECPrivateKeyParameters
+
+OBJECTS
+	org.bouncycastle.crypto.params.ECDomainParameters params;
+	java.math.BigInteger d;
+
+EVENTS
+	c1: ECPrivateKeyParameters(d, params);
+	Cons := c1;
+	
+ORDER
+	Cons
+
+CONSTRAINTS
+	notHardCoded[d];
+
+REQUIRES
+	generatedECDomainParameters[params];
+
+ENSURES
+	generatedECPrivateKeyParameters[this];

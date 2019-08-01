@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.params.ECKeyGenerationParameters
+
+OBJECTS
+	org.bouncycastle.crypto.params.ECDomainParameters domainParams;
+	java.security.SecureRandom random;
+
+EVENTS
+	c1: ECKeyGenerationParameters(domainParams, random);
+	Cons := c1;
+
+ORDER
+	Cons
+
+REQUIRES
+	randomized[random];
+	generatedECDomainParameters[domainParams];
+
+ENSURES
+	generatedECKeyGenerationParameters[this];

@@ -1,0 +1,20 @@
+SPEC org.bouncycastle.crypto.generators.ECKeyPairGenerator
+
+OBJECTS
+	org.bouncycastle.crypto.KeyGenerationParameters genParams;
+	
+EVENTS
+	c : ECKeyPairGenerator();
+	
+	i : init(genParams);
+	
+	g : generateKeyPair();
+
+ORDER
+	c, i, g
+
+REQUIRES
+	generatedECKeyGenerationParameters[genParams];
+
+ENSURES
+	generatedECKeyPair[this] after g;

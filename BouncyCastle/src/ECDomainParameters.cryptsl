@@ -1,0 +1,24 @@
+SPEC org.bouncycastle.crypto.params.ECDomainParameters
+
+OBJECTS
+	org.bouncycastle.math.ec.ECCurve curve;
+	byte[] seed;
+	org.bouncycastle.math.ec.ECPoint G;
+	java.math.BigInteger n;
+	java.math.BigInteger h;
+	java.math.BigInteger hInv;
+
+EVENTS
+	c1: ECDomainParameters(curve, G, n);
+	c2: ECDomainParameters(curve, G, n, h);
+	c3: ECDomainParameters(curve, G, n, h, seed);
+	Cons := c1 | c2 | c3;
+
+ORDER
+	Cons
+
+REQUIRES	
+	randomized[seed];
+
+ENSURES
+	generatedECDomainParameters[this];
