@@ -1,0 +1,41 @@
+SPEC java.security.KeyPairGenerator
+OBJECTS
+    java.lang.String keyPairAlgorithm;
+    java.security.KeyPair kp;
+    java.security.spec.AlgorithmParameterSpec params;
+    int keySize;
+
+EVENTS
+    g1:getInstance(keyPairAlgorithm);
+    g2:getInstance(keyPairAlgorithm, _);
+    Gets := g1 | g2;
+
+	i1: initialize(keySize);
+    i2: initialize(keySize, _);
+    i3: initialize(params);
+    i4: initialize(params, _);
+    Inits := i1 | i2 | i3 | i4;
+
+    k1: kp = generateKeyPair();
+    k2: kp = genKeyPair();
+    Generators := k1 | k2;
+
+ORDER
+    Gets, Inits, Generators
+
+CONSTRAINTS
+	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
+    keyPairAlgorithm in {"RSA"} => keySize in {4096, 3072, 2048};
+    keyPairAlgorithm in {"DSA"} => keySize in {2048};
+	keyPairAlgorithm in {"DiffieHellman", "DH"} => keySize in {2048};
+	keyPairAlgorithm in {"EC"} => keySize in {256};
+
+REQUIRES
+    keyPairAlgorithm in {"RSA"} => preparedRSA[params];
+    keyPairAlgorithm in {"DSA"} => preparedDSA[params];
+    keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+    keyPairAlgorithm in {"EC"} => preparedEC[params]; //seems missing
+    
+
+ENSURES
+    generatedKeypair[kp, keyPairAlgorithm];
