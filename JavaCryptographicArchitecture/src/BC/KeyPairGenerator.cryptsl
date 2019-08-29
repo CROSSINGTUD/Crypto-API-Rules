@@ -3,15 +3,15 @@ OBJECTS
     java.lang.String keyPairAlgorithm;
     java.security.KeyPair kp;
     java.security.spec.AlgorithmParameterSpec params;
-    int keySize;
+    int keyPairSize;
 
 EVENTS
     g1:getInstance(keyPairAlgorithm);
     g2:getInstance(keyPairAlgorithm, _);
     Gets := g1 | g2;
 
-	i1: initialize(keySize);
-    i2: initialize(keySize, _);
+	i1: initialize(keyPairSize);
+    i2: initialize(keyPairSize, _);
     i3: initialize(params);
     i4: initialize(params, _);
     Inits := i1 | i2 | i3 | i4;
@@ -25,10 +25,10 @@ ORDER
 
 CONSTRAINTS
 	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
-    keyPairAlgorithm in {"RSA"} => keySize in {4096, 3072, 2048};
-    keyPairAlgorithm in {"DSA"} => keySize in {2048};
-	keyPairAlgorithm in {"DiffieHellman", "DH"} => keySize in {2048};
-	keyPairAlgorithm in {"EC"} => keySize in {256};
+    keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
+    keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
+	keyPairAlgorithm in {"DiffieHellman", "DH"} => keyPairSize in {2048};
+	keyPairAlgorithm in {"EC"} => keyPairSize in {256};
 
 REQUIRES
     keyPairAlgorithm in {"RSA"} => preparedRSA[params];

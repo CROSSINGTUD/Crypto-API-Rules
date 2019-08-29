@@ -22,6 +22,7 @@ OBJECTS
     
     byte[] plainText;
     byte[] cipherText;
+    byte[] wrappedKeyBytes;
 	java.nio.ByteBuffer plainBuffer;
 	java.nio.ByteBuffer cipherBuffer;
 	
@@ -63,7 +64,7 @@ EVENTS
     FINWOU := f2 | f4 | f5 | f6 | f7;
     DOFINALS := FINWOU | f1 | f3;
     
-    w: wrap(wrappedKey);
+    w: wrappedKeyBytes = wrap(wrappedKey);
     
     iv: getIV();
     
@@ -71,15 +72,16 @@ ORDER
     Gets, Inits+, w+ | (FINWOU | (updates+, DOFINALS))+
 
 CONSTRAINTS
-	alg(transformation) in {"AES", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256", "RSA"};
+	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};
+	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
     alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "PCBC", "CTR", "CTS", "CFB", "OFB"};
-    alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => pad(transformation) in {"CBC"};
+    alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => mode(transformation) in {"CBC"};
     alg(transformation) in {"RSA"} => mode(transformation) in {"", "ECB"};
 
-    alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => pad(transformation) in {"PKCS7Padding", "PKCS5Padding"};
+    alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => pad(transformation) in {"PKCS5Padding"};
     alg(transformation) in {"RSA"} => pad(transformation) in {"", "PKCS1Padding","OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
 
-   	alg(transformation) in {"AES"} && mode(transformation) in {"CBC", "PCBC"} => pad(transformation) in {"PKCS7Padding", "PKCS5Padding", "ISO10126Padding"};
+   	alg(transformation) in {"AES"} && mode(transformation) in {"CBC", "PCBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
 	
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
@@ -103,3 +105,4 @@ ENSURES
 	encrypted[pre_ciphertext, pre_plaintext] after updates; 
 	encrypted[cipherText, plainText];
 	encrypted[cipherBuffer, plainBuffer];
+	wrappedKey[wrappedKeyBytes, wrappedKey];
