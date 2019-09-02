@@ -24,8 +24,13 @@ ORDER
     Gets, Inits?, gk
 
 CONSTRAINTS
-	secretKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
-    secretKeyAlgorithm in {"AES"} => secretKeySize in {128, 192, 256};
+	secretKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "Poly1305-AES", "Blowfish", "Poly1305-Camellia", "ChaCha", 
+							"ChaCha7539", "DESede", "Poly1305", "Rijndael", "Salsa20", "Serpent", "Tnepres", "Poly1305-Serpent", "SHACAL-2", "Twofish", 
+							"Poly1305-Twofish", "XSalsa20"};
+    secretKeyAlgorithm in {"AES", "Poly1305-Camellia"} => secretKeySize in {128, 192, 256};
+    secretKeyAlgorithm in {"Blowfish", "ChaCha", "Salsa20", "SHACAL-2"} => secretKeySize in {128};
+    secretKeyAlgorithm in {"DESede", "Rijndael", "Serpent", "Tnepres"} => secretKeySize in {192};
+    secretKeyAlgorithm in {"ChaCha7539", "Poly1305", "Poly1305-Serpent", "Twofish", "Poly1305-Twofish", "XSalsa20"} => secretKeySize in {256};
    
 REQUIRES
     randomized[ranGen];

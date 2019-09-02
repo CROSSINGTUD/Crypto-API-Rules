@@ -24,11 +24,12 @@ ORDER
     Gets, Inits, Encoded?
 
 CONSTRAINTS
-	alg in {"AES", "Blowfish", "DESede", "DiffieHellman"};
+	alg in {"AES", "Blowfish", "Camellia", "ChaCha7539", "DESede", "DiffieHellman", "Rijndael", "Salsa20", "Tnepres", 
+			"Serpent", "SHACAL-2", "Twofish", "XSalsa20", "GCM", "CCM"};
 
 REQUIRES    
     preparedAlg[parAr];
-    alg in {"AES", "Blowfish", "DESede"} => preparedIV[params];
+    alg in {"AES", "Blowfish", "Twofish", "Camellia", "ChaCha7539", "DESede", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2", "XSalsa20"} => preparedIV[params];
     alg in {"DiffieHellman"} => preparedDH[params];
     
 ENSURES 

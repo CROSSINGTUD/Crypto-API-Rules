@@ -73,17 +73,29 @@ ORDER
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};
-	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES"};
-    alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB"};
+	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "Blowfish", "Twofish", "Camellia", "DESede", "Serpent", "Shacal2"};
+    alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
+    alg(transformation) in {"Blowfish"} => mode(transformation) in {"CBC"};
+    alg(transformation) in {"Twofish"} => mode(transformation) in {"CBC"};
+    alg(transformation) in {"Camellia"} => mode(transformation) in {"CBC"};
+    alg(transformation) in {"DESede"} => mode(transformation) in {"CBC"};
+    alg(transformation) in {"Serpent"} => mode(transformation) in {"CBC", "CFB", "OFB"};
+    alg(transformation) in {"Shacal2"} => mode(transformation) in {"CBC"};
     alg(transformation) in {"RSA"} => mode(transformation) in {"", "ECB"};
-
     alg(transformation) in {"RSA"} => pad(transformation) in {"", "PKCS1Padding","OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
 
    	alg(transformation) in {"AES"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
-	
-	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
-    mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[iv];     
+    alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
+    alg(transformation) in {"Serpent"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    alg(transformation) in {"Serpent"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
+    alg(transformation) in {"Blowfish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    alg(transformation) in {"Twofish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    alg(transformation) in {"Camellia"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    alg(transformation) in {"DESede"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    alg(transformation) in {"Shacal2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+    
+	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode != 1 => noCallTo[IWOIV];
+    mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode == 1 => callTo[iv];     
     
     encmode in {1,2,3,4};
     length[pre_plaintext] >= pre_plain_off + len;
