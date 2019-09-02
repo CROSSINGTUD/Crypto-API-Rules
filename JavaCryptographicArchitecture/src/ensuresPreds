@@ -4,6 +4,7 @@ preparedHMAC
 encrypted
 preparedGCM
 preparedDH
+preparedEC
 preparedDSA
 preparedHMAC
 preparedIV

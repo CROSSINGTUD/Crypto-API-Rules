@@ -42,7 +42,7 @@ ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA256withRSA", "SHA224withDSA", "NONEwithDSA", "SHA1withDSA"};
+    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", "NONEwithDSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", "NONEwithDSA", "SHA1withDSA"};
     
 REQUIRES
     generatedPrivkey[priv];

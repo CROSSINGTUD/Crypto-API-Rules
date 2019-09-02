@@ -24,7 +24,7 @@ ORDER
     Gets, Inits, Generators
 
 CONSTRAINTS
-	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC"};
+	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ElGamal"};
     keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
     keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"DiffieHellman", "DH"} => keyPairSize in {2048};
