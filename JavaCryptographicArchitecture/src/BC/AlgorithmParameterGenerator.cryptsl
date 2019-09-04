@@ -25,5 +25,5 @@ CONSTRAINTS
 	algorithm in {"AES", "DESede", "Camellia", "Shacal2", "DH", "DiffieHellman", "DSA", "ElGamal"};
 	
 ENSURES
-	genAlg[this, algorithm] after Gen;
+	genAlgParam[this, algorithm] after Gen;
 	
