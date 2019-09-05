@@ -29,6 +29,10 @@ CONSTRAINTS
     keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"DiffieHellman", "DH"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"EC"} => keyPairSize in {256};
+	
+	// algorithms for Post-Quantum Computation (PQC)
+	keyPairAlgorithm in {"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2",
+							"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 
 REQUIRES
     keyPairAlgorithm in {"RSA"} => preparedRSA[params];

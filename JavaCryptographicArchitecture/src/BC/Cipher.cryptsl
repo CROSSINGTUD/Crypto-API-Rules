@@ -94,6 +94,9 @@ CONSTRAINTS
     alg(transformation) in {"DESede"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"Shacal2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     
+    // algorithms for Post-Quantum Computation (PQC)
+    alg(transformation) in {"McEliece", "McEliecePointcheval", "McElieceKobaraImai", "McElieceFujisaki"};
+    
 	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode != 1 => noCallTo[IWOIV];
     mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode == 1 => callTo[iv];     
     

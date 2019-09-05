@@ -20,6 +20,10 @@ ORDER
 
 CONSTRAINTS
 	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "RSA"};
+	
+	// algorithms for Post-Quantum Computation (PQC)
+	keyFactoryAlgorithm in {"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2",
+							"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 
 REQUIRES
 	speccedKey[keySpec, _];
