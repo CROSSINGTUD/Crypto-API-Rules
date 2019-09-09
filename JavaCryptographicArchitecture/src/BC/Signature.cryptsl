@@ -42,10 +42,9 @@ ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", "NONEwithDSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", "NONEwithDSA", "SHA1withDSA"};
-    
-    // algorithms for Post-Quantum Computation (PQC)
-    signAlgorithm in {"QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", 
+    					"NONEwithDSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", "NONEwithDSA", "SHA1withDSA", 
+    					"QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
     
 REQUIRES
     generatedPrivkey[priv];
