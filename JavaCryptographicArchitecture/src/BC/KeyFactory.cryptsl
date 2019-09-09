@@ -1,8 +1,7 @@
 SPEC java.security.KeyFactory
 OBJECTS
     java.lang.String keyFactoryAlgorithm;
-    javax.crypto.SecretKey key;
-    javax.crypto.SecretKey otherKey;
+    java.security.Key key;
     java.security.spec.KeySpec keySpec;
    
 EVENTS
@@ -10,8 +9,8 @@ EVENTS
     g2: getInstance(keyFactoryAlgorithm, _);
     Gets := g1 | g2;
 
-    gPriv: key = generatePrivate(keySpec);
-    gPubl: key = generatePublic(otherKey);
+    gPriv: generatePrivate(keySpec);
+    gPubl: generatePublic(keySpec);
     
     Gens := gPriv | gPubl;
 
@@ -25,7 +24,8 @@ CONSTRAINTS
 	keyFactoryAlgorithm in {"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2",
 							"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 
-REQUIRES
-	speccedKey[keySpec, _];
+//REQUIRES
+//	speccedKey[keySpec, _];
+	
 ENSURES
     generatedKeyFactory[key, keyFactoryAlgorithm];
