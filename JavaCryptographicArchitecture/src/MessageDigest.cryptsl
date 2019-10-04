@@ -1,6 +1,6 @@
 SPEC java.security.MessageDigest
 OBJECTS
-    java.lang.String digestAlg;
+    java.lang.String digestAlgorithm;
     byte pre_inbyte;
     byte[] pre_inbytearr;
     int pre_off;
@@ -12,8 +12,8 @@ OBJECTS
     byte[] out;
 	
 EVENTS
-    g1: getInstance(digestAlg);
-    g2: getInstance(digestAlg, _);
+    g1: getInstance(digestAlgorithm);
+    g2: getInstance(digestAlgorithm, _);
     Gets := g1 | g2;
 
     u1: update(pre_inbyte);
@@ -33,7 +33,7 @@ ORDER
     Gets, (DWOU | (Updates+, Digests))+
 
 CONSTRAINTS
-    digestAlg in {"SHA-256", "SHA-384", "SHA-512"};
+    digestAlgorithm in {"SHA-256", "SHA-384", "SHA-512"};
     pre_len > pre_off;
     len > off;
 

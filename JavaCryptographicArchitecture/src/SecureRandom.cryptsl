@@ -3,7 +3,7 @@ OBJECTS
 	byte[] seed;
 	byte[] genSeed;
 	int num;
-	java.lang.String randAlg;
+	java.lang.String randomAlgorithm;
 	long lSeed;
 	byte[] next;
 	int numB;
@@ -13,8 +13,8 @@ EVENTS
 	c2: SecureRandom(seed);
 	Cons := c1 | c2;
 	
-	g1: getInstance(randAlg);
-	g2: getInstance(randAlg, _);
+	g1: getInstance(randomAlgorithm);
+	g2: getInstance(randomAlgorithm, _);
 	gI: getInstanceStrong();
 	Gets := g1 | g2 | gI;
 	
@@ -36,7 +36,7 @@ ORDER
  	Ins, Seeds?, Ends*
  	
 CONSTRAINTS
-	randAlg in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
+	randomAlgorithm in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
 	
 REQUIRES	
 	randomized[seed];

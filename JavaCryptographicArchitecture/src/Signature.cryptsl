@@ -5,15 +5,16 @@ OBJECTS
     byte[] inpba;
     byte[] out;
     java.nio.ByteBuffer inpBuf;
-    java.lang.String alg;
+    java.lang.String signAlgorithm;
     java.security.PrivateKey priv;
     java.security.PublicKey pub;
     java.security.cert.Certificate cert;
     java.security.spec.AlgorithmParameterSpec params;
+    boolean verified;
 
 EVENTS
-    g1: getInstance(alg);
-    g2: getInstance(alg, _);
+    g1: getInstance(signAlgorithm);
+    g2: getInstance(signAlgorithm, _);
     Gets := g1 | g2;
 
     i1: initSign(priv);
@@ -33,15 +34,15 @@ EVENTS
     s2: sign(out, offset, len);
     Signs := s1 | s2;
 
-    v1: verify(sign);
-    v2: verify(sign, offset, len);
+    v1: verified = verify(sign);
+    v2: verified = verify(sign, offset, len);
     Verifies := v1 | v2;
 
 ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    alg in {"NONEwithDSA", "SHA1withDSA", "SHA224withDSA", "SHA256withDSA", "SHA256withRSA", "SHA256withECDSA"};
+    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA256withRSA", "SHA224withDSA", "NONEwithDSA", "SHA1withDSA"};
     
 REQUIRES
     generatedPrivkey[priv];
@@ -51,4 +52,4 @@ ENSURES
     signed[out, inpb] after Signs;
     signed[out, inpba] after Signs;
     signed[out, inpBuf] after Signs;
-    verified[sign];
+    verified[verified, sign] after Verifies;
