@@ -17,9 +17,7 @@ ORDER
 	c, (i, p)+
 	
 REQUIRES
-	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params];
-	// needs to be Or-ed with above line
-	generatedECPublicKeyParameters[params];
+	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
 	
 ENSURES
 	generatedRSAEngine[this] after c;

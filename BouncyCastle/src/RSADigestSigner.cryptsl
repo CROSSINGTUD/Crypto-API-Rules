@@ -30,9 +30,7 @@ ORDER
 	
 REQUIRES
 	generatedSHA256Digest[digest];
-	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params];
-	// needs to be OR-ed with above line
-	generatedECPublicKeyParameters[params];
+	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
 
 ENSURES
 	signed[out] after Signs;
