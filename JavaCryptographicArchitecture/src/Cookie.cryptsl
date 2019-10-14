@@ -12,7 +12,7 @@ ORDER
     c,sc
     
 CONSTRAINTS
-    secure in {true};
+    secure != false;
 
 ENSURES
     generatedCookie[this];
