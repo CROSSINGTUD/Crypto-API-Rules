@@ -17,8 +17,7 @@ ORDER
 	c, (i, p)+
 	
 REQUIRES
-	//Can be removed as soon as REQUIRES supports OR
-	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[params];
+	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
 	
 ENSURES
 	generatedRSAEngine[this] after c;

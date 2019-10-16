@@ -20,5 +20,3 @@ REQUIRES
 
 ENSURES
 	generatedParametersWithIV[this];
-	//Can be removed as soon as REQUIRES supports OR
-	generatedAEADParametersOrParametersWithIV[this];

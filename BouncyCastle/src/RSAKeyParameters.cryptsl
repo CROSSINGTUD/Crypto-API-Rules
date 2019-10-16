@@ -17,5 +17,3 @@ CONSTRAINTS
 
 ENSURES
 	generatedRSAKeyParameters[this];
-	//Can be removed as soon as REQUIRES supports OR
-	generatedRSAKeyParametersOrRSAPrivateCrtKeyParametersOrECPublicKeyParameters[this];

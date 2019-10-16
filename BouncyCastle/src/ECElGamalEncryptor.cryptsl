@@ -19,9 +19,7 @@ ORDER
 	Cons, (Inits, Encrypts+)+
 
 REQUIRES
-	generatedECPublicKeyParameters[params];
-	//Can be removed when REQUIRES support OR clause
-	generatedParametersWithRandom[params];
+	generatedECPublicKeyParameters[params] || generatedParametersWithRandom[params];
 
 ENSURES
 	generatedECElGamalEncrypt[cipherText] after e1;
