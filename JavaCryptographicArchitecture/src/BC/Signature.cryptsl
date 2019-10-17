@@ -43,7 +43,7 @@ ORDER
 
 CONSTRAINTS
     signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", 
-    					"NONEwithDSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", "NONEwithDSA", "SHA1withDSA", "QTESLA"};
+    					"SHA224withDSA", "SHA384withDSA", "SHA512withDSA", "QTESLA"};
     
 REQUIRES
     generatedPrivkey[priv];
