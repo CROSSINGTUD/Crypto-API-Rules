@@ -73,13 +73,11 @@ ORDER
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};
-	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "Blowfish", "Twofish", "Camellia", "DESede", "Serpent", "Shacal2",
+	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "Twofish", "Camellia", "Serpent", "Shacal2",
 																		"McEliece", "McEliecePointcheval", "McElieceKobaraImai", "McElieceFujisaki"};
     alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
-    alg(transformation) in {"Blowfish"} => mode(transformation) in {"CBC"};
     alg(transformation) in {"Twofish"} => mode(transformation) in {"CBC"};
     alg(transformation) in {"Camellia"} => mode(transformation) in {"CBC"};
-    alg(transformation) in {"DESede"} => mode(transformation) in {"CBC"};
     alg(transformation) in {"Serpent"} => mode(transformation) in {"CBC", "CFB", "OFB"};
     alg(transformation) in {"Shacal2"} => mode(transformation) in {"CBC"};
     
@@ -89,10 +87,8 @@ CONSTRAINTS
     alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
     alg(transformation) in {"Serpent"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"Serpent"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
-    alg(transformation) in {"Blowfish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"Twofish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"Camellia"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"DESede"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     alg(transformation) in {"Shacal2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     
 	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode != 1 => noCallTo[IWOIV];
