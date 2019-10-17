@@ -27,11 +27,10 @@ CONSTRAINTS
 	secretKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "Poly1305-AES", "Poly1305-Camellia", "ChaCha", 
 							"ChaCha7539", "Poly1305", "Rijndael", "Salsa20", "Serpent", "Tnepres", "Poly1305-Serpent", "SHACAL-2", "Twofish", 
 							"Poly1305-Twofish", "XSalsa20"};
-    secretKeyAlgorithm in {"AES", "Poly1305-Camellia"} => secretKeySize in {128, 192, 256};
-    secretKeyAlgorithm in {"ChaCha", "Salsa20", "SHACAL-2"} => secretKeySize in {128};
-    secretKeyAlgorithm in {"Rijndael", "Serpent", "Tnepres"} => secretKeySize in {192};
-    secretKeyAlgorithm in {"ChaCha7539", "Poly1305", "Poly1305-Serpent", "Twofish", "Poly1305-Twofish", "XSalsa20"} => secretKeySize in {256};
-   
+    secretKeyAlgorithm in {"AES", "Poly1305-Camellia", "ChaCha", "Salsa20", "SHACAL-2", "Rijndael", 
+    						"Serpent", "Tnepres", "ChaCha7539", "Poly1305", "Poly1305-Serpent", 
+    						"Twofish", "Poly1305-Twofish", "XSalsa20"} => secretKeySize in {128, 192, 256};
+
 REQUIRES
     randomized[ranGen];
     
