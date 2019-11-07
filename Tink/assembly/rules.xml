@@ -15,7 +15,7 @@
 			<outputDirectory>/</outputDirectory>
 			<directory>target/classes</directory>
 			<includes>
-				<include>*.cryptsl</include>
+				<include>*.crysl</include>
 			</includes>
 		</fileSet>
 	</fileSets>
