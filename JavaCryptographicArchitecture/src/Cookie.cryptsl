@@ -1,9 +1,9 @@
 SPEC javax.servlet.http.Cookie
 
 OBJECTS
-java.lang.String cookieName;
-java.lang.String cookieValue;
-boolean secure;
+	java.lang.String cookieName;
+	java.lang.String cookieValue;
+	boolean secure;
 
 EVENTS
     c: Cookie(cookieName,cookieValue);
