@@ -18,8 +18,8 @@ ORDER
     Gets, Gens
 
 CONSTRAINTS
-	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "RSA", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
-							"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", "McElieceKobaraImai", 
+							"McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 	
 ENSURES
     generatedKeyFactory[key, keyFactoryAlgorithm];

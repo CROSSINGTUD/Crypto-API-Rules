@@ -22,7 +22,7 @@ ORDER
 	Gets, Inits, Gen
 	
 CONSTRAINTS
-	algorithm in {"AES", "Camellia", "Shacal2", "DH", "DiffieHellman", "DSA", "ElGamal"};
+	algorithm in {"AES", "Camellia", "Shacal2", "Shacal-2", "DH", "DiffieHellman", "DSA", "ElGamal"};
 	
 ENSURES
 	genAlgParam[this, algorithm] after Gen;

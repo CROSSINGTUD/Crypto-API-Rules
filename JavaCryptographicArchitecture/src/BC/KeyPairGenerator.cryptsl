@@ -24,14 +24,14 @@ ORDER
     Gets, Inits, Generators
 
 CONSTRAINTS
-	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ElGamal",
-						"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
+	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", 
+						"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
 						"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 						
     keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
     keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"DiffieHellman", "DH"} => keyPairSize in {2048};
-	keyPairAlgorithm in {"EC"} => keyPairSize in {256};
+	keyPairAlgorithm in {"EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", "ECIES"} => keyPairSize in {256};
 	
 REQUIRES
     keyPairAlgorithm in {"RSA"} => preparedRSA[params];

@@ -33,8 +33,8 @@ ORDER
     Gets, (DWOU | (Updates+, Digests))+
 
 CONSTRAINTS
-    digestAlgorithm in {"SHA-256", "SHA-384", "SHA-512", "BLAKE2B-256", "BLAKE2B-384", "BLAKE2B-512", "SM3",
-    					"BLAKE2S-256", "BLAKE2S-384", "BLAKE2S-512", "KECCAK-256", "KECCAK-384", "KECCAK-512", "WHIRLPOOL"};
+    digestAlgorithm in {"SHA-256", "SHA-384", "SHA-512", "SHA-512/256", "BLAKE2B-256", "BLAKE2B-384", "BLAKE2B-512",
+    					"BLAKE2S-256", "KECCAK-256", "KECCAK-384", "KECCAK-512", "WHIRLPOOL"};
     pre_len > pre_off;
     len > off;
 
