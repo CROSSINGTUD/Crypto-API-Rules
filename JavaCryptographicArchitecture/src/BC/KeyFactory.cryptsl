@@ -1,0 +1,25 @@
+SPEC java.security.KeyFactory
+OBJECTS
+    java.lang.String keyFactoryAlgorithm;
+    java.security.Key key;
+    java.security.spec.KeySpec keySpec;
+   
+EVENTS
+    g1: getInstance(keyFactoryAlgorithm);
+    g2: getInstance(keyFactoryAlgorithm, _);
+    Gets := g1 | g2;
+
+    gPriv: generatePrivate(keySpec);
+    gPubl: generatePublic(keySpec);
+    
+    Gens := gPriv | gPubl;
+
+ORDER
+    Gets, Gens
+
+CONSTRAINTS
+	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", "McElieceKobaraImai", 
+							"McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+	
+ENSURES
+    generatedKeyFactory[key, keyFactoryAlgorithm];
