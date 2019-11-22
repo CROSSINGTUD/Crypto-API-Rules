@@ -30,7 +30,7 @@ ORDER
 	Gets, Inits, dp, GenSecret
 	
 CONSTRAINTS
-	algorithm in {"DH", "DiffieHellman", "ECDH", "NH"};
+	algorithm in {"DH", "DiffieHellman", "NH"};
 	
 REQUIRES
     randomized[random];
