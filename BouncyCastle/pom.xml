@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.fraunhofer.iem</groupId>
 	<artifactId>BouncyCastle</artifactId>
-	<version>0.6</version>
+	<version>0.7</version>
 	<name>CrySL Rules Bundle</name>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
