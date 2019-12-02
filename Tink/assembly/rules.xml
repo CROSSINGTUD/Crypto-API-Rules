@@ -9,13 +9,13 @@
 	<formats>
 		<format>zip</format>
 	</formats>
-  	<baseDirectory>${artifactId}</baseDirectory>
+	<baseDirectory>${artifactId}</baseDirectory>
 	<fileSets>
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
 			<directory>target/classes</directory>
 			<includes>
-				<include>*.cryptsl</include>
+				<include>*.crysl</include>
 			</includes>
 		</fileSet>
 	</fileSets>
