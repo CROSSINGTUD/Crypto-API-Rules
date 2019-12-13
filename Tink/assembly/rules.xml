@@ -13,7 +13,7 @@
 	<fileSets>
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
-			<directory>target/classes</directory>
+			<directory>src</directory>
 			<includes>
 				<include>*.crysl</include>
 			</includes>
