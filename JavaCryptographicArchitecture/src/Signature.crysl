@@ -26,8 +26,8 @@ EVENTS
     InitSigns := i1 | i2;
     InitVerifies := i3 | i4;
 
-    u1: update(inpb);
-    u2: update(inpba);
+    u1: update(inpba);
+    u2: update(inpb);
     u3: update(inpba, offset, len);
     u4: update(inpBuf);
     Updates := u1 | u2 | u3 | u4;
@@ -44,7 +44,7 @@ ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    signAlgorithm in {"SHA256withECDSA", "SHA256withDSA", "SHA256withRSA", "SHA224withDSA", "NONEwithDSA", "SHA1withDSA"};
+    signAlgorithm in {"SHA256withRSA", "SHA256withECDSA", "SHA256withDSA", "SHA224withDSA", "NONEwithDSA", "SHA1withDSA"};
     
 REQUIRES
     generatedPrivkey[priv];
