@@ -1,6 +1,5 @@
 SPEC java.security.Key
 OBJECTS 
-	java.security.Key key;
 	byte[] keyMaterial;
 EVENTS
 	ge: keyMaterial = getEncoded();
