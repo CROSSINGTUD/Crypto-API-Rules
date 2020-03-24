@@ -7,7 +7,8 @@ OBJECTS
 	long lSeed;
 	byte[] next;
 	int numB;
-
+	int randInt;
+	
 EVENTS
 	c1: SecureRandom();
 	c2: SecureRandom(seed);
@@ -28,7 +29,8 @@ EVENTS
 	
 	ne: next(numB);
 	nB: nextBytes(next);
-	Nexts := ne | nB;
+	nI: randInt = nextInt();
+	Nexts := ne | nB | nI;
 	
 	Ends := gS | Nexts;
 
@@ -46,3 +48,4 @@ ENSURES
 	randomized[genSeed];
 	randomized[next];
 	randomized[numB];
+	randomized[randInt];
