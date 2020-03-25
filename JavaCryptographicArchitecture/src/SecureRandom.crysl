@@ -2,7 +2,6 @@ SPEC java.security.SecureRandom
 OBJECTS 
 	byte[] seed;
 	byte[] genSeed;
-	int num;
 	java.lang.String randomAlgorithm;
 	long lSeed;
 	byte[] next;
@@ -21,12 +20,12 @@ EVENTS
 	
 	Ins := Gets | Cons;
 
-	gS: genSeed = generateSeed(num);	
-
 	s1: setSeed(seed);
 	s2: setSeed(lSeed);
 	Seeds := s1 | s2;
-	
+
+	gS: genSeed = generateSeed(_);	
+
 	ne: next(numB);
 	nB: nextBytes(next);
 	nI: randInt = nextInt();
@@ -35,17 +34,18 @@ EVENTS
 	Ends := gS | Nexts;
 
 ORDER
- 	Ins, Seeds?, Ends*
+ 	Ins, (Seeds?, Ends*)*
  	
 CONSTRAINTS
 	randomAlgorithm in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
 	
 REQUIRES	
 	randomized[seed];
+	randomized[lSeed];
 	
 ENSURES
 	randomized[this] after Ins;
-	randomized[genSeed];
-	randomized[next];
-	randomized[numB];
-	randomized[randInt];
+	randomized[genSeed] after gS;
+	randomized[next] after nB;
+	randomized[numB] after ne;
+	randomized[randInt] after nI;
