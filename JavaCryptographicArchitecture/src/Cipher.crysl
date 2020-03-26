@@ -1,4 +1,5 @@
 SPEC javax.crypto.Cipher
+
 OBJECTS
     java.lang.String transformation;
     int encmode;
@@ -32,7 +33,7 @@ OBJECTS
 
 EVENTS
     g1: getInstance(transformation);
-    g2:getInstance(transformation, _);
+    g2: getInstance(transformation, _);
     Gets := g1 | g2;
 
     i1: init(encmode, cert);
@@ -52,7 +53,7 @@ EVENTS
     u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
     u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
     u5: update(pre_plainBuffer, pre_cipherBuffer);
-    updates := u1 | u2 | u3 | u4 | u5;
+    Updates := u1 | u2 | u3 | u4 | u5;
 
     f1: cipherText = doFinal();
     f2: cipherText =  doFinal(plainText);
@@ -69,7 +70,7 @@ EVENTS
     iv: getIV();
     
 ORDER
-    Gets, Inits+, w+ | (FINWOU | (updates+, DOFINALS))+
+    Gets, Inits+, w+ | (FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey]  || instanceOf[cert, java.security.cert.Certificate]|| encmode in {3, 4} => alg(transformation) in {"RSA"};
@@ -102,9 +103,11 @@ REQUIRES
     !macced[_, plainText];
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[params];
 	mode(transformation) in {"GCM"} => preparedGCM[params];
+	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[params];
 	
 ENSURES
-	encrypted[pre_ciphertext, pre_plaintext] after updates; 
+	generatedCipher[this] after Inits;
+	encrypted[pre_ciphertext, pre_plaintext] after Updates; 
 	encrypted[cipherText, plainText];
 	encrypted[cipherBuffer, plainBuffer];
 	wrappedKey[wrappedKeyBytes, wrappedKey];

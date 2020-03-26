@@ -1,0 +1,16 @@
+SPEC java.security.spec.ECParameterSpec
+
+OBJECTS 
+	java.security.spec.EllipticCurve curve;
+	java.security.spec.ECPoint g;
+	java.math.BigInteger n;
+	int n;
+	
+EVENTS
+	con: ECParameterSpec(EllipticCurve curve, ECPoint g, BigInteger n, int h);	
+
+ORDER
+	con
+
+ENSURES
+	preparedEC[this];

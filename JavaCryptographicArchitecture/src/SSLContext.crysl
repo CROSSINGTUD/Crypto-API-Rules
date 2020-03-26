@@ -4,7 +4,6 @@ OBJECTS
 	java.lang.String protocol;
 	javax.net.ssl.KeyManager[] kms; 
 	javax.net.ssl.TrustManager[] tms; 
-	java.security.SecureRandom sr;
 	javax.net.ssl.SSLEngine eng;
 	
 FORBIDDEN
@@ -30,7 +29,6 @@ CONSTRAINTS
 REQUIRES
 	generatedKeyManager[kms];
 	generatedTrustManager[tms];
-	randomized[sr];
 	
 ENSURES
 	generatedSSLContext[this] after Init;

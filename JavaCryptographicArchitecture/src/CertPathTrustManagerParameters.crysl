@@ -4,10 +4,10 @@ OBJECTS
 	java.security.cert.CertPathParameters params;
 
 EVENTS
-	C: CertPathTrustManagerParameters(params);	
+	c: CertPathTrustManagerParameters(params);	
 	
 ORDER
-	C
+	c
 
 REQUIRES
 	generatedCertPathParameters[params];

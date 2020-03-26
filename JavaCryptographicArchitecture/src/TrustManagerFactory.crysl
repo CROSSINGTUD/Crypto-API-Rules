@@ -29,4 +29,4 @@ REQUIRES
 															
 ENSURES
 	generatedTrustManager[this] after Init;			
-	generatedTrustManagers[tms];															
+	generatedTrustManagers[tms] after gtm;															

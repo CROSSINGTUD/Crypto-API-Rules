@@ -9,7 +9,7 @@ EVENTS
     c: Cookie(cookieName,cookieValue);
     sc: setSecure(secure);
 ORDER
-    c,sc
+    c, sc
     
 CONSTRAINTS
     secure in {true};

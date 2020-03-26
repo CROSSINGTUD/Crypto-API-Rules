@@ -7,11 +7,14 @@ OBJECTS
 EVENTS
 	c1: PKIXParameters(keyStore);
 	c2: PKIXParameters(trustAnchors);
+	Cons := c1 | c2;
+	
 ORDER
-	c1
+	Cons
 
 REQUIRES
 	generatedKeyStore[keyStore];		
-	//generatedTrustAnchor[];							
+	//generatedTrustAnchor[];	
+
 ENSURES
 	generatedCertPathParameters[this];
