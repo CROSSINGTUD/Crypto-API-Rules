@@ -17,7 +17,7 @@ ORDER
     Gets, (gPriv* | gPubl*)*
 
 CONSTRAINTS
-	keyFactoryAlgorithm in {"RSA", "DiffieHellman", "DSA", "EC"};
+	keyFactoryAlgorithm in {"RSA", "DiffieHellman", "DH", "DSA", "EC"};
 
 REQUIRES
 	speccedKey[keySpec];	
