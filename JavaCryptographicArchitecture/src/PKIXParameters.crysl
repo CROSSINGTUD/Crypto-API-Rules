@@ -2,11 +2,10 @@ SPEC java.security.cert.PKIXParameters
 
 OBJECTS
 	java.security.KeyStore keyStore;
-	java.util.Set<java.security.cert.TrustAnchor> trustAnchors;
 	
 EVENTS
 	c1: PKIXParameters(keyStore);
-	c2: PKIXParameters(trustAnchors);
+	c2: PKIXParameters(_);
 	Cons := c1 | c2;
 	
 ORDER
@@ -14,7 +13,6 @@ ORDER
 
 REQUIRES
 	generatedKeyStore[keyStore];		
-	//generatedTrustAnchor[];	
 
 ENSURES
 	generatedCertPathParameters[this];
