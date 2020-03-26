@@ -1,4 +1,5 @@
 SPEC java.security.SecureRandom
+
 OBJECTS 
 	byte[] seed;
 	byte[] genSeed;

@@ -1,4 +1,5 @@
 SPEC java.security.KeyPairGenerator
+
 OBJECTS
     java.lang.String keyPairAlgorithm;
     java.security.KeyPair kp;
@@ -34,8 +35,7 @@ REQUIRES
     keyPairAlgorithm in {"RSA"} => preparedRSA[params];
     keyPairAlgorithm in {"DSA"} => preparedDSA[params];
     keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
-    keyPairAlgorithm in {"EC"} => preparedEC[params]; //seems missing
-    
+    keyPairAlgorithm in {"EC"} => preparedEC[params];
 
 ENSURES
     generatedKeypair[kp, keyPairAlgorithm];

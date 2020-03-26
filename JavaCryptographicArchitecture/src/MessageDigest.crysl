@@ -1,4 +1,5 @@
 SPEC java.security.MessageDigest
+
 OBJECTS
     java.lang.String digestAlgorithm;
     byte pre_inbyte;
@@ -38,5 +39,6 @@ CONSTRAINTS
     len > off;
 
 ENSURES
+	generatedMessageDigest[this] after Gets;
 	digested[out, _];
     digested[out, inbytearr];

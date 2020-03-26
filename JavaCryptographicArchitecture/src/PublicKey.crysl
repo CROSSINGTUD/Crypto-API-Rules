@@ -1,18 +1,13 @@
-SPEC javax.crypto.SecretKey
+SPEC java.security.PublicKey
 
 OBJECTS 
-	javax.crypto.SecretKey key;
 	byte[] keyMaterial;
-	
+
 EVENTS
 	ge: keyMaterial = getEncoded();
-	d: destroy();
 
 ORDER
-	ge*, d?
-			
+	ge*
+	
 ENSURES
 	preparedKeyMaterial[keyMaterial] after ge;
-
-NEGATES
-	generatedKey[this, _] after d;

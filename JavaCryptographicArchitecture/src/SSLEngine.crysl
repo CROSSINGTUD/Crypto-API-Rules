@@ -1,38 +1,14 @@
 SPEC javax.net.ssl.SSLEngine
 
-/*
- *  When using raw SSLSocket and SSLEngine classes, 
- *  you should always check the peer's credentials
- *  before sending any data. The SSLSocket and SSLEngine 
- *  classes do not automatically verify that the host name
- *  in a URL matches the host name in the peer's credentials.
- *  An application could be exploited with URL spoofing if
- *  the host name is not verified. Since JDK 7, endpoint 
- *  identification/verification procedures can be handled 
- *  during SSL/TLS handshaking. See the SSLParameters.getEndpointIdentificationAlgorithm method.
- */
-
 OBJECTS
 	java.lang.String[] ciphersuites;
 	java.lang.String[] protocols;
+
 EVENTS
 	
-	c1: SSLEngine();
-	c2: SSLEngine(_,_);
-	Con := c1 | c2;
-
 	ec: setEnabledCipherSuites(ciphersuites);
-	SetEnabledCipherSuites := ec;
-	
 	ep: setEnabledProtocols(protocols);
-	SetEnabledProtocols := ep;
-	
-	
-	/*	dependent on purpose of the SSLEngine obj (Client || Server)
-	 *  serverEngine.setUseClientMode(false);
-     *  serverEngine.setNeedClientAuth(true);
-	 */
-	
+
 ORDER
 	Con, (ec,ep) | (ep,ec) 
 

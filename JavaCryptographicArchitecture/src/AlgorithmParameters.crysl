@@ -30,6 +30,8 @@ REQUIRES
     preparedAlg[parAr];
     alg in {"AES", "Blowfish", "DESede"} => preparedIV[params];
     alg in {"DiffieHellman"} => preparedDH[params];
+    alg in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => speccedKey[params];
+    alg in {"OEAP"} => preparedOAEP[params];
     
 ENSURES 
     preparedAlg[this, alg] after Inits;

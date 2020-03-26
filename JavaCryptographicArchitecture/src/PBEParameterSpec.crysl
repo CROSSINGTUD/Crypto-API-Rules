@@ -11,11 +11,13 @@ EVENTS
 	
 ORDER
 	Cons
+	
 CONSTRAINTS
 	iterationCount >= 10000;	
 
 REQUIRES
 	randomized[salt];
-
+	speccedKey[paramSpec,_]
+			
 ENSURES
 	preparedPBE[this];
