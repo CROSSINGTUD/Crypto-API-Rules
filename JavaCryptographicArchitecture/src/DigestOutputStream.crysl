@@ -9,7 +9,7 @@ OBJECTS
 	int specifiedByte;
 
 FORBIDDEN
-	on(boolean);
+	on(boolean) ;
 
 EVENTS
 	con: DigestOutputStream(os, md);
