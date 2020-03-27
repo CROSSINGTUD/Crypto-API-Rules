@@ -9,8 +9,5 @@ EVENTS
 ORDER
 	con
 
-REQUIRES
-	randomized[src];
-
 ENSURES
 	preparedEC[this];

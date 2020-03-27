@@ -8,7 +8,7 @@ OBJECTS
 	int len;
 
 FORBIDDEN
-	on(boolean);
+	on(boolean) ;
 
 EVENTS
 	con: DigestInputStream(is, md);
