@@ -7,7 +7,7 @@ OBJECTS
 	int n;
 	
 EVENTS
-	con: ECParameterSpec(EllipticCurve curve, ECPoint g, BigInteger n, int h);	
+	con: ECParameterSpec(curve, g, n, h);	
 
 ORDER
 	con

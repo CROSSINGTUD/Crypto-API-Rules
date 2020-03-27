@@ -4,7 +4,7 @@ OBJECTS
 	java.lang.String stdName;
 	
 EVENTS
-	con: ECGenParameterSpec(String stdName);
+	con: ECGenParameterSpec(stdName);
 
 ORDER
 	con
