@@ -10,7 +10,7 @@ EVENTS
 	ep: setEnabledProtocols(protocols);
 
 ORDER
-	Con, (ec,ep) | (ep,ec) 
+	(ec,ep) | (ep,ec) 
 
 CONSTRAINTS
 	elements(protocols) in {"TLSv1.2","TLSv1.1"};
