@@ -8,7 +8,7 @@ OBJECTS
 	java.lang.String alg;
 
 EVENTS
-	con: OAEPParameterSpec(String mdName, String mgfName, AlgorithmParameterSpec mgfSpec, PSource pSrc);
+	con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
 
 ORDER
 	con

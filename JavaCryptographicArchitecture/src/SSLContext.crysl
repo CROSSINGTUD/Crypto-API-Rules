@@ -27,8 +27,8 @@ CONSTRAINTS
 	protocol in {"TLSv1.2"};
 
 REQUIRES
-	generatedKeyManager[kms];
-	generatedTrustManager[tms];
+	generatedKeyManagers[kms];
+	generatedTrustManagers[tms];
 	
 ENSURES
 	generatedSSLContext[this] after Init;

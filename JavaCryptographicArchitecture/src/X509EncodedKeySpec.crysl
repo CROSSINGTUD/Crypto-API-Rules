@@ -13,4 +13,4 @@ REQUIRES
 	preparedKeyMaterial[encodedKey];
  	
 ENSURES
-	speccedKey[this, keylength] after con;
+	speccedKey[this, _] after con;
