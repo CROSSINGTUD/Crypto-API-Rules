@@ -11,9 +11,9 @@ EVENTS
 	c2: TrustAnchor(cert, _);
 	c3: TrustAnchor(princ, pubKey, _);
 	
-	Cons: c1 | c2 | c3
+	Cons := c1 | c2 | c3
 ORDER
-	c1 | c2 | c3
+	Cons
 	
 REQUIRES
 	generatedPubkey[pubKey];
