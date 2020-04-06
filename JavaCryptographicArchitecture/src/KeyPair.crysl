@@ -14,7 +14,7 @@ EVENTS
 	Gets := pu | pr;
 
 ORDER
-	con, (pu*, pr*)*
+	con, Gets*
 	
 REQUIRES
 	generatedPrivkey[consPriv];
