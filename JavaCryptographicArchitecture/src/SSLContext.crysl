@@ -5,6 +5,7 @@ OBJECTS
 	javax.net.ssl.KeyManager[] kms; 
 	javax.net.ssl.TrustManager[] tms; 
 	javax.net.ssl.SSLEngine eng;
+	java.security.SecureRandom sr;
 	
 FORBIDDEN
 	getDefault() => Gets;
@@ -14,7 +15,7 @@ EVENTS
 	g2: getInstance(protocol, _);
 	Gets := g1 | g2;
 	
-	Init: init(kms, tms, _);		
+	Init: init(kms, tms, sr);		
 	
 	se1: eng = createSSLEngine();
 	se2: eng = createSSLEngine(_,_);
@@ -29,6 +30,7 @@ CONSTRAINTS
 REQUIRES
 	generatedKeyManagers[kms];
 	generatedTrustManagers[tms];
+	randomized[sr];
 	
 ENSURES
 	generatedSSLContext[this] after Init;
