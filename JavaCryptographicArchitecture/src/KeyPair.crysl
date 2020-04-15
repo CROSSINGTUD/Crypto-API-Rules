@@ -8,10 +8,8 @@ OBJECTS
 	
 EVENTS
 	con: KeyPair(consPub, consPriv);
-
 	pu: retPub = getPublic();
 	pr: retPriv = getPrivate();
-	Gets := pu | pr;
 
 ORDER
 	con, (pu*, pr*)*

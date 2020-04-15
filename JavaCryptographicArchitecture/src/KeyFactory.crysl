@@ -20,7 +20,7 @@ CONSTRAINTS
 	keyFactoryAlgorithm in {"RSA", "DiffieHellman", "DH", "DSA", "EC"};
 
 REQUIRES
-	speccedKey[keySpec];	
+	speccedKey[keySpec, _];	
 	
 ENSURES
     generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;

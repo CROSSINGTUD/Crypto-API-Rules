@@ -4,7 +4,7 @@ OBJECTS
 	java.security.spec.EllipticCurve curve;
 	java.security.spec.ECPoint g;
 	java.math.BigInteger n;
-	int n;
+	int h;
 	
 EVENTS
 	con: ECParameterSpec(curve, g, n, h);	

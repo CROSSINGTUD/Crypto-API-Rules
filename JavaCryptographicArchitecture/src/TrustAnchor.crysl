@@ -2,7 +2,6 @@ SPEC java.security.cert.TrustAnchor
 
 OBJECTS
 	java.security.PublicKey pubKey;
-	byte[] nameConstraints;				 
 	java.security.cert.X509Certificate cert;
 	javax.security.auth.x500.X500Principal princ;
 	
@@ -11,9 +10,9 @@ EVENTS
 	c2: TrustAnchor(cert, _);
 	c3: TrustAnchor(princ, pubKey, _);
 	
-	Cons: c1 | c2 | c3
+	Cons := c1 | c2 | c3;
 ORDER
-	c1 | c2 | c3
+	Cons
 	
 REQUIRES
 	generatedPubkey[pubKey];

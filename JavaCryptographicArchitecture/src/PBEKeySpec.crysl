@@ -7,8 +7,8 @@ OBJECTS
 	int keylength; 
 	
 FORBIDDEN
-	PBEKeySpec(char[]) => c1;
-	PBEKeySpec(char[],byte[],int) => c1;
+	PBEKeySpec(char[]) => con;
+	PBEKeySpec(char[],byte[],int) => con;
 	
 EVENTS
 	con: PBEKeySpec(password, salt, iterationCount, keylength);
