@@ -2,7 +2,7 @@ SPEC javax.crypto.spec.OAEPParameterSpec
 
 OBJECTS 
 	java.lang.String mdName;
-	java.lang.String mgfName
+	java.lang.String mgfName;
 	java.security.spec.AlgorithmParameterSpec mgfSpec;
 	javax.crypto.spec.PSource pSrc;
 	java.lang.String alg;
