@@ -23,6 +23,7 @@ ORDER
 
 CONSTRAINTS
     neverTypeOf[password, java.lang.String];
+    notHardCoded[password];
     algo in {"PKIX", "SunX509"};
 
 REQUIRES
