@@ -4,7 +4,7 @@ OBJECTS
 	java.lang.String mdName;
 
 EVENTS
-	con: MGF1ParameterSpec(mdName)
+	con: MGF1ParameterSpec(mdName);
 	
 ORDER
 	con
