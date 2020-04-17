@@ -25,8 +25,8 @@ CONSTRAINTS
 	saltLen => 0;
 	
 REQUIRES
-	preparedMGF1[mgfSpec,mdName];
+	preparedMGF1[mgfSpec, mdName];
 	
 ENSURES
-	preparedPSS[this];
+	preparedPSS[this] after con;
 	preparedMGF1[mgf] after getMGF;
