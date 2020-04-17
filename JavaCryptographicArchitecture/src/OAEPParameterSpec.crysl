@@ -4,14 +4,16 @@ OBJECTS
 	java.lang.String mdName;
 	java.lang.String mgfName;
 	java.security.spec.AlgorithmParameterSpec mgfSpec;
+	java.security.spec.AlgorithmParameterSpec mgf;
 	javax.crypto.spec.PSource pSrc;
 	java.lang.String alg;
 
 EVENTS
 	con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
+	getMGF: mgf = getMGFParameters();
 
 ORDER
-	con
+	con, getMGF*
 
 CONSTRAINTS
 	mdName in {"SHA-256", "SHA-384", "SHA-512"};
@@ -22,3 +24,4 @@ REQUIRES
 
 ENSURES
 	preparedOAEP[this];
+	preparedMGF1[mgf] after getMGF;
