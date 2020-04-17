@@ -1,0 +1,14 @@
+SPEC java.security.spec.RSAPrivateKeySpec
+
+OBJECTS 	
+	java.math.BigInteger modulus; 
+	java.math.BigInteger privateExponent;
+	
+EVENTS
+	con: RSAPrivateKeySpec(modulus, privateExponent);
+	
+ORDER
+ 	con
+
+ENSURES
+	speccedRSAPrivKeySpec[this];

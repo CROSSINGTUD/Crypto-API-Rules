@@ -1,0 +1,14 @@
+SPEC java.security.spec.RSAPublicKeySpec
+
+OBJECTS
+	java.math.BigInteger modulus; 
+	java.math.BigInteger publicExponent;
+	
+EVENTS
+	con: RSAPublicKeySpec(modulus, publicExponent);
+	
+ORDER
+ 	con
+
+ENSURES
+	speccedRSAPubKeySpec[this];
