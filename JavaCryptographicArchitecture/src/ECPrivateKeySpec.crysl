@@ -1,0 +1,20 @@
+SPEC  java.security.spec.ECPrivateKeySpec
+
+OBJECTS 	
+	java.math.BigInteger s;
+	java.security.spec.ECParameterSpec params;
+	java.security.spec.ECParameterSpec retParams;
+	
+EVENTS
+	con: ECPrivateKeySpec(s, params);
+	get: retParams = getParams();
+	
+ORDER
+ 	con, get*
+
+REQUIRES
+	preparedEC[params];
+ 	
+ENSURES
+	speccedECPrivKeySpec[this] after con;
+	preparedEC[retParams] after get;
