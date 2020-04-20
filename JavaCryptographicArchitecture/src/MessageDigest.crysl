@@ -35,8 +35,8 @@ ORDER
 
 CONSTRAINTS
     digestAlgorithm in {"SHA-256", "SHA-384", "SHA-512"};
-    length(pre_inbytearr) >= pre_len + pre_off;
-    length(out) >= len + off;
+    length[pre_inbytearr] >= pre_len + pre_off;
+    length[out] >= len + off;
 
 ENSURES
 	generatedMessageDigest[this] after Gets;
