@@ -1,40 +1,50 @@
 SPEC javax.crypto.KeyAgreement
 
 OBJECTS
-	java.lang.String algorithm;
-	java.security.Key key;
+	java.lang.String keyExchangeAlgorithm;
+	java.lang.String symmetricKeyAlgorithm;
+	java.security.Key firstKey;
+	java.security.Key secondKey;
+	javax.crypto.SecretKey sharedKey;
+	byte[] sharedKeyBuffer;
 	boolean lastPhase;
-	byte[] sharedSecret;
 	int offset;
 	java.security.spec.AlgorithmParameterSpec params;
 	java.security.SecureRandom random;
 	
 EVENTS
-	g1: getInstance(algorithm);
-    g2: getInstance(algorithm, _);
+	g1: getInstance(keyExchangeAlgorithm);
+    g2: getInstance(keyExchangeAlgorithm, _);
     Gets := g1 | g2;
     
-    i1: init(key);
-    i2: init(key, params);
-    i3: init(key, params, random);
-    i4: init(key, random);
+    i1: init(firstKey);
+    i2: init(firstKey, params);
+    i3: init(firstKey, params, random);
+    i4: init(firstKey, random);
     Inits := i1 | i2 | i3 | i4;
     
-    dp: doPhase(key, lastPhase);
+    dp: doPhase(secondKey, lastPhase);
     
-    gs1: generateSecret();
-    gs2: generateSecret(sharedSecret, offset);
-    gs3: generateSecret(algorithm);
-    GenSecret := gs1 | gs2 | gs3;
+    gs1: sharedKeyBuffer = generateSecret();
+    gs2: generateSecret(sharedKeyBuffer, offset);
+    KeyMat := gs1 | gs2;
+    
+    gs3: sharedKey = generateSecret(symmetricKeyAlgorithm);
     
 ORDER
-	Gets, Inits, dp, GenSecret
+	Gets, Inits, dp, KeyMat | gs3
 	
 CONSTRAINTS
-	algorithm in {"DH", "DiffieHellman", "NH"};
-	
+	keyExchangeAlgorithm in {"DH", "DiffieHellman", "ECDH", "ECMQV"};
+	symmetricKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "RSA", "EC", "DSA", "DiffieHellman", "DH"}; 
+
 REQUIRES
     randomized[random];
-    
+    generatedKey[firstKey, _];
+   	generatedKey[secondKey, _];
+   	
 ENSURES 
-    agreedKey[key, algorithm];
+    generatedKey[sharedKey, symmetricKeyAlgorithm] after gs3;
+    preparedKeyMaterial[sharedKeyBuffer] after KeyMat;	
+    
+    
