@@ -44,11 +44,14 @@ ORDER
     Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
 
 CONSTRAINTS
-    signAlgorithm in {"SHA256withRSA", "SHA256withECDSA", "SHA256withDSA", "SHA224withDSA", "NONEwithDSA", "SHA1withDSA"};
+    signAlgorithm in {"SHA256withRSA", "SHA256withECDSA", "SHA256withDSA", "SHA224withDSA"};
     
 REQUIRES
-    generatedPrivkey[priv];
-    generatedPubkey[pub];
+	signAlgorithm in {"SHA256withRSA"} => preparedRSA[params];
+	signAlgorithm in {"SHA256withECDSA"} => preparedEC[params];
+	signAlgorithm in {"SHA256withDSA", "SHA224withDSA"} => preparedDSA[params];
+    generatedPrivKey[priv, _];
+    generatedPubKey[pub, _];
 
 ENSURES
     signed[out, inpb] after Signs;
