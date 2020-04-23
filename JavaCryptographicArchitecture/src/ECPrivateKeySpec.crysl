@@ -7,14 +7,12 @@ OBJECTS
 	
 EVENTS
 	con: ECPrivateKeySpec(s, params);
-	get: retParams = getParams();
 	
 ORDER
- 	con, get*
+ 	con
 
 REQUIRES
 	preparedEC[params];
  	
 ENSURES
 	speccedECPrivKeySpec[this] after con;
-	preparedEC[retParams] after get;

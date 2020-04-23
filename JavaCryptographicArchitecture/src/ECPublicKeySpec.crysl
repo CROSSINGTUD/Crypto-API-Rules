@@ -1,4 +1,4 @@
-SPEC java.security.spec.ECPrivateKeySpec
+SPEC java.security.spec.ECPublicKeySpec
 
 OBJECTS 	
 	java.security.spec.ECPoint w;
@@ -6,15 +6,13 @@ OBJECTS
 	java.security.spec.ECParameterSpec retParams;
 	
 EVENTS
-	con: ECPrivateKeySpec(w, params);
-	get: retParams = getParams();
+	con: ECPublicKeySpec(w, params);
 	
 ORDER
- 	con, get*
+ 	con
 
 REQUIRES
 	preparedEC[params];
  	
 ENSURES
-	speccedECPrivKeySpec[this] after con;
-	preparedEC[retParams] after get;
+	speccedECPubKeySpec[this] after con;
