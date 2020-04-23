@@ -1,28 +1,37 @@
 SPEC java.security.KeyFactory
+
 OBJECTS
-    java.lang.String keyFactoryAlgorithm;
-    java.security.spec.KeySpec keySpec;
+    java.lang.String keyAlgorithm;
+    java.security.spec.KeySpec privKeySpec;
+    java.security.spec.KeySpec pubKeySpec;
+    
     java.security.PrivateKey privKey;
     java.security.PublicKey pubKey;
-   
+  
 EVENTS
-    g1: getInstance(keyFactoryAlgorithm);
-    g2: getInstance(keyFactoryAlgorithm, _);
+    g1: getInstance(keyAlgorithm);
+    g2: getInstance(keyAlgorithm, _);
     Gets := g1 | g2;
-
-    gPriv: privKey = generatePrivate(keySpec);
-    gPubl: pubKey = generatePublic(keySpec);
+    
+    getPriv: privKey = generatePrivate(privKeySpec);
+    getPubl: pubKey = generatePublic(pubKeySpec);
     
 ORDER
-    Gets, (gPriv* | gPubl*)*
+    Gets, ((getPriv, getPubl*) | (getPubl, getPubl*))+
 
 CONSTRAINTS
-	keyFactoryAlgorithm in {"RSA", "DiffieHellman", "DH", "DSA", "EC"};
+	keyAlgorithm in {"RSA", "DiffieHellman", "DH", "DSA", "EC"};
 
-REQUIRES
-	speccedKey[keySpec, _];	
-	
+REQUIRES    
+    keyAlgorithm in {"RSA"} => speccedRSAPrivKeySpec[privKeySpec] || speccedPrivKeySpec[privKeySpec];
+    keyAlgorithm in {"RSA"} => speccedRSAPubKeySpec[pubKeySpec] || speccedPubKeySpec[pubKeySpec];
+    keyAlgorithm in {"DSA"} => speccedRSAPrivKeySpec[privKeySpec] || speccedPrivKeySpec[privKeySpec];
+    keyAlgorithm in {"DSA"} => speccedDSAPubKeySpec[pubKeySpec] || speccedPubKeySpec[pubKeySpec];
+   	keyAlgorithm in {"EC"} => speccedECPrivKeySpec[privKeySpec];
+    keyAlgorithm in {"EC"} => speccedECPubKeySpec[pubKeySpec];
+    keyAlgorithm in {"DiffieHellman", "DH"} => speccedDHPrivKeySpec[privKeySpec];
+    keyAlgorithm in {"DiffieHellman", "DH"} => speccedDHPubKeySpec[pubKeySpec];
+    
 ENSURES
-    generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;
-    generatedPrivkey[privKey] after gPriv;
-    generatedPubkey[pubKey] after gPubl;
+    generatedPrivKey[privKey, keyAlgorithm] after getPriv;
+    generatedPubKey[pubKey, keyAlgorithm] after getPriv;
