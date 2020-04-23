@@ -15,8 +15,8 @@ ORDER
 	con, (pu*, pr*)*
 	
 REQUIRES
-	generatedPrivKey[consPriv];
-	generatedPubKey[consPub];
+	generatedPrivKey[consPriv, _];
+	generatedPubKey[consPub, _];
 	
 ENSURES
 	generatedKeypair[this, _] after con;

@@ -48,5 +48,3 @@ REQUIRES
 ENSURES 
     generatedKey[sharedKey, symmetricKeyAlgorithm] after gs3;
     preparedKeyMaterial[sharedKeyBuffer] after KeyMat;	
-    
-    
