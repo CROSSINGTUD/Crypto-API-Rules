@@ -36,12 +36,14 @@ ORDER
 	
 CONSTRAINTS
 	keyExchangeAlgorithm in {"DH", "DiffieHellman", "ECDH", "ECMQV"};
-	symmetricKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "RSA", "EC", "DSA", "DiffieHellman", "DH"}; 
-
+	symmetricKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
+	
 REQUIRES
     randomized[random];
-    generatedKey[firstKey, _];
-   	generatedKey[secondKey, _];
+   	generatedPrivKey[firstKey, _];
+   	generatedPubKey[secondKey, _];
+    keyExchangeAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+    keyExchangeAlgorithm in {"ECDH", "ECMQV"} => preparedEC[params];
    	
 ENSURES 
     generatedKey[sharedKey, symmetricKeyAlgorithm] after gs3;
