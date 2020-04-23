@@ -32,4 +32,4 @@ REQUIRES
 	
 ENSURES
 	generatedKeyManager[this] after Inits;
-	generatedKeyManagers[kms];
+	generatedKeyManagers[kms] after gkm;
