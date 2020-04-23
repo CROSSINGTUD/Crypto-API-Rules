@@ -1,10 +1,10 @@
-SPEC java.security.spec.X509EncodedKeySpec
+SPEC java.security.spec.EncodedKeySpec
 
 OBJECTS 	
 	byte[] encodedKey;
 
 EVENTS
-	con: X509EncodedKeySpec(encodedKey);
+	con: EncodedKeySpec(encodedKey);
 	
 ORDER
  	con
@@ -13,4 +13,6 @@ REQUIRES
 	preparedKeyMaterial[encodedKey];
  	
 ENSURES
+	speccedPrivKeySpec[this];
 	speccedPubKeySpec[this];
+	

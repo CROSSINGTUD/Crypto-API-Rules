@@ -1,0 +1,16 @@
+SPEC java.security.spec.PKCS8EncodedKeySpec
+
+OBJECTS 	
+	byte[] encodedKey;
+
+EVENTS
+	con: PKCS8EncodedKeySpec(encodedKey);
+	
+ORDER
+ 	con
+
+REQUIRES
+	preparedKeyMaterial[encodedKey];
+ 	
+ENSURES
+	speccedPrivKeySpec[this];
