@@ -15,7 +15,7 @@ ORDER
 	Cons
 	
 REQUIRES
-	generatedPubkey[pubKey];
+	generatedPubKey[pubKey, _];
 	
 ENSURES
 	generatedTrustAnchor[this];
