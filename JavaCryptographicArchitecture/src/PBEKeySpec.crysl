@@ -26,7 +26,7 @@ REQUIRES
 	randomized[salt];	
 
 ENSURES
-	speccedKey[this, keylength] after con;
+	speccedPBEKeySpec[this, keylength] after con;
 
 NEGATES
-	speccedKey[this, _] after clear;
+	speccedPBEKeySpec[this, _] after clear;
