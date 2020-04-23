@@ -15,10 +15,10 @@ ORDER
 	con, (pu*, pr*)*
 	
 REQUIRES
-	generatedPrivkey[consPriv];
-	generatedPubkey[consPub];
+	generatedPrivKey[consPriv];
+	generatedPubKey[consPub];
 	
 ENSURES
 	generatedKeypair[this, _] after con;
-	generatedPubkey[retPub] after pu;
-	generatedPrivkey[retPriv] after pr;
+	generatedPubKey[retPub, _] after pu;
+	generatedPrivKey[retPriv, _] after pr;
