@@ -34,4 +34,4 @@ REQUIRES
 	
 ENSURES
 	generatedSSLContext[this] after Init;
-	generatedSSLEngine[eng];
+	generatedSSLEngine[eng] after Engine;
