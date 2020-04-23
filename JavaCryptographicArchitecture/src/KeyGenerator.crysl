@@ -30,6 +30,7 @@ CONSTRAINTS
    
 REQUIRES
     randomized[ranGen];
+    speccedSymmetricKeySpec[params, secretKeyAlgorithm];
     
 ENSURES 
     generatedKey[key, secretKeyAlgorithm];
