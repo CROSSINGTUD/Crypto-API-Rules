@@ -10,10 +10,9 @@ OBJECTS
 
 EVENTS
 	con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
-	getMGF: mgf = getMGFParameters();
 
 ORDER
-	con, getMGF*
+	con
 
 CONSTRAINTS
 	mdName in {"SHA-256", "SHA-384", "SHA-512"};
@@ -24,4 +23,3 @@ REQUIRES
 
 ENSURES
 	preparedOAEP[this];
-	preparedMGF1[mgf] after getMGF;
