@@ -1,0 +1,15 @@
+SPEC  javax.crypto.spec.DHPublicKeySpec
+
+OBJECTS 	
+	java.math.BigInteger y; 
+	java.math.BigInteger p;
+	java.math.BigInteger g;
+	
+EVENTS
+	con: DHPublicKeySpec(y, p, g);
+	
+ORDER
+ 	con
+
+ENSURES
+	speccedDHPubKeySpec[this];

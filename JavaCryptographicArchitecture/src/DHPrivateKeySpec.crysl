@@ -1,0 +1,15 @@
+SPEC  javax.crypto.spec.DHPrivateKeySpec
+
+OBJECTS 	
+	java.math.BigInteger x; 
+	java.math.BigInteger p;
+	java.math.BigInteger g;
+	
+EVENTS
+	con: DHPrivateKeySpec(x, p, g);
+	
+ORDER
+ 	con
+
+ENSURES
+	speccedDHPrivKeySpec[this];
