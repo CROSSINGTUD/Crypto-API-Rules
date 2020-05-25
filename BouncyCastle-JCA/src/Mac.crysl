@@ -31,11 +31,11 @@ EVENTS
     f1: output1 = doFinal();
     f2: output2 = doFinal(input);
     f3: doFinal(output1, outOffset);
-    FinalsWU := f1 | f2;
-    Finals := FinalsWU | f3;
+    FinalsWU := f1 | f3;
+    Finals := FinalsWU | f2;
 
 ORDER
-    Gets, Inits, (Finals | (Updates+, Finals))
+    Gets, Inits, (FinalsWU | (Updates+, Finals))
 
 CONSTRAINTS
     macAlgorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512", "PBEWithHmacSHA256", "PBEWithHmacSHA384", 
