@@ -1,4 +1,5 @@
 SPEC java.security.AlgorithmParameters
+
 OBJECTS
     java.lang.String alg;
     java.security.spec.AlgorithmParameterSpec params;
@@ -31,7 +32,7 @@ CONSTRAINTS
 			"SHA3-256WITHRSAANDMGF1", "SHA3-386WITHRSAANDMGF1", "SHA3-512WITHRSAANDMGF1"};
 
 REQUIRES    
-    preparedAlg[parAr];
+    preparedAlg[parAr, alg];
     alg in {"AES", "Camellia", "ChaCha7539", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2", 
     		"Shacal2", "Twofish", "XSalsa20", "OAEP", "PSS", "RSAPSS", "SHA256withRSA/PSS", "SHA384withRSA/PSS", "SHA512withRSA/PSS",
     		"SHA256WITHRSAANDMGF1", "SHA386WITHRSAANDMGF1", "SHA512WITHRSAANDMGF1", "SHA3-256WITHRSAANDMGF1", "SHA3-386WITHRSAANDMGF1", 

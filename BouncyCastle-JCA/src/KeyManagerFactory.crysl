@@ -23,10 +23,12 @@ ORDER
 
 CONSTRAINTS
     neverTypeOf[password, java.lang.String];
+    notHardCoded[password];
     algo in {"PKIX", "X509", "X.509"};
 
 REQUIRES
 	generatedKeyStore[keyStore];
+	generatedManagerFactoryParameters[params];
 	
 ENSURES
 	generatedKeyManager[this] after Init;

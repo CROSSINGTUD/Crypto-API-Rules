@@ -1,4 +1,5 @@
 SPEC javax.crypto.CipherOutputStream
+
 OBJECTS
 	java.io.OutputStream os;
 	javax.crypto.Cipher ciph;
@@ -24,6 +25,9 @@ ORDER
 	
 CONSTRAINTS
 	len > off;
+	
+REQUIRES
+	generatedCipher[ciph];
 	
 ENSURES
 	cipheredOutputStream[os, ciph];

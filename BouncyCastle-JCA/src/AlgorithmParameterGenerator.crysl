@@ -1,4 +1,5 @@
 SPEC java.security.AlgorithmParameterGenerator
+
 OBJECTS
 	java.lang.String algorithm;
     java.security.spec.AlgorithmParameterSpec genParamSpec; 

@@ -1,8 +1,10 @@
 SPEC java.security.KeyFactory
+
 OBJECTS
     java.lang.String keyFactoryAlgorithm;
-    java.security.Key key;
     java.security.spec.KeySpec keySpec;
+    java.security.PrivateKey privKey;
+    java.security.PublicKey pubKey;
    
 EVENTS
     g1: getInstance(keyFactoryAlgorithm);
@@ -12,14 +14,17 @@ EVENTS
     gPriv: generatePrivate(keySpec);
     gPubl: generatePublic(keySpec);
     
-    Gens := gPriv | gPubl;
-
 ORDER
-    Gets, Gens
+    Gets, (gPriv* | gPubl*)*
 
 CONSTRAINTS
 	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", "McElieceKobaraImai", 
 							"McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 	
+REQUIRES
+	speccedKey[keySpec, _];	
+	
 ENSURES
-    generatedKeyFactory[key, keyFactoryAlgorithm];
+    generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;
+    generatedPrivkey[privKey] after gPriv;
+    generatedPubkey[pubKey] after gPubl;

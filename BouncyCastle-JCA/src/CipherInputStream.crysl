@@ -1,4 +1,5 @@
 SPEC javax.crypto.CipherInputStream
+
 OBJECTS
 	java.io.InputStream is;
 	javax.crypto.Cipher ciph;
@@ -23,6 +24,9 @@ ORDER
 
 CONSTRAINTS
 	len > off;
+	
+REQUIRES
+	generatedCipher[ciph];
 	
 ENSURES
 	cipheredInputStream[is, ciph];

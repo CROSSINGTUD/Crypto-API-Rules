@@ -1,4 +1,5 @@
 SPEC javax.crypto.Cipher
+
 OBJECTS
     java.lang.String transformation;
     int encmode;

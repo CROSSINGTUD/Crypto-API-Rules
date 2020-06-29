@@ -1,4 +1,5 @@
 SPEC javax.crypto.KeyGenerator
+
 OBJECTS
     int secretKeySize;
     java.security.spec.AlgorithmParameterSpec params;
