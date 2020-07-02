@@ -1,4 +1,5 @@
 SPEC java.security.Signature
+
 OBJECTS
     byte[] sign;
     byte inpb;
@@ -11,6 +12,8 @@ OBJECTS
     java.security.cert.Certificate cert;
     java.security.spec.AlgorithmParameterSpec params;
     boolean verified;
+    int offset;
+    int len;
 
 EVENTS
     g1: getInstance(signAlgorithm);

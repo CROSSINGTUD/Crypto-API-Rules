@@ -1,12 +1,13 @@
 SPEC java.security.SecureRandom
+
 OBJECTS 
 	byte[] seed;
 	byte[] genSeed;
-	int num;
 	java.lang.String randomAlgorithm;
 	long lSeed;
 	byte[] next;
 	int numB;
+	int randInt;
 
 EVENTS
 	c1: SecureRandom();
@@ -20,7 +21,7 @@ EVENTS
 	
 	Ins := Gets | Cons;
 
-	gS: genSeed = generateSeed(num);	
+	gS: genSeed = generateSeed(_);	
 
 	s1: setSeed(seed);
 	s2: setSeed(lSeed);
@@ -28,21 +29,24 @@ EVENTS
 	
 	ne: next(numB);
 	nB: nextBytes(next);
-	Nexts := ne | nB;
+	nI: randInt = nextInt();
+	Nexts := ne | nB | nI;
 	
 	Ends := gS | Nexts;
 
 ORDER
- 	Ins, Seeds?, Ends*
+ 	Ins, (Seeds?, Ends*)*
  	
 CONSTRAINTS
 	randomAlgorithm in {"DEFAULT", "NONCEANDIV"};
 	
 REQUIRES	
 	randomized[seed];
+	randomized[lSeed];
 	
 ENSURES
 	randomized[this] after Ins;
-	randomized[genSeed];
-	randomized[next];
-	randomized[numB];
+	randomized[genSeed] after gS;
+	randomized[next] after nB;
+	randomized[numB] after ne;
+	randomized[randInt] after nI;

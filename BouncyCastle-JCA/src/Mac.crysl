@@ -1,4 +1,5 @@
 SPEC javax.crypto.Mac
+
 OBJECTS
     javax.crypto.Mac mac;
     java.security.Key key;
@@ -47,6 +48,7 @@ REQUIRES
     !encrypted[output1, _];
     !encrypted[output2,_];
     preparedHMAC[params];
+    generatedKey[key,_];
 
 ENSURES
     macced[output1, inp];

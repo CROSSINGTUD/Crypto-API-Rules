@@ -1,7 +1,5 @@
 SPEC javax.net.ssl.SSLParameters
 
-/* Used for sslSocket */
-
 OBJECTS
 	java.lang.String[] ciphersuites;
 	java.lang.String[] protocols;
@@ -16,12 +14,10 @@ EVENTS
 		
 	
 ORDER
-	(C1, (CS , PR) | (PR , CS)) | (C2, PR) | C3
-	
-/* SSLParameters.setUseCipherSuitesOrder(true).*/
-	
+	(C1, ((CS , PR) | (PR , CS))) | (C2, PR) | C3
+		
 CONSTRAINTS
-	elements(protocols) in {"TLSv1.2","TLSv1.1"};
+	elements(protocols) in {"TLSv1.2"};
 	elements(ciphersuites) in {"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
 							"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
 							"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
