@@ -33,7 +33,7 @@ OBJECTS
 
 EVENTS
     g1: getInstance(transformation);
-    g2:getInstance(transformation, _);
+    g2: getInstance(transformation, _);
     Gets := g1 | g2;
 
     i1: init(encmode, cert);
@@ -53,7 +53,7 @@ EVENTS
     u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
     u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
     u5: update(pre_plainBuffer, pre_cipherBuffer);
-    updates := u1 | u2 | u3 | u4 | u5;
+    Updates := u1 | u2 | u3 | u4 | u5;
 
     f1: cipherText = doFinal();
     f2: cipherText =  doFinal(plainText);
@@ -70,11 +70,13 @@ EVENTS
     iv: getIV();
     
 ORDER
-    Gets, Inits+, w+ | (FINWOU | (updates+, DOFINALS))+
+    Gets, Inits+, w+ | (FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};
 	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "RIJNDAEL", "ElGamal", "ECIESwithAES-CBC", "DHIESwithAES-CBC", "Twofish", "Camellia", "Serpent", "Tnepres", 
+																		"Shacal2", "Shacal-2", "McEliece", "McEliecePointcheval", "McElieceKobaraImai", "McElieceFujisaki"};
+	noCallTo[Inits] => alg(transformation) in {"AES", "RSA", "RIJNDAEL", "ElGamal", "ECIESwithAES-CBC", "DHIESwithAES-CBC", "Twofish", "Camellia", "Serpent", "Tnepres", 
 																		"Shacal2", "Shacal-2", "McEliece", "McEliecePointcheval", "McElieceKobaraImai", "McElieceFujisaki"};
 																		
     alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
@@ -121,7 +123,8 @@ REQUIRES
 	mode(transformation) in {"GCM"} => preparedGCM[params];
 	
 ENSURES
-	encrypted[pre_ciphertext, pre_plaintext] after updates; 
+	generatedCipher[this] after Inits;
+	encrypted[pre_ciphertext, pre_plaintext] after Updates; 
 	encrypted[cipherText, plainText];
 	encrypted[cipherBuffer, plainBuffer];
 	wrappedKey[wrappedKeyBytes, wrappedKey];
