@@ -19,10 +19,10 @@ EVENTS
 	
 	se1: eng = createSSLEngine();
 	se2: eng = createSSLEngine(_,_);
-	Engine := se1 | se2;
+	Engines := se1 | se2;
 
 ORDER
-	Gets, Init, Engine? 
+	Gets, Init, Engines? 
 
 CONSTRAINTS
 	protocol in {"TLSv1.2"};
@@ -35,3 +35,4 @@ REQUIRES
 ENSURES
 	generatedSSLContext[this] after Init;
 	generatedSSLEngine[eng];
+	

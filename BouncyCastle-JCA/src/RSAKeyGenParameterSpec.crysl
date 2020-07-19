@@ -5,10 +5,10 @@ OBJECTS
 	java.math.BigInteger publicExponent;
 	
 EVENTS
-	con: RSAKeyGenParameterSpec(keyLength, publicExponent);
+	Con: RSAKeyGenParameterSpec(keyLength, publicExponent);
 	
 ORDER
-	con
+	Con
 	
 CONSTRAINTS
 	 keyLength in {1024, 2048, 4096};
@@ -16,3 +16,4 @@ CONSTRAINTS
 	 
 ENSURES
 	preparedRSA[this];
+	

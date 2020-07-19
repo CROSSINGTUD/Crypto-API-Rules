@@ -15,7 +15,7 @@ ORDER
 	
 REQUIRES
 	generatedKeyStore[keyStore];
-	//generatedTrustAnchor[];							
 	
 ENSURES
 	generatedCertPathParameters[this];
+	

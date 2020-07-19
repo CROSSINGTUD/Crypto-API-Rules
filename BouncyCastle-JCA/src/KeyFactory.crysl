@@ -11,11 +11,11 @@ EVENTS
     g2: getInstance(keyFactoryAlgorithm, _);
     Gets := g1 | g2;
 
-    gPriv: generatePrivate(keySpec);
-    gPubl: generatePublic(keySpec);
+    GenPriv: generatePrivate(keySpec);
+    GenPubl: generatePublic(keySpec);    
     
 ORDER
-    Gets, (gPriv* | gPubl*)*
+    Gets, (GenPriv* | GenPubl*)*
 
 CONSTRAINTS
 	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", "McElieceKobaraImai", 
@@ -26,5 +26,6 @@ REQUIRES
 	
 ENSURES
     generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;
-    generatedPrivkey[privKey] after gPriv;
-    generatedPubkey[pubKey] after gPubl;
+    generatedPrivkey[privKey] after GenPriv;
+    generatedPubkey[pubKey] after GenPubl;
+    

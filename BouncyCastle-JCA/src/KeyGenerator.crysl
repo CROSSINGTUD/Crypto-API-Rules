@@ -19,10 +19,10 @@ EVENTS
     i5: init(ranGen);
     Inits := i1 | i2 | i3 | i4 | i5;
     
-    gk: key = generateKey();
+    GenKey: key = generateKey();
 
 ORDER
-    Gets, Inits?, gk
+    Gets, Inits?, GenKey
 
 CONSTRAINTS
 	secretKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "Poly1305-AES", "Poly1305-Camellia", "Camellia", "ChaCha", 
@@ -37,3 +37,4 @@ REQUIRES
     
 ENSURES 
     generatedKey[key, secretKeyAlgorithm];
+    

@@ -19,10 +19,10 @@ EVENTS
 
     k1: kp = generateKeyPair();
     k2: kp = genKeyPair();
-    Generators := k1 | k2;
+    Gens := k1 | k2;
 
 ORDER
-    Gets, Inits, Generators
+    Gets, Inits, Gens
 
 CONSTRAINTS
 	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", 
@@ -39,7 +39,7 @@ REQUIRES
     keyPairAlgorithm in {"DSA"} => preparedDSA[params];
     keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
     keyPairAlgorithm in {"EC"} => preparedEC[params];
-    
 
 ENSURES
     generatedKeypair[kp, keyPairAlgorithm];
+    

@@ -5,11 +5,12 @@ OBJECTS
 	java.lang.String[] protocols;
 	
 EVENTS
-	ec: setEnabledCipherSuites(ciphersuites);
-	ep: setEnabledProtocols(protocols);
+	EnableCipher: setEnabledCipherSuites(ciphersuites);
+	
+	EnableProtocol: setEnabledProtocols(protocols);
 	
 ORDER
-	(ec,ep) | (ep,ec) 
+	(EnableCipher, EnableProtocol) | (EnableProtocol, EnableCipher) 
 
 CONSTRAINTS
 	elements(protocols) in {"TLSv1.2"};
@@ -44,3 +45,4 @@ CONSTRAINTS
 		
 ENSURES
 	generatedSSLEngine[this];
+	
