@@ -32,5 +32,5 @@ REQUIRES
 	
 ENSURES
 	generatedKeyManager[this] after Init;
-	generatedKeyManagers[kms];
+	generatedKeyManagers[kms] after GetKeyMng;
 	

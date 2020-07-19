@@ -26,4 +26,4 @@ CONSTRAINTS
 	encoding in {"PKCS7", "PkiPath"};
 	
 ENSURES
-	genCert[alg];
+	generatedCert[alg];
