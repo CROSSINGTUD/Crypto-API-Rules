@@ -1,29 +1,29 @@
 SPEC javax.crypto.Cipher
 
 OBJECTS
-    java.lang.String transformation;
-    int encmode;
-    java.security.Key key;
-    java.security.cert.Certificate cert;
-    java.security.spec.AlgorithmParameterSpec params;
-    java.security.AlgorithmParameters param;
+	java.lang.String transformation;
+	int encmode;
+	java.security.Key key;
+	java.security.cert.Certificate cert;
+	java.security.spec.AlgorithmParameterSpec params;
+	java.security.AlgorithmParameters param;
     
-    int pre_plain_off;
-    int pre_ciphertext_off;
-    int plain_off;
-    int ciphertext_off;
+	int pre_plain_off;
+	int pre_ciphertext_off;
+	int plain_off;
+	int ciphertext_off;
     
-    int pre_len;
-    int len;
+	int pre_len;
+	int len;
     
-    byte[] pre_plaintext;
-    byte[] pre_ciphertext;
-    java.nio.ByteBuffer pre_plainBuffer;
+	byte[] pre_plaintext;
+	byte[] pre_ciphertext;
+	java.nio.ByteBuffer pre_plainBuffer;
 	java.nio.ByteBuffer pre_cipherBuffer;
     
-    byte[] plainText;
-    byte[] cipherText;
-    byte[] wrappedKeyBytes;
+	byte[] plainText;
+	byte[] cipherText;
+	byte[] wrappedKeyBytes;
 	java.nio.ByteBuffer plainBuffer;
 	java.nio.ByteBuffer cipherBuffer;
 	
@@ -32,45 +32,45 @@ OBJECTS
 	java.security.Key wrappedKey;
 
 EVENTS
-    g1: getInstance(transformation);
-    g2: getInstance(transformation, _);
-    Gets := g1 | g2;
+	g1: getInstance(transformation);
+	g2: getInstance(transformation, _);
+	Gets := g1 | g2;
 
-    i1: init(encmode, cert);
-    i2: init(encmode, cert, ranGen);
-    i3: init(encmode, key);
-    i4: init(encmode, key, params);
-    i5: init(encmode, key, param);
-    i6: init(encmode, key, params, ranGen);
-    i7: init(encmode, key, param, ranGen);
-    i8: init(encmode, key, ranGen);
-    IWOIV := i1 | i2 | i3 | i8;
-    IWIV :=  i4 | i5 | i6 | i7;
-    Inits := IWOIV | IWIV;
+	i1: init(encmode, cert);
+	i2: init(encmode, cert, ranGen);
+	i3: init(encmode, key);
+	i4: init(encmode, key, params);
+	i5: init(encmode, key, param);
+	i6: init(encmode, key, params, ranGen);
+	i7: init(encmode, key, param, ranGen);
+	i8: init(encmode, key, ranGen);
+	IWOIV := i1 | i2 | i3 | i8;
+	IWIV :=  i4 | i5 | i6 | i7;
+	Inits := IWOIV | IWIV;
 
-    u1: pre_ciphertext = update(pre_plaintext);
-    u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
-    u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
-    u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
-    u5: update(pre_plainBuffer, pre_cipherBuffer);
-    Updates := u1 | u2 | u3 | u4 | u5;
+	u1: pre_ciphertext = update(pre_plaintext);
+	u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
+	u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
+	u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
+	u5: update(pre_plainBuffer, pre_cipherBuffer);
+	Updates := u1 | u2 | u3 | u4 | u5;
 
-    f1: cipherText = doFinal();
-    f2: cipherText =  doFinal(plainText);
-    f3: doFinal(cipherText, ciphertext_off);
-    f4: cipherText = doFinal(plainText, plain_off, len);
-    f5: doFinal(plainText, plain_off, len, cipherText);
-    f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
-    f7: doFinal(plainBuffer, cipherBuffer);
-    FINWOU := f2 | f4 | f5 | f6 | f7;
-    DOFINALS := FINWOU | f1 | f3;
+	f1: cipherText = doFinal();
+	f2: cipherText =  doFinal(plainText);
+	f3: doFinal(cipherText, ciphertext_off);
+	f4: cipherText = doFinal(plainText, plain_off, len);
+	f5: doFinal(plainText, plain_off, len, cipherText);
+	f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
+	f7: doFinal(plainBuffer, cipherBuffer);
+	FINWOU := f2 | f4 | f5 | f6 | f7;
+	DOFINALS := FINWOU | f1 | f3;
     
-    WKB: wrappedKeyBytes = wrap(wrappedKey);
+	WKB: wrappedKeyBytes = wrap(wrappedKey);
     
-    IV: getIV();
+	IV: getIV();
     
 ORDER
-    Gets, Inits+, WKB+ | (FINWOU | (Updates+, DOFINALS))+
+	Gets, Inits+, WKB+ | (FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};
@@ -79,46 +79,46 @@ CONSTRAINTS
 	noCallTo[Inits] => alg(transformation) in {"AES", "RSA", "RIJNDAEL", "ElGamal", "ECIESwithAES-CBC", "DHIESwithAES-CBC", "Twofish", "Camellia", "Serpent", "Tnepres", 
 																		"Shacal2", "Shacal-2", "McEliece", "McEliecePointcheval", "McElieceKobaraImai", "McElieceFujisaki"};
 																		
-    alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
-    alg(transformation) in {"RIJNDAEL"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
-    alg(transformation) in {"ElGamal"} => mode(transformation) in {"ECB"};
-    alg(transformation) in {"Twofish"} => mode(transformation) in {"CBC"};
-    alg(transformation) in {"Camellia"} => mode(transformation) in {"CBC"};
-    alg(transformation) in {"Serpent"} => mode(transformation) in {"CBC", "CFB", "OFB"};
-    alg(transformation) in {"Tnepres"} => mode(transformation) in {"CBC", "CFB", "OFB"};
-    alg(transformation) in {"Shacal2"} => mode(transformation) in {"CBC"};
-    alg(transformation) in {"Shacal-2"} => mode(transformation) in {"CBC"};
+	alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
+	alg(transformation) in {"RIJNDAEL"} => mode(transformation) in {"CBC", "GCM", "CTR", "CTS", "CFB", "OFB", "CCM"};
+	alg(transformation) in {"ElGamal"} => mode(transformation) in {"ECB"};
+	alg(transformation) in {"Twofish"} => mode(transformation) in {"CBC"};
+	alg(transformation) in {"Camellia"} => mode(transformation) in {"CBC"};
+	alg(transformation) in {"Serpent"} => mode(transformation) in {"CBC", "CFB", "OFB"};
+	alg(transformation) in {"Tnepres"} => mode(transformation) in {"CBC", "CFB", "OFB"};
+	alg(transformation) in {"Shacal2"} => mode(transformation) in {"CBC"};
+	alg(transformation) in {"Shacal-2"} => mode(transformation) in {"CBC"};
     
-    alg(transformation) in {"ElGamal"} && mode(transformation) in {"ECB"} => pad(transformation) in {"PKCS1Padding"};
-    alg(transformation) in {"RSA"} && mode(transformation) in {""} => pad(transformation) in {""};
+	alg(transformation) in {"ElGamal"} && mode(transformation) in {"ECB"} => pad(transformation) in {"PKCS1Padding"};
+	alg(transformation) in {"RSA"} && mode(transformation) in {""} => pad(transformation) in {""};
 	alg(transformation) in {"RSA"} && mode(transformation) in {"ECB"} => pad(transformation) in {"PKCS1Padding","OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"};
-   	alg(transformation) in {"AES"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
-    alg(transformation) in {"RIJNDAEL"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"RIJNDAEL"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
-    alg(transformation) in {"Serpent"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"Serpent"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
-    alg(transformation) in {"Tnepres"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"Tnepres"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
-    alg(transformation) in {"Twofish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"Camellia"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"Shacal2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
-    alg(transformation) in {"Shacal-2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"AES"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
+	alg(transformation) in {"RIJNDAEL"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"RIJNDAEL"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB", "CCM"} => pad(transformation) in {"NoPadding"};
+	alg(transformation) in {"Serpent"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"Serpent"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
+	alg(transformation) in {"Tnepres"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"Tnepres"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
+	alg(transformation) in {"Twofish"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"Camellia"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"Shacal2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
+	alg(transformation) in {"Shacal-2"} && mode(transformation) in {"CBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
     
 	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode != 1 => noCallTo[IWOIV];
-    mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode == 1 => callTo[IV];
-       
-    encmode in {1,2,3,4};
-    length[pre_plaintext] >= pre_plain_off + len;
-    length[pre_ciphertext] <= pre_ciphertext_off;
-    length[plainText] <= plain_off + len;
-    length[cipherText] <= ciphertext_off;
+	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode == 1 => callTo[IV];
+       	
+	encmode in {1,2,3,4};
+	length[pre_plaintext] >= pre_plain_off + len;
+	length[pre_ciphertext] <= pre_ciphertext_off;
+	length[plainText] <= plain_off + len;
+	length[cipherText] <= ciphertext_off;
 
 REQUIRES
 	generatedKey[key, alg(transformation)];
-    randomized[ranGen];
-    preparedAlg[param, alg(transformation)];
-    !macced[_, plainText];
+	randomized[ranGen];
+	preparedAlg[param, alg(transformation)];
+	!macced[_, plainText];
 	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[params];
 	mode(transformation) in {"GCM"} => preparedGCM[params];
 	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[params];

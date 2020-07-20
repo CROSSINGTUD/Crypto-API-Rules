@@ -1,45 +1,45 @@
 SPEC java.security.KeyPairGenerator
 
 OBJECTS
-    java.lang.String keyPairAlgorithm;
-    java.security.KeyPair kp;
-    java.security.spec.AlgorithmParameterSpec params;
-    int keyPairSize;
+	java.lang.String keyPairAlgorithm;
+	java.security.KeyPair kp;
+	java.security.spec.AlgorithmParameterSpec params;
+	int keyPairSize;
 
 EVENTS
-    g1:getInstance(keyPairAlgorithm);
-    g2:getInstance(keyPairAlgorithm, _);
-    Gets := g1 | g2;
+	g1:getInstance(keyPairAlgorithm);
+	g2:getInstance(keyPairAlgorithm, _);
+	Gets := g1 | g2;
 
 	i1: initialize(keyPairSize);
-    i2: initialize(keyPairSize, _);
-    i3: initialize(params);
-    i4: initialize(params, _);
-    Inits := i1 | i2 | i3 | i4;
+	i2: initialize(keyPairSize, _);
+	i3: initialize(params);
+	i4: initialize(params, _);
+	Inits := i1 | i2 | i3 | i4;
 
-    k1: kp = generateKeyPair();
-    k2: kp = genKeyPair();
-    Gens := k1 | k2;
+	k1: kp = generateKeyPair();
+	k2: kp = genKeyPair();
+	Gens := k1 | k2;
 
 ORDER
-    Gets, Inits, Gens
+	Gets, Inits, Gens
 
 CONSTRAINTS
 	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", 
 						"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
 						"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 						
-    keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
-    keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
+	keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
+	keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"DiffieHellman", "DH"} => keyPairSize in {2048};
 	keyPairAlgorithm in {"EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", "ECIES"} => keyPairSize in {256};
 	
 REQUIRES
-    keyPairAlgorithm in {"RSA"} => preparedRSA[params];
-    keyPairAlgorithm in {"DSA"} => preparedDSA[params];
-    keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
-    keyPairAlgorithm in {"EC"} => preparedEC[params];
+	keyPairAlgorithm in {"RSA"} => preparedRSA[params];
+	keyPairAlgorithm in {"DSA"} => preparedDSA[params];
+	keyPairAlgorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+	keyPairAlgorithm in {"EC"} => preparedEC[params];
 
 ENSURES
-    generatedKeypair[kp, keyPairAlgorithm];
+	generatedKeypair[kp, keyPairAlgorithm];
     

@@ -35,7 +35,7 @@ EVENTS
 	Ends := gS | Nexts;
 
 ORDER
- 	Ins, (Seeds?, Ends*)*
+	Ins, (Seeds?, Ends*)*
  	
 CONSTRAINTS
 	randomAlgorithm in {"DEFAULT", "NONCEANDIV"};

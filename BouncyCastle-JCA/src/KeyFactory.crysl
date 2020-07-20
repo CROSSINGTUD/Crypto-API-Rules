@@ -1,31 +1,32 @@
 SPEC java.security.KeyFactory
 
 OBJECTS
-    java.lang.String keyFactoryAlgorithm;
-    java.security.spec.KeySpec keySpec;
-    java.security.PrivateKey privKey;
-    java.security.PublicKey pubKey;
+	java.lang.String keyFactoryAlgorithm;
+	java.security.spec.KeySpec keySpec;
+	java.security.PrivateKey privKey;
+	java.security.PublicKey pubKey;
    
 EVENTS
-    g1: getInstance(keyFactoryAlgorithm);
-    g2: getInstance(keyFactoryAlgorithm, _);
-    Gets := g1 | g2;
+	g1: getInstance(keyFactoryAlgorithm);
+	g2: getInstance(keyFactoryAlgorithm, _);
+	Gets := g1 | g2;
 
-    GenPriv: generatePrivate(keySpec);
-    GenPubl: generatePublic(keySpec);    
+	GenPriv: generatePrivate(keySpec);
+	GenPubl: generatePublic(keySpec);    
     
 ORDER
-    Gets, (GenPriv* | GenPubl*)*
+	Gets, (GenPriv* | GenPubl*)*
 
 CONSTRAINTS
-	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", "McElieceKobaraImai", 
-							"McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", 
+							"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", 
+							"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 	
 REQUIRES
 	speccedKey[keySpec, _];	
 	
 ENSURES
-    generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;
-    generatedPrivkey[privKey] after GenPriv;
-    generatedPubkey[pubKey] after GenPubl;
+	generatedKeyFactory[this, keyFactoryAlgorithm] after Gets;
+	generatedPrivkey[privKey] after GenPriv;
+	generatedPubkey[pubKey] after GenPubl;
     
