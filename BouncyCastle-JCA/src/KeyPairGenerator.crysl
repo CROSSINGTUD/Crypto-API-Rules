@@ -26,8 +26,8 @@ ORDER
 
 CONSTRAINTS
 	keyPairAlgorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", 
-						"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
-						"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+			"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
+			"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 						
 	keyPairAlgorithm in {"RSA"} => keyPairSize in {4096, 3072, 2048};
 	keyPairAlgorithm in {"DSA"} => keyPairSize in {2048};

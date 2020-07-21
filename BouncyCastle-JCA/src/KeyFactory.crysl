@@ -19,9 +19,9 @@ ORDER
 
 CONSTRAINTS
 	keyFactoryAlgorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal", 
-							"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", 
-							"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
-	
+				"McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", "McEliece", "McEliece-CCA2", 
+				"NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
+
 REQUIRES
 	speccedKey[keySpec, _];	
 	
