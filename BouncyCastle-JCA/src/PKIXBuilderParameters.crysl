@@ -8,13 +8,14 @@ OBJECTS
 EVENTS
 	c1: PKIXBuilderParameters(keyStore, certSelector);
 	c2: PKIXBuilderParameters(trustAnchors, certSelector);
+	Cons := c1 | c2;
 	
 ORDER
-	c1 | c2
+	Cons
 	
 REQUIRES
 	generatedKeyStore[keyStore];
-	//generatedTrustAnchor[];							
 	
 ENSURES
 	generatedCertPathParameters[this];
+	

@@ -1,4 +1,5 @@
 SPEC javax.crypto.CipherInputStream
+
 OBJECTS
 	java.io.InputStream is;
 	javax.crypto.Cipher ciph;
@@ -9,20 +10,24 @@ OBJECTS
 EVENTS
 	c1: CipherInputStream(is);
 	c2: CipherInputStream(is, ciph);
-	Constructs:= c1 | c2;
+	Cons:= c1 | c2;
 	
 	r1: read();
 	r2: read(b); 
 	r3: read(b, off, len);
 	Reads:= r1 | r2 | r3;
 	
-	c: close();
+	Close: close();
 	
 ORDER
-	Constructs, Reads+, c
+	Cons, Reads+, Close
 
 CONSTRAINTS
 	len > off;
 	
+REQUIRES
+	generatedCipher[ciph];
+	
 ENSURES
 	cipheredInputStream[is, ciph];
+	

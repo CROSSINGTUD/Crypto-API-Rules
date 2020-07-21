@@ -14,16 +14,16 @@ EVENTS
 	
 	gen1: generateCertPath(inStream);
 	gen2: generateCertPath(inStream, encoding);
-	GenCertPath := gen1 | gen2;
+	GenCertPaths := gen1 | gen2;
 	
 	GenCRL: generateCRL(inStream);
 	
 ORDER
-	Gets, (GenCert | GenCertPath | GenCRL)+
+	Gets, (GenCert | GenCertPaths | GenCRL)+
 	
 CONSTRAINTS
 	alg in {"X509", "X.509"};
 	encoding in {"PKCS7", "PkiPath"};
 	
 ENSURES
-	genCert[alg];
+	generatedCert[alg];

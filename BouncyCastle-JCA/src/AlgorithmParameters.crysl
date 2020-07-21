@@ -1,27 +1,28 @@
 SPEC java.security.AlgorithmParameters
+
 OBJECTS
-    java.lang.String alg;
-    java.security.spec.AlgorithmParameterSpec params;
+	java.lang.String alg;
+	java.security.spec.AlgorithmParameterSpec params;
 	byte[] parAr; 
 	java.lang.String format;
 	byte[] parsRes;
 
 EVENTS
-    g1: getInstance(alg);
-    g2: getInstance(alg, _);
-    Gets := g1 | g2;
+	g1: getInstance(alg);
+	g2: getInstance(alg, _);
+	Gets := g1 | g2;
 
-    i1: init(params);
-    i2: init(parAr);
-    i3: init(parAr, _);
-    Inits := i1 | i2 | i3;
+	i1: init(params);
+	i2: init(parAr);
+	i3: init(parAr, _);
+	Inits := i1 | i2 | i3;
     
-    e1: parsRes = getEncoded();
-    e2: parsRes = getEncoded(format);
-    Encoded := e1 | e2;
+	e1: parsRes = getEncoded();
+	e2: parsRes = getEncoded(format);
+	GetEncs := e1 | e2;
 
 ORDER
-    Gets, Inits, Encoded?
+	Gets, Inits, GetEncs?
 
 CONSTRAINTS
 	alg in {"AES", "Camellia", "ChaCha7539", "DSA", "DiffieHellman", "DH", "EC", "ElGamal", "PBKDF2", 
@@ -31,15 +32,16 @@ CONSTRAINTS
 			"SHA3-256WITHRSAANDMGF1", "SHA3-386WITHRSAANDMGF1", "SHA3-512WITHRSAANDMGF1"};
 
 REQUIRES    
-    preparedAlg[parAr];
-    alg in {"AES", "Camellia", "ChaCha7539", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2", 
+	preparedAlg[parAr, alg];
+	alg in {"AES", "Camellia", "ChaCha7539", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2", 
     		"Shacal2", "Twofish", "XSalsa20", "OAEP", "PSS", "RSAPSS", "SHA256withRSA/PSS", "SHA384withRSA/PSS", "SHA512withRSA/PSS",
     		"SHA256WITHRSAANDMGF1", "SHA386WITHRSAANDMGF1", "SHA512WITHRSAANDMGF1", "SHA3-256WITHRSAANDMGF1", "SHA3-386WITHRSAANDMGF1", 
     		"SHA3-512WITHRSAANDMGF1"} => preparedIV[params];
-    alg in {"DiffieHellman", "DH"} => preparedDH[params];
-    alg in {"DSA"} => preparedDSA[params];
-    alg in {"EC"} => preparedEC[params];
+	alg in {"DiffieHellman", "DH"} => preparedDH[params];
+	alg in {"DSA"} => preparedDSA[params];
+	alg in {"EC"} => preparedEC[params];
     
 ENSURES 
-    preparedAlg[this, alg] after Inits;
-    preparedAlg[parsRes, alg] after Encoded;
+	preparedAlg[this, alg] after Inits;
+	preparedAlg[parsRes, alg] after GetEncs;
+    

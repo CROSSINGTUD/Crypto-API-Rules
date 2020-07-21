@@ -1,4 +1,5 @@
 SPEC javax.crypto.CipherOutputStream
+
 OBJECTS
 	java.io.OutputStream os;
 	javax.crypto.Cipher ciph;
@@ -10,20 +11,24 @@ OBJECTS
 EVENTS
 	c1: CipherOutputStream(os);
 	c2: CipherOutputStream(os, ciph);
-	Constructs:= c1 | c2;
+	Cons:= c1 | c2;
 	
 	w1: write(b);
 	w2: write(byte);
 	w3: write(byte, off, len);
 	Writes:= w1 | w2 | w3;
 	
-	c: close();
+	Close: close();
 	
 ORDER
-	Constructs, Writes+, c
+	Cons, Writes+, Close
 	
 CONSTRAINTS
 	len > off;
 	
+REQUIRES
+	generatedCipher[ciph];
+	
 ENSURES
 	cipheredOutputStream[os, ciph];
+	

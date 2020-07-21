@@ -1,27 +1,23 @@
 SPEC javax.net.ssl.SSLParameters
 
-/* Used for sslSocket */
-
 OBJECTS
 	java.lang.String[] ciphersuites;
 	java.lang.String[] protocols;
 	
 EVENTS
-	C1: SSLParameters();
-	C2: SSLParameters(ciphersuites);
-	C3: SSLParameters(ciphersuites,protocols);
+	Con1: SSLParameters();
+	Con2: SSLParameters(ciphersuites);
+	Con3: SSLParameters(ciphersuites,protocols);
 	
-	CS: setCipherSuites(ciphersuites);
-	PR:	setProtocols(protocols);
+	CipherSuite: setCipherSuites(ciphersuites);
+	SetProtocol: setProtocols(protocols);
 		
 	
 ORDER
-	(C1, (CS , PR) | (PR , CS)) | (C2, PR) | C3
-	
-/* SSLParameters.setUseCipherSuitesOrder(true).*/
-	
+	(Con1, ((CipherSuite , SetProtocol) | (SetProtocol , CipherSuite))) | (Con2, SetProtocol) | Con3
+		
 CONSTRAINTS
-	elements(protocols) in {"TLSv1.2","TLSv1.1"};
+	elements(protocols) in {"TLSv1.2"};
 	elements(ciphersuites) in {"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
 							"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
 							"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
@@ -53,3 +49,4 @@ CONSTRAINTS
 				
 ENSURES
 	generatedSSLParameters[this];
+	

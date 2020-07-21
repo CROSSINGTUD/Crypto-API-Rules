@@ -1,29 +1,30 @@
 SPEC java.security.AlgorithmParameterGenerator
+
 OBJECTS
 	java.lang.String algorithm;
-    java.security.spec.AlgorithmParameterSpec genParamSpec; 
+	java.security.spec.AlgorithmParameterSpec genParamSpec; 
 	java.security.SecureRandom random;
 	int size;
 
 EVENTS
 	g1: getInstance(algorithm);
-    g2: getInstance(algorithm, _);
-    Gets := g1 | g2;
+	g2: getInstance(algorithm, _);
+	Gets := g1 | g2;
 
-    i1: init(size);
-    i2: init(size, random);
-    i3: init(genParamSpec);
-    i4: init(genParamSpec, random);
-    Inits := i1 | i2 | i3 | i4;
+	i1: init(size);
+	i2: init(size, random);
+	i3: init(genParamSpec);
+	i4: init(genParamSpec, random);
+	Inits := i1 | i2 | i3 | i4;
     
-    Gen: generateParameters();
+	GenParam: generateParameters();
     
 ORDER
-	Gets, Inits, Gen
+	Gets, Inits, GenParam
 	
 CONSTRAINTS
 	algorithm in {"AES", "Camellia", "Shacal2", "Shacal-2", "DH", "DiffieHellman", "DSA", "ElGamal"};
 	
 ENSURES
-	genAlgParam[this, algorithm] after Gen;
+	genAlgParam[algorithm];
 	
