@@ -11,8 +11,8 @@ EVENTS
 	g2: getInstance(keyFactoryAlgorithm, _);
 	Gets := g1 | g2;
 
-	GenPriv: generatePrivate(keySpec);
-	GenPubl: generatePublic(keySpec);    
+	GenPriv: privKey = generatePrivate(keySpec);
+	GenPubl: pubKey = generatePublic(keySpec);    
     
 ORDER
 	Gets, (GenPriv* | GenPubl*)*

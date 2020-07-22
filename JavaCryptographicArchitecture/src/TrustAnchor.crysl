@@ -9,8 +9,8 @@ EVENTS
 	c1: TrustAnchor(_, pubKey, _);
 	c2: TrustAnchor(cert, _);
 	c3: TrustAnchor(princ, pubKey, _);
-	
 	Cons := c1 | c2 | c3;
+	
 ORDER
 	Cons
 	
@@ -19,3 +19,4 @@ REQUIRES
 	
 ENSURES
 	generatedTrustAnchor[this];
+	

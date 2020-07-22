@@ -4,10 +4,11 @@ OBJECTS
 	int outputLength;
 
 EVENTS
-	con: HMACParameterSpec(outputLength);
+	Con: HMACParameterSpec(outputLength);
 	
 ORDER
-	con
+	Con
 	
 ENSURES
 	preparedHMAC[this];
+	

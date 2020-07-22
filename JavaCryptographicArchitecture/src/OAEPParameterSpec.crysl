@@ -8,10 +8,10 @@ OBJECTS
 	java.lang.String alg;
 
 EVENTS
-	con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
+	Con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
 
 ORDER
-	con
+	Con
 
 CONSTRAINTS
 	mdName in {"SHA-256", "SHA-384", "SHA-512"};
@@ -22,3 +22,4 @@ REQUIRES
 
 ENSURES
 	preparedOAEP[this];
+	

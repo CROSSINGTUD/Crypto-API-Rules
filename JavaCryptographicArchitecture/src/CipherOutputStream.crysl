@@ -18,10 +18,10 @@ EVENTS
 	w3: write(data, offset, len);
 	Writes := w1 | w2 | w3;
 	
-	c: close();
+	Close: close();
 	
 ORDER
-	Cons, Writes+, c
+	Cons, Writes+, Close
 	
 CONSTRAINTS
 	len > offset;
@@ -31,3 +31,4 @@ REQUIRES
 
 ENSURES
 	cipheredOutputStream[os, ciph];
+	

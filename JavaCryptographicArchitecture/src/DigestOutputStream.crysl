@@ -12,16 +12,16 @@ FORBIDDEN
 	on(boolean) ;
 
 EVENTS
-	con: DigestOutputStream(os, md);
+	Con: DigestOutputStream(os, md);
 	
 	r1: write(specifiedByte); 
 	r2: write(data, offset, len);
 	Writes := r1 | r2;
 
-	cl: close();
+	Close: close();
 
 ORDER
-	con, Writes+, cl
+	Con, Writes+, Close
 	
 CONSTRAINTS
 	len > offset;
@@ -31,3 +31,4 @@ REQUIRES
 	
 ENSURES
 	digestedOutputStream[os, md];
+	
