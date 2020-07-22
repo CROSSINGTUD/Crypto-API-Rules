@@ -7,7 +7,9 @@ OBJECTS
 
 EVENTS
 	Con: Cookie(cookieName,cookieValue);
+	
 	SetSecure: setSecure(secure);
+	
 ORDER
 	Con, SetSecure
     
