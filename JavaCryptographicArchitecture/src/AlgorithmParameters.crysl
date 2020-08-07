@@ -25,7 +25,7 @@ ORDER
 	Gets, Inits, GetEncs?
 
 CONSTRAINTS
-	alg in {"AES", "Blowfish", "DESede", "DiffieHellman", "OEAP", "PBEWithHmacSHA224AndAES_128", 
+	alg in {"AES", "Blowfish", "DESede", "DiffieHellman", "DH", "OEAP", "PBEWithHmacSHA224AndAES_128", 
 		"PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", 
 		"PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", 
 		"PBEWithHmacSHA512AndAES_256"};
