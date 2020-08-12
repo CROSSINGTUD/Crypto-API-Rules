@@ -10,12 +10,12 @@ OBJECTS
 EVENTS
 	c1: CipherInputStream(is);
 	c2: CipherInputStream(is, ciph);
-	Cons:= c1 | c2;
+	Cons := c1 | c2;
 	
 	r1: read();
 	r2: read(b); 
 	r3: read(b, off, len);
-	Reads:= r1 | r2 | r3;
+	Reads := r1 | r2 | r3;
 	
 	Close: close();
 	

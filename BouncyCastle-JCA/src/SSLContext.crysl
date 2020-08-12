@@ -15,7 +15,7 @@ EVENTS
 	g2: getInstance(protocol, _);
 	Gets := g1 | g2;
 	
-	Init: init(kms, tms, _);		
+	Init: init(kms, tms, sr);		
 	
 	se1: eng = createSSLEngine();
 	se2: eng = createSSLEngine(_,_);

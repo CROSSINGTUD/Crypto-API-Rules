@@ -7,18 +7,20 @@ OBJECTS
 	java.security.PublicKey retPub;
 	
 EVENTS
-	con: KeyPair(consPub, consPriv);
-	pu: retPub = getPublic();
-	pr: retPriv = getPrivate();
+	Con: KeyPair(consPub, consPriv);
+	
+	GetPubl: retPub = getPublic();
+	GetPriv: retPriv = getPrivate();
 
 ORDER
-	con, (pu*, pr*)*
+	Con, (GetPubl*, GetPriv*)*
 	
 REQUIRES
 	generatedPrivkey[consPriv];
 	generatedPubkey[consPub];
 	
 ENSURES
-	generatedKeypair[this, _] after con;
-	generatedPubkey[retPub] after pu;
-	generatedPrivkey[retPriv] after pr;
+	generatedKeypair[this, _] after Con;
+	generatedPubkey[retPub] after GetPubl;
+	generatedPrivkey[retPriv] after GetPriv;
+	

@@ -4,10 +4,10 @@ OBJECTS
 	byte[] keyMaterial;
 
 EVENTS
-	ge: keyMaterial = getEncoded();
+	GetEnc: keyMaterial = getEncoded();
 
 ORDER
-	ge*
+	GetEnc*
 	
 ENSURES
-	preparedKeyMaterial[keyMaterial] after ge;
+	preparedKeyMaterial[keyMaterial] after GetEnc;

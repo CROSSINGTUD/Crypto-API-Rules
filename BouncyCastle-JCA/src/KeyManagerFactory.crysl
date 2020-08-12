@@ -14,12 +14,12 @@ EVENTS
 
 	i1: init(keyStore, password);
 	i2: init(params);
-	Init := i1 | i2;
+	Inits := i1 | i2;
 	
 	GetKeyMng: kms = getKeyManagers();
 			
 ORDER
-	Gets, Init, GetKeyMng?
+	Gets, Inits, GetKeyMng?
 
 CONSTRAINTS
 	neverTypeOf[password, java.lang.String];
@@ -31,6 +31,6 @@ REQUIRES
 	generatedManagerFactoryParameters[params];
 	
 ENSURES
-	generatedKeyManager[this] after Init;
+	generatedKeyManager[this] after Inits;
 	generatedKeyManagers[kms] after GetKeyMng;
 	

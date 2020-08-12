@@ -39,8 +39,8 @@ ORDER
 	Gets, Inits, (FinalsWU | (Updates+, Finals))
 
 CONSTRAINTS
-	macAlgorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512", "PBEWithHmacSHA256", "PBEWithHmacSHA384", 
-					"PBEWithHmacSHA512", "Poly1305", "Shacal-2CMAC"};
+	macAlgorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512", "PBEWithHmacSHA256", 
+			"PBEWithHmacSHA384", "PBEWithHmacSHA512", "Poly1305", "Shacal-2CMAC"};
 	offset < len;
 	length[output1] > outOffset;
     

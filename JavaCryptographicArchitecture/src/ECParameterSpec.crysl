@@ -7,10 +7,11 @@ OBJECTS
 	int h;
 	
 EVENTS
-	con: ECParameterSpec(curve, g, n, h);	
+	Con: ECParameterSpec(curve, g, n, h);	
 
 ORDER
-	con
+	Con
 
 ENSURES
 	preparedEC[this];
+	

@@ -17,10 +17,10 @@ EVENTS
 	r3: read(buffer, offset, len);
 	Reads := r1 | r2 | r3;
 	
-	c: close();
+	Close: close();
 	
 ORDER
-	Cons, Reads+, c
+	Cons, Reads+, Close
 
 CONSTRAINTS
 	len > offset;
@@ -30,3 +30,4 @@ REQUIRES
 	
 ENSURES
 	cipheredInputStream[is, ciph];
+	

@@ -35,7 +35,7 @@ EVENTS
 	Ends := gS | Nexts;
 
 ORDER
- 	Ins, (Seeds?, Ends*)*
+	Ins, (Seeds?, Ends*)*
  	
 CONSTRAINTS
 	randomAlgorithm in {"SHA1PRNG", "Windows-PRNG", "NativePRNG", "NativePRNGBlocking", "NativePRNGNonBlocking", "PKCS11"};
@@ -50,3 +50,4 @@ ENSURES
 	randomized[next] after nB;
 	randomized[numB] after ne;
 	randomized[randInt] after nI;
+	

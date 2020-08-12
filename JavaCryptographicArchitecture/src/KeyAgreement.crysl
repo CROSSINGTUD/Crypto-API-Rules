@@ -11,30 +11,30 @@ OBJECTS
 	
 EVENTS
 	g1: getInstance(algorithm);
-    g2: getInstance(algorithm, _);
-    Gets := g1 | g2;
+	g2: getInstance(algorithm, _);
+	Gets := g1 | g2;
     
-    i1: init(key);
-    i2: init(key, params);
-    i3: init(key, params, random);
-    i4: init(key, random);
-    Inits := i1 | i2 | i3 | i4;
+	i1: init(key);
+	i2: init(key, params);
+	i3: init(key, params, random);
+	i4: init(key, random);
+	Inits := i1 | i2 | i3 | i4;
     
-    dp: doPhase(key, lastPhase);
+	DoPhase: doPhase(key, lastPhase);
     
-    gs1: generateSecret();
-    gs2: generateSecret(sharedSecret, offset);
-    gs3: generateSecret(algorithm);
-    GenSecret := gs1 | gs2 | gs3;
+	gs1: generateSecret();
+	gs2: generateSecret(sharedSecret, offset);
+	gs3: generateSecret(algorithm);
+	GenSecrets := gs1 | gs2 | gs3;
     
 ORDER
-	Gets, Inits, dp, GenSecret
+	Gets, Inits, DoPhase, GenSecrets
 	
 CONSTRAINTS
 	algorithm in {"DH", "DiffieHellman", "NH"};
 	
 REQUIRES
-    randomized[random];
+	randomized[random];
     
 ENSURES 
-    agreedKey[key, algorithm];
+	agreedKey[key, algorithm];

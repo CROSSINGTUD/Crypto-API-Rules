@@ -6,13 +6,16 @@ OBJECTS
 	boolean secure;
 
 EVENTS
-    c: Cookie(cookieName,cookieValue);
-    sc: setSecure(secure);
+	Con: Cookie(cookieName,cookieValue);
+	
+	SetSecure: setSecure(secure);
+	
 ORDER
-    c, sc
+	Con, SetSecure
     
 CONSTRAINTS
-    secure in {true};
+	secure in {true};
 
 ENSURES
-    generatedCookie[this];
+	generatedCookie[this];
+    

@@ -15,10 +15,10 @@ EVENTS
 	i2: init(params);
 	Init := i1 | i2;
 	
-	gtm: tms = getTrustManagers();
+	GetTrustMng: tms = getTrustManagers();
 	
 ORDER
-	Gets, Init, gtm?
+	Gets, Init, GetTrustMng?
 	
 CONSTRAINTS
 	algo in {"PKIX", "SunX509"};
@@ -29,4 +29,5 @@ REQUIRES
 															
 ENSURES
 	generatedTrustManager[this] after Init;			
-	generatedTrustManagers[tms] after gtm;															
+	generatedTrustManagers[tms] after GetTrustMng;
+	

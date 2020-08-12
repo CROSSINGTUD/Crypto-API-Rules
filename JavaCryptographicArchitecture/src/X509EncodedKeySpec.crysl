@@ -4,13 +4,13 @@ OBJECTS
 	byte[] encodedKey;
 
 EVENTS
-	con: X509EncodedKeySpec(encodedKey);
+	Con: X509EncodedKeySpec(encodedKey);
 	
 ORDER
- 	con
+	Con
 
 REQUIRES
 	preparedKeyMaterial[encodedKey];
  	
 ENSURES
-	speccedKey[this, _] after con;
+	speccedKey[this, _] after Con;

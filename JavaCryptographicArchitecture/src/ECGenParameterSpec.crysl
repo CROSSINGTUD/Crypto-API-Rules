@@ -4,10 +4,11 @@ OBJECTS
 	java.lang.String stdName;
 	
 EVENTS
-	con: ECGenParameterSpec(stdName);
+	Con: ECGenParameterSpec(stdName);
 
 ORDER
-	con
+	Con
 
 ENSURES
 	preparedEC[this];
+	

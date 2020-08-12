@@ -1,4 +1,5 @@
 SPEC javax.crypto.spec.PBEParameterSpec
+
 OBJECTS 
 	byte[] salt;
 	int iterationCount;
@@ -20,3 +21,4 @@ REQUIRES
 			
 ENSURES
 	preparedPBE[this];
+	

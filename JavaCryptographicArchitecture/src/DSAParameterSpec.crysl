@@ -6,10 +6,10 @@ OBJECTS
 	java.math.BigInteger g;
 	
 EVENTS
-	con: DSAParameterSpec(p, q, g);
+	Con: DSAParameterSpec(p, q, g);
 	
 ORDER
-	con
+	Con
 	
 CONSTRAINTS
 	p >= 1^2048;
@@ -17,3 +17,4 @@ CONSTRAINTS
 	
 ENSURES
 	preparedDSA[this];
+	
