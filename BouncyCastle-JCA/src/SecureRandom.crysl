@@ -27,10 +27,9 @@ EVENTS
 	s2: setSeed(lSeed);
 	Seeds := s1 | s2;
 	
-	ne: next(numB);
 	nB: nextBytes(next);
 	nI: randInt = nextInt();
-	Nexts := ne | nB | nI;
+	Nexts := nB | nI;
 	
 	Ends := gS | Nexts;
 
