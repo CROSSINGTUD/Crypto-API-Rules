@@ -28,7 +28,7 @@ EVENTS
 
 	nB: nextBytes(next);
 	nI: randInt = nextInt();
-	Nexts := ne | nB | nI;
+	Nexts := nB | nI;
 	
 	Ends := gS | Nexts;
 
