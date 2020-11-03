@@ -6,7 +6,6 @@ OBJECTS
 	java.lang.String randomAlgorithm;
 	long lSeed;
 	byte[] next;
-	int numB;
 	int randInt;
 
 EVENTS
