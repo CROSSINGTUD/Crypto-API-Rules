@@ -46,6 +46,5 @@ ENSURES
 	randomized[this] after Ins;
 	randomized[genSeed] after gS;
 	randomized[next] after nB;
-	randomized[numB] after ne;
 	randomized[randInt] after nI;
 	
