@@ -8,9 +8,8 @@ OBJECTS
 	int b;
 	
 EVENTS
-	c1: CipherOutputStream(os);
-	c2: CipherOutputStream(os, ciph);
-	Constructs:= c1 | c2;
+	c1: CipherOutputStream(os, ciph);
+	Constructs:= c1;
 	
 	w1: write(b);
 	w2: write(data);

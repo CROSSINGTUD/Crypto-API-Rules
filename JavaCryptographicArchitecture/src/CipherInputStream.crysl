@@ -7,9 +7,8 @@ OBJECTS
 	int len;
 	
 EVENTS
-	c1: CipherInputStream(is);
-	c2: CipherInputStream(is, ciph);
-	Constructs:= c1 | c2;
+	c1: CipherInputStream(is, ciph);
+	Constructs:= c1;
 	
 	r1: read();
 	r2: read(b); 
