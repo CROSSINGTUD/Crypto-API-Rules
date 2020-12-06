@@ -8,9 +8,8 @@ OBJECTS
 	int len;
 	
 EVENTS
-	c1: CipherInputStream(is);
-	c2: CipherInputStream(is, ciph);
-	Cons := c1 | c2;
+	c1: CipherInputStream(is, ciph);
+	Cons := c1;
 	
 	r1: read();
 	r2: read(buffer); 
