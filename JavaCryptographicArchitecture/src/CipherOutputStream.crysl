@@ -9,9 +9,8 @@ OBJECTS
 	int specifiedByte;
 	
 EVENTS
-	c1: CipherOutputStream(os);
-	c2: CipherOutputStream(os, ciph);
-	Cons := c1 | c2;
+	c1: CipherOutputStream(os, ciph);
+	Cons := c1;
 	
 	w1: write(specifiedByte);
 	w2: write(data);
