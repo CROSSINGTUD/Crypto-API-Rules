@@ -6,7 +6,6 @@ OBJECTS
 	java.lang.String randomAlgorithm;
 	long lSeed;
 	byte[] next;
-	int numB;
 
 EVENTS
 	c1: SecureRandom();
@@ -26,9 +25,8 @@ EVENTS
 	s2: setSeed(lSeed);
 	Seeds := s1 | s2;
 	
-	ne: next(numB);
 	nB: nextBytes(next);
-	Nexts := ne | nB;
+	Nexts := nB;
 	
 	Ends := gS | Nexts;
 
@@ -45,4 +43,3 @@ ENSURES
 	randomized[this] after Ins;
 	randomized[genSeed];
 	randomized[next];
-	randomized[numB];
