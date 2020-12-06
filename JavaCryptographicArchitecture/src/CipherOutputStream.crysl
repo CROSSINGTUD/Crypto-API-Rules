@@ -2,7 +2,7 @@ SPEC javax.crypto.CipherOutputStream
 OBJECTS
 	java.io.OutputStream os;
 	javax.crypto.Cipher ciph;
-	byte[] byte;
+	byte[] data;
 	int off;
 	int len;
 	int b;
@@ -13,8 +13,8 @@ EVENTS
 	Constructs:= c1 | c2;
 	
 	w1: write(b);
-	w2: write(byte);
-	w3: write(byte, off, len);
+	w2: write(data);
+	w3: write(data, off, len);
 	Writes:= w1 | w2 | w3;
 	
 	c: close();
