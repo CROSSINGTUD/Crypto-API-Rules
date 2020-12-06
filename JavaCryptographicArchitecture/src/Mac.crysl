@@ -15,7 +15,7 @@ OBJECTS
 
 EVENTS
     g1: getInstance(macAlgorithm);
-    g2: getInstance(macAlgorithm);
+    g2: getInstance(macAlgorithm, _);
     Gets := g1 | g2;
 
     i1: init(key);
