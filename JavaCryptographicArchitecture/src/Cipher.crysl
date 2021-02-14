@@ -12,9 +12,11 @@ OBJECTS
 	int pre_ciphertext_off;
 	int plain_off;
 	int ciphertext_off;
+	int aad_off;
     
 	int pre_len;
 	int len;
+	int aad_len;
     
 	byte[] pre_plaintext;
 	byte[] pre_ciphertext;
@@ -26,6 +28,9 @@ OBJECTS
 	byte[] wrappedKeyBytes;
 	java.nio.ByteBuffer plainBuffer;
 	java.nio.ByteBuffer cipherBuffer;
+	
+	byte[] aad;
+	java.nio.ByteBuffer aadBuffer;
 	
 	java.security.SecureRandom ranGen;
 	
@@ -54,7 +59,12 @@ EVENTS
 	u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
 	u5: update(pre_plainBuffer, pre_cipherBuffer);
 	Updates := u1 | u2 | u3 | u4 | u5;
-
+	
+	ua1: updateAAD(aad);
+	ua2: updateAAD(aad, aad_off, aad_len);
+	ua3: updateAAD(aadBuffer);
+	AADUpdates := ua1 | ua2 | ua3;
+	
 	f1: cipherText = doFinal();
 	f2: cipherText =  doFinal(plainText);
 	f3: doFinal(cipherText, ciphertext_off);
@@ -70,7 +80,7 @@ EVENTS
 	IV: getIV();
     
 ORDER
-	Gets, Inits+, WKB+ | (FINWOU | (Updates+, DOFINALS))+
+	Gets, Inits+, WKB+ | AADUpdates* ,(FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || instanceOf[cert, java.security.cert.Certificate] || 
@@ -101,7 +111,10 @@ CONSTRAINTS
 	alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
 	
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];     
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
+	
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdates];
+	     
     
 	encmode in {1,2,3,4};
 	length[pre_plaintext] >= pre_plain_off + len;
