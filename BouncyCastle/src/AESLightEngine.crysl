@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.engines.AESLightEngine
+
+OBJECTS
+	int dummy;
+
+EVENTS	
+	c : AESLightEngine();
+	
+ORDER
+	c
+
+ENSURES
+	generatedAESLightEngine[this];

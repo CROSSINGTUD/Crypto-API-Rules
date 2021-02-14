@@ -1,0 +1,13 @@
+SPEC org.bouncycastle.crypto.engines.AESFastEngine
+
+OBJECTS
+	int dummy;
+
+EVENTS	
+	c : AESFastEngine();
+	
+ORDER
+	c
+
+ENSURES
+	generatedAESFastEngine[this];

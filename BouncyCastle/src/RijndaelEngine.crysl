@@ -1,0 +1,18 @@
+SPEC org.bouncycastle.crypto.engines.RijndaelEngine
+
+OBJECTS
+	int blockSize;
+
+EVENTS
+	c1 : RijndaelEngine();
+	c2 : RijndaelEngine(blockSize);
+	c := c1 | c2;
+
+ORDER
+	c
+
+CONSTRAINTS
+	blockSize in {128,192,256};
+
+ENSURES
+	generatedRijndaelEngine[this];
