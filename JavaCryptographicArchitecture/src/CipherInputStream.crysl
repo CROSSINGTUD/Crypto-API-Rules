@@ -9,7 +9,7 @@ OBJECTS
 	
 EVENTS
 	c1: CipherInputStream(is, ciph);
-	Cons := c1:
+	Cons := c1;
 	
 	r1: read();
 	r2: read(buffer); 
