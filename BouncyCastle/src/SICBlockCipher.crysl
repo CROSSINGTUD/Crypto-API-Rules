@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.modes.SICBlockCipher
+
+OBJECTS
+	org.bouncycastle.crypto.BlockCipher engine;
+	
+
+EVENTS
+	c : SICBlockCipher(engine);
+	
+//No need to specify the order, must be wrapped in BufferedCipher!
+	
+ORDER
+	c
+
+REQUIRES
+	generatedAESEngine[engine];
+
+ENSURES
+	generatedSICBlockCipher[this];

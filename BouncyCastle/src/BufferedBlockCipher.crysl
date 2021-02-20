@@ -28,7 +28,7 @@ ORDER
 
 	
 REQUIRES
-	generatedGCMBlockCipher[engineOrMode] || generatedCCMBlockCipher[engineOrMode];
+	generatedGCMBlockCipher[engineOrMode] || generatedCCMBlockCipher[engineOrMode] || generatedSICBlockCipher[engineOrMode];
 	generatedCipherParams[params];
 	
 ENSURES
