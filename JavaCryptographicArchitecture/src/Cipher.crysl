@@ -80,7 +80,7 @@ EVENTS
 	IV: getIV();
     
 ORDER
-	Gets, Inits+, WKB+ | AADUpdates* ,(FINWOU | (Updates+, DOFINALS))+
+	Gets, Inits+, AADUpdates*, WKB+ | (FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || instanceOf[cert, java.security.cert.Certificate] || 
