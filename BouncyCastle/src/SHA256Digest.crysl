@@ -22,7 +22,7 @@ EVENTS
 	r : reset();
 	
 ORDER
-	Cons, (Updates+, Finals)*
+	Cons, ((r?, Updates+)+, Finals)*
 	
 REQUIRES
 	generatedSHA256Digest[digest];
