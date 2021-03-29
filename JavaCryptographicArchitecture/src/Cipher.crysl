@@ -12,20 +12,25 @@ OBJECTS
 	int pre_ciphertext_off;
 	int plain_off;
 	int ciphertext_off;
+	int aad_off;
     
 	int pre_len;
 	int len;
+	int aad_len;
     
 	byte[] pre_plaintext;
 	byte[] pre_ciphertext;
-	java.nio.ByteBuffer pre_plainBuffer;
-	java.nio.ByteBuffer pre_cipherBuffer;
+	java.nio.ByteBuffer pre_plain_bytebuffer;
+	java.nio.ByteBuffer pre_cipher_bytebuffer;
     
 	byte[] plainText;
 	byte[] cipherText;
 	byte[] wrappedKeyBytes;
-	java.nio.ByteBuffer plainBuffer;
-	java.nio.ByteBuffer cipherBuffer;
+	java.nio.ByteBuffer plain_bytebuffer;
+	java.nio.ByteBuffer cipher_bytebuffer;
+	
+	byte[] aad_bytes;
+	java.nio.ByteBuffer aad_bytebuffer;
 	
 	java.security.SecureRandom ranGen;
 	
@@ -52,16 +57,21 @@ EVENTS
 	u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
 	u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
 	u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
-	u5: update(pre_plainBuffer, pre_cipherBuffer);
+	u5: update(pre_plain_bytebuffer, pre_cipher_bytebuffer);
 	Updates := u1 | u2 | u3 | u4 | u5;
-
+	
+	ua1: updateAAD(aad_bytes);
+	ua2: updateAAD(aad_bytes, aad_off, aad_len);
+	ua3: updateAAD(aad_bytebuffer);
+	AADUpdates := ua1 | ua2 | ua3;
+	
 	f1: cipherText = doFinal();
 	f2: cipherText =  doFinal(plainText);
 	f3: doFinal(cipherText, ciphertext_off);
 	f4: cipherText = doFinal(plainText, plain_off, len);
 	f5: doFinal(plainText, plain_off, len, cipherText);
 	f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
-	f7: doFinal(plainBuffer, cipherBuffer);
+	f7: doFinal(plain_bytebuffer, cipher_bytebuffer);
 	FINWOU := f2 | f4 | f5 | f6 | f7;
 	DOFINALS := FINWOU | f1 | f3;
     
@@ -70,7 +80,7 @@ EVENTS
 	IV: getIV();
     
 ORDER
-	Gets, Inits+, WKB+ | (FINWOU | (Updates+, DOFINALS))+
+	Gets, Inits+, AADUpdates*, WKB+ | (FINWOU | (Updates+, DOFINALS))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || instanceOf[cert, java.security.cert.Certificate] || 
@@ -101,7 +111,10 @@ CONSTRAINTS
 	alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
 	
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];     
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
+	
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdates];
+	     
     
 	encmode in {1,2,3,4};
 	length[pre_plaintext] >= pre_plain_off + len;
@@ -123,5 +136,5 @@ ENSURES
 	generatedCipher[this] after Inits;
 	encrypted[pre_ciphertext, pre_plaintext] after Updates; 
 	encrypted[cipherText, plainText];
-	encrypted[cipherBuffer, plainBuffer];
+	encrypted[cipher_bytebuffer, plain_bytebuffer];
 	wrappedKey[wrappedKeyBytes, wrappedKey];
