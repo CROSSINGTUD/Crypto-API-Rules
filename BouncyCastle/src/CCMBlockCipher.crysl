@@ -5,27 +5,24 @@ OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 
 EVENTS
-	Cons: CCMBlockCipher(engine);
-	init: init(_, params);
+	Con: CCMBlockCipher(engine);
+	
+	Init: init(_,params);
 
 	p1: processAADByte(_);
 	p2: processAADBytes(_,_,_);
 	p3: processByte(_,_,_);
 	p4: processBytes(_,_,_,_,_);
 	p5: processPacket(_,_,_);
-	
-	process := p1 | p2 | p3 | p4 | p5;
+	Process := p1 | p2 | p3 | p4 | p5;
 
 	doFinal: doFinal(_,_);
 	
 ORDER
-	Cons, init, process+, doFinal
-
-
+	Con, Init, Process+, doFinal
 
 REQUIRES
 	generatedAESEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
+	
 
-ENSURES
-	generatedCCMBlockCipherMode[this] after Cons;
