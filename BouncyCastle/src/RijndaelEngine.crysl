@@ -6,13 +6,14 @@ OBJECTS
 EVENTS
 	c1 : RijndaelEngine();
 	c2 : RijndaelEngine(blockSize);
-	c := c1 | c2;
+	Cons := c1 | c2;
 
 ORDER
-	c
+	Cons
 
 CONSTRAINTS
 	blockSize in {128,192,256};
 
 ENSURES
 	generatedRijndaelEngine[this];
+
