@@ -19,9 +19,12 @@ EVENTS
 	
 ORDER
 	Con, Init, Process+, doFinal
+	
+CONSTRAINTS
+	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
 
 REQUIRES
-	generatedAESEngine[engine] || generatedAESFastEngine[engine] || generatedAESLightEngine[engine];
+	generatedAESEngine[engine] || generatedAESLightEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
 		
 	

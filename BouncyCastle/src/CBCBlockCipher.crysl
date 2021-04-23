@@ -8,11 +8,15 @@ EVENTS
 
 //No need to specify the order, must be wrapped in PaddedBufferedCipher!
 	
+
 ORDER
 	Con
-
+	
+CONSTRAINTS
+	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
+	
 REQUIRES
-	generatedAESEngine[engine] || generatedAESFastEngine[engine] || generatedAESLightEngine[engine];
+	generatedAESEngine[engine] || generatedAESLightEngine[engine];
 	
 ENSURES
 	generatedCBCBlockCipher[this];
