@@ -7,6 +7,8 @@ OBJECTS
 	long lSeed;
 	byte[] next;
 	int randInt;
+	int randIntInRange;
+	int range;
 	
 EVENTS
 	c1: SecureRandom();
@@ -28,7 +30,8 @@ EVENTS
 
 	nB: nextBytes(next);
 	nI: randInt = nextInt();
-	Nexts := nB | nI;
+	nIR: randIntInRange = nextInt(range);
+	Nexts := nB | nI | nIR;
 	
 	Ends := gS | Nexts;
 
@@ -47,4 +50,4 @@ ENSURES
 	randomized[genSeed] after gS;
 	randomized[next] after nB;
 	randomized[randInt] after nI;
-	
+	randomized[randIntInRange] after nIR;
