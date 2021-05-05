@@ -25,7 +25,7 @@ ORDER
 	Gets, Init, Engines? 
 
 CONSTRAINTS
-	protocol in {"TLSv1.2"};
+	protocol in {"TLSv1.2", "TLSv1.3"};
 
 REQUIRES
 	generatedKeyManagers[kms];
