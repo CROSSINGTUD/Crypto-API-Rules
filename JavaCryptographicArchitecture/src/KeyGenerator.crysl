@@ -25,7 +25,7 @@ ORDER
 	Gets, Inits?, GenKey
 
 CONSTRAINTS
-	secretKeyAlgorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
+	secretKeyAlgorithm in {"AES", "HmacSHA256", "HmacSHA384", "HmacSHA512", "HmacSHA3-256", "HmacSHA3-384", "HmacSHA3-512"};
 	secretKeyAlgorithm in {"AES"} => secretKeySize in {128, 192, 256};
    
 REQUIRES

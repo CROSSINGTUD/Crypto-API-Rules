@@ -25,7 +25,7 @@ ORDER
 	
 CONSTRAINTS
 	algorithm in {"DH", "DiffieHellman", "DSA"};
-	size in {1024};
+	size >= 2000;
 
 REQUIRES
 	randomized[random];
