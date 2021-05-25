@@ -1,0 +1,19 @@
+SPEC org.bouncycastle.crypto.agreement.ECDHBasicAgreement
+
+OBJECTS
+	int fieldSize;
+	org.bouncycastle.crypto.CipherParameters privParam;
+	org.bouncycastle.crypto.CipherParameters pubParam;
+
+EVENTS
+	Calc : calculateAgreement(pubParam);
+	
+	Init : init(privParam);
+	
+	Con : ECDHBasicAgreement();
+	
+ORDER
+	Con, (Init, Calc)+
+	
+ENSURES
+	generatedECDHBasicAgreement[this] after Con;
