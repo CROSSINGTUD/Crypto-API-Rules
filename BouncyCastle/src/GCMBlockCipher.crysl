@@ -5,23 +5,28 @@ OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 	
 EVENTS
-	Cons : GCMBlockCipher(engine);
-	init: init(_,params);
+	Con : GCMBlockCipher(engine);
+	
+	Init: init(_,params);
+	
 	p1: processAADByte(_);
 	p2: processAADBytes(_,_,_);
 	p3: processByte(_,_,_);
 	p4: processBytes(_,_,_,_,_);
+	Process := p1 | p2 | p3 | p4;
 	
-	process := p1 | p2 | p3 | p4;
 	doFinal: doFinal(_,_);
 	
 ORDER
-	Cons, init, process+, doFinal
+	Con, Init, Process+, doFinal
+	
+CONSTRAINTS
+	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
 
 REQUIRES
-	generatedAESEngine[engine];
+	generatedAESEngine[engine] || generatedAESLightEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
 		
 	
 ENSURES
-	generatedGCMBlockCipherMode[this] after Cons;
+	generatedGCMBlockCipherMode[this] after Con;

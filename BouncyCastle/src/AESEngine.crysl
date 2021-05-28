@@ -1,14 +1,14 @@
 SPEC org.bouncycastle.crypto.engines.AESEngine
 
 OBJECTS
-	int dummy;
+	int dummy; //This section can't be empty or else the rule is marked with an error.
 
 EVENTS
-	c : AESEngine();
+	Con : AESEngine();
 	
 ORDER
-	c
+	Con
 	
 ENSURES
 	generatedAESEngine[this];
-	
+
