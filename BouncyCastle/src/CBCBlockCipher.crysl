@@ -4,15 +4,15 @@ OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	
 EVENTS
-	c : CBCBlockCipher(engine);
+	Con: CBCBlockCipher(engine);
 
 //No need to specify the order, must be wrapped in PaddedBufferedCipher!
 	
 ORDER
-	c
+	Con
 
 REQUIRES
-	generatedAESEngine[engine];
+	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
 	
 ENSURES
 	generatedCBCBlockCipher[this];

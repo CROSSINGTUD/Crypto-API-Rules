@@ -22,7 +22,5 @@ ORDER
 	Con, Init, Process+, doFinal
 
 REQUIRES
-	generatedAESEngine[engine];
+	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
-	
-
