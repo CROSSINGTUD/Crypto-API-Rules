@@ -1,0 +1,30 @@
+SPEC org.bouncycastle.jce.spec.IESParameterSpec
+
+OBJECTS
+	int cipherKeySize;
+	int macKeySize;
+	byte[] nonce;
+	byte[] derivation;
+	byte[] encoding;
+	boolean compress;
+
+EVENTS
+	d : getDerivationV();
+	
+	e : getEncodingV();
+	
+	con1 : IESParameterSpec(derivation, encoding, macKeySize, cipherKeySize, nonce, compress);
+	con2 : IESParameterSpec(derivation, encoding, macKeySize, cipherKeySize, nonce);
+	con3 : IESParameterSpec(derivation, encoding, macKeySize);
+	Cons := con1 | con2 | con3;
+
+ORDER
+	Cons, (d | e)*
+
+CONSTRAINTS
+	macKeySize >= 128;
+	cipherKeySize >= 128;
+	noCallTo[con3];
+
+ENSURES
+	generatedIESParameterSpec[this];

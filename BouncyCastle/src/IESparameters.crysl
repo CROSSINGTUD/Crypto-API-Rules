@@ -1,0 +1,23 @@
+SPEC org.bouncycastle.crypto.params.IESParameters
+OBJECTS
+	int macKeySize;
+	byte[] derivation;
+	byte[] encoding;
+
+EVENTS
+	getMac : getMacKeySize();
+	
+	getDer : getDerivationV();
+	
+	getEnc : getEncodingV();
+	
+	Con : IESParameters(derivation, encoding, macKeySize);
+	
+ORDER
+	Con, (getMac | getDer | getEnc)*
+
+CONSTRAINTS
+	macKeySize >= 128;
+
+ENSURES
+	generatedIESParameters[this] after Con;

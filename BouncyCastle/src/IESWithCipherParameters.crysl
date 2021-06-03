@@ -1,0 +1,22 @@
+SPEC org.bouncycastle.crypto.params.IESWithCipherParameters
+OBJECTS
+	int keySize;
+	byte[] derivation;
+	byte[] encoding;
+	int macKeySize;
+	int cipherKeySize;
+
+EVENTS
+	Con : IESWithCipherParameters(derivation, encoding, macKeySize, cipherKeySize );
+	
+	Get : keySize = getCipherKeySize();
+	
+ORDER
+	Con, Get*
+
+CONSTRAINTS
+	macKeySize >= 128;
+	cipherKeySize >= 128;
+
+ENSURES
+	generatedIESWithCipherParameters[this] after Con;

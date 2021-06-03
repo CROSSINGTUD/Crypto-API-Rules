@@ -1,0 +1,55 @@
+SPEC org.bouncycastle.crypto.engines.IESEngine
+
+OBJECTS
+	byte[] plain;
+	byte[] ciphertext;
+	int plain_off;
+	int plain_len;
+	
+	boolean encmode;
+
+	org.bouncycastle.crypto.DerivationFunction derivFun;
+	org.bouncycastle.crypto.BasicAgreement agr;
+	org.bouncycastle.crypto.BufferedBlockCipher bufBloCip;
+	org.bouncycastle.crypto.Mac mac;
+	
+	org.bouncycastle.crypto.CipherParameters priParams;
+	org.bouncycastle.crypto.CipherParameters pubParams;
+	org.bouncycastle.crypto.CipherParameters params;
+	
+	org.bouncycastle.crypto.KeyParser keyParser;
+	org.bouncycastle.crypto.generators.EphemeralKeyPairGenerator ephKeyPairGen;
+	org.bouncycastle.crypto.params.AsymmetricKeyParameter ecKey;
+
+	
+EVENTS
+	con1 : IESEngine(agr, derivFun, mac);
+	con2 : IESEngine(agr, derivFun, mac, bufBloCip);
+	Cons := con1 | con2;
+
+	init1: init(encmode, priParams, pubParams, params);
+	init2: init(ecKey, params, ephKeyPairGen); //decryptor//*
+	init3: init(ecKey, params, keyParser); //encryptor//*
+	Inits:= init1 | init2 | init3;
+	
+	Proc : ciphertext = processBlock(plain, plain_off, plain_len);
+
+ORDER
+	Cons, (Inits, Proc)+
+	
+CONSTRAINTS
+	length[plain] <= plain_off + plain_len;
+
+REQUIRES
+	generatedBufferedBlockCipher[bufBloCip];
+	generatedIESParameters[params] || IESWithCipherParameters[params];
+	generatedCipherParams[priParams]; 
+	generatedCipherParams[pubParams];
+	generatedKDF2BytesGenerator[derivFun];
+	generatedECDHBasicAgreement[agr];
+	generatedHMAC[mac];
+	generatedECPubkey[ecKey] || generatedECPrivkey[ecKey];
+
+ENSURES
+	generatedIESEngine[this] after Cons;
+	encrypted[ciphertext] after Proc;
