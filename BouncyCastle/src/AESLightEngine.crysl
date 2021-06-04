@@ -1,0 +1,15 @@
+SPEC org.bouncycastle.crypto.engines.AESLightEngine
+
+OBJECTS
+	int dummy; //This section can't be empty or else the rule is marked with an error.
+
+EVENTS	
+	Con : AESLightEngine();
+	
+ORDER
+	Con
+
+ENSURES
+	generatedAESLightEngine[this];
+
+

@@ -6,6 +6,7 @@ OBJECTS
 	
 EVENTS
 	Con: GCMBlockCipher(engine);
+
 	
 	Init: init(_,params);
 	
@@ -23,3 +24,10 @@ ORDER
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
+	
+CONSTRAINTS
+	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
+
+ENSURES
+	generatedGCMBlockCipherMode[this] after Con;
+
