@@ -1,21 +1,21 @@
-SPEC org.bouncycastle.crypto.modes.GCMBlockCipher
+SPEC org.bouncycastle.crypto.modes.CCMBlockCipher
 
 OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	org.bouncycastle.crypto.CipherParameters params;
-	
-EVENTS
-	Con: GCMBlockCipher(engine);
 
+EVENTS
+	Con: CCMBlockCipher(engine);
 	
 	Init: init(_,params);
-	
+
 	p1: processAADByte(_);
 	p2: processAADBytes(_,_,_);
 	p3: processByte(_,_,_);
 	p4: processBytes(_,_,_,_,_);
-	Process := p1 | p2 | p3 | p4;
-	
+	p5: processPacket(_,_,_);
+	Process := p1 | p2 | p3 | p4 | p5;
+
 	doFinal: doFinal(_,_);
 	
 ORDER
@@ -24,10 +24,3 @@ ORDER
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
-	
-CONSTRAINTS
-	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
-
-ENSURES
-	generatedGCMBlockCipherMode[this] after Con;
-
