@@ -8,27 +8,26 @@ OBJECTS
 	byte[] cipherText;
 	
 EVENTS
-	c1 : BufferedBlockCipher(engineOrMode);
-	Cons := c1;
+	c1: BufferedBlockCipher(engineOrMode);
+	Con := c1;
 
 	i : init(is_encryption, params);
-	Inits := i;
+	Init := i;
 
 //	@return the number of output bytes copied to out.
 	p1: processByte(_ ,_ ,_ );
 	p2: processBytes(_ ,_ ,_ ,_ ,_ );
-	Procs := p1 | p2;
+	Process := p1 | p2;
 	
 //	@return the number of output bytes copied to out.
 	f : doFinal(cipherText, _);
-	DOFINALS := f;
+	doFinal := f;
 	
 ORDER
-	Cons, (Inits, Procs, DOFINALS)+
-
+	Con, (Init, Process, doFinal)+
 	
 REQUIRES
-	generatedGCMBlockCipher[engineOrMode];
+	generatedSICBlockCipher[engineOrMode];
 	generatedCipherParams[params];
 	
 ENSURES
