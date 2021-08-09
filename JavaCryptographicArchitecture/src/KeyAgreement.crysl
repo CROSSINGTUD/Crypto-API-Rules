@@ -31,7 +31,7 @@ ORDER
 	Gets, Inits, DoPhase, GenSecrets
 	
 CONSTRAINTS
-	algorithm in {"DH", "DiffieHellman", "NH"};
+	algorithm in {"DH", "DiffieHellman", "ECDH"};
 	
 REQUIRES
 	randomized[random];
