@@ -17,7 +17,7 @@ EVENTS
 	GetPriv := gpr1;
 
 ORDER
-	Con, (GetPubl*, GetPriv*)*
+	Con, (GetPubl | GetPriv)*
 	
 REQUIRES
 	generatedPrivkey[privateKey];

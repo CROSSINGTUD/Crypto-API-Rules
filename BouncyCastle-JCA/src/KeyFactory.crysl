@@ -18,7 +18,7 @@ EVENTS
 	GenPubl := gpu1;
     
 ORDER
-	Get, (GenPriv* | GenPubl*)*
+	Get, (GenPriv | GenPubl)*
 
 CONSTRAINTS
 	algorithm in {"DiffieHellman", "DH", "DSA", "EC", "ECDH", "ECDHC", "ECDSA", "RSA", "ElGamal",
