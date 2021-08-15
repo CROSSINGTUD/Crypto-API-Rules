@@ -6,20 +6,20 @@ OBJECTS
 	org.bouncycastle.crypto.ec.ECPair cipherText;
 
 EVENTS
-	c1 : ECElGamalEncryptor();
-	Cons := c1;
+	c1: ECElGamalEncryptor();
+	Con := c1;
 	
-	i1 : init(params);
-	Inits := i1;
+	i1: init(params);
+	Init := i1;
 	
-	e1 : cipherText = encrypt(data);
-	Encrypts := e1;
-
+	e1: cipherText = encrypt(data);
+	Encrypt := e1;
+	
 ORDER
-	Cons, (Inits, Encrypts+)+
+	Con, (Init, Encrypt+)+
 
 REQUIRES
 	generatedECPublicKeyParameters[params] || generatedParametersWithRandom[params];
 
 ENSURES
-	generatedECElGamalEncrypt[cipherText] after e1;
+	generatedECElGamalEncrypt[cipherText] after Encrypt;

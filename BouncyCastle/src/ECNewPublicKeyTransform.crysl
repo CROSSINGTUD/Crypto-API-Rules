@@ -6,17 +6,17 @@ OBJECTS
 	org.bouncycastle.crypto.ec.ECPair transformedCipherText;
 
 EVENTS
-	c1 : ECNewPublicKeyTransform();
-	Cons := c1;
+	c1: ECNewPublicKeyTransform();
+	Con := c1;
 	
-	i1 : init(keyParams);
-	Inits := i1;
+	i1: init(keyParams);
+	Init := i1;
 	
-	t1 : transformedCipherText = transform(cipherText);
-	Transforms := t1;
+	t1: transformedCipherText = transform(cipherText);
+	Transform := t1;
 
 ORDER
-	Cons, (Inits, Transforms+)
+	Con, Init, Transform+
 
 REQUIRES
 	//As the keyParams can be an instance of ParametersWithRandom with ECPublicKeyParameters in it or instance of ECPublicKeyParameters itself.
@@ -24,4 +24,4 @@ REQUIRES
 	generatedECPair[cipherText];
 
 ENSURES
-	generatedNewPublicKeyTransform[transformedCipherText] after t1;
+	generatedNewPublicKeyTransform[transformedCipherText] after Transform;

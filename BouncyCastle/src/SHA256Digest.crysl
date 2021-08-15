@@ -3,31 +3,43 @@ SPEC org.bouncycastle.crypto.digests.SHA256Digest
 OBJECTS
 	org.bouncycastle.crypto.digests.SHA256Digest digest;
 	byte[] encodedState;
-	byte[] output;
+	
+	byte inputByte;
+	byte[] inputBytes;
+	int inputBytesOff;
+	int inputBytesLen;
+	
+	byte[] outputBytes;
+	int outputBytesOff;
 	
 EVENTS
-	c1 : SHA256Digest();
-	c2 : SHA256Digest(digest);
+	c1: SHA256Digest();
+	c2: SHA256Digest(digest);
 //	@param encodedState the encoded state from the originating digest.
-	c3 : SHA256Digest(encodedState);
-	Cons := c1 | c2 | c3;
+	c3: SHA256Digest(encodedState);
+	Con := c1 | c2 | c3;
 	
-	u1 : update(_);
-	u2 : update(_, _, _);
-	Updates := u1 | u2;
+	u1: update(inputByte);
+	u2: update(inputBytes, inputBytesOff, inputBytesLen);
+	Update := u1 | u2;
 	
-	f : doFinal(output, _);
-	Finals := f;
+	df1: doFinal(outputBytes, outputBytesOff);
+	DoFinal := df1;
 	
-	r : reset();
+	r1: reset();
+	Reset := r1;
 	
 ORDER
-	Cons, ((r?, Updates+)+, Finals)*
+	Con, ((Reset?, Update+)+, DoFinal)*
+	
+CONSTRAINTS
+	length[inputBytes] >= inputBytesOff + inputBytesLen;
+	length[outputBytes] >= outputBytesOff;
 	
 REQUIRES
 	generatedSHA256Digest[digest];
 	
 ENSURES
-	generatedSHA256Digest[this] after Cons;
-	digested[output];
+	generatedSHA256Digest[this] after Con;
+	digested[outputBytes];
 	

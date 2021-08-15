@@ -6,12 +6,15 @@ OBJECTS
 	int keyLen;
 
 EVENTS
-	c1 : KeyParameter(key);
-	c2 : KeyParameter(key, keyOff, keyLen);
-	Cons := c1 | c2;
+	c1: KeyParameter(key);
+	c2: KeyParameter(key, keyOff, keyLen);
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
+	
+CONSTRAINTS
+	length[key] >= keyOff + keyLen;
 
 REQUIRES
 	randomized[key];

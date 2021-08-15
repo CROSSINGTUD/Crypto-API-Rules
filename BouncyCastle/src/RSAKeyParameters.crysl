@@ -6,13 +6,14 @@ OBJECTS
 	java.math.BigInteger exponent;
 	
 EVENTS
-	c : RSAKeyParameters(isPrivate, modulus, exponent);
+	c1: RSAKeyParameters(isPrivate, modulus, exponent);
+	Con := c1;
 
 ORDER
-	c	
+	Con	
 	
 CONSTRAINTS
-	modulus >= 2000; // BSI describles length of the modulus n to be at least 2000 bits
+	modulus >= 2000; // BSI describes length of the modulus n to be at least 2000 bits
 	isPrivate == true => notHardCoded[exponent];
 
 ENSURES

@@ -4,17 +4,20 @@ OBJECTS
 	org.bouncycastle.crypto.KeyGenerationParameters genParams;
 	
 EVENTS
-	c : ECKeyPairGenerator();
+	c1: ECKeyPairGenerator();
+	Con := c1;
 	
-	i : init(genParams);
+	i1: init(genParams);
+	Init := i1;
 	
-	g : generateKeyPair();
+	gk1: generateKeyPair();
+	Gen := gk1;
 
 ORDER
-	c, i, g
+	Con, Init, Gen
 
 REQUIRES
 	generatedECKeyGenerationParameters[genParams];
 
 ENSURES
-	generatedECKeyPair[this] after g;
+	generatedECKeyPair[this] after Gen;

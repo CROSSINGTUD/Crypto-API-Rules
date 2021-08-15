@@ -5,11 +5,11 @@ OBJECTS
 	org.bouncycastle.math.ec.ECPoint yPoint;
 
 EVENTS
-	c1 : ECPair(xPoint, yPoint);
-	Cons := c1;
+	c1: ECPair(xPoint, yPoint);
+	Con := c1;
 
 ORDER
-	Cons
+	Con
 
 ENSURES
 	generatedECPair[this];

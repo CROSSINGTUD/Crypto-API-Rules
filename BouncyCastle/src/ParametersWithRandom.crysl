@@ -5,12 +5,12 @@ OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 
 EVENTS
-	c1 : ParametersWithRandom(params, random);
-	c2 : ParametersWithRandom(params);
-	Cons := c1 | c2;
+	c1: ParametersWithRandom(params, random);
+	c2: ParametersWithRandom(params);
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 
 REQUIRES
 	randomized[random];

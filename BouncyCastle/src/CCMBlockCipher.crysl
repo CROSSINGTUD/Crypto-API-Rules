@@ -3,23 +3,42 @@ SPEC org.bouncycastle.crypto.modes.CCMBlockCipher
 OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	org.bouncycastle.crypto.CipherParameters params;
-
+	
+	byte aadByte;
+	byte[] aadBytes;
+	int aadOff;
+	int aadLen;
+	
+	byte plainTextByte;
+	byte[] plainText;
+	int plainTextOff;
+	int plainTextLen;
+	
+	byte[] cipherText;
+	int cipherTextOff;
+	
+	boolean isEncryption;
+	
 EVENTS
-	Con: CCMBlockCipher(engine);
-
-	Init: init(_,params);
-
-	p1: processAADByte(_);
-	p2: processAADBytes(_,_,_);
-	p3: processByte(_,_,_);
-	p4: processBytes(_,_,_,_,_);
-	p5: processPacket(_,_,_);
-	Process := p1 | p2 | p3 | p4 | p5;
-
-	doFinal: doFinal(_,_);
+	c1: CCMBlockCipher(engine);
+	Con := c1;
+	
+	i1: init(isEncryption, params);
+	Init := i1;
+	
+	pa1: processAADByte(aadByte);
+	pa2: processAADBytes(aadBytes, aadOff, aadLen);
+	ProcessAAD := pa1 | pa2;
+	
+	p1: processByte(plainTextByte, cipherText, cipherTextOff);
+	p2: processBytes(plainText, plainTextOff, plainTextLen, cipherText, cipherTextOff);
+	Process := p1 | p2;
+	
+	df1: doFinal(cipherText, cipherTextOff);
+	DoFinal := df1;
 
 ORDER
-	Con, Init, Process+, doFinal
+	Con, Init, Process+, DoFinal
 
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];

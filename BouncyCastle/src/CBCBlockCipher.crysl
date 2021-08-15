@@ -4,11 +4,10 @@ OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	
 EVENTS
-	Con : CBCBlockCipher(engine);
+	c1: CBCBlockCipher(engine);
+	Con := c1;
 
 //No need to specify the order, must be wrapped in PaddedBufferedCipher!
-	
-
 ORDER
 	Con
 	
@@ -20,4 +19,5 @@ REQUIRES
 	
 ENSURES
 	generatedCBCBlockCipher[this];
+
 	

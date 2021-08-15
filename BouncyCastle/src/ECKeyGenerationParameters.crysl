@@ -6,10 +6,10 @@ OBJECTS
 
 EVENTS
 	c1: ECKeyGenerationParameters(domainParams, random);
-	Cons := c1;
+	Con := c1;
 
 ORDER
-	Cons
+	Con
 
 REQUIRES
 	randomized[random];

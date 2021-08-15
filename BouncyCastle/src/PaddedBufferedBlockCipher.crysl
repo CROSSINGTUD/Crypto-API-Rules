@@ -4,30 +4,38 @@ OBJECTS
 	org.bouncycastle.crypto.BlockCipher cipher;
 	org.bouncycastle.crypto.CipherParameters params;
 	org.bouncycastle.crypto.paddings.BlockCipherPadding padding;
-
-	boolean is_encryption;
 	
+	byte plainTextByte;
+	byte[] plainText;
+	int plainTextOff;
+	int plainTextLen;
 	
 	byte[] cipherText;
+	int cipherTextOff;
+	
+	boolean isEncryption;
 	
 EVENTS
-	c1 : PaddedBufferedBlockCipher(cipher);
-	c1 : PaddedBufferedBlockCipher(cipher, padding);
-	Cons := c1;
+	c1: PaddedBufferedBlockCipher(cipher);
+	c2: PaddedBufferedBlockCipher(cipher, padding);
+	Con := c1 | c2;
 
-	i : init(is_encryption, params);
-	Inits := i;
+	i1: init(isEncryption, params);
+	Init := i1;
 
-	p1: processByte(_ ,_ ,_);
-	p2: processBytes(_,_,_,_,_);
-	Procs := p1 | p2;
+	p1: processByte(plainTextByte, cipherText, cipherTextOff);
+	p2: processBytes(plainText, plainTextOff, plainTextLen, cipherText, cipherTextOff);
+	Process := p1 | p2;
 	
-	f : doFinal(cipherText,_);
-	DOFINALS := f;
+	df1: doFinal(cipherText, cipherTextOff);
+	DoFinal:= df1;
 	
 ORDER
-	Cons, (Inits, Procs, DOFINALS)+
-
+	Cons, (Init, Process, DoFinal)+
+	
+CONSTRAINTS
+		length[plainText] >= plainTextOff + plainTextLen;
+		length[cipherText] >= cipherTextOff;
 	
 REQUIRES
 	generatedCBCBlockCipher[cipher];

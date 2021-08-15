@@ -6,16 +6,15 @@ OBJECTS
 	org.bouncycastle.math.ec.ECPoint G;
 	java.math.BigInteger n;
 	java.math.BigInteger h;
-	java.math.BigInteger hInv;
-
+	
 EVENTS
 	c1: ECDomainParameters(curve, G, n);
 	c2: ECDomainParameters(curve, G, n, h);
 	c3: ECDomainParameters(curve, G, n, h, seed);
-	Cons := c1 | c2 | c3;
+	Con := c1 | c2 | c3;
 
 ORDER
-	Cons
+	Con
 
 REQUIRES	
 	randomized[seed];

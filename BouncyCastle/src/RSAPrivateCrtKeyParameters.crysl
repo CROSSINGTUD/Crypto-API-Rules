@@ -2,17 +2,23 @@ SPEC org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters
 
 OBJECTS
 	java.math.BigInteger modulus;
+	java.math.BigInteger publicExponent;
+	java.math.BigInteger privateExponent;
 	java.math.BigInteger p;
 	java.math.BigInteger q;
+	java.math.BigInteger dP;
+	java.math.BigInteger dQ;
+	java.math.BigInteger qInv;
 	
 EVENTS
-	c : RSAPrivateCrtKeyParameters(modulus, _, _, p, q, _, _, _);
+	c1: RSAPrivateCrtKeyParameters(modulus, publicExponent, privateExponent, p, q, dP, dQ, qInv);
+	Con := c1;
 
 ORDER
-	c
+	Con
 	
 CONSTRAINTS
-	modulus >= 2000; // BSI describles length of the modulus n to be at least 2000 bits
+	modulus >= 2000; // BSI describes length of the modulus n to be at least 2000 bits
 	
 REQUIRES
 	randomized[p]; // BSI describes p and q to be prime numbers chosen at random and independently of each other

@@ -7,21 +7,21 @@ OBJECTS
 	org.bouncycastle.crypto.ec.ECPair transformedCipherText;
 
 EVENTS
-	c1 : ECFixedTransform(k);
-	Cons := c1;
+	c1: ECFixedTransform(k);
+	Con := c1;
 	
-	i1 : init(keyParams);
-	Inits := i1;
+	i1: init(keyParams);
+	Init := i1;
 	
-	t1 : transformedCipherText = transform(cipherText);
-	Transforms := t1;
+	t1: transformedCipherText = transform(cipherText);
+	Transform := t1;
 
 ORDER
-	Cons, (Inits, Transforms+)
+	Con, Init, Transform+
 
 REQUIRES
 	generatedECPublicKeyParameters[keyParams];
 	generatedECPair[cipherText];
 
 ENSURES
-	generatedECFixedTransform[transformedCipherText] after t1;
+	generatedECFixedTransform[transformedCipherText] after Transform;

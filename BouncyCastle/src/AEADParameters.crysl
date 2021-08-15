@@ -2,14 +2,17 @@ SPEC org.bouncycastle.crypto.params.AEADParameters
 
 OBJECTS
 	org.bouncycastle.crypto.params.KeyParameter keyParam;
+	int macSize;
+	byte[] nonce;
+	byte[] associatedText;
 
 EVENTS
-	c1 : AEADParameters(keyParam,_,_);
-	c2 : AEADParameters(keyParam,_,_,_);
-	CONS := c1 | c2;
+	c1: AEADParameters(keyParam, macSize, nonce);
+	c2: AEADParameters(keyParam, macSize, nonce, associatedText);
+	Con := c1 | c2;
 
 ORDER
-	CONS
+	Con
 	
 REQUIRES
 	generatedKeyParameter[keyParam];
