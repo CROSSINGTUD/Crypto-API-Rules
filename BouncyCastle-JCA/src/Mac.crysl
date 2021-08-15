@@ -3,45 +3,46 @@ SPEC javax.crypto.Mac
 OBJECTS
 	javax.crypto.Mac mac;
 	java.security.Key key;
-	byte inp;
-	byte[] pre_input;
+	byte inputByte;
+	byte[] preInput;
 	byte[] input;
 	byte[] output1;
 	byte[] output2;
-	java.lang.String macAlgorithm;
+	java.nio.ByteBuffer preInputByteBuffer;
+	java.lang.String algorithm;
 	java.security.spec.AlgorithmParameterSpec params;
 	int offset;
 	int outOffset;
 	int len;
 
 EVENTS
-	g1: getInstance(macAlgorithm);
-	g2: getInstance(macAlgorithm, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 
 	i1: init(key);
 	i2: init(key, params);
-	Inits := i1 | i2;
+	Init := i1 | i2;
 
-	u1: update(inp);
-	u2: update(pre_input);
-	u3: update(pre_input, offset, len);
-	u4: update(pre_input);
-	Updates := u1 | u2 | u3 | u4;
+	u1: update(inputByte);
+	u2: update(preInput);
+	u3: update(preInput, offset, len);
+	u4: update(preInputByteBuffer);
+	Update := u1 | u2 | u3 | u4;
 
 	f1: output1 = doFinal();
 	f2: output2 = doFinal(input);
 	f3: doFinal(output1, outOffset);
-	FinalsWU := f1 | f3;
-	Finals := FinalsWU | f2;
+	FinalWU := f1 | f3;
+	Final := FinalWU | f2;
 
 ORDER
-	Gets, Inits, (FinalsWU | (Updates+, Finals))
+	Get, Init, (FinalWU | (Update+, Final))
 
 CONSTRAINTS
-	macAlgorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512", "PBEWithHmacSHA256", 
-			"PBEWithHmacSHA384", "PBEWithHmacSHA512", "Poly1305", "Shacal-2CMAC"};
-	offset < len;
+	algorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512",
+			 "HMACSHA3-256", "HMACSHA3-384", "HMACSHA3-512",
+			 "PBEWithHmacSHA256", "PBEWithHmacSHA384", "PBEWithHmacSHA512", "Poly1305", "Shacal-2CMAC"};
 	length[output1] > outOffset;
     
 REQUIRES
@@ -51,6 +52,6 @@ REQUIRES
 	generatedKey[key,_];
 
 ENSURES
-	macced[output1, inp];
-	macced[output1, pre_input];
+	macced[output1, inputByte];
+	macced[output1, preInput];
 	macced[output2, input];

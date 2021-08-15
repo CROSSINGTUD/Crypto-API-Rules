@@ -5,11 +5,11 @@ OBJECTS
 	int exponentSize;
 	
 EVENTS
-	Con: DHGenParameterSpec(primeSize, exponentSize);	
-	
+	c1: DHGenParameterSpec(primeSize, exponentSize);
+	Con := c1;
+
 ORDER
 	Con
-	
+
 ENSURES
 	preparedDH[this];
-	

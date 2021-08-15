@@ -8,11 +8,10 @@ OBJECTS
 EVENTS
 	c1: DSAGenParameterSpec(primePLen, subPrimeQLen);
 	c2: DSAGenParameterSpec(primePLen, subPrimeQLen, seedLen);
-	Cons := c1 | c2;
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 	
 ENSURES
 	preparedDSA[this];
-	

@@ -4,7 +4,8 @@ OBJECTS
 	byte[] keyMaterial;
 	
 EVENTS
-	GetEnc: keyMaterial = getEncoded();
+	ge1: keyMaterial = getEncoded();
+	GetEnc := ge1;
 	
 ORDER
 	GetEnc*

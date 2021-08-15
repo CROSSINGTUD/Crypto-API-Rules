@@ -1,45 +1,49 @@
 SPEC java.security.MessageDigest
 
 OBJECTS
-	java.lang.String digestAlgorithm;
-	byte pre_inbyte;
-	byte[] pre_inbytearr;
-	int pre_off;
-	int pre_len;
-	java.nio.ByteBuffer pre_inpBuf;
-	byte[] inbytearr;
-	int off;
+	java.lang.String algorithm;
+	byte preInputByte;
+	byte[] preInput;
+	int preOffset;
+	int preLen;
+	java.nio.ByteBuffer preInputByteBuffer;
+	byte[] input;
+	int offset;
 	int len;
-	byte[] out;
+	byte[] output;
 	
 EVENTS
-	g1: getInstance(digestAlgorithm);
-	g2: getInstance(digestAlgorithm, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 
-	u1: update(pre_inbyte);
-	u2: update(pre_inbytearr);
-	u3: update(pre_inbytearr, pre_off, pre_len);
-	u4: update(pre_inpBuf);
-	Updates := u1 | u2 | u3 | u4;
+	u1: update(preInputByte);
+	u2: update(preInput);
+	u3: update(preInput, preOffset, preLen);
+	u4: update(preInputByteBuffer);
+	Update := u1 | u2 | u3 | u4;
 
-	d1: out = digest();
-	d2: out = digest(inbytearr);
-	d3: digest(out, off, len);
+	d1: output = digest();
+	d2: output = digest(input);
+	d3: digest(output, offset, len);
 	DWOU := d2;
 	DWU := d1 | d3;
-	Digests := DWU | DWOU;
+	Digest := DWU | DWOU;
 
 ORDER
-	Gets, (DWOU | (Updates+, Digests))+
+	Get, (DWOU | (Update+, Digest))+
 
 CONSTRAINTS
-	digestAlgorithm in {"SHA-256", "SHA-384", "SHA-512", "SHA-512/256", "BLAKE2B-256", "BLAKE2B-384", 
-			"BLAKE2B-512", "BLAKE2S-256", "KECCAK-256", "KECCAK-384", "KECCAK-512", "WHIRLPOOL"};
-	length[pre_inbytearr] >= pre_len + pre_off;
-	length[out] >= len + off;
+	algorithm in {"SHA-256", "SHA-384", "SHA-512", "SHA-512/256", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512",
+			"BLAKE2B-256", "BLAKE2B-384", "BLAKE2B-512", "BLAKE2S-256",
+			"KECCAK-256", "KECCAK-384", "KECCAK-512",
+			"WHIRLPOOL"};
+	length[preInput] >= preLen + preOffset;
+	length[output] >= len + offset;
 
 ENSURES
-	generatedMessageDigest[this] after Gets;
-	digested[out, _];
-	digested[out, inbytearr];
+	generatedMessageDigest[this] after Get;
+	digested[output, _];
+	digested[output, input];
+
+

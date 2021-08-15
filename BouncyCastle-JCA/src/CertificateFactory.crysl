@@ -3,27 +3,29 @@ SPEC java.security.cert.CertificateFactory
 OBJECTS
 	java.io.InputStream inStream;
 	java.lang.String encoding;
-	java.lang.String alg;
+	java.lang.String type;
 
 EVENTS
-	g1: getInstance(alg);
-	g2: getInstance(alg, _);
-	Gets := g1 | g2;
+	g1: getInstance(type);
+	g2: getInstance(type, _);
+	Get := g1 | g2;
 	
-	GenCert: generateCertificate(inStream);
+	gc1: generateCertificate(inStream);
+	GenCert := gc1;
 	
 	gen1: generateCertPath(inStream);
 	gen2: generateCertPath(inStream, encoding);
-	GenCertPaths := gen1 | gen2;
+	GenCertPath := gen1 | gen2;
 	
-	GenCRL: generateCRL(inStream);
+	gcrl1: generateCRL(inStream);
+	GenCRL := gcrl1;
 	
 ORDER
-	Gets, (GenCert | GenCertPaths | GenCRL)+
+	Get, (GenCert | GenCertPath | GenCRL)+
 	
 CONSTRAINTS
-	alg in {"X509", "X.509"};
+	type in {"X509", "X.509"};
 	encoding in {"PKCS7", "PkiPath"};
 	
 ENSURES
-	generatedCert[alg];
+	generatedCert[type];

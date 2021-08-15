@@ -1,20 +1,20 @@
 SPEC java.security.cert.PKIXBuilderParameters
 
 OBJECTS
-	java.security.KeyStore keyStore;
-	java.security.cert.CertSelector certSelector;
+	java.security.KeyStore keystore;
+	java.security.cert.CertSelector targetConstraints;
 	java.util.Set<java.security.cert.TrustAnchor> trustAnchors;
 
 EVENTS
-	c1: PKIXBuilderParameters(keyStore, certSelector);
-	c2: PKIXBuilderParameters(trustAnchors, certSelector);
-	Cons := c1 | c2;
+	c1: PKIXBuilderParameters(keystore, targetConstraints);
+	c2: PKIXBuilderParameters(trustAnchors, targetConstraints);
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 	
 REQUIRES
-	generatedKeyStore[keyStore];
+	generatedKeyStore[keystore];
 	
 ENSURES
 	generatedCertPathParameters[this];

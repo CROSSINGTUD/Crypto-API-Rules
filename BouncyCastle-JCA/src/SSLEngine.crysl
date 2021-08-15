@@ -1,20 +1,22 @@
 SPEC javax.net.ssl.SSLEngine
 
 OBJECTS
-	java.lang.String[] ciphersuites;
+	java.lang.String[] cipherSuites;
 	java.lang.String[] protocols;
-	
+
 EVENTS
-	EnableCipher: setEnabledCipherSuites(ciphersuites);
+	ec1: setEnabledCipherSuites(cipherSuites);
+	EnableCipher := ec1;
 	
-	EnableProtocol: setEnabledProtocols(protocols);
+	ep1: setEnabledProtocols(protocols);
+	EnableProtocol := ep1;	
 	
 ORDER
 	(EnableCipher, EnableProtocol) | (EnableProtocol, EnableCipher) 
 
 CONSTRAINTS
 	elements(protocols) in {"TLSv1.2"};
-	elements(ciphersuites) in {"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+	elements(cipherSuites) in {"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
 				"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
 				"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
 				"TLS_RSA_WITH_AES_256_GCM_SHA384",

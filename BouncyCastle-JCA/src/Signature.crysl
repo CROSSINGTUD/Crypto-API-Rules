@@ -2,13 +2,13 @@ SPEC java.security.Signature
 
 OBJECTS
 	byte[] sign;
-	byte inpb;
-	byte[] inpba;
-	byte[] out;
-	java.nio.ByteBuffer inpBuf;
-	java.lang.String signAlgorithm;
-	java.security.PrivateKey priv;
-	java.security.PublicKey pub;
+	byte inputByte;
+	byte[] input;
+	byte[] output;
+	java.nio.ByteBuffer inputByteBuffer;
+	java.lang.String algorithm;
+	java.security.PrivateKey privateKey;
+	java.security.PublicKey publicKey;
 	java.security.cert.Certificate cert;
 	java.security.spec.AlgorithmParameterSpec params;
 	boolean verified;
@@ -16,47 +16,47 @@ OBJECTS
 	int len;
 
 EVENTS
-	g1: getInstance(signAlgorithm);
-	g2: getInstance(signAlgorithm, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 
-	i1: initSign(priv);
-	i2: initSign(priv, _);
+	i1: initSign(privateKey);
+	i2: initSign(privateKey, _);
 	i3: initVerify(cert);
-	i4: initVerify(pub);
-	InitSigns := i1 | i2;
-	InitVerifies := i3 | i4;
+	i4: initVerify(publicKey);
+	InitSign := i1 | i2;
+	InitVerify := i3 | i4;
 
-	u1: update(inpb);
-	u2: update(inpba);
-	u3: update(inpba, offset, len);
-	u4: update(inpBuf);
-	Updates := u1 | u2 | u3 | u4;
+	u1: update(input);
+	u2: update(inputByte);
+	u3: update(input, offset, len);
+	u4: update(inputByteBuffer);
+	Update := u1 | u2 | u3 | u4;
 
-	s1: out = sign();
-	s2: sign(out, offset, len);
-	Signs := s1 | s2;
+	s1: output = sign();
+	s2: sign(output, offset, len);
+	Sign := s1 | s2;
 
 	v1: verified = verify(sign);
 	v2: verified = verify(sign, offset, len);
-	Verifies := v1 | v2;
+	Verify := v1 | v2;
 
 ORDER
-	Gets, ((InitSigns+, (Updates+, Signs+)+ )+ | (InitVerifies+, (Updates*, Verifies+)+ )+ )
+	Get, ((InitSign+, (Update+, Sign+)+ )+ | (InitVerify+, (Update*, Verify+)+ )+ )
 
 CONSTRAINTS
-	signAlgorithm in {"ECDDSA", "SHA256WITHECDDSA", "SHA384WITHECDDSA", "SHA512WITHECDDSA", "SHA3-256WITHECDDSA", "SHA3-384WITHECDDSA", 
+	algorithm in {"ECDDSA", "SHA256WITHECDDSA", "SHA384WITHECDDSA", "SHA512WITHECDDSA", "SHA3-256WITHECDDSA", "SHA3-384WITHECDDSA", 
 			"SHA3-512WITHECDDSA", "SHA256WITHECNR", "SHA384WITHECNR", "SHA512WITHECNR", "SHA256withECDSA", "SHA256withDSA", 
 			"SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", 
 			"QTESLA"};
     
 REQUIRES
-	generatedPrivkey[priv];
-	generatedPubkey[pub];
+	generatedPrivkey[privateKey];
+	generatedPubkey[publicKey];
 
 ENSURES
-	signed[out, inpb] after Signs;
-	signed[out, inpba] after Signs;
-	signed[out, inpBuf] after Signs;
-	verified[verified, sign] after Verifies;
+	signed[output, inputByte] after Sign;
+	signed[output, input] after Sign;
+	signed[output, inputByteBuffer] after Sign;
+	verified[verified, sign] after Verify;
     

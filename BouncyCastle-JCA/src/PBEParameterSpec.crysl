@@ -3,22 +3,23 @@ SPEC javax.crypto.spec.PBEParameterSpec
 OBJECTS 
 	byte[] salt;
 	int iterationCount;
-	java.security.spec.AlgorithmParameterSpec paramSpec;
+	java.security.spec.AlgorithmParameterSpec params;
 	
 EVENTS
 	c1: PBEParameterSpec(salt, iterationCount);
-	c2: PBEParameterSpec(salt, iterationCount, paramSpec);
-	Cons := c1 | c2;
+	c2: PBEParameterSpec(salt, iterationCount, params);
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 	
 CONSTRAINTS
 	iterationCount >= 10000;	
 
 REQUIRES
 	randomized[salt];
-
+			
 ENSURES
 	preparedPBE[this];
+
 	
