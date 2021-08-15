@@ -4,92 +4,94 @@ OBJECTS
 	java.lang.String transformation;
 	int encmode;
 	java.security.Key key;
-	java.security.cert.Certificate cert;
-	java.security.spec.AlgorithmParameterSpec params;
-	java.security.AlgorithmParameters param;
+	java.security.cert.Certificate certificate;
+	java.security.spec.AlgorithmParameterSpec paramSpec;
+	java.security.AlgorithmParameters params;
     
-	int pre_plain_off;
-	int pre_ciphertext_off;
-	int plain_off;
-	int ciphertext_off;
-	int aad_off;
+	int prePlainTextOffset;
+	int preCipherTextOffset;
+	int plainTextOffset;
+	int cipherTextOffset;
+	int aadOffset;
     
-	int pre_len;
-	int len;
-	int aad_len;
+	int prePlainTextLen;
+	int plainTextLen;
+	int aadLen;
     
-	byte[] pre_plaintext;
-	byte[] pre_ciphertext;
-	java.nio.ByteBuffer pre_plain_bytebuffer;
-	java.nio.ByteBuffer pre_cipher_bytebuffer;
+	byte[] prePlainText;
+	byte[] preCipherText;
+	java.nio.ByteBuffer prePlainTextByteBuffer;
+	java.nio.ByteBuffer preCipherTextByteBuffer;
     
 	byte[] plainText;
 	byte[] cipherText;
 	byte[] wrappedKeyBytes;
-	java.nio.ByteBuffer plain_bytebuffer;
-	java.nio.ByteBuffer cipher_bytebuffer;
+	java.nio.ByteBuffer plainTextByteBuffer;
+	java.nio.ByteBuffer cipherTextByteBuffer;
 	
-	byte[] aad_bytes;
-	java.nio.ByteBuffer aad_bytebuffer;
+	byte[] aadBytes;
+	java.nio.ByteBuffer aadByteBuffer;
 	
-	java.security.SecureRandom ranGen;
+	java.security.SecureRandom random;
 	
 	java.security.Key wrappedKey;
 
 EVENTS
 	g1: getInstance(transformation);
 	g2: getInstance(transformation, _);
-	Gets := g1 | g2;
+	Get := g1 | g2;
 
-	i1: init(encmode, cert);
-	i2: init(encmode, cert, ranGen);
+	i1: init(encmode, certificate);
+	i2: init(encmode, certificate, random);
 	i3: init(encmode, key);
-	i4: init(encmode, key, params);
-	i5: init(encmode, key, param);
-	i6: init(encmode, key, params, ranGen);
-	i7: init(encmode, key, param, ranGen);
-	i8: init(encmode, key, ranGen);
+	i4: init(encmode, key, paramSpec);
+	i5: init(encmode, key, params);
+	i6: init(encmode, key, paramSpec, random);
+	i7: init(encmode, key, params, random);
+	i8: init(encmode, key, random);
 	IWOIV := i1 | i2 | i3 | i8;
 	IWIV :=  i4 | i5 | i6 | i7;
-	Inits := IWOIV | IWIV;
+	Init := IWOIV | IWIV;
 
-	u1: pre_ciphertext = update(pre_plaintext);
-	u2: pre_ciphertext = update(pre_plaintext, pre_plain_off, _);
-	u3: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext);
-	u4: update(pre_plaintext, pre_plain_off, pre_len, pre_ciphertext, pre_ciphertext_off);
-	u5: update(pre_plain_bytebuffer, pre_cipher_bytebuffer);
-	Updates := u1 | u2 | u3 | u4 | u5;
+	u1: preCipherText = update(prePlainText);
+	u2: preCipherText = update(prePlainText, prePlainTextOffset, _);
+	u3: update(prePlainText, prePlainTextOffset, prePlainTextLen, preCipherText);
+	u4: update(prePlainText, prePlainTextOffset, prePlainTextLen, preCipherText, preCipherTextOffset);
+	u5: update(prePlainTextByteBuffer, preCipherTextByteBuffer);
+	Update := u1 | u2 | u3 | u4 | u5;
 	
-	ua1: updateAAD(aad_bytes);
-	ua2: updateAAD(aad_bytes, aad_off, aad_len);
-	ua3: updateAAD(aad_bytebuffer);
-	AADUpdates := ua1 | ua2 | ua3;
+	ua1: updateAAD(aadBytes);
+	ua2: updateAAD(aadBytes, aadOffset, aadLen);
+	ua3: updateAAD(aadByteBuffer);
+	AADUpdate := ua1 | ua2 | ua3;
 	
 	f1: cipherText = doFinal();
 	f2: cipherText =  doFinal(plainText);
-	f3: doFinal(cipherText, ciphertext_off);
-	f4: cipherText = doFinal(plainText, plain_off, len);
-	f5: doFinal(plainText, plain_off, len, cipherText);
-	f6: doFinal(plainText, plain_off, len, cipherText, ciphertext_off);
-	f7: doFinal(plain_bytebuffer, cipher_bytebuffer);
+	f3: doFinal(cipherText, cipherTextOffset);
+	f4: cipherText = doFinal(plainText, plainTextOffset, plainTextLen);
+	f5: doFinal(plainText, plainTextOffset, plainTextLen, cipherText);
+	f6: doFinal(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
+	f7: doFinal(plainTextByteBuffer, cipherTextByteBuffer);
 	FINWOU := f2 | f4 | f5 | f6 | f7;
-	DOFINALS := FINWOU | f1 | f3;
+	DoFinal := FINWOU | f1 | f3;
     
-	WKB: wrappedKeyBytes = wrap(wrappedKey);
+	wkb1: wrappedKeyBytes = wrap(wrappedKey);
+	WKB := wkb1;
     
-	IV: getIV();
+	iv1: getIV();
+	IV := iv1;
     
 ORDER
-	Gets, Inits+, AADUpdates*, WKB+ | (FINWOU | (Updates+, DOFINALS))+
+	Get, Init+, AADUpdate*, WKB+ | (FINWOU | (Update+, DoFinal))+
 
 CONSTRAINTS
-	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || instanceOf[cert, java.security.cert.Certificate] || 
+	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || instanceOf[certificate, java.security.cert.Certificate] || 
 												encmode in {3, 4} => alg(transformation) in {"RSA"};
 	instanceOf[key, javax.crypto.SecretKey] => alg(transformation) in {"AES", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", 
 									"PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", 
 									"PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", 
 									"PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
-	noCallTo[Inits] => alg(transformation) in {"AES", "RSA", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", 
+	noCallTo[Init] => alg(transformation) in {"AES", "RSA", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", 
 						"PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", 
 						"PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
 	alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "PCBC", "CTR", "CTS", "CFB", "OFB"};
@@ -113,28 +115,28 @@ CONSTRAINTS
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
 	
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdates];
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdate];
 	     
     
 	encmode in {1,2,3,4};
-	length[pre_plaintext] >= pre_plain_off + len;
-	length[pre_ciphertext] <= pre_ciphertext_off;
-	length[plainText] <= plain_off + len;
-	length[cipherText] <= ciphertext_off;
+	length[prePlainText] >= prePlainTextOffset + prePlainTextLen;
+	length[preCipherText] >= preCipherTextOffset;
+	length[plainText] >= plainTextOffset + plainTextLen;
+	length[cipherText] >= cipherTextOffset;
 
 REQUIRES
 	generatedKey[key, alg(transformation)];
-	randomized[ranGen];
-	preparedAlg[param, alg(transformation)];
+	randomized[random];
+	preparedAlg[params, alg(transformation)];
 	!macced[_, plainText];
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[params];
-	mode(transformation) in {"GCM"} => preparedGCM[params];
+	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[paramSpec];
+	mode(transformation) in {"GCM"} => preparedGCM[paramSpec];
 	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", 
-				"OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[params];
+				"OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[paramSpec];
 	
 ENSURES
-	generatedCipher[this] after Inits;
-	encrypted[pre_ciphertext, pre_plaintext] after Updates; 
+	generatedCipher[this] after Init;
+	encrypted[preCipherText, prePlainText] after Update; 
 	encrypted[cipherText, plainText];
-	encrypted[cipher_bytebuffer, plain_bytebuffer];
+	encrypted[cipherTextByteBuffer, plainTextByteBuffer];
 	wrappedKey[wrappedKeyBytes, wrappedKey];

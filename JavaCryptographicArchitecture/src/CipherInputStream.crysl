@@ -1,32 +1,32 @@
 SPEC javax.crypto.CipherInputStream
 
 OBJECTS
-	java.io.InputStream is;
-	javax.crypto.Cipher ciph;
+	java.io.InputStream inputStream;
+	javax.crypto.Cipher cipher;
 	byte[] buffer;
 	int offset;
 	int len;
 	
 EVENTS
-	c1: CipherInputStream(is, ciph);
-	Cons := c1;
+	c1: CipherInputStream(inputStream, cipher);
+	Con := c1;
 	
 	r1: read();
 	r2: read(buffer); 
 	r3: read(buffer, offset, len);
-	Reads := r1 | r2 | r3;
+	Read := r1 | r2 | r3;
 	
-	Close: close();
+	cl1: close();
+	Close := cl1;
 	
 ORDER
-	Cons, Reads+, Close
+	Con, Read+, Close
 
 CONSTRAINTS
-	len > offset;
+	length[buffer] >= offset + len;
 	
 REQUIRES
-	generatedCipher[ciph];	
+	generatedCipher[cipher];	
 	
 ENSURES
-	cipheredInputStream[is, ciph];
-	
+	cipheredInputStream[inputStream, cipher];

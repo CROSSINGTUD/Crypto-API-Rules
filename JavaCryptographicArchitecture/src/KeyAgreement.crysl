@@ -5,30 +5,31 @@ OBJECTS
 	java.security.Key key;
 	boolean lastPhase;
 	byte[] sharedSecret;
-	int offset;
+	int off;
 	java.security.spec.AlgorithmParameterSpec params;
 	java.security.SecureRandom random;
 	
 EVENTS
 	g1: getInstance(algorithm);
 	g2: getInstance(algorithm, _);
-	Gets := g1 | g2;
+	Get := g1 | g2;
     
 	i1: init(key);
 	i2: init(key, params);
 	i3: init(key, params, random);
 	i4: init(key, random);
-	Inits := i1 | i2 | i3 | i4;
+	Init := i1 | i2 | i3 | i4;
     
-	DoPhase: doPhase(key, lastPhase);
+	dp1: doPhase(key, lastPhase);
+	DoPhase := dp1;
     
 	gs1: generateSecret();
-	gs2: generateSecret(sharedSecret, offset);
+	gs2: generateSecret(sharedSecret, off);
 	gs3: generateSecret(algorithm);
-	GenSecrets := gs1 | gs2 | gs3;
+	GenSecret := gs1 | gs2 | gs3;
     
 ORDER
-	Gets, Inits, DoPhase, GenSecrets
+	Get, Init, DoPhase, GenSecret
 	
 CONSTRAINTS
 	algorithm in {"DH", "DiffieHellman", "ECDH"};

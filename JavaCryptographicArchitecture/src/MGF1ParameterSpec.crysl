@@ -4,7 +4,8 @@ OBJECTS
 	java.lang.String mdName;
 
 EVENTS
-	Con: MGF1ParameterSpec(mdName);
+	c1: MGF1ParameterSpec(mdName);
+	Con := c1;
 	
 ORDER
 	Con
@@ -14,4 +15,3 @@ CONSTRAINTS
 
 ENSURES
 	preparedMGF1[this, mdName];
-	

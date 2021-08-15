@@ -4,7 +4,8 @@ OBJECTS
 	byte[] encodedKey;
 
 EVENTS
-	Con: X509EncodedKeySpec(encodedKey);
+	c1: X509EncodedKeySpec(encodedKey);
+	Con := c1;
 	
 ORDER
 	Con
