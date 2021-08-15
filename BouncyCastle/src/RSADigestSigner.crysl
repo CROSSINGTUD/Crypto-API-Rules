@@ -33,10 +33,12 @@ EVENTS
 	Verify := v1;
 	
 ORDER
-	((c1, Init, Updates+, Sign) | (c2, Init, Updates+, Verify))
+	(Con, Init, Update+, (Sign | Verify))+
 	
 CONSTRAINTS
 	length[inputBytes] >= inputBytesOff + inputBytesLen;
+	forSigning in {true} => noCallTo[Verify];
+	forSigning in {false} => noCallTo[Sign];
 		
 REQUIRES
 	generatedSHA256Digest[digest];
