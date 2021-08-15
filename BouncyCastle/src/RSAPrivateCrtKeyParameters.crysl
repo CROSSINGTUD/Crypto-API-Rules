@@ -19,6 +19,7 @@ ORDER
 	
 CONSTRAINTS
 	modulus >= 2000; // BSI describes length of the modulus n to be at least 2000 bits
+	p != q;
 	
 REQUIRES
 	randomized[p]; // BSI describes p and q to be prime numbers chosen at random and independently of each other
