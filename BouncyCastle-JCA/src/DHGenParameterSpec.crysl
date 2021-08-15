@@ -10,6 +10,9 @@ EVENTS
 
 ORDER
 	Con
+	
+CONSTRAINTS
+	exponentSize < primeSize;
 
 ENSURES
 	preparedDH[this];
