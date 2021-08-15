@@ -38,7 +38,7 @@ EVENTS
 	DoFinal := df1;
 	
 ORDER
-	Con, Init, Process+, DoFinal
+	Con, Init, ProcessAAD*, Process+, DoFinal
 	
 CONSTRAINTS
 	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];

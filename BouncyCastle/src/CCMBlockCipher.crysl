@@ -38,7 +38,7 @@ EVENTS
 	DoFinal := df1;
 
 ORDER
-	Con, Init, Process+, DoFinal
+	Con, Init, ProcessAAD*, Process+, DoFinal
 
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
