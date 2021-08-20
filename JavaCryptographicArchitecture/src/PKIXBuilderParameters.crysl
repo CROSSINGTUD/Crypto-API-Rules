@@ -8,10 +8,10 @@ OBJECTS
 EVENTS
 	c1: PKIXBuilderParameters(keystore, targetConstraints);
 	c2: PKIXBuilderParameters(trustAnchors, targetConstraints);
-	Cons := c1 | c2;
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 	
 REQUIRES
 	generatedKeyStore[keystore];
