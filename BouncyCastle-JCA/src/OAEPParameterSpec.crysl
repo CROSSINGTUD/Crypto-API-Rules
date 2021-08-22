@@ -1,0 +1,25 @@
+SPEC javax.crypto.spec.OAEPParameterSpec
+
+OBJECTS 
+	java.lang.String mdName;
+	java.lang.String mgfName;
+	java.security.spec.AlgorithmParameterSpec mgfSpec;
+	javax.crypto.spec.PSource pSrc;
+	java.lang.String alg;
+
+EVENTS
+	c1: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
+	Con := c1;
+
+ORDER
+	Con
+
+CONSTRAINTS
+	mdName in {"SHA-256", "SHA-384", "SHA-512"};
+	mgfName in {"MGF1"};
+	
+REQUIRES
+	preparedMGF1[mgfSpec, mdName];
+
+ENSURES
+	preparedOAEP[this];
