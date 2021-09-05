@@ -137,10 +137,10 @@ REQUIRES
 	randomized[random];
 	preparedAlg[params, alg(transformation)];
 	!macced[_, plainText];
-	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[params];
-	mode(transformation) in {"GCM"} => preparedGCM[params];
+	mode(transformation) in {"CBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[paramSpec];
+	mode(transformation) in {"GCM"} => preparedGCM[paramSpec];
 	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding",
-				"OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[params];
+				"OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[paramSpec];
 	
 ENSURES
 	generatedCipher[this] after Init;

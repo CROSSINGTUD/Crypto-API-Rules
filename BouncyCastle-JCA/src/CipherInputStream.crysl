@@ -3,7 +3,7 @@ SPEC javax.crypto.CipherInputStream
 OBJECTS
 	java.io.InputStream inputStream;
 	javax.crypto.Cipher cipher;
-	byte[] buffer;
+	byte[] data;
 	int offset;
 	int len;
 	
@@ -12,8 +12,8 @@ EVENTS
 	Con := c1;
 	
 	r1: read();
-	r2: read(buffer); 
-	r3: read(buffer, offset, len);
+	r2: read(data); 
+	r3: read(data, offset, len);
 	Read := r1 | r2 | r3;
 	
 	cl1: close();
@@ -23,7 +23,7 @@ ORDER
 	Con, Read+, Close
 
 CONSTRAINTS
-	length[buffer] >= offset + len;
+	length[data] >= offset + len;
 	
 REQUIRES
 	generatedCipher[cipher];	
