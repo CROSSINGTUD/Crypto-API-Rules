@@ -13,7 +13,7 @@ EVENTS
 	gc1: generateCertificate(inStream);
 	GenCert := gc1;
 	
-	gen1: generateCertPath(inStream);
+	gen1: generateCertPath(_);
 	gen2: generateCertPath(inStream, encoding);
 	GenCertPath := gen1 | gen2;
 	
