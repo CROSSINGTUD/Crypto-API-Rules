@@ -24,7 +24,7 @@ EVENTS
 	Con := c1;
 	
 	i1: init(isEncryption, params);
-	init := i1;
+	Init := i1;
 	
 	pa1: processAADByte(aadByte);
 	pa2: processAADBytes(aadBytes, aadOff, aadLen);
