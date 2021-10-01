@@ -36,7 +36,6 @@ CONSTRAINTS
 	
 REQUIRES
 	randomized[random];
-	generatedPrivkey[key];
     
 ENSURES 
 	agreedKey[key, algorithm];
