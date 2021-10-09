@@ -5,7 +5,7 @@ OBJECTS
 	java.security.Key key;
 	boolean lastPhase;
 	byte[] sharedSecret;
-	int off;
+	int offset;
 	java.security.spec.AlgorithmParameterSpec params;
 	java.security.SecureRandom random;
 	
@@ -24,7 +24,7 @@ EVENTS
 	DoPhase := dp1;
     
 	gs1: generateSecret();
-	gs2: generateSecret(sharedSecret, off);
+	gs2: generateSecret(sharedSecret, offset);
 	gs3: generateSecret(algorithm);
 	GenSecret := gs1 | gs2 | gs3;
     
