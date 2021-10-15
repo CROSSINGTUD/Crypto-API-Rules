@@ -1,0 +1,25 @@
+SPEC org.bouncycastle.crypto.generators.KDF2BytesGenerator
+
+OBJECTS
+	byte[] out;
+	org.bouncycastle.crypto.DerivationParameters params;
+	org.bouncycastle.crypto.Digest digest;
+	int outLen;
+	int outOff;
+
+EVENTS
+	Con: KDF2BytesGenerator(digest);
+	
+	Init : init(params);
+	
+	Gen : generateBytes(out, outOff, outLen);
+	
+ORDER
+	Con, (Init, Gen)+
+
+REQUIRES
+	generatedSHA256Digest[digest];
+	generatedKDFParameters[params];
+
+ENSURES
+	generatedKDF2BytesGenerator[this];

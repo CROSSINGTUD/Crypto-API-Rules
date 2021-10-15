@@ -3,16 +3,33 @@ SPEC org.bouncycastle.crypto.AsymmetricCipherKeyPair
 OBJECTS
 	org.bouncycastle.crypto.params.AsymmetricKeyParameter pubParams;
 	org.bouncycastle.crypto.params.AsymmetricKeyParameter privParams;
+	java.security.PrivateKey priKey;
+	java.security.PublicKey pubKey;
 	
 EVENTS
-	co : AsymmetricCipherKeyPair(pubParams, privParams);
+	Con: AsymmetricCipherKeyPair(pubParams, privParams);
 	
+	getPri : priKey = getPrivate();
+	
+	getPub : pubKey = getPublic();
+
 ORDER
-	co
+	Con, (getPri*, getPub*)*
+	
+CONSTRAINTS
+	instanceOf[pubParams, org.bouncycastle.crypto.params.ECPublicKeyParameters] => instanceOf[privParams, org.bouncycastle.crypto.params.ECPrivateKeyParameters];
+	instanceOf[pubParams, org.bouncycastle.crypto.params.RSAKeyParameters] => instanceOf[privParams, org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters];
 	 
-REQUIRES
-	generatedRSAKeyParameters[pubParams];
-	generatedRSAPrivateCrtKeyParameters[privParams];
+REQUIRES	
+	generatedRSAKeyParameters[pubParams] || generatedECPublicKeyParameters[pubParams];
+	generatedRSAPrivateCrtKeyParameters[privParams] || generatedECPrivateKeyParameters[privParams];
+	
 	
 ENSURES
-	generatedRSAKeyPair[this] after co;
+	generatedECKeyPair[this] after Con;
+	generatedRSAKeyPair[this] after Con;
+	generatedECPubkey[pubKey] after getPub;
+	generatedECPrivkey[priKey] after getPri;
+	generatedRSAPubkey[pubKey] after getPub;
+	generatedRSAPrivkey[priKey] after getPri;
+

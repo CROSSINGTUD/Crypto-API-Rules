@@ -1,0 +1,14 @@
+SPEC org.bouncycastle.crypto.params.KDFParameters
+
+OBJECTS
+	byte[] iv;
+	byte[] shared;
+
+EVENTS
+	Con: KDFParameters(shared, iv);
+	
+ORDER
+	Con
+
+ENSURES
+	generatedKDFParameters[this];

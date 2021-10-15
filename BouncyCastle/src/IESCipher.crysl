@@ -1,0 +1,54 @@
+SPEC org.bouncycastle.jcajce.provider.asymmetric.ec.IESCipher
+OBJECTS
+	byte[] plaintext;
+	byte[] ciphertext;
+	
+	java.security.Key key;
+	java.security.SecureRandom ranGen;
+	java.security.spec.AlgorithmParameterSpec paramSpec;
+	
+	int iv_len;
+	int encmode;
+	int plain_len;
+	int plain_off;
+	int ciphertext_off;
+	
+	java.security.AlgorithmParameters params;
+	org.bouncycastle.crypto.engines.IESEngine engine;
+
+EVENTS
+	con1 : IESCipher(engine);
+	con2 : IESCipher(engine, iv_len);
+	Cons := con1 | con2;
+
+	init1 : engineInit(encmode, key, params, ranGen);
+	init2 : engineInit(encmode, key, ranGen); //guesses paramSpec//*
+	init3 : engineInit(encmode, key, paramSpec, ranGen);
+	Inits := init1 | init2 | init3;
+
+	upd1 : engineUpdate(plaintext, plain_off, plain_len);
+	upd2 : engineUpdate(plaintext, plain_off, plain_len, ciphertext, ciphertext_off);
+	Updates := upd1 | upd2;
+	
+	doFinal1 : ciphertext = engineDoFinal(plaintext, plain_off, plain_len);
+	doFinal2 : engineDoFinal(plaintext, plain_off, plain_len, ciphertext, ciphertext_off);
+	DoFinals := doFinal1 | doFinal2;
+	
+ORDER
+	Cons, (Inits, Updates*, DoFinals)+
+	
+CONSTRAINTS
+	encmode in {1,2,3,4};
+	length[plaintext] <= plain_off + plain_len;
+	length[ciphertext] <= ciphertext_off;
+
+REQUIRES
+	generatedIESEngine[engine];
+	generatedIESParameterSpec[paramSpec] || generatedIESParameter[params];
+	randomized[ranGen];
+	generatedPubkey[key] || generatedPrivkey[key] || generatedECPubkey[key] || generatedECPrivkey[key];
+
+ENSURES
+	generatedIESCipher[this] after Inits;
+	encrypted[ciphertext, plaintext];
+	
