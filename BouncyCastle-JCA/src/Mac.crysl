@@ -33,8 +33,9 @@ EVENTS
 	f1: output1 = doFinal();
 	f2: output2 = doFinal(input);
 	f3: doFinal(output1, outOffset);
-	FinalWU := f1 | f3;
-	Final := FinalWU | f2;
+	FinalWU := f2;
+	FinalWOU := f1 | f3;
+	Final := FinalWU | FinalWOU;
 
 ORDER
 	Get, Init, (FinalWU | (Update+, Final))
