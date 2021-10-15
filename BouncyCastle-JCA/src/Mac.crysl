@@ -44,6 +44,9 @@ CONSTRAINTS
 			 "HMACSHA3-256", "HMACSHA3-384", "HMACSHA3-512",
 			 "PBEWithHmacSHA256", "PBEWithHmacSHA384", "PBEWithHmacSHA512", "Poly1305", "Shacal-2CMAC"};
 	length[output1] > outOffset;
+	length[preInput] >= offset + len;
+	offset >= 0;
+	len > 0;
     
 REQUIRES
 	!encrypted[output1, _];

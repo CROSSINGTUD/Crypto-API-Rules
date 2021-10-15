@@ -49,6 +49,9 @@ CONSTRAINTS
 			"SHA3-512WITHECDDSA", "SHA256WITHECNR", "SHA384WITHECNR", "SHA512WITHECNR", "SHA256withECDSA", "SHA256withDSA", 
 			"SHA224withRSA", "SHA384withRSA", "SHA512withRSA", "SHA256withRSA", "SHA224withDSA", "SHA384withDSA", "SHA512withDSA", 
 			"QTESLA"};
+	length[input] >= offset + len;
+    offset >= 0;
+    len > 0;
     
 REQUIRES
 	generatedPrivkey[privateKey];

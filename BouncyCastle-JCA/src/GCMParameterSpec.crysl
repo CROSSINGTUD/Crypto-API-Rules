@@ -17,6 +17,8 @@ ORDER
 CONSTRAINTS
 	tagLen in {96, 104, 112, 120, 128};
 	length[src] >= offset + len;
+	offset >= 0;
+	len > 0;
 	
 REQUIRES
 	randomized[src];

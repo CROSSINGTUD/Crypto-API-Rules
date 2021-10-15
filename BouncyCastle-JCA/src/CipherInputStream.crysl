@@ -24,6 +24,10 @@ ORDER
 
 CONSTRAINTS
 	length[data] >= offset + len;
+	offset >= 0;
+	len > 0;
+
+	
 	
 REQUIRES
 	generatedCipher[cipher];	

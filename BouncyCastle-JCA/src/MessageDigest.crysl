@@ -39,7 +39,11 @@ CONSTRAINTS
 			"KECCAK-256", "KECCAK-384", "KECCAK-512",
 			"WHIRLPOOL"};
 	length[preInput] >= preLen + preOffset;
+	preOffset >= 0;
+	preLen > 0;
 	length[output] >= len + offset;
+	offset >= 0;
+	len > 0;
 
 ENSURES
 	generatedMessageDigest[this] after Get;
