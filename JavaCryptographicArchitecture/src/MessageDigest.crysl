@@ -36,7 +36,11 @@ ORDER
 CONSTRAINTS
 	algorithm in {"SHA-256", "SHA-384", "SHA-512"};
 	length[preInput] >= preLen + preOffset;
+	preOffset >= 0;
+	preLen > 0;
 	length[output] >= len + offset;
+	offset >= 0;
+	len > 0;
 
 ENSURES
 	generatedMessageDigest[this] after Get;

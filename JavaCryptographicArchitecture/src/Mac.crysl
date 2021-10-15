@@ -42,6 +42,9 @@ ORDER
 CONSTRAINTS
 	algorithm in {"HmacSHA256", "HmacSHA384", "HmacSHA512", "HmacPBESHA1", "PBEWithHmacSHA1", "PBEWithHmacSHA224", "PBEWithHmacSHA256", "PBEWithHmacSHA384", "PBEWithHmacSHA512"};
 	length[output1] > outOffset;
+	length[preInput] >= offset + len;
+	offset >= 0;
+	len > 0;
     
 REQUIRES
 	!encrypted[output1, _];

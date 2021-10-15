@@ -54,7 +54,7 @@ EVENTS
 	Init := IWOIV | IWIV;
 
 	u1: preCipherText = update(prePlainText);
-	u2: preCipherText = update(prePlainText, prePlainTextOffset, _);
+	u2: preCipherText = update(prePlainText, prePlainTextOffset, prePlainTextLen);
 	u3: update(prePlainText, prePlainTextOffset, prePlainTextLen, preCipherText);
 	u4: update(prePlainText, prePlainTextOffset, prePlainTextLen, preCipherText, preCipherTextOffset);
 	u5: update(prePlainTextByteBuffer, preCipherTextByteBuffer);
@@ -121,8 +121,14 @@ CONSTRAINTS
 	encmode in {1,2,3,4};
 	length[prePlainText] >= prePlainTextOffset + prePlainTextLen;
 	length[preCipherText] >= preCipherTextOffset;
+	prePlainTextOffset >= 0;
+	prePlainTextLen > 0;
+	preCipherTextOffset >= 0;
 	length[plainText] >= plainTextOffset + plainTextLen;
 	length[cipherText] >= cipherTextOffset;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
+	cipherTextOffset >= 0;
 
 REQUIRES
 	generatedKey[key, alg(transformation)];

@@ -47,6 +47,8 @@ ORDER
 CONSTRAINTS
 	algorithm in {"SHA256withRSA", "SHA256withECDSA", "SHA256withDSA", "SHA384withRSA", "SHA512withRSA", "SHA384withECDSA", "SHA512withECDSA"};
     length[input] >= offset + len;
+    offset >= 0;
+    len > 0;
     
 REQUIRES
 	generatedPrivkey[privateKey];
