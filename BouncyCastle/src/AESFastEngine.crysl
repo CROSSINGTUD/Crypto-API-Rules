@@ -8,7 +8,8 @@ FORBIDDEN
 	AESFastEngine() ;
 
 EVENTS	
-	Con : AESFastEngine();
+	c1: AESFastEngine();
+	Con := c1;
 	
 ORDER
 	Con

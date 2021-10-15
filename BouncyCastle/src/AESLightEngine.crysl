@@ -4,7 +4,8 @@ OBJECTS
 	int dummy; //This section can't be empty or else the rule is marked with an error.
 
 EVENTS	
-	Con : AESLightEngine();
+	c1: AESLightEngine();
+	Con := c1;
 	
 ORDER
 	Con

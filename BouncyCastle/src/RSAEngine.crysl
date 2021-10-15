@@ -3,23 +3,34 @@ SPEC org.bouncycastle.crypto.engines.RSAEngine
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 	
-	boolean is_encryption;
+	boolean isEncryption;
 	byte[] cipherText;
 	
+	byte[] plainText;
+	int plainTextLen;
+	int plainTextOffset;
+
 EVENTS
-	c : RSAEngine();
+	c1: RSAEngine();
+	Con := c1;
 	
-	i : init(is_encryption, params);
+	i1: init(isEncryption, params);
+	Init := i1;
 	
-	p : cipherText = processBlock(_, _, _);
+	p1: cipherText = processBlock(plainText, plainTextOffset, plainTextLen);
+	Process := p1;
 	
 ORDER
-	c, (i, p)+
+	Con, (Init, Process)+
+	
+CONSTRAINTS
+	length[plainText] >= plainTextOffset + plainTextLen;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
 	
 REQUIRES
 	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
 	
 ENSURES
-	generatedRSAEngine[this] after c;
-	encrypted[cipherText] after p;
-	
+	generatedRSAEngine[this] after Con;
+	encrypted[cipherText] after Process;

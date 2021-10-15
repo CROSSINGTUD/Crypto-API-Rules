@@ -4,12 +4,12 @@ OBJECTS
 	int blockSize;
 
 EVENTS
-	c1 : RijndaelEngine();
-	c2 : RijndaelEngine(blockSize);
-	Cons := c1 | c2;
+	c1: RijndaelEngine();
+	c2: RijndaelEngine(blockSize);
+	Con := c1 | c2;
 
 ORDER
-	Cons
+	Con
 
 CONSTRAINTS
 	blockSize in {128,192,256};

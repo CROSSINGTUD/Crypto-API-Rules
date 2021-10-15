@@ -4,29 +4,55 @@ OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	org.bouncycastle.crypto.CipherParameters params;
 	
+	byte aadByte;
+	byte[] aadBytes;
+	int aadOff;
+	int aadLen;
+	
+	byte plainTextByte;
+	byte[] plainText;
+	int plainTextOffset;
+	int plainTextLen;
+	
+	byte[] cipherText;
+	int cipherTextOffset;
+	
+	boolean isEncryption;
+	
 EVENTS
-	Con : GCMBlockCipher(engine);
+	c1: GCMBlockCipher(engine);
+	Con := c1;
 	
-	Init: init(_,params);
+	i1: init(isEncryption, params);
+	Init := i1;
 	
-	p1: processAADByte(_);
-	p2: processAADBytes(_,_,_);
-	p3: processByte(_,_,_);
-	p4: processBytes(_,_,_,_,_);
-	Process := p1 | p2 | p3 | p4;
+	pa1: processAADByte(aadByte);
+	pa2: processAADBytes(aadBytes, aadOff, aadLen);
+	ProcessAAD := pa1 | pa2;
 	
-	doFinal: doFinal(_,_);
+	p1: processByte(plainTextByte, cipherText, cipherTextOffset);
+	p2: processBytes(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
+	Process := p1 | p2;
+	
+	df1: doFinal(cipherText, cipherTextOffset);
+	DoFinal := df1;
 	
 ORDER
-	Con, Init, Process+, doFinal
+	Con, Init, ProcessAAD*, Process+, DoFinal
 	
 CONSTRAINTS
 	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
+	length[aadBytes] >= aadOff + aadLen;
+	length[plainText] >= plainTextOffset + plainTextLen;
+	length[cipherText] >= cipherTextOffset;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
+	cipherTextOffset >= 0;
 
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine];
 	generatedAEADParameters[params] || generatedParametersWithIV[params];
-		
 	
 ENSURES
 	generatedGCMBlockCipherMode[this] after Con;
+

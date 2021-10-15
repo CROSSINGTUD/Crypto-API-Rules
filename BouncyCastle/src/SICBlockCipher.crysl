@@ -5,7 +5,8 @@ OBJECTS
 	org.bouncycastle.crypto.BlockCipher engine;
 	
 EVENTS
-	Con: SICBlockCipher(engine);
+	c1: SICBlockCipher(engine);
+	Con := c1;
 	
 //No need to specify the order, must be wrapped in BufferedCipher
 	

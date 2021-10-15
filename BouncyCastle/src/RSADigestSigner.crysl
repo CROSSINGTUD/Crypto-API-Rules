@@ -3,36 +3,50 @@ SPEC org.bouncycastle.crypto.signers.RSADigestSigner
 OBJECTS
 	org.bouncycastle.crypto.Digest digest;
 	org.bouncycastle.crypto.CipherParameters params;
+	
+	byte inputByte;
+	byte[] inputBytes;
+	int inputBytesOffset;
+	int inputBytesLen;
 
-	byte[] out;
-	byte[] sign;
-	boolean is_encryption;
+	byte[] generatedSignature;
+	
+	byte[] signature;	
+	boolean forSigning;
 	
 EVENTS
-	c1 : RSADigestSigner(digest);
-	c2 : RSADigestSigner(digest, _);
+	c1: RSADigestSigner(digest);
+	c2: RSADigestSigner(digest, _);
+	Con := c1 | c2;
 	
-	i : init(is_encryption, params);
-	Inits := i;
+	i1: init(forSigning, params);
+	Init := i1;
 	
-	u1 : update(_);
-	u2 : update(_, _, _);
-	Updates := u1 | u2;
+	u1: update(inputByte);
+	u2: update(inputBytes, inputBytesOffset, inputBytesLen);
+	Update := u1 | u2;
 	
-	g : out = generateSignature();
-	Signs := g;
-	
-	v : verifySignature(sign);
-	Verify := v;
+	s1: generatedSignature = generateSignature();
+	Sign := s1;
+
+	v1: verifySignature(signature);
+	Verify := v1;
 	
 ORDER
-	((c1, Inits, Updates+, Signs) | (c2, Inits, Updates+, Verify))+
+	(Con, Init, Update+, (Sign | Verify))+
 	
+CONSTRAINTS
+	length[inputBytes] >= inputBytesOffset + inputBytesLen;
+	inputBytesOffset >= 0;
+	inputBytesLen > 0;
+	forSigning in {true} => noCallTo[Verify];
+	forSigning in {false} => noCallTo[Sign];
+		
 REQUIRES
 	generatedSHA256Digest[digest];
 	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];
 
 ENSURES
-	signed[out] after Signs;
-	verified[sign] after Verify;
+	signed[generatedSignature] after Sign;
+	verified[signature] after Verify;
 	
