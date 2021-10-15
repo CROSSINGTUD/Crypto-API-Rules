@@ -8,10 +8,10 @@ OBJECTS
 EVENTS
 	c1: DHParameterSpec(p, g);
 	c2: DHParameterSpec(p, g, l);
-	Cons := c1 | c2;
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 
 CONSTRAINTS
 	p >= 1^2048;

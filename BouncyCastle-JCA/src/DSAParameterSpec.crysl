@@ -6,7 +6,8 @@ OBJECTS
 	java.math.BigInteger g;
 	
 EVENTS
-	Con: DSAParameterSpec(p, q, g);
+	c1: DSAParameterSpec(p, q, g);
+	Con := c1;
 	
 ORDER
 	Con

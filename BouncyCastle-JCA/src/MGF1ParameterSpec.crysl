@@ -1,0 +1,17 @@
+SPEC java.security.spec.MGF1ParameterSpec
+
+OBJECTS 
+	java.lang.String mdName;
+
+EVENTS
+	c1: MGF1ParameterSpec(mdName);
+	Con := c1;
+	
+ORDER
+	Con
+
+CONSTRAINTS
+	mdName in {"SHA-256", "SHA-384", "SHA-512"};
+
+ENSURES
+	preparedMGF1[this, mdName];

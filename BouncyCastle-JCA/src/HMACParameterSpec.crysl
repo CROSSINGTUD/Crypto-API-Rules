@@ -1,14 +1,14 @@
 SPEC javax.xml.crypto.dsig.spec.HMACParameterSpec
 
 OBJECTS 
-	int outputLength;
-	
+	int outputLen;
+
 EVENTS
-	Con: HMACParameterSpec(outputLength);
+	c1: HMACParameterSpec(outputLen);
+	Con := c1;
 	
 ORDER
 	Con
 	
 ENSURES
 	preparedHMAC[this];
-	

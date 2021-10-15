@@ -1,0 +1,17 @@
+SPEC java.security.spec.X509EncodedKeySpec
+
+OBJECTS 	
+	byte[] encodedKey;
+
+EVENTS
+	c1: X509EncodedKeySpec(encodedKey);
+	Con := c1;
+	
+ORDER
+	Con
+
+REQUIRES
+	preparedKeyMaterial[encodedKey];
+ 	
+ENSURES
+	speccedKey[this, _] after Con;

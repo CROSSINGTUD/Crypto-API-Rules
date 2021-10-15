@@ -1,27 +1,28 @@
 SPEC javax.net.ssl.TrustManagerFactory
 
 OBJECTS
-	java.lang.String algo;
+	java.lang.String algorithm;
 	java.security.KeyStore keyStore;
 	javax.net.ssl.ManagerFactoryParameters params;
-	javax.net.ssl.TrustManager[] tms; 
+	javax.net.ssl.TrustManager[] trustManager; 
 	
 EVENTS
-	g1: getInstance(algo);
-	g2: getInstance(algo, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 	
 	i1: init(keyStore);
 	i2: init(params);
 	Init := i1 | i2;
 	
-	GetTrustMng: tms = getTrustManagers();
+	gtm1: trustManager = getTrustManagers();
+	GetTrustMng := gtm1;
 	
 ORDER
-	Gets, Init, GetTrustMng?
+	Get, Init, GetTrustMng?
 	
 CONSTRAINTS
-	algo in {"PKIX", "X509", "X.509"};
+	algorithm in {"PKIX", "X509", "X.509"};
 
 REQUIRES
 	generatedKeyStore[keyStore];
@@ -29,4 +30,4 @@ REQUIRES
 															
 ENSURES
 	generatedTrustManager[this] after Init;			
-	generatedTrustManagers[tms] after GetTrustMng;
+	generatedTrustManagers[trustManager] after GetTrustMng;

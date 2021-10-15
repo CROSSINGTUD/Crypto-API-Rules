@@ -1,46 +1,50 @@
 SPEC java.security.AlgorithmParameters
 
 OBJECTS
-	java.lang.String alg;
-	java.security.spec.AlgorithmParameterSpec params;
-	byte[] parAr; 
+	java.lang.String algorithm;
+	java.security.spec.AlgorithmParameterSpec paramSpec;
+	byte[] params; 
 	java.lang.String format;
-	byte[] parsRes;
+	byte[] encParams;
 
 EVENTS
-	g1: getInstance(alg);
-	g2: getInstance(alg, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 
-	i1: init(params);
-	i2: init(parAr);
-	i3: init(parAr, _);
-	Inits := i1 | i2 | i3;
+	i1: init(paramSpec);
+	i2: init(params);
+	i3: init(params, _);
+	Init := i1 | i2 | i3;
     
-	e1: parsRes = getEncoded();
-	e2: parsRes = getEncoded(format);
-	GetEncs := e1 | e2;
+	e1: encParams = getEncoded();
+	e2: encParams = getEncoded(format);
+	GetEncoded := e1 | e2;
 
 ORDER
-	Gets, Inits, GetEncs?
+	Get, Init, GetEncoded?
 
 CONSTRAINTS
-	alg in {"AES", "Camellia", "ChaCha7539", "DSA", "DiffieHellman", "DH", "EC", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", 
+	algorithm in {"AES", "Camellia", "ChaCha7539", "DSA", "DiffieHellman", "DH", "EC", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", 
 		"Serpent", "SHACAL-2", "Shacal2", "Twofish", "XSalsa20", "OAEP", "PSS", "RSAPSS", "SHA256withRSA/PSS", "SHA384withRSA/PSS", 
 		"SHA512withRSA/PSS", "SHA256WITHRSAANDMGF1", "SHA386WITHRSAANDMGF1", "SHA512WITHRSAANDMGF1", "SHA3-256WITHRSAANDMGF1", 
 		"SHA3-386WITHRSAANDMGF1", "SHA3-512WITHRSAANDMGF1"};
 
 REQUIRES    
-	preparedAlg[parAr, alg];
-	alg in {"AES", "Camellia", "ChaCha7539", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2",
+	preparedAlg[params, algorithm];
+	algorithm in {"AES", "Camellia", "ChaCha7539", "ElGamal", "PBKDF2", "Rijndael", "Salsa20", "Tnepres", "Serpent", "SHACAL-2",
 		"Shacal2", "Twofish", "XSalsa20", "OAEP", "PSS", "RSAPSS", "SHA256withRSA/PSS", "SHA384withRSA/PSS", "SHA512withRSA/PSS",
 		"SHA256WITHRSAANDMGF1", "SHA386WITHRSAANDMGF1", "SHA512WITHRSAANDMGF1", "SHA3-256WITHRSAANDMGF1", "SHA3-386WITHRSAANDMGF1",
-		"SHA3-512WITHRSAANDMGF1"} => preparedIV[params];
-	alg in {"DiffieHellman", "DH"} => preparedDH[params];
-	alg in {"DSA"} => preparedDSA[params];
-	alg in {"EC"} => preparedEC[params];
+		"SHA3-512WITHRSAANDMGF1"} => preparedIV[paramSpec];
+	algorithm in {"DiffieHellman", "DH"} => preparedDH[paramSpec];
+	algorithm in {"DSA"} => preparedDSA[paramSpec];
+	algorithm in {"EC"} => preparedEC[paramSpec];
+	algorithm in {"OAEP"} => preparedOAEP[paramSpec];
+	algorithm in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", 
+		"PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", 
+		"PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => preparedPBE[paramSpec];
     
 ENSURES 
-	preparedAlg[this, alg] after Inits;
-	preparedAlg[parsRes, alg] after GetEncs;
+	preparedAlg[this, algorithm] after Init;
+	preparedAlg[encParams, algorithm] after GetEncoded;
     
