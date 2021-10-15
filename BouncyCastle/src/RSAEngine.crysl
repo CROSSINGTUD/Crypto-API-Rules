@@ -8,7 +8,7 @@ OBJECTS
 	
 	byte[] plainText;
 	int plainTextLen;
-	int plainTextOff;
+	int plainTextOffset;
 
 EVENTS
 	c1: RSAEngine();
@@ -17,14 +17,16 @@ EVENTS
 	i1: init(isEncryption, params);
 	Init := i1;
 	
-	p1: cipherText = processBlock(plainText, plainTextOff, plainTextLen);
+	p1: cipherText = processBlock(plainText, plainTextOffset, plainTextLen);
 	Process := p1;
 	
 ORDER
 	Con, (Init, Process)+
 	
 CONSTRAINTS
-	length[plainText] >= plainTextOff + plainTextLen;
+	length[plainText] >= plainTextOffset + plainTextLen;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
 	
 REQUIRES
 	generatedRSAKeyParameters[params] || generatedRSAPrivateCrtKeyParameters[params] || generatedECPublicKeyParameters[params];

@@ -9,10 +9,10 @@ OBJECTS
 	byte inputByte;
 	byte[] inputBytes;
 	int inputBytesLen;
-	int inputBytesOff;
+	int inputBytesOffset;
 	
 	byte[] outputBytes;
-	int outputBytesOff;
+	int outputBytesOffset;
 
 
 EVENTS
@@ -23,17 +23,20 @@ EVENTS
 	Init := i1;
 	
 	u1: update(inputByte);
-	u2: update(inputBytes, inputBytesOff, inputBytesLen);
+	u2: update(inputBytes, inputBytesOffset, inputBytesLen);
 	Update := u1 | u2;
 	
-	DoFinal: doFinal(outputBytes, outputBytesOff);
+	DoFinal: doFinal(outputBytes, outputBytesOffset);
 	
 ORDER
 	Con, (Init, Update+, DoFinal)+
 	
 CONSTRAINTS
-	length[inputBytes] >= inputBytesOff + inputBytesLen;
-	length[outputBytes] >= outputBytesOff;
+	length[inputBytes] >= inputBytesOffset + inputBytesLen;
+	length[outputBytes] >= outputBytesOffset;
+	inputBytesOffset >= 0;
+	inputBytesLen > 0;
+	outputBytesOffset >= 0;
 	
 REQUIRES
 	generatedSHA256Digest[digest];

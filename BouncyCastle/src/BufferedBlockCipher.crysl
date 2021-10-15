@@ -6,11 +6,11 @@ OBJECTS
 	
 	byte plainTextByte;
 	byte[] plainText;
-	int plainTextOff;
+	int plainTextOffset;
 	int plainTextLen;
 	
 	byte[] cipherText;
-	int cipherTextOff;
+	int cipherTextOffset;
 	
 	boolean isEncryption;
 
@@ -23,20 +23,23 @@ EVENTS
 	Init := i1;
 
 //	@return the number of output bytes copied to out.
-	p1: processByte(plainTextByte, cipherText, cipherTextOff);
-	p2: processBytes(plainText, plainTextOff, plainTextLen, cipherText, cipherTextOff);
+	p1: processByte(plainTextByte, cipherText, cipherTextOffset);
+	p2: processBytes(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
 	Proc := p1 | p2;
 	
 //	@return the number of output bytes copied to out.
-	df1: doFinal(cipherText, cipherTextOff);
+	df1: doFinal(cipherText, cipherTextOffset);
 	DoFinal := df1;
 	
 ORDER
 	Con, (Init, Proc, DoFinal)+
 	
 CONSTRAINTS
-	length[plainText] >= plainTextOff + plainTextLen;
-	length[cipherText] >= cipherTextOff;
+	length[plainText] >= plainTextOffset + plainTextLen;
+	length[cipherText] >= cipherTextOffset;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
+	cipherTextOffset >= 0;
 	
 REQUIRES
 	generatedGCMBlockCipher[cipher];

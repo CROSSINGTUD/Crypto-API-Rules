@@ -6,11 +6,11 @@ OBJECTS
 	
 	byte inputByte;
 	byte[] inputBytes;
-	int inputBytesOff;
+	int inputBytesOffset;
 	int inputBytesLen;
 	
 	byte[] outputBytes;
-	int outputBytesOff;
+	int outputBytesOffset;
 	
 EVENTS
 	c1: SHA256Digest();
@@ -20,10 +20,10 @@ EVENTS
 	Con := c1 | c2 | c3;
 	
 	u1: update(inputByte);
-	u2: update(inputBytes, inputBytesOff, inputBytesLen);
+	u2: update(inputBytes, inputBytesOffset, inputBytesLen);
 	Update := u1 | u2;
 	
-	df1: doFinal(outputBytes, outputBytesOff);
+	df1: doFinal(outputBytes, outputBytesOffset);
 	DoFinal := df1;
 	
 	r1: reset();
@@ -33,8 +33,11 @@ ORDER
 	Con, ((Reset?, Update+)+, DoFinal)*
 	
 CONSTRAINTS
-	length[inputBytes] >= inputBytesOff + inputBytesLen;
-	length[outputBytes] >= outputBytesOff;
+	length[inputBytes] >= inputBytesOffset + inputBytesLen;
+	inputBytesOffset >= 0;
+	inputBytesLen > 0;
+	length[outputBytes] >= outputBytesOffset;
+	outputBytesOffset > 0;
 	
 REQUIRES
 	generatedSHA256Digest[digest];

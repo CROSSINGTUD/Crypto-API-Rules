@@ -2,19 +2,21 @@ SPEC org.bouncycastle.crypto.params.KeyParameter
 
 OBJECTS
 	byte[] key;
-	int keyOff;
+	int keyOffset;
 	int keyLen;
 
 EVENTS
 	c1: KeyParameter(key);
-	c2: KeyParameter(key, keyOff, keyLen);
+	c2: KeyParameter(key, keyOffset, keyLen);
 	Con := c1 | c2;
 	
 ORDER
 	Con
 	
 CONSTRAINTS
-	length[key] >= keyOff + keyLen;
+	length[key] >= keyOffset + keyLen;
+	keyOffset >= 0;
+	keyLen > 0;
 
 REQUIRES
 	randomized[key];

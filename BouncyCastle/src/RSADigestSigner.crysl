@@ -6,7 +6,7 @@ OBJECTS
 	
 	byte inputByte;
 	byte[] inputBytes;
-	int inputBytesOff;
+	int inputBytesOffset;
 	int inputBytesLen;
 
 	byte[] generatedSignature;
@@ -23,7 +23,7 @@ EVENTS
 	Init := i1;
 	
 	u1: update(inputByte);
-	u2: update(inputBytes, inputBytesOff, inputBytesLen);
+	u2: update(inputBytes, inputBytesOffset, inputBytesLen);
 	Update := u1 | u2;
 	
 	s1: generatedSignature = generateSignature();
@@ -36,7 +36,9 @@ ORDER
 	(Con, Init, Update+, (Sign | Verify))+
 	
 CONSTRAINTS
-	length[inputBytes] >= inputBytesOff + inputBytesLen;
+	length[inputBytes] >= inputBytesOffset + inputBytesLen;
+	inputBytesOffset >= 0;
+	inputBytesLen > 0;
 	forSigning in {true} => noCallTo[Verify];
 	forSigning in {false} => noCallTo[Sign];
 		

@@ -11,11 +11,11 @@ OBJECTS
 	
 	byte plainTextByte;
 	byte[] plainText;
-	int plainTextOff;
+	int plainTextOffset;
 	int plainTextLen;
 	
 	byte[] cipherText;
-	int cipherTextOff;
+	int cipherTextOffset;
 	
 	boolean isEncryption;
 	
@@ -30,11 +30,11 @@ EVENTS
 	pa2: processAADBytes(aadBytes, aadOff, aadLen);
 	ProcessAAD := pa1 | pa2;
 	
-	p1: processByte(plainTextByte, cipherText, cipherTextOff);
-	p2: processBytes(plainText, plainTextOff, plainTextLen, cipherText, cipherTextOff);
+	p1: processByte(plainTextByte, cipherText, cipherTextOffset);
+	p2: processBytes(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
 	Process := p1 | p2;
 	
-	df1: doFinal(cipherText, cipherTextOff);
+	df1: doFinal(cipherText, cipherTextOffset);
 	DoFinal := df1;
 	
 ORDER
@@ -43,8 +43,11 @@ ORDER
 CONSTRAINTS
 	neverTypeOf[engine, org.bouncycastle.crypto.engines.AESFastEngine];
 	length[aadBytes] >= aadOff + aadLen;
-	length[plainText] >= plainTextOff + plainTextLen;
-	length[cipherText] >= cipherTextOff;
+	length[plainText] >= plainTextOffset + plainTextLen;
+	length[cipherText] >= cipherTextOffset;
+	plainTextOffset >= 0;
+	plainTextLen > 0;
+	cipherTextOffset >= 0;
 
 REQUIRES
 	generatedAESEngine[engine] || generatedAESLightEngine[engine];
