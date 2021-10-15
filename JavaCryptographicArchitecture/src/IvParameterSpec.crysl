@@ -6,16 +6,20 @@ OBJECTS
 	int len;
 	
 EVENTS
-	cons1: IvParameterSpec(iv);
-	cons2: IvParameterSpec(iv, offset, len);
-	Cons := cons1 | cons2;
+	c1: IvParameterSpec(iv);
+	c2: IvParameterSpec(iv, offset, len);
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
+	
+CONSTRAINTS
+	length[iv] >= offset + len;
+	offset >= 0;
+	len > 0;
 	
 REQUIRES
 	randomized[iv];
 
 ENSURES
 	preparedIV[this];
-	

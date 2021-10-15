@@ -1,26 +1,29 @@
 SPEC java.security.KeyPair
 
 OBJECTS
-	java.security.PrivateKey consPriv;
-	java.security.PublicKey consPub;
-	java.security.PrivateKey retPriv;
-	java.security.PublicKey retPub;
+	java.security.PrivateKey privateKey;
+	java.security.PublicKey publicKey;
+	java.security.PrivateKey retPrivateKey;
+	java.security.PublicKey retPublicKey;
 	
 EVENTS
-	Con: KeyPair(consPub, consPriv);
+	c1: KeyPair(publicKey, privateKey);
+	Con := c1;
 	
-	GetPubl: retPub = getPublic();
-	GetPriv: retPriv = getPrivate();
+	gpu1: retPublicKey = getPublic();
+	GetPubl := gpu1;
+	
+	gpr1: retPrivateKey = getPrivate();
+	GetPriv := gpr1;
 
 ORDER
-	Con, (GetPubl*, GetPriv*)*
+	Con, (GetPubl | GetPriv)*
 	
 REQUIRES
-	generatedPrivkey[consPriv];
-	generatedPubkey[consPub];
+	generatedPrivkey[privateKey];
+	generatedPubkey[publicKey];
 	
 ENSURES
 	generatedKeypair[this, _] after Con;
-	generatedPubkey[retPub] after GetPubl;
-	generatedPrivkey[retPriv] after GetPriv;
-	
+	generatedPubkey[retPublicKey] after GetPubl;
+	generatedPrivkey[retPrivateKey] after GetPriv;

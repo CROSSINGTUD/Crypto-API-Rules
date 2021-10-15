@@ -2,37 +2,37 @@ SPEC javax.net.ssl.SSLContext
  
 OBJECTS
 	java.lang.String protocol;
-	javax.net.ssl.KeyManager[] kms; 
-	javax.net.ssl.TrustManager[] tms; 
+	javax.net.ssl.KeyManager[] km; 
+	javax.net.ssl.TrustManager[] tm; 
 	javax.net.ssl.SSLEngine eng;
-	java.security.SecureRandom sr;
+	java.security.SecureRandom random;
 	
 FORBIDDEN
-	getDefault() => Gets;
+	getDefault() => Get;
 
 EVENTS
 	g1: getInstance(protocol);
 	g2: getInstance(protocol, _);
-	Gets := g1 | g2;
+	Get := g1 | g2;
 	
-	Init: init(kms, tms, sr);		
+	i1: init(km, tm, random);
+	Init := i1;		
 	
 	se1: eng = createSSLEngine();
 	se2: eng = createSSLEngine(_,_);
-	Engines := se1 | se2;
+	Engine := se1 | se2;
 
 ORDER
-	Gets, Init, Engines? 
+	Get, Init, Engine? 
 
 CONSTRAINTS
 	protocol in {"TLSv1.2", "TLSv1.3"};
 
 REQUIRES
-	generatedKeyManagers[kms];
-	generatedTrustManagers[tms];
-	randomized[sr];
+	generatedKeyManagers[km];
+	generatedTrustManagers[tm];
+	randomized[random];
 	
 ENSURES
 	generatedSSLContext[this] after Init;
-	generatedSSLEngine[eng] after Engines;
-
+	generatedSSLEngine[eng] after Engine;

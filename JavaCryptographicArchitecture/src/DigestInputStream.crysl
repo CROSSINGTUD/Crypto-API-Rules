@@ -1,8 +1,8 @@
 SPEC java.security.DigestInputStream
 
 OBJECTS
-	java.io.InputStream is;
-	java.security.MessageDigest md;
+	java.io.InputStream stream;
+	java.security.MessageDigest digest;
 	byte[] data;
 	int offset;
 	int len;
@@ -11,23 +11,26 @@ FORBIDDEN
 	on(boolean) ;
 
 EVENTS
-	Con: DigestInputStream(is, md);
+	c1: DigestInputStream(stream, digest);
+	Con := c1;
 	
 	r1: read(); 
 	r2: read(data, offset, len);
-	Reads := r1 | r2;
+	Read := r1 | r2;
 
-	Close: close();
+	cl1: close();
+	Close := cl1;
 
 ORDER
-	Con, Reads+, Close
+	Con, Read+, Close
 	
 CONSTRAINTS
-	len > offset;
+	length[data] >= offset + len;
+	offset >= 0;
+	len > 0;
 	
 REQUIRES
-	generatedMessageDigest[md];
+	generatedMessageDigest[digest];
 
 ENSURES
-	digestedInputStream[is, md];
-	
+	digestedInputStream[stream, digest];

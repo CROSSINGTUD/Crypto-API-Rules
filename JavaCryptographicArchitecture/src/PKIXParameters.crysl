@@ -6,14 +6,13 @@ OBJECTS
 EVENTS
 	c1: PKIXParameters(keyStore);
 	c2: PKIXParameters(_);
-	Cons := c1 | c2;
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 
 REQUIRES
 	generatedKeyStore[keyStore];		
 
 ENSURES
 	generatedCertPathParameters[this];
-	

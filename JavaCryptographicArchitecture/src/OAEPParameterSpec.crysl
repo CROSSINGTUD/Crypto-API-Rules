@@ -8,7 +8,8 @@ OBJECTS
 	java.lang.String alg;
 
 EVENTS
-	Con: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
+	c1: OAEPParameterSpec(mdName, mgfName, mgfSpec, pSrc);
+	Con := c1;
 
 ORDER
 	Con
@@ -22,4 +23,3 @@ REQUIRES
 
 ENSURES
 	preparedOAEP[this];
-	

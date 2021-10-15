@@ -1,22 +1,21 @@
 SPEC java.security.cert.TrustAnchor
 
 OBJECTS
-	java.security.PublicKey pubKey;
-	java.security.cert.X509Certificate cert;
-	javax.security.auth.x500.X500Principal princ;
+	java.security.PublicKey publicKey;
+	java.security.cert.X509Certificate trustedCert;
+	javax.security.auth.x500.X500Principal caPrincipal;
 	
 EVENTS
-	c1: TrustAnchor(_, pubKey, _);
-	c2: TrustAnchor(cert, _);
-	c3: TrustAnchor(princ, pubKey, _);
-	Cons := c1 | c2 | c3;
+	c1: TrustAnchor(_, publicKey, _);
+	c2: TrustAnchor(trustedCert, _);
+	c3: TrustAnchor(caPrincipal, publicKey, _);
+	Con := c1 | c2 | c3;
 	
 ORDER
-	Cons
+	Con
 	
 REQUIRES
-	generatedPubkey[pubKey];
+	generatedPubkey[publicKey];
 	
 ENSURES
 	generatedTrustAnchor[this];
-	

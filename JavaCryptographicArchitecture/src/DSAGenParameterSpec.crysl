@@ -8,11 +8,18 @@ OBJECTS
 EVENTS
 	c1: DSAGenParameterSpec(primePLen, subPrimeQLen);
 	c2: DSAGenParameterSpec(primePLen, subPrimeQLen, seedLen);
-	Cons := c1 | c2;
+	Con := c1 | c2;
 	
 ORDER
-	Cons
+	Con
 	
+CONSTRAINTS
+	primePLen in {1024, 2048, 3072};
+	subPrimeQLen in {160, 224, 256};
+	
+	primePLen in {1024} => subPrimeQLen in {160};
+	primePLen in {2048} => subPrimeQLen in {224, 256};
+	primePLen in {3072} => subPrimeQLen in {256};
+
 ENSURES
 	preparedDSA[this];
-	

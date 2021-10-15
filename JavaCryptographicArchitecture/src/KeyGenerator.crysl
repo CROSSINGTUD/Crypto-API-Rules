@@ -1,36 +1,36 @@
 SPEC javax.crypto.KeyGenerator
 
 OBJECTS
-	int secretKeySize;
+	int keysize;
 	java.security.spec.AlgorithmParameterSpec params;
 	javax.crypto.SecretKey key;
-	java.lang.String secretKeyAlgorithm;
-	java.security.SecureRandom ranGen;
+	java.lang.String algorithm;
+	java.security.SecureRandom random;
 
 EVENTS
-	g1: getInstance(secretKeyAlgorithm);
-	g2: getInstance(secretKeyAlgorithm, _);
-	Gets := g1 | g2;
+	g1: getInstance(algorithm);
+	g2: getInstance(algorithm, _);
+	Get := g1 | g2;
 
-	i1: init(secretKeySize);
-	i2: init(secretKeySize, ranGen);
+	i1: init(keysize);
+	i2: init(keysize, random);
 	i3: init(params);
-	i4: init(params, ranGen);
-	i5: init(ranGen);
-	Inits := i1 | i2 | i3 | i4 | i5;
+	i4: init(params, random);
+	i5: init(random);
+	Init := i1 | i2 | i3 | i4 | i5;
     
-	GenKey: key = generateKey();
+	gk1: key = generateKey();
+	GenKey := gk1;
 
 ORDER
-	Gets, Inits?, GenKey
+	Get, Init?, GenKey
 
 CONSTRAINTS
-	secretKeyAlgorithm in {"AES", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
-	secretKeyAlgorithm in {"AES"} => secretKeySize in {128, 192, 256};
+	algorithm in {"AES", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
+	algorithm in {"AES"} => keysize in {128, 192, 256};
    
 REQUIRES
-	randomized[ranGen];
+	randomized[random];
     
 ENSURES 
-	generatedKey[key, secretKeyAlgorithm];
-	
+	generatedKey[key, algorithm];
