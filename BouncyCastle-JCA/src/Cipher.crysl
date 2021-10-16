@@ -82,7 +82,7 @@ EVENTS
 	IV := iv1;
     
 ORDER
-	Get, Init+, AADUpdate*, WKB+ | (FINWOU | (Update+, DoFinal))+
+	Get, Init+, WKB+ | (FINWOU | (Update+, DoFinal))+
 
 CONSTRAINTS
 	instanceOf[key, java.security.PublicKey] || instanceOf[key, java.security.PrivateKey] || encmode in {3, 4} => alg(transformation) in {"RSA"};

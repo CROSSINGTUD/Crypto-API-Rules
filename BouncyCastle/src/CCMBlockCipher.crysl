@@ -38,7 +38,7 @@ EVENTS
 	DoFinal := df1;
 
 ORDER
-	Con, Init, ProcessAAD*, Process+, DoFinal
+	Con, Init, Process+, DoFinal
 	
 CONSTRAINTS
 	length[cipherText] >= cipherTextOffset;
