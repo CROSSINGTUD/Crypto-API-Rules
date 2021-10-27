@@ -15,7 +15,7 @@ ORDER
 	Con
 
 CONSTRAINTS
-	mdName in {"SHA-256", "SHA-384", "SHA-512"};
+	mdName in {"SHA-256", "SHA-384", "SHA-512", "SHA3-256", "SHA3-384", "SHA3-512"};
 	mgfName in {"MGF1"};
 	
 REQUIRES
