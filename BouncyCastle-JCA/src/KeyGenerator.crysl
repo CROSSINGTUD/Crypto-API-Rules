@@ -26,7 +26,7 @@ ORDER
 	Get, Init?, GenKey
 
 CONSTRAINTS
-	algorithm in {"AES", "HmacSHA224", "HmacSHA256", "HmacSHA384", "HmacSHA512", "HMACSHA3-224", "HMACSHA3-256", "HMACSHA3-384", "HMACSHA3-512",
+	algorithm in {"AES", "HmacSHA256", "HmacSHA384", "HmacSHA512", "HMACSHA3-256", "HMACSHA3-384", "HMACSHA3-512",
 				"Poly1305-AES", "Poly1305-Camellia", "Camellia", "ChaCha", 
 				"ChaCha7539", "Poly1305", "Rijndael", "Salsa20", "Serpent", "Tnepres", "Poly1305-Serpent", "SHACAL-2", "Shacal2", 
 				"Twofish", "Poly1305-Twofish", "XSalsa20"};
