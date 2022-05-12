@@ -2,9 +2,12 @@ SPEC javax.crypto.KeyAgreement
 
 OBJECTS
 	java.lang.String algorithm;
-	java.security.Key key;
+	java.lang.String symmetricKeyAlgorithm;
+	java.security.Key pubKey;
+	java.security.Key privKey;
+	javax.crypto.SecretKey sharedKey;
 	boolean lastPhase;
-	byte[] sharedSecret;
+	byte[] sharedSecretBuffer;
 	int offset;
 	java.security.spec.AlgorithmParameterSpec params;
 	java.security.SecureRandom random;
@@ -14,28 +17,35 @@ EVENTS
 	g2: getInstance(algorithm, _);
 	Get := g1 | g2;
     
-	i1: init(key);
-	i2: init(key, params);
-	i3: init(key, params, random);
-	i4: init(key, random);
+	i1: init(privKey);
+	i2: init(privKey, params);
+	i3: init(privKey, params, random);
+	i4: init(privKey, random);
 	Init := i1 | i2 | i3 | i4;
     
-	dp1: doPhase(key, lastPhase);
+	dp1: doPhase(pubKey, lastPhase);
 	DoPhase := dp1;
     
-	gs1: generateSecret();
-	gs2: generateSecret(sharedSecret, offset);
-	gs3: generateSecret(algorithm);
-	GenSecret := gs1 | gs2 | gs3;
+	gs1: sharedSecretBuffer = generateSecret();
+	gs2: generateSecret(sharedSecretBuffer, offset);
+	GenSecretBuffer := gs1 | g2;
+	
+	gs3: sharedKey = generateSecret(symmetricKeyAlgorithm);
+	GenSecret := gs3 | GenSecretBuffer;
     
 ORDER
-	Get, Init, DoPhase, GenSecret
+	Get, Init, DoPhase, GenSecretBuffer
 	
 CONSTRAINTS
 	algorithm in {"DH", "DiffieHellman", "ECDH"};
+	noCallTo[gs3];
 	
 REQUIRES
 	randomized[random];
+	generatedPrivkey[privKey];
+	generatedPubkey[pubKey];
+	algorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+	algorithm in {"ECDH"} => preparedEC[params];
     
-ENSURES 
-	agreedKey[key, algorithm];
+ENSURES
+	preparedKeyMaterial[sharedSecretBuffer] after GenSecretBuffer;
