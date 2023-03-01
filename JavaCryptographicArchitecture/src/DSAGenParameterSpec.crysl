@@ -14,11 +14,9 @@ ORDER
 	Con
 	
 CONSTRAINTS
-	primePLen in {1024, 2048, 3072};
-	subPrimeQLen in {160, 224, 256};
-	
-	primePLen in {1024} => subPrimeQLen in {160};
-	primePLen in {2048} => subPrimeQLen in {224, 256};
+	primePLen in {3072}; //BSI TR-02102-1 page 53
+	subPrimeQLen in {256};
+
 	primePLen in {3072} => subPrimeQLen in {256};
 
 ENSURES
