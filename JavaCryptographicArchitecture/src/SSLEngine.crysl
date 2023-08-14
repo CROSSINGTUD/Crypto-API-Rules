@@ -9,7 +9,7 @@ EVENTS
 	EnableCipher := ec1;
 	
 	ep1: setEnabledProtocols(protocols);
-	EnableProtocol := cp1;	
+	EnableProtocol := ep1;	
 
 ORDER
 	(EnableCipher, EnableProtocol) | (EnableProtocol, EnableCipher) 
