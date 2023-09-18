@@ -134,7 +134,7 @@ REQUIRES
 	generatedKey[key, alg(transformation)];
 	randomized[random];
 	preparedAlg[params, alg(transformation)];
-	!macced[_, plainText];
+	!macced[this, plainText];
 	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[paramSpec];
 	mode(transformation) in {"GCM"} => preparedGCM[paramSpec];
 	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", 
