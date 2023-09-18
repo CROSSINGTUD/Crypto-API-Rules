@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # BouncyCastle
+  - package-ecosystem: "maven"
+    directory: "/BouncyCastle"
+    schedule:
+      interval: "weekly"
+
+  # BouncyCastle-JCA
+  - package-ecosystem: "maven"
+    directory: "/BouncyCastle-JCA"
+    schedule:
+      interval: "weekly"
+
+  # JavaCryptographicArchitecture
+  - package-ecosystem: "maven"
+    directory: "/JavaCryptographicArchitecture"
+    schedule:
+      interval: weekly
+  
+  # Tink
+  - package-ecosystem: "maven"
+    directory: "/Tink"
+    schedule:
+      interval: "weekly"
