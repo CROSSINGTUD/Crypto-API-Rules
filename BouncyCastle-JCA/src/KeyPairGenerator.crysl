@@ -29,9 +29,9 @@ CONSTRAINTS
 			"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
 			"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 						
-	algorithm in {"RSA"} => keysize in {4096, 3072, 2048};
-	algorithm in {"DSA"} => keysize in {2048};
-	algorithm in {"DiffieHellman", "DH"} => keysize in {2048};
+	algorithm in {"RSA"} => keysize in {4096, 3072}; //BSI TR-02102-1 Recommends atleast 3000bits for keys
+	algorithm in {"DSA"} => keysize in {3072};
+	algorithm in {"DiffieHellman", "DH"} => keysize in {3072};
 	algorithm in {"EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", "ECIES"} => keysize in {256};
 	
 REQUIRES

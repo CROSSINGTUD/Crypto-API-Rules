@@ -13,7 +13,7 @@ ORDER
 	Con	
 	
 CONSTRAINTS
-	modulus >= 2000; // BSI describes length of the modulus n to be at least 2000 bits
+	modulus >= 3000; // BSI describes length of the modulus n to be at least 2000 bits
 	isPrivate == true => notHardCoded[exponent];
 
 ENSURES
