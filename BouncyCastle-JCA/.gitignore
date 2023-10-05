@@ -1,3 +1,6 @@
 target/
+.settings/
+assembly/
+.classpath
 .project
 .DS_Store
