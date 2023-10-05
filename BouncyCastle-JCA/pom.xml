@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.paderborn.uni</groupId>
 	<artifactId>BouncyCastle-JCA</artifactId>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<name>CrySL Rules Bundle</name>
 
 	<licenses>
