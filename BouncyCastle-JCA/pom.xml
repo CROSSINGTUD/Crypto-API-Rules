@@ -25,6 +25,7 @@
 		<developerConnection>scm:git:ssh://github.com:CROSSINGTUD/Crypto-API-Rules.git</developerConnection>
 		<url>https://github.com/CROSSINGTUD/Crypto-API-Rules/tree/master/BouncyCastle-JCA</url>
 	</scm>
+
 	<description>BouncyCastle-JCA CrySL ruleset</description>
 	<url>https://github.com/CROSSINGTUD/Crypto-API-Rules/tree/master/BouncyCastle-JCA</url>
 
