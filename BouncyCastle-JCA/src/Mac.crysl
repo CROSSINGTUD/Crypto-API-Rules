@@ -38,7 +38,7 @@ EVENTS
 	Final := FinalWU | FinalWOU;
 
 ORDER
-	Get, Init, (FinalWU | (Update+, Final))
+	Get, Init, (FinalWU | (Update+, Final))+
 
 CONSTRAINTS
 	algorithm in {"AESCMAC", "AESCCMMAC", "HmacSHA256", "HmacSHA384", "HmacSHA512",
