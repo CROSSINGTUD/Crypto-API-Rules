@@ -131,7 +131,7 @@ CONSTRAINTS
 	cipherTextOffset >= 0;
 
 REQUIRES
-	generatedKey[key, alg(transformation)];
+	generatedKey[key, alg(transformation)] || generatedPubkey[key] || generatedPrivkey[key];
 	randomized[random];
 	preparedAlg[params, alg(transformation)];
 	!macced[this, plainText];

@@ -26,7 +26,7 @@ ORDER
 	
 CONSTRAINTS
 	algorithm in {"AES", "Camellia", "Shacal2", "Shacal-2", "DH", "DiffieHellman", "DSA", "ElGamal"};
-	algorithm in {"DH", "DSA", "ElGamal"} => size in {1048};
+	algorithm in {"DH", "DiffieHellman", "DSA", "ElGamal"} => size in {3072};
 	algorithm in {"AES", "Camellia", "Shacal2", "Shacal-2" } => size in {128, 192, 256};
 
 REQUIRES
