@@ -1,17 +1,5 @@
 //The AESFastEngine class is deprecated and insecure. This crysl rule ensures that a AESFastEngine object is considered insecure.
 SPEC org.bouncycastle.crypto.engines.AESFastEngine
-
-OBJECTS
-	int dummy; //This section can't be empty or else the rule is marked with an error.
 	
 FORBIDDEN
-	AESFastEngine() ;
-
-EVENTS	
-	c1: AESFastEngine();
-	Con := c1;
-	
-ORDER
-	Con
-
-
+	AESFastEngine();

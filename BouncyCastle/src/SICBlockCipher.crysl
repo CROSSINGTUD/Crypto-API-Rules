@@ -1,15 +1,16 @@
 SPEC org.bouncycastle.crypto.modes.SICBlockCipher
 
 OBJECTS
-
 	org.bouncycastle.crypto.BlockCipher engine;
+
+FORBIDDEN
+	SICBlockCipher(org.bouncycastle.crypto.BlockCipher);
 	
 EVENTS
-	c1: SICBlockCipher(engine);
+	c1: newInstance(engine);
 	Con := c1;
 	
-//No need to specify the order, must be wrapped in BufferedCipher
-	
+// No need to specify the order, must be wrapped in BufferedCipher
 ORDER
 	Con
 

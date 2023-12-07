@@ -1,10 +1,10 @@
 SPEC org.bouncycastle.crypto.engines.AESEngine
 
-OBJECTS
-	int dummy; //This section can't be empty or else the rule is marked with an error.
+FORBIDDEN
+	AESEngine();
 
 EVENTS
-	c1: AESEngine();
+	c1: newInstance();
 	Con := c1;
 	
 ORDER

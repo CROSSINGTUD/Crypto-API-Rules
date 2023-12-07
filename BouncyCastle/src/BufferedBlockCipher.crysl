@@ -1,49 +1,5 @@
+// Deprecated
 SPEC org.bouncycastle.crypto.BufferedBlockCipher
 
-OBJECTS
-	org.bouncycastle.crypto.BlockCipher cipher;
-	org.bouncycastle.crypto.CipherParameters params;
-	
-	byte plainTextByte;
-	byte[] plainText;
-	int plainTextOffset;
-	int plainTextLen;
-	
-	byte[] cipherText;
-	int cipherTextOffset;
-	
-	boolean isEncryption;
-
-	
-EVENTS
-	c1: BufferedBlockCipher(cipher);
-	Con := c1;
-
-	i1: init(isEncryption, params);
-	Init := i1;
-
-//	@return the number of output bytes copied to out.
-	p1: processByte(plainTextByte, cipherText, cipherTextOffset);
-	p2: processBytes(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
-	Proc := p1 | p2;
-	
-//	@return the number of output bytes copied to out.
-	df1: doFinal(cipherText, cipherTextOffset);
-	DoFinal := df1;
-	
-ORDER
-	Con, (Init, Proc, DoFinal)+
-	
-CONSTRAINTS
-	length[plainText] >= plainTextOffset + plainTextLen;
-	length[cipherText] >= cipherTextOffset;
-	plainTextOffset >= 0;
-	plainTextLen > 0;
-	cipherTextOffset >= 0;
-	
-REQUIRES
-	generatedGCMBlockCipher[cipher];
-	generatedCipherParams[params];
-	
-ENSURES
-	encrypted[cipherText];
+FORBIDDEN
+	BufferedBlockCipher(org.bouncycastle.crypto.BlockCipher);

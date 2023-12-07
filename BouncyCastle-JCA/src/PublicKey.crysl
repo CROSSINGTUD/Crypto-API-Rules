@@ -1,0 +1,14 @@
+SPEC java.security.PublicKey
+
+OBJECTS 
+	byte[] keyMaterial;
+
+EVENTS
+	ge1: keyMaterial = getEncoded();
+	GetEnc := ge1;
+
+ORDER
+	GetEnc*
+	
+ENSURES
+	preparedKeyMaterial[keyMaterial] after GetEnc;

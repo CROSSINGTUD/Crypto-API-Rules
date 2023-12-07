@@ -18,9 +18,12 @@ OBJECTS
 	int cipherTextOffset;
 	
 	boolean isEncryption;
+
+FORBIDDEN
+	GCMBlockCipher(org.bouncycastle.crypto.BlockCipher);
 	
 EVENTS
-	c1: GCMBlockCipher(engine);
+	c1: newInstance(engine);
 	Con := c1;
 	
 	i1: init(isEncryption, params);
