@@ -1,13 +1,8 @@
-SPEC org.bouncycastle.crypto.modes.CCMBlockCipher
+SPEC org.bouncycastle.crypto.DefaultBufferedBlockCipher
 
 OBJECTS
-	org.bouncycastle.crypto.BlockCipher engine;
+	org.bouncycastle.crypto.BlockCipher cipher;
 	org.bouncycastle.crypto.CipherParameters params;
-	
-	byte aadByte;
-	byte[] aadBytes;
-	int aadOff;
-	int aadLen;
 	
 	byte plainTextByte;
 	byte[] plainText;
@@ -18,38 +13,36 @@ OBJECTS
 	int cipherTextOffset;
 	
 	boolean isEncryption;
-
-FORBIDDEN
-	CCMBlockCipher(org.bouncycastle.crypto.BlockCipher);
 	
 EVENTS
-	c1: newInstance(engine);
+	c1: DefaultBufferedBlockCipher(cipher);
 	Con := c1;
-	
+
 	i1: init(isEncryption, params);
 	Init := i1;
-	
-	pa1: processAADByte(aadByte);
-	pa2: processAADBytes(aadBytes, aadOff, aadLen);
-	ProcessAAD := pa1 | pa2;
-	
+
+//	@return the number of output bytes copied to out.
 	p1: processByte(plainTextByte, cipherText, cipherTextOffset);
 	p2: processBytes(plainText, plainTextOffset, plainTextLen, cipherText, cipherTextOffset);
-	Process := p1 | p2;
+	Proc := p1 | p2;
 	
+//	@return the number of output bytes copied to out.
 	df1: doFinal(cipherText, cipherTextOffset);
 	DoFinal := df1;
-
+	
 ORDER
-	Con, Init, ProcessAAD*, Process+, DoFinal
+	Con, (Init, Proc, DoFinal)+
 	
 CONSTRAINTS
-	length[cipherText] >= cipherTextOffset;
 	length[plainText] >= plainTextOffset + plainTextLen;
+	length[cipherText] >= cipherTextOffset;
 	plainTextOffset >= 0;
 	plainTextLen > 0;
 	cipherTextOffset >= 0;
-
+	
 REQUIRES
-	generatedAESEngine[engine] || generatedAESLightEngine[engine] || generatedRijndaelEngine[engine];
-	generatedAEADParameters[params] || generatedParametersWithIV[params];
+	generatedGCMBlockCipher[cipher];
+	generatedCipherParams[params];
+	
+ENSURES
+	encrypted[cipherText];
