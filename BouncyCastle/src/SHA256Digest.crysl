@@ -37,7 +37,7 @@ CONSTRAINTS
 	inputBytesOffset >= 0;
 	inputBytesLen > 0;
 	length[outputBytes] >= outputBytesOffset;
-	outputBytesOffset > 0;
+	outputBytesOffset >= 0;
 	
 REQUIRES
 	generatedSHA256Digest[digest];
