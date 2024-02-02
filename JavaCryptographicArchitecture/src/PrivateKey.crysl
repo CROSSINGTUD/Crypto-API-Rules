@@ -9,6 +9,9 @@ EVENTS
 
 ORDER
 	GetEnc*
+
+REQUIRES
+	generatedPrivkey[this];
 	
 ENSURES
 	preparedKeyMaterial[keyMaterial] after GetEnc;

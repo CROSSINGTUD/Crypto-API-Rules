@@ -2,14 +2,16 @@ SPEC java.security.Key
 
 OBJECTS 
 	byte[] keyMaterial;
-	
+
 EVENTS
 	ge1: keyMaterial = getEncoded();
 	GetEnc := ge1;
-	
+
 ORDER
 	GetEnc*
+
+REQUIRES
+	generatedKey[this, _] || generatedPubkey[this] || generatedPrivkey[this];
 	
 ENSURES
 	preparedKeyMaterial[keyMaterial] after GetEnc;
-	
