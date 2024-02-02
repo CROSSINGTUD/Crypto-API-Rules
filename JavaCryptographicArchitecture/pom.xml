@@ -6,7 +6,6 @@
 	<artifactId>JavaCryptographicArchitecture</artifactId>
 	<version>3.0.2</version>
 	<name>CrySL Rules Bundle</name>
-
 	<licenses>
 		<license>
 			<name>Eclipse Public License - v2.0</name>
