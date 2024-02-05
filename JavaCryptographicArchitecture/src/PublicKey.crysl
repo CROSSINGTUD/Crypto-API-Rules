@@ -9,6 +9,9 @@ EVENTS
 
 ORDER
 	GetEnc*
+
+REQUIRES
+	generatedPubkey[this];
 	
 ENSURES
 	preparedKeyMaterial[keyMaterial] after GetEnc;

@@ -22,6 +22,7 @@ ORDER
 REQUIRES
 	generatedPrivkey[privateKey];
 	generatedPubkey[publicKey];
+	noCallTo[Con] => generatedKeypair[this, _];
 	
 ENSURES
 	generatedKeypair[this, _] after Con;
