@@ -94,10 +94,7 @@ CONSTRAINTS
 	noCallTo[Init] => alg(transformation) in {"AES", "RSA", "PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", 
 						"PBEWithHmacSHA384AndAES_128", "PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", 
 						"PBEWithHmacSHA256AndAES_256", "PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"};
-	alg(transformation) in {"AES"} => mode(transformation) in {"CBC", "GCM", "PCBC", "CTR", "CTS", "CFB", "OFB"};
-	alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", 
-				"PBEWithHmacSHA512AndAES_128", "PBEWithHmacSHA224AndAES_256", "PBEWithHmacSHA256AndAES_256", 
-				"PBEWithHmacSHA384AndAES_256", "PBEWithHmacSHA512AndAES_256"} => mode(transformation) in {"CBC"};
+	alg(transformation) in {"AES"} => mode(transformation) in { "GCM", "CTR", "CTS", "CFB", "OFB"};
 	alg(transformation) in {"RSA"} => mode(transformation) in {"", "ECB"};
 
 	alg(transformation) in {"PBEWithHmacSHA224AndAES_128", "PBEWithHmacSHA256AndAES_128", "PBEWithHmacSHA384AndAES_128", 
@@ -109,13 +106,12 @@ CONSTRAINTS
 											"OAEPWithSHA-256AndMGF1Padding", "OAEPWithSHA-384AndMGF1Padding", 
 											"OAEPWithSHA-512AndMGF1Padding"};
 	
-	alg(transformation) in {"AES"} && mode(transformation) in {"CBC", "PCBC"} => pad(transformation) in {"PKCS5Padding", "ISO10126Padding"};
 	alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
 	
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
+	mode(transformation) in {"CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
+	mode(transformation) in {"CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
 	
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdate];
+	mode(transformation) in {"CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdate];
 	     
     
 	encmode in {1,2,3,4};
@@ -135,7 +131,7 @@ REQUIRES
 	randomized[random];
 	preparedAlg[params, alg(transformation)];
 	!macced[this, plainText];
-	mode(transformation) in {"CBC", "PCBC", "CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[paramSpec];
+	mode(transformation) in {"CTR", "CTS", "CFB", "OFB"} && encmode == 1 => preparedIV[paramSpec];
 	mode(transformation) in {"GCM"} => preparedGCM[paramSpec];
 	mode(transformation) in {"OAEPWithMD5AndMGF1Padding", "OAEPWithSHA-224AndMGF1Padding", "OAEPWithSHA-256AndMGF1Padding", 
 				"OAEPWithSHA-384AndMGF1Padding", "OAEPWithSHA-512AndMGF1Padding"} => preparedOAEP[paramSpec];

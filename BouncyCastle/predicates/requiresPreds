@@ -10,8 +10,6 @@ AsymmetricCipherKeyPair ->		generatedRSAKeyParameters[pubParams];
 BufferedBlockCipher ->			generatedGCMBlockCipher[engineOrMode];
 								generatedCipherParams[params];
 
-CBCBlockCipher ->				generatedAESEngine[engine];
-
 ECDomainParameters ->			randomized[seed];
 
 ECElGamalDecryptor ->			generatedECPair[pair];
@@ -46,8 +44,7 @@ GCMBlockCipher ->				generatedAESEngine[engine];
 
 KeyParameter ->					randomized[key];
 
-PaddedBufferedBlockCipher ->	generatedCBCBlockCipher[cipher];
-								generatedParametersWithIV[params];
+PaddedBufferedBlockCipher ->	generatedParametersWithIV[params];
 								generatedPKCS7Padding[padding];
 
 ParametersWithIV ->				randomized[iv];

@@ -8,8 +8,6 @@ AsymmetricCipherKeyPair ->		generatedRSAKeyPair[this] after co;
 
 BufferedBlockCipher ->			encrypted[cipherText];
 
-CBCBlockCipher ->				generatedCBCBlockCipher[this];
-
 ECDomainParameters ->			generatedECDomainParameters[this];
 
 ECElGamalDecryptor ->			generatedECElGamalDecrypt[plainText] after d1;
