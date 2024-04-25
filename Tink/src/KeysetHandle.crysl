@@ -9,21 +9,27 @@
 SPEC com.google.crypto.tink.KeysetHandle
 
 OBJECTS
-    com.google.crypto.tink.proto.KeyTemplate kt;
+    com.google.crypto.tink.KeyTemplate kt;
     com.google.crypto.tink.KeysetHandle publicKeysetHandle; 
+    com.google.crypto.tink.mac.HmacParameters hmacParams;
+    
 
 EVENTS
     gen_evt        : generateNew(kt);
+    gen_hmac_evt   : generateNew(hmacParams);
     gen_public_evt : publicKeysetHandle = getPublicKeysetHandle();
     read_evt       : read(_, _); 
     export_evt     : write(_, _); 
+    get_prim       : getPrimitive(_);
     
 ORDER
-    (gen_evt | read_evt), gen_public_evt?, export_evt?  
+    (gen_evt | read_evt), gen_public_evt?, export_evt?, get_prim*
    
 
 REQUIRES
-	keyTemplate[kt];
+	genKeyTemplate[kt];
+	hmacParams[hmacParams];
+	
 	
 ENSURES
 	generatedKeySet[this];

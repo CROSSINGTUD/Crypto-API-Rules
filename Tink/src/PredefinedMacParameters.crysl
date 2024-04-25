@@ -1,0 +1,19 @@
+SPEC com.google.crypto.tink.mac.PredefinedMacParameters 
+
+OBJECTS
+	com.google.crypto.tink.mac.HmacParameters hmacParams;
+	com.google.crypto.tink.mac.PredefinedMacParameters macParams
+	
+EVENTS
+	hmac_sha256_128 : hmac_sha256 = macParams.HMAC_SHA256_128BITTAG
+	hmac_sha256_256 : hmac_sha256 = macParams.HMAC_SHA256_256BITTAG
+	Hmac_sha256: hmac_sha256_128 | hmac_sha256_256
+	
+ORDER 
+	Hmac_sha256+
+
+CONSTRAINTS
+
+	
+ENSURES
+	hmacParams[hmacParams]
