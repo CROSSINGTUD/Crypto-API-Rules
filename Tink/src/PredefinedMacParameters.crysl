@@ -11,9 +11,6 @@ EVENTS
 	
 ORDER 
 	Hmac_sha256+
-
-CONSTRAINTS
-
 	
 ENSURES
 	hmacParams[hmacParams]
