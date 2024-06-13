@@ -1,12 +1,14 @@
 SPEC com.google.crypto.tink.KeyTemplate
 
 OBJECTS
-	com.google.crypto.tink.KeyTemplate template
-	com.google.crypto.tink.Parameters params
+	com.google.crypto.tink.KeyTemplate template;
+	com.google.crypto.tink.Parameters params;
 		
 EVENTS
-	cre: template = createFrom(params)
+	cre: template = createFrom(params);
+
 ORDER
 	cre+
+
 ENSURES
-	genKeyTemplate[template]
+	genKeyTemplate[template];
