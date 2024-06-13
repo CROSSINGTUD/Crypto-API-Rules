@@ -41,7 +41,7 @@ CONSTRAINTS
 	cipherTextOffset >= 0;
 	
 REQUIRES
-	generatedRijndaelEngine[cipher]
+	generatedRijndaelEngine[cipher];
 	generatedParametersWithIV[params];
 	generatedPKCS7Padding[padding];
 	
