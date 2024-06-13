@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.darmstadt.tu.crossing</groupId>
 	<artifactId>Tink</artifactId>
-	<version>3.0.0</version>
+	<version>3.1.0</version>
 	<name>CrySL Rules Bundle</name>
 
 	<licenses>
