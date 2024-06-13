@@ -35,4 +35,3 @@ ENSURES
 	keyTemplate[ecies_aes128_gcm];
 	keyTemplate[ecies_aes128_ctr_hmac];
 	
-	
