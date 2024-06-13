@@ -6,15 +6,89 @@
 	<artifactId>BouncyCastle-JCA</artifactId>
 	<version>0.2</version>
 	<name>CrySL Rules Bundle</name>
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
-		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.60</version>
-		</dependency>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v2.0</name>
+			<url>https://www.eclipse.org/legal/epl-2.0/</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>CogniCrypt</id>
+			<name>CogniCrypt</name>
+			<email>cognicrypt@eim.upb.de</email>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:CROSSINGTUD/Crypto-API-Rules.git</connection>
+		<developerConnection>scm:git:ssh://github.com:CROSSINGTUD/Crypto-API-Rules.git</developerConnection>
+		<url>https://github.com/CROSSINGTUD/Crypto-API-Rules/tree/master/BouncyCastle-JCA</url>
+	</scm>
 
-	</dependencies>
+	<description>BouncyCastle-JCA CrySL ruleset</description>
+	<url>https://github.com/CROSSINGTUD/Crypto-API-Rules/tree/master/BouncyCastle-JCA</url>
+
+	<profiles>
+		<profile>
+			<id>deployment</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.3.1</version>
+						<executions>
+							<execution>
+								<id>attach-source</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.2.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>3.0.1</version>
+						<configuration>
+							<tagNameFormat>@{project.version}</tagNameFormat>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.7.0</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://s01.oss.sonatype.org</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -38,20 +112,24 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.60</version>
+		</dependency>
+	</dependencies>
 	
 	<distributionManagement>
 		<snapshotRepository>
-			<id>soot-snapshot</id>
-			<name>Soot snapshot repository</name>
-			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/</url>
-			<layout>default</layout>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
 		<repository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>soot-release</id>
-			<name>Soot release repository</name>
-			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-release/</url>
-			<layout>default</layout>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
 </project>
