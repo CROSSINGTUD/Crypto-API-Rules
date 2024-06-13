@@ -1,4 +1,4 @@
-name: Deploy old version BouncyCastle JavaCryptographicArchitecture
+name: Deploy old BouncyCastle-JCA
 
 on:
   push
@@ -6,7 +6,7 @@ on:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    name: BouncyCastle JavaCryptographicArchitecture old version deployment
+    name: BouncyCastle-JCA old deployment
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
         uses: stCarolas/setup-maven@v4.5
         with:
           maven-version: 3.6.3
-      - name: Build & Deploy BC JavaCryptographicArchitecture
+      - name: Build & Deploy BouncyCastle-JCA old
         run: mvn -f BouncyCastle-JCA -B -U clean deploy -Pdeployment
         env:
           SIGN_KEY_PASS: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
