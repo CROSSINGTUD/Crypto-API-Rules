@@ -7,6 +7,7 @@ on:
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    environment: deploy
     name: JavaCryptographicArchitecture deployment
     steps:
       - name: Checkout source code
