@@ -11,4 +11,4 @@ How to write new rules:
 6. Run `mvn install` from the command line from within the project folder. The latter command packages the .cryptslbin files within target/classes and installs the artifact to the local repository.
 7. Reference the installed artifact within [CryptoAnalysis](https://github.com/CROSSINGTUD/CryptoAnalysis) / or the [CogniCrypt Plugin](https://github.com/eclipse-cognicrypt/CogniCrypt). See respective pom.xml.
 
-To contribute a new version of the rule set or new rule set, open a pull request.
+To contribute a new version of the rule set or a new rule set, open a pull request.
