@@ -40,16 +40,8 @@ ORDER
  	
 CONSTRAINTS
 	algorithm in {"DEFAULT", "NONCEANDIV"};
-	newSecureRandom =
-            s.<init>()
-            OR
-            s.<init>(byte[])
-            OR
-            java.security.SecureRandom.getInstance("DRBG")
-            OR
-            java.security.SecureRandom.getInstanceStrong()
 
-        nextBytes = s.nextBytes(byte[])
+
 	
 REQUIRES	
 	randomized[seed];

@@ -16,7 +16,7 @@ EVENTS
 	i3: initialize(params);
 	i4: initialize(params, _);
 	i5: initialize(java.security.spec.AlgorithmParameterSpec, java.security.SecureRandom)
-	Init := i1 | i2 | i3 | i4;
+	Init := i1 | i2 | i3 | i4 | i5;
 
 	k1: keyPair = generateKeyPair();
 	k2: keyPair = genKeyPair();
@@ -26,17 +26,18 @@ ORDER
 	Get, Init, Gen
 
 CONSTRAINTS
-	algorithm in {"Kyber", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC",
+	algorithm in {"RSA", "DSA", "DiffieHellman", "DH", "EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC",
 			"ECIES", "ElGamal", "McElieceKobaraImai", "McEliecePointcheval", "McElieceFujisaki", 
 			"McEliece", "McEliece-CCA2", "NH", "QTESLA", "Rainbow", "SPHINCS256", "XMSS", "XMSSMT"};
 						
-	algorithm in {"Kyber"} => keysize in {4096, 3072}; //BSI TR-02102-1 Recommends atleast 3000bits for keys
-	algorithm in {"DSA"} => keysize in {3072};
-	algorithm in {"DiffieHellman", "DH"} => keysize in {3072};
-	algorithm in {"EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", "ECIES"} => keysize in {256};
-	
+	algorithm in {"RSA"} => keysize >= 3000; //BSI TR-02102-1 Recommends atleast 3000bits for keys
+	algorithm in {"DSA"} => keysize >= 3072;
+	algorithm in {"DiffieHellman", "DH"} => keysize >= 3000;
+	algorithm in {"EC", "ECDSA", "ECDH", "ECDHWITHSHA1KDF", "ECDHC", "ECIES"} => keysize >= 320;
+	algorithm in {"DSA"} && afterYear >= 2029 => false;//# DSA deprecated after 2029
+
 REQUIRES
-    algorithm in {"Kyber"} => preparedKyber[params];	algorithm in {"DSA"} => preparedDSA[params];
+    algorithm in {"RSA"} => preparedRSA[params];	algorithm in {"DSA"} => preparedDSA[params];
 	algorithm in {"DiffieHellman", "DH"} => preparedDH[params];
 	algorithm in {"EC"} => preparedEC[params];
 
