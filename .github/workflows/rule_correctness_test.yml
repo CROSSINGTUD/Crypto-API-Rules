@@ -2,13 +2,9 @@ name: Validate CrySL Rules
 
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - ready_for_review
+
 jobs:
-  BuildAndTest:
+  Validation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -20,4 +16,4 @@ jobs:
           java-package: jdk
           java-version: 11
       - name: Validate Rules with Maven
-        run: mvn -Dtest=RuleCorrectnessTest test
+        run: mvn clean test -f RuleCorrectnessTest
