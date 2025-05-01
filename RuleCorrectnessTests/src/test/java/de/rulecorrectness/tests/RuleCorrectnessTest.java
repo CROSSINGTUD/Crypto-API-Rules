@@ -22,8 +22,7 @@ public class RuleCorrectnessTest {
     private int countCrySLFiles(String directoryPath) {
         File directory = new File(directoryPath);
         if (!directory.exists()) {
-            System.err.println("Warning: Directory does not exist: " + directoryPath);
-            return 0;
+            throw new RuntimeException("Directory does not exist: " + directoryPath);
         }
 
         int count = 0;
@@ -44,15 +43,9 @@ public class RuleCorrectnessTest {
     @Test
     public void jcaCorrectnessTest() throws IOException {
         CrySLParser parser = new CrySLParser();
-        String jcaRulesPath = "path/to/JavaCryptographicArchitecture/src";
+        String jcaRulesPath = "./../JavaCryptographicArchitecture/src";
         Collection<CrySLRule> jcaRules = parser.parseRulesFromPath(jcaRulesPath);
         int ExpectedCount = countCrySLFiles(jcaRulesPath);
-
-        // If any rule fails to parse, it will be skipped, resulting in fewer rules than expected
-        if (jcaRules.size() < ExpectedCount) {
-            System.err.println("Some JCA rules could not be parsed!");
-            jcaRules.forEach(rule -> System.out.println("Successfully parsed: " + rule.getClassName()));
-        }
 
         Assert.assertEquals(ExpectedCount, jcaRules.size());
     }
@@ -60,15 +53,9 @@ public class RuleCorrectnessTest {
     @Test
     public void BouncyCastleCorrectnessTest() throws IOException {
         CrySLParser parser = new CrySLParser();
-        String bouncyCastlePath = "path/to//BouncyCastle/src";
+        String bouncyCastlePath = "./../BouncyCastle/src";
         Collection<CrySLRule> bouncyCastleRules = parser.parseRulesFromPath(bouncyCastlePath);
         int ExpectedCount = countCrySLFiles(bouncyCastlePath);
-
-        // If any rule fails to parse, it will be skipped, resulting in fewer rules than expected
-        if (bouncyCastleRules.size() < ExpectedCount) {
-            System.err.println("Some Bouncy Castle rules could not be parsed!");
-            bouncyCastleRules.forEach(rule -> System.out.println("Successfully parsed: " + rule.getClassName()));
-        }
 
         Assert.assertEquals(ExpectedCount, bouncyCastleRules.size());
     }
@@ -76,15 +63,9 @@ public class RuleCorrectnessTest {
     @Test
     public void BouncyCastleJCACorrectnessTest() throws IOException {
         CrySLParser parser = new CrySLParser();
-        String bouncyCastleJCAPath = "path/to//BouncyCastle-JCA/src";
+        String bouncyCastleJCAPath = "./../BouncyCastle-JCA/src";
         Collection<CrySLRule> bouncyCastleJCARules = parser.parseRulesFromPath(bouncyCastleJCAPath);
         int ExpectedCount = countCrySLFiles(bouncyCastleJCAPath);
-
-        // If any rule fails to parse, it will be skipped, resulting in fewer rules than expected
-        if (bouncyCastleJCARules.size() < ExpectedCount) {
-            System.err.println("Some Bouncy Castle JCA rules could not be parsed!");
-            bouncyCastleJCARules.forEach(rule -> System.out.println("Successfully parsed: " + rule.getClassName()));
-        }
 
         Assert.assertEquals(ExpectedCount, bouncyCastleJCARules.size());
     }
@@ -92,15 +73,9 @@ public class RuleCorrectnessTest {
     @Test
     public void TinkCorrectnessTest() throws IOException {
         CrySLParser parser = new CrySLParser();
-        String tinkPath = "path/to//Tink/src";
+        String tinkPath = "./../Tink/src";
         Collection<CrySLRule> tinkRules = parser.parseRulesFromPath(tinkPath);
         int ExpectedCount = countCrySLFiles(tinkPath);
-
-        // If any rule fails to parse, it will be skipped, resulting in fewer rules than expected
-        if (tinkRules.size() < ExpectedCount) {
-            System.err.println("Some Tink rules could not be parsed!");
-            tinkRules.forEach(rule -> System.out.println("Successfully parsed: " + rule.getClassName()));
-        }
 
         Assert.assertEquals(ExpectedCount, tinkRules.size());
     }
