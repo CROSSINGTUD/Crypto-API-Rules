@@ -12,7 +12,7 @@
 
     <groupId>de.cognicrypt.crysl</groupId>
     <artifactId>RuleCorrectnessTests</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>RuleCorrectnessTests</name>
@@ -20,8 +20,6 @@
     <url>https://github.com/CROSSINGTUD/CryptSL</url>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -31,7 +29,16 @@
             <artifactId>CrySLParser</artifactId>
             <version>4.0.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.80</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.crypto.tink</groupId>
+            <artifactId>tink</artifactId>
+            <version>1.17.0</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
