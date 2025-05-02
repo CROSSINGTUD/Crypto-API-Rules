@@ -14,6 +14,6 @@ jobs:
         with:
           distribution: temurin
           java-package: jdk
-          java-version: 11
+          java-version: 17
       - name: Validate Rules with Maven
-        run: mvn clean test -f RuleCorrectnessTest
+        run: mvn clean test -f RuleCorrectnessTests
