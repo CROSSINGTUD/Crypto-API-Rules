@@ -1,0 +1,19 @@
+name: Validate CrySL Rules
+
+on:
+  pull_request:
+
+jobs:
+  Validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-package: jdk
+          java-version: 17
+      - name: Validate Rules with Maven
+        run: mvn clean test -f RuleCorrectnessTests

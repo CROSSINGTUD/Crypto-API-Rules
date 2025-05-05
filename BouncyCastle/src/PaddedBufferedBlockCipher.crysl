@@ -3,7 +3,7 @@ SPEC org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher
 OBJECTS
 	org.bouncycastle.crypto.CipherParameters params;
 	org.bouncycastle.crypto.paddings.BlockCipherPadding padding;
-	org.bouncycastle.crypto.engines.RijndaelEngine cipher;
+	org.bouncycastle.crypto.BlockCipher cipher;
 	
 	byte plainTextByte;
 	byte[] plainText;
@@ -41,7 +41,7 @@ CONSTRAINTS
 	cipherTextOffset >= 0;
 	
 REQUIRES
-	generatedRijndaelEngine[cipher];
+	generatedBlockCipher[cipher];
 	generatedParametersWithIV[params];
 	generatedPKCS7Padding[padding];
 	

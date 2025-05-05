@@ -11,12 +11,12 @@ SPEC com.google.crypto.tink.KeysetHandle
 OBJECTS
     com.google.crypto.tink.KeyTemplate kt;
     com.google.crypto.tink.KeysetHandle publicKeysetHandle; 
-    com.google.crypto.tink.mac.HmacParameters hmacParams;
+    com.google.crypto.tink.Parameters params;
     
 
 EVENTS
     gen_evt        : generateNew(kt);
-    gen_hmac_evt   : generateNew(hmacParams);
+    gen_hmac_evt   : generateNew(params);
     gen_public_evt : publicKeysetHandle = getPublicKeysetHandle();
     read_evt       : read(_, _); 
     export_evt     : write(_, _); 
@@ -28,7 +28,7 @@ ORDER
 
 REQUIRES
 	genKeyTemplate[kt];
-	hmacParams[hmacParams];
+	genParams[params];
 	
 	
 ENSURES
