@@ -78,9 +78,6 @@ EVENTS
 	wkb1: wrappedKeyBytes = wrap(wrappedKey);
 	WKB := wkb1;
     
-	iv1: getIV();
-	IV := iv1;
-    
 ORDER
 	Get, Init+, AADUpdate*, WKB+ | (FINWOU | (Update+, DoFinal))+
 
@@ -110,8 +107,6 @@ CONSTRAINTS
 	alg(transformation) in {"Tnepres"} && mode(transformation) in {"CFB", "OFB"} => pad(transformation) in {"NoPadding"};
     
 	mode(transformation) in { "CTR", "CTS", "CFB", "OFB", "CCM"} && encmode != 1 => noCallTo[IWOIV];
-	mode(transformation) in {"CTR", "CTS", "CFB", "OFB", "CCM"} && encmode == 1 => callTo[IV];
-       	
     mode(transformation) in {"CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdate];   	
     
 	encmode in {1,2,3,4};
