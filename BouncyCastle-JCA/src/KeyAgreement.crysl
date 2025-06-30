@@ -37,15 +37,19 @@ ORDER
 	Get, Init, DoPhase, (GenSecret | GenSecretBuffer)
 	
 CONSTRAINTS
-	algorithm in {"DH", "DiffieHellman", "NH" ,"ECDH", "ECDHC"};
+	algorithm in {"DH","DiffieHellman","ECDH","NH", "ECDHC"};
+	keyLength>=3000;
+	curveBits>= 250;
 	symmetricKeyAlgorithm in {"AES", "HmacSHA256", "HmacSHA384", "HmacSHA512",
 			 "HMACSHA3-256", "HMACSHA3-384", "HMACSHA3-512"};
+	tagLength>=96
+
 	
 REQUIRES
 	randomized[random];
 	generatedPrivkey[privKey];
 	generatedPubkey[pubKey];
-	algorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+	algorithm in {"DiffieHellman","DH"} => preparedDH[params];
 	algorithm in {"ECDH", "ECDHC"} => preparedEC[params];
     
 ENSURES 
