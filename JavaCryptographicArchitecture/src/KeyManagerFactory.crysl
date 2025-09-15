@@ -34,3 +34,7 @@ REQUIRES
 ENSURES
 	generatedKeyManager[this] after Init;
 	generatedKeyManagers[keyManager] after GetKeyMng;
+
+WEAKNESSES
+    CWE-259;
+	CWE-316;

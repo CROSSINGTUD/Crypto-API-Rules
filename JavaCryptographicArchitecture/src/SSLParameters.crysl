@@ -36,3 +36,8 @@ CONSTRAINTS
 				
 ENSURES
 	generatedSSLParameters[this];
+
+WEAKNESSES
+    CWE-326;
+    CWE-327;
+	CWE-757;

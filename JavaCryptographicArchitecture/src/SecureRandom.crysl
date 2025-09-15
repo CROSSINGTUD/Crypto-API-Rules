@@ -51,3 +51,10 @@ ENSURES
 	randomized[bytes] after nB;
 	randomized[randInt] after nI;
 	randomized[randIntInRange] after nIR;
+
+WEAKNESSES
+    CWE-330;
+    CWE-338;
+	CWE-335;
+	CWE-337;
+	CWE-331;

@@ -21,3 +21,9 @@ REQUIRES
 			
 ENSURES
 	preparedPBE[this];
+
+WEAKNESSES
+    CWE-330;
+    CWE-916;
+    CWE-331;
+	CWE-760;
