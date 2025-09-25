@@ -39,6 +39,8 @@ CONSTRAINTS
 	plainTextOffset >= 0;
 	plainTextLen > 0;
 	cipherTextOffset >= 0;
+
+	padding in {ISO, Padding58,ESP}// BSI recoomedation for padding Scheme (ISO-Padding, Padding according to [58], ESP-Padding)
 	
 REQUIRES
 	generatedBlockCipher[cipher];

@@ -17,6 +17,7 @@ CONSTRAINTS
 	length[iv] >= offset + len;
 	offset >= 0;
 	len > 0;
+	unique[iv]
 	
 REQUIRES
 	randomized[iv];
