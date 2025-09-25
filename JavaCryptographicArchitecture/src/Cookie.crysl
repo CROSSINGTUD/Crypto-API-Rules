@@ -20,3 +20,6 @@ CONSTRAINTS
 
 ENSURES
 	generatedCookie[this];
+	
+WEAKNESSES
+    CWE-614;

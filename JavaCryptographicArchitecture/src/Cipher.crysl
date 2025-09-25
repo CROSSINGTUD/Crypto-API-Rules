@@ -78,6 +78,9 @@ EVENTS
 	wkb1: wrappedKeyBytes = wrap(wrappedKey);
 	WKB := wkb1;
     
+	iv1: getIV();
+	IV := iv1;
+    
 ORDER
 	Get, Init+, AADUpdate*, WKB+ | (FINWOU | (Update+, DoFinal))+
 
@@ -106,6 +109,8 @@ CONSTRAINTS
 	alg(transformation) in {"AES"} && mode(transformation) in {"GCM", "CTR", "CTS", "CFB", "OFB"} => pad(transformation) in {"NoPadding"};
 	
 	mode(transformation) in {"CTR", "CTS", "CFB", "OFB"} && encmode != 1 => noCallTo[IWOIV];
+	mode(transformation) in {"CTR", "CTS", "CFB", "OFB"} && encmode == 1 => callTo[IV];
+	
 	mode(transformation) in {"CTR", "CTS", "CFB", "ECB", "OFB"} => noCallTo[AADUpdate];
 	     
     
@@ -137,3 +142,12 @@ ENSURES
 	encrypted[cipherText, plainText];
 	encrypted[cipherTextByteBuffer, plainTextByteBuffer];
 	wrappedKey[wrappedKeyBytes, wrappedKey];
+
+WEAKNESSES
+    CWE-1240;
+    CWE-327;
+    CWE-329;
+    CWE-330;
+    CWE-335;
+    CWE-338;
+    CWE-780;

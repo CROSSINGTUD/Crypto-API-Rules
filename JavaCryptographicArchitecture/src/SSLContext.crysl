@@ -36,3 +36,9 @@ REQUIRES
 ENSURES
 	generatedSSLContext[this] after Init;
 	generatedSSLEngine[eng] after Engine;
+
+WEAKNESSES
+    CWE-295;
+    CWE-321;
+    CWE-327;
+    CWE-330;

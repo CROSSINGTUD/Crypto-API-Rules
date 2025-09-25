@@ -15,3 +15,8 @@ REQUIRES
  	
 ENSURES
 	speccedKey[this, _] after Con;
+
+WEAKNESSES
+    CWE-330;
+    CWE-326;
+    CWE-345;

@@ -46,3 +46,6 @@ ENSURES
 	generatedMessageDigest[this] after Get;
 	digested[output, _];
 	digested[output, input];
+
+WEAKNESSES
+    CWE-327;

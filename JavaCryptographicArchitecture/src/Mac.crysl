@@ -57,3 +57,11 @@ ENSURES
 	macced[output1, inputByte];
 	macced[output1, preInput];
 	macced[output2, input];
+
+WEAKNESSES
+    CWE-320;
+    CWE-325;
+    CWE-328;
+    CWE-330;
+	CWE-916;
+	CWE-327;

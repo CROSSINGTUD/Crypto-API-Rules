@@ -34,3 +34,9 @@ REQUIRES
 
 ENSURES
 	preparedAlg[algParams, algorithm] after GenParam;
+
+WEAKNESSES
+    CWE-326;
+    CWE-327;
+    CWE-329;
+    CWE-330;

@@ -30,3 +30,7 @@ ENSURES
 	generatedKeyFactory[this, algorithm] after Get;
 	generatedPrivkey[privateKey] after GenPriv;
 	generatedPubkey[publicKey] after GenPubl;
+
+WEAKNESSES
+    CWE-327;
+	CWE-326;
