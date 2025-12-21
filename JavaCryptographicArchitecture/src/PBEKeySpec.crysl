@@ -33,3 +33,13 @@ ENSURES
 
 NEGATES
 	speccedKey[this, _] after ClearPass;
+
+WEAKNESSES
+    CWE-259;
+    CWE-326;
+    CWE-330;
+    CWE-760;
+	CWE-916;
+	CWE-760;
+	CWE-750;
+	CWE-226;

@@ -19,3 +19,6 @@ REQUIRES
 	
 ENSURES
 	generatedTrustAnchor[this];
+	
+WEAKNESSES
+    CWE-295;

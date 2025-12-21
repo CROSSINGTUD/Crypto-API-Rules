@@ -19,3 +19,6 @@ REQUIRES
 	
 ENSURES
 	generatedCertPathParameters[this];
+WEAKNESSES
+    CWE-295;
+ 
