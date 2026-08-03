@@ -15,3 +15,8 @@ REQUIRES
 	
 ENSURES
 	generatedManagerFactoryParameters[this];
+
+WEAKNESSES
+    CWE-295;
+    CWE-330;
+	CWE-347;

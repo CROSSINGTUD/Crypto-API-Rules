@@ -15,3 +15,8 @@ ORDER
 
 ENSURES
 	preparedEC[this];
+	
+WEAKNESSES
+    CWE-1240;
+    CWE-326;
+    CWE-327;

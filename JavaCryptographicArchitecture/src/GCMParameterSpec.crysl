@@ -25,3 +25,7 @@ REQUIRES
 	
 ENSURES
 	preparedGCM[this];
+
+WEAKNESSES
+	CWE-323
+    CWE-330;

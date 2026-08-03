@@ -15,3 +15,10 @@ REQUIRES
 	
 ENSURES
 	preparedKeyMaterial[keyMaterial] after GetEnc;
+
+WEAKNESSES
+    CWE-312;
+    CWE-319;
+    CWE-320;
+    CWE-321;
+    CWE-326;

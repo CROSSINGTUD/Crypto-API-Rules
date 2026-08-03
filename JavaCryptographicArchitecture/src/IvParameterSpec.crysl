@@ -23,3 +23,6 @@ REQUIRES
 
 ENSURES
 	preparedIV[this];
+WEAKNESSES
+    CWE-330;
+	CWE-323;
