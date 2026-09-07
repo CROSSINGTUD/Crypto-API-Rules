@@ -12,7 +12,7 @@ ORDER
 	Con
 	
 CONSTRAINTS
-	keysize in {4096}; //BSI TR-02102-1 Recommends atleast 3000bits for keys
+	keysize >= 3000; //BSI TR-02102-1 Recommends atleast 3000bits for keys
 	publicExponent in {65537};
 	 
 ENSURES

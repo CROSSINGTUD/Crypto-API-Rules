@@ -25,16 +25,19 @@ ORDER
 	Get, Init, Gen
 
 CONSTRAINTS
-	algorithm in {"RSA", "EC", "DSA", "DiffieHellman", "DH"}; //BSI TR-02102-1 Recommends atleast 3000bits for keys
-	algorithm in {"RSA"} => keysize in {4096, 3072};
-	algorithm in {"DSA"} => keysize in {3072};
-	algorithm in {"DiffieHellman", "DH"} => keysize in {3072};
-	algorithm in {"EC"} => keysize in {256};
+	algorithm in {"RSA", "EC", "DSA", "DiffieHellman", "DH"};
+	algorithm in {"RSA"} => keysize >=3000;
+	algorithm in {"DSA"} => keysize >= 3072;
+	algorithm in {"DiffieHellman", "DH"} => keysize >=3000;
+	algorithm in {"EC"} => keysize >=250;
+
+FORBIDDEN
+    algorithm =="DSA" && afterYear>=2029;
 
 REQUIRES
 	algorithm in {"RSA"} => preparedRSA[params];
 	algorithm in {"DSA"} => preparedDSA[params];
-	algorithm in {"DiffieHellman", "DH"} => preparedDH[params];
+	algorithm in {"DiffieHellman","DH"} => preparedDH[params];
 	algorithm in {"EC"} => preparedEC[params];
 
 ENSURES
