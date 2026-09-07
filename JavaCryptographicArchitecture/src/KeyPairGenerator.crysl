@@ -39,3 +39,8 @@ REQUIRES
 
 ENSURES
 	generatedKeypair[keyPair, algorithm];
+
+WEAKNESSES
+    CWE-326;
+    CWE-330;
+    CWE-338;

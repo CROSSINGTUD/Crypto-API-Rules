@@ -34,3 +34,7 @@ REQUIRES
 
 ENSURES
 	digestedInputStream[stream, digest];
+
+WEAKNESSES
+	CWE-325;
+    CWE-665;

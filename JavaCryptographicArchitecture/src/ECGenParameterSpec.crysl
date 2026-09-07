@@ -23,3 +23,7 @@ CONSTRAINTS
 
 ENSURES
 	preparedEC[this];
+
+WEAKNESSES
+    CWE-327;
+	CWE-326;

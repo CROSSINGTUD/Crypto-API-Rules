@@ -17,3 +17,6 @@ CONSTRAINTS
 	 
 ENSURES
 	preparedRSA[this];
+
+WEAKNESSES
+    CWE-326;

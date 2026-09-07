@@ -31,3 +31,8 @@ REQUIRES
 ENSURES
 	generatedTrustManager[this] after Init;			
 	generatedTrustManagers[trustManager] after GetTrustMng;
+
+WEAKNESSES
+    CWE-295;
+    CWE-322;
+    CWE-326;

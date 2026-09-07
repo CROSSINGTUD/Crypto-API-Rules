@@ -34,3 +34,8 @@ CONSTRAINTS
 		
 ENSURES
 	generatedSSLEngine[this];
+
+WEAKNESSES
+    CWE-326;
+    CWE-327;
+	cw-757;

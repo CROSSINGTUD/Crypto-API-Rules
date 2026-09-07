@@ -32,3 +32,11 @@ REQUIRES
 	
 ENSURES
 	cipheredInputStream[inputStream, cipher];
+
+WEAKNESSES
+    CWE-20;
+    CWE-284;
+    CWE-326;
+    CWE-404;
+    CWE-617;
+    CWE-665;

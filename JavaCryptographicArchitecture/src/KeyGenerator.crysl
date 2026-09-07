@@ -34,3 +34,8 @@ REQUIRES
     
 ENSURES 
 	generatedKey[key, algorithm];
+
+WEAKNESSES
+    CWE-326;
+    CWE-327;
+    CWE-330;

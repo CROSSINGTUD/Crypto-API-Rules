@@ -42,3 +42,9 @@ REQUIRES
 ENSURES 
 	preparedAlg[this, algorithm] after Init;
 	preparedAlg[encParams, algorithm] after GetEncoded;
+	
+WEAKNESSES
+    CWE-325;
+    CWE-326;
+    CWE-330;
+    CWE-916;

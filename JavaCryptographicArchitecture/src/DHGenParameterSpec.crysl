@@ -16,3 +16,6 @@ CONSTRAINTS
 
 ENSURES
 	preparedDH[this];
+	
+WEAKNESSES
+    CWE-326;

@@ -33,3 +33,8 @@ REQUIRES
 
 ENSURES
 	cipheredOutputStream[outputStream, cipher];
+
+WEAKNESSES
+	CWE-404;
+    CWE-665;
+    CWE-704;
