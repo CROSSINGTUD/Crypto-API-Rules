@@ -22,3 +22,7 @@ REQUIRES
 
 ENSURES
 	preparedOAEP[this];
+
+WEAKNESSES
+    CWE-327;
+    CWE-328;

@@ -12,3 +12,9 @@ ORDER
 	
 ENSURES
 	preparedHMAC[this];
+	
+WEAKNESSES
+    CWE-325;
+    CWE-326;
+    CWE-327;
+    CWE-328;

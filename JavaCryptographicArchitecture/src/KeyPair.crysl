@@ -28,3 +28,13 @@ ENSURES
 	generatedKeypair[this, _] after Con;
 	generatedPubkey[retPublicKey] after GetPubl;
 	generatedPrivkey[retPrivateKey] after GetPriv;
+
+WEAKNESSES
+    CWE-320;
+    CWE-321;
+    CWE-330;
+    CWE-331;
+    CWE-338;
+    CWE-325;
+	CWE-326;
+

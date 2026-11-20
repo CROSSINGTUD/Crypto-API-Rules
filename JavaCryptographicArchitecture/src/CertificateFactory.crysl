@@ -29,3 +29,8 @@ CONSTRAINTS
 	
 ENSURES
 	generatedCert[type];
+
+WEAKNESSES
+    CWE-295;
+    CWE-693;
+	CWE-347;

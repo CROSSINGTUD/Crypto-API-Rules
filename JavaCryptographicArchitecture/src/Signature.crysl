@@ -59,3 +59,13 @@ ENSURES
 	signed[output, input] after Sign;
 	signed[output, inputByteBuffer] after Sign;
 	verified[verified, sign] after Verify;
+
+WEAKNESSES
+    CWE-284;
+    CWE-295;
+    CWE-326;
+    CWE-327;
+    CWE-330;
+    CWE-347;
+    CWE-325;
+

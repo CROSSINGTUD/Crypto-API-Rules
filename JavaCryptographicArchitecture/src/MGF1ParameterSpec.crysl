@@ -15,3 +15,7 @@ CONSTRAINTS
 
 ENSURES
 	preparedMGF1[this, mdName];
+
+WEAKNESSES
+    CWE-327;
+	CWE-328;
