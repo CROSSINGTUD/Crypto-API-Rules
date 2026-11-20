@@ -5,6 +5,7 @@ OBJECTS
 	byte[] src;
 	int offset;
 	int len;
+	byte[] iv;
 	
 EVENTS
 	c1: GCMParameterSpec(tagLen, src);
@@ -15,10 +16,12 @@ ORDER
 	Con
 	
 CONSTRAINTS
-	tagLen in {96, 104, 112, 120, 128};
+	tagLen in {96, 104, 112, 120, 128};//GCM with a length of the GCM tags of at least 96 bits should be used.
 	length[src] >= offset + len;
 	offset >= 0;
 	len > 0;
+	length[iv] == 12;
+	unique[iv] // initiallization vector should not be repeated over the entire lifetime of a key
 	
 REQUIRES
 	randomized[src];
